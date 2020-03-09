@@ -1,0 +1,104 @@
+\documentclass[10pt]{article}
+
+\usepackage{my-thesis-template}
+
+
+%----------------------------------------------------------------------------------------
+%	METADATA
+%----------------------------------------------------------------------------------------
+\newcommand{\thesistitle}{Robotic surgical tool manipulator - Recognition, control and manipulation of laparoscopic tools}
+\newcommand{\division}{Division}
+\newcommand{\me}{Karadimos Alexios of Loukas}
+\newcommand{\nomme}{Karadimos Alexios of Loukas}
+\newcommand{\studnum}{1046820}
+\newcommand{\monthyear}{Month 2021}
+\newcommand{\supname}{Evangelos Dermatas}
+\newcommand{\suptitle}{Associate Professor Dr.}
+\newcommand{\headofdivision}{Kazakos Demosthenes}
+\newcommand{\headofdivisiontitle}{Assistant Professor Dr.}
+\title{\thesistitle}
+\author{Karadimos Alexios}
+\date{2020}
+
+
+\begin{document}
+
+\selectlanguage{greek}
+\selectlanguage{english}
+
+
+%----------------------------------------------------------------------------------------
+%	FRONT PAGE & CERTIFICATION
+%----------------------------------------------------------------------------------------
+\include{titlepage}
+
+\include{certification}
+
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+\tableofcontents
+\renewcommand*\contentsname{Table of Contents}
+
+%----------------------------------------------------------------------------------------
+%	MAIN SECTIONS
+%----------------------------------------------------------------------------------------
+
+\section{Kinematic Analysis}
+\subsection{Forward Kinematics \& DH parameters}
+\subsection{Inverse Kinematics}
+\subsubsection{Decoupling Technique}
+\subsubsection{Workspace constraints \& Singularity points}
+\subsubsection{Numerical Solution}
+\subsubsection{Quaternion Solution}
+\subsubsection{Redundancy \& Optimization Conditions}
+\subsubsection{Comparison of Inverse Kinematics Techniques}
+
+\section{Dynamic Analysis}
+
+\section{Control}
+\subsection{Robotic Arm Controller}
+\subsection{Gripper Controller}
+
+\section{Laparoscopic tool recognition with Computer Vision}
+
+\section{Path Planning}
+
+\section{Trajectory Planning}
+\subsection{Trajectory planning in cartesian coordinates}
+\subsection{Trajectory planning in joint angles space}
+
+\section{Simulation with the ROS framework}
+
+
+
+%----------------------------------------------------------------------------------------
+%	BIBLIOGRAPHY, REFERENCES, TABLES
+%----------------------------------------------------------------------------------------
+\clearpage
+\mbox{}
+\nomenclature{$c$}{Speed of light in a vacuum inertial frame}
+\nomenclature{$h$}{Planck constant}
+\printnomenclature
+
+\newpage
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{section}{\listfigurename}
+\listoffigures
+
+\newpage
+\cleardoublepage
+\phantomsection
+\renewcommand{\listoflistingscaption}{List of programs}
+\addcontentsline{toc}{section}{\listoflistingscaption}
+\listoflistings
+
+\newpage
+\nocite{*}
+\printbibliography[heading=bibintoc,title={Bibliography}]
+
+%\end{otherlanguage}
+\end{document}

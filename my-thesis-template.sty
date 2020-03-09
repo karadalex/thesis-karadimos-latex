@@ -1,0 +1,28 @@
+\ProvidesPackage{my-thesis-template}
+
+\usepackage[top=2cm, bottom=2cm, left=2cm, right=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[T1,LGR]{fontenc}
+\usepackage[greek,english]{babel}
+\usepackage{alphabeta}
+\usepackage{gensymb}
+\usepackage{csquotes}
+\usepackage[figurename=Εικόνα]{caption}
+\usepackage{float}
+\usepackage[bibencoding=auto,backend=biber,babel=other, style=numeric]{biblatex}
+\usepackage{listings}
+\usepackage{minted}
+\usepackage{xcolor}
+\usepackage[intoc]{nomencl}
+\makenomenclature
+
+\renewcommand{\listfigurename}{Ευρετήριο εικόνων}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness here
+
+\addbibresource{bibliography.bib}
+\usemintedstyle{perldoc}
+\urlstyle{same}
+\graphicspath{{images/}}

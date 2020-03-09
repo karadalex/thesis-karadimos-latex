@@ -9,3 +9,7 @@
 *.run.xml
 *.synctex.gz
 *.toc
+*.dvi
+*.ilg
+*.nlo
+*.nls
