@@ -10,13 +10,14 @@
 \usepackage{alphabeta}
 \usepackage{gensymb}
 \usepackage{csquotes}
-\usepackage[figurename=Εικόνα]{caption}
+\usepackage{caption}
 \usepackage{float}
 \usepackage[bibencoding=auto,backend=biber, style=numeric]{biblatex}
 \usepackage{listings}
 \usepackage{minted}
 \usepackage{xcolor}
 \usepackage[intoc]{nomencl}
+\usepackage{fancyhdr}
 
 \renewcommand{\listfigurename}{Ευρετήριο εικόνων}
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness here
@@ -26,3 +27,11 @@
 \usemintedstyle{perldoc}
 \urlstyle{same}
 \graphicspath{{images/}}
+\pagestyle{fancy}
+\renewcommand{\sectionmark}[1]{\markright{#1}{}}
+\renewcommand{\subsectionmark}[1]{\markright{#1}{}}
+\fancyhf{}
+\fancyhead[LO,RE]{\thepage}
+\fancyhead[RO]{\rightmark}
+\fancyhead[LE]{\rightmark}
+\numberwithin{equation}{subsection}
