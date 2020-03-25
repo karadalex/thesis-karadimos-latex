@@ -1,0 +1,34 @@
+\section{Grasping}
+
+\subsection{Gripper \& Forward Kinematics}
+
+\begin{center}
+\includegraphics[width=12cm]{images/bh8-282-dimensions.png}\\[1cm]
+\end{center}
+
+\subsection{Gripper Inverse Kinematics}
+
+The following Inverse Kinematics analysis referes to one finger of the Barrett Hand gripper, which has 3 revolute joints. Finger 3 has only 2 
+revolute joints for which the angle solutions are the same with the solutions of the last 2 joints of the other fingers. Let
+\[
+\mathbf{p} = \begin{bmatrix} p_x \\ p_y \\ p_z \\ \end{bmatrix}
+\]
+be the position of the grasp point for one finger. The first angle can easily be calculated as
+\[
+φ_1 = atan2 \left( p_y, p_x \right)
+\]
+Next, we calculate the third angle based on the law of cosines (see fig.)
+\[
+cos \left( π - φ_3 - \frac{2π}{9} \right) = \frac{L_2^2 + L_3^2 - p^2}{2 L_2 L_3}
+\]
+\[
+cos \left(φ_3 + \frac{2π}{9} \right) = \frac{p^2 - L_2^2 - L_3^2}{2 L_2 L_3}
+\]
+\[
+φ_3 = atan2 \left[ \pm \sqrt{1 - \left( \frac{p^2 - L_2^2 - L_3^2}{2 L_2 L_3} \right)^2} , \frac{p^2 - L_2^2 - L_3^2}{2 L_2 L_3} \right] - \frac{2π}{9}
+\]
+
+\subsection{Force closure}
+The planar case, the spatial case \& convex hull test.
+
+\subsection{Firm grasping algorithm \& Force control}
