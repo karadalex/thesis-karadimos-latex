@@ -28,15 +28,27 @@ be the position of the grasp point for one finger. The first angle can easily be
 
 Next, we calculate the third angle based on the law of cosines (see fig.)
 \[
-cos \left( π - φ_3 - \frac{2π}{9} \right) = \frac{L_2^2 + L_3^2 - p^2}{2 L_2 L_3}
+cos \left( π - φ_3 - \frac{π}{4} \right) = \frac{L_2^2 + L_3^2 - p^2}{2 L_2 L_3}
 \]
 \[
-cos \left(φ_3 + \frac{2π}{9} \right) = \frac{p^2 - L_2^2 - L_3^2}{2 L_2 L_3}
+cos \left(φ_3 + \frac{π}{4} \right) = \frac{p^2 - L_2^2 - L_3^2}{2 L_2 L_3}
 \]
 \begin{equation}
-φ_3 = atan2 \left[ \pm \sqrt{1 - \left( \frac{p^2 - L_2^2 - L_3^2}{2 L_2 L_3} \right)^2} , \frac{p^2 - L_2^2 - L_3^2}{2 L_2 L_3} \right] - \frac{2π}{9}
+φ_3 = atan2 \left[ \pm \sqrt{1 - \left( \frac{p^2 - L_2^2 - L_3^2}{2 L_2 L_3} \right)^2} , \frac{p^2 - L_2^2 - L_3^2}{2 L_2 L_3} \right] - \frac{π}{4}
 \end{equation}
 
+After having calculated $φ_3$ we can calculate $φ_2 $
+
+\[
+tan \left( ψ + φ_2 \right) = \frac{p_z}{\sqrt{p_x^2 + p_y^2}}
+\]
+\[
+tan \left( ψ \right) = \frac{L_3 sin \left( φ_3 + \frac{π}{4} \right) }{L_2 + L_3 cos \left( φ_3 + \frac{π}{4} \right)}
+\]
+
+\begin{equation}
+φ_2 = atan2 \left( pz, \sqrt{p_x^2 + p_y^2} \right) - atan2 \left[ L_3 sin \left( φ_3 + \frac{π}{4} \right), L_2 + L_3 cos \left( φ_3 + \frac{π}{4} \right) \right]
+\end{equation}
 
 \subsection{Force closure}
 The planar case, the spatial case \& convex hull test.
