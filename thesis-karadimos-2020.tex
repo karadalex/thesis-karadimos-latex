@@ -1,4 +1,4 @@
-\documentclass[10pt]{article}
+\documentclass[a4paper,11pt]{article}
 
 \usepackage{my-thesis-template}
 
@@ -16,9 +16,22 @@
 \newcommand{\suptitle}{Associate Professor Dr.}
 \newcommand{\headofdivision}{Kazakos Demosthenes}
 \newcommand{\headofdivisiontitle}{Assistant Professor Dr.}
+\newcommand{\keywords}{surgery, robotics, control, laparoscopy}
 \title{\thesistitle}
 \author{Karadimos Alexios}
 \date{2020}
+
+% PDF metadata
+\hypersetup
+{
+    pdfauthor={Alexios Karadimos},
+    pdftitle={thesis},
+    pdfsubject={\thesistitle},
+    pdfkeywords={\keywords},
+    pdfproducer={PdfLaTex},
+    pdfcreator={Alexios Karadimos}
+}
+
 
 
 \begin{document}
@@ -47,48 +60,48 @@
 %----------------------------------------------------------------------------------------
 
 %\newpage
-\include{chapters/1_kinematics}
+\input{chapters/1_kinematics}
 
 %\newpage
-\include{chapters/2_dynamics}
+\input{chapters/2_dynamics}
 
 %\newpage
-\include{chapters/3_control}
+\input{chapters/3_control}
 
 %\newpage
-\include{chapters/4_vision}
+\input{chapters/4_vision}
 
 %\newpage
-\include{chapters/5_path}
+\input{chapters/5_path}
 
 %\newpage
-\include{chapters/6_trajectory}
+\input{chapters/6_trajectory}
 
 %\newpage
-\include{chapters/7_ros_sim}
+\input{chapters/7_ros_sim}
 
 
 %----------------------------------------------------------------------------------------
 %	BIBLIOGRAPHY, REFERENCES, TABLES
 %----------------------------------------------------------------------------------------
 \newpage
-\include{nomenclature}
+\input{nomenclature}
 \printnomenclature
 
-\newpage
+%\newpage
 \cleardoublepage
 \phantomsection
 \addcontentsline{toc}{section}{\listfigurename}
 \listoffigures
 
-\newpage
-\cleardoublepage
+%\newpage
+%\cleardoublepage
 \phantomsection
 \renewcommand{\listoflistingscaption}{List of programs}
 \addcontentsline{toc}{section}{\listoflistingscaption}
 \listoflistings
 
-\newpage
+%\newpage
 \nocite{*}
 \printbibliography[heading=bibintoc,title={Bibliography}]
 
