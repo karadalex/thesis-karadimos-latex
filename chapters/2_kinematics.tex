@@ -74,7 +74,7 @@ and position respectively.
 θ_1 = 
 \begin{cases}
 atan2 \left( p_y, p_x \right) \\
-2π - atan2 \left( p_y, p_x \right)
+π - atan2 \left( p_y, p_x \right)
 \end{cases}
 \end{equation}
 
@@ -119,6 +119,20 @@ i_z & j_z & k_z\\
 
 
 \subsubsection{Workspace constraints \& Singularity points}
+
+\begin{center}
+\begin{figure}[H]
+\centering
+\includegraphics[width=10cm]{images/iiwa-workspace.png}\\
+\caption{KUKA iiwa LBR14 workspace dimensions}
+\end{figure}
+\end{center}
+
+Singularity points:
+\begin{itemize}
+	\item When $p_x^2 + p_y^2 = 0$ then the end-effector lies on the z-axis and $θ_1$ is not defined
+	\item When $sin\left( θ_6 \right) = 0$ then the angles $θ_5, θ_7$ are not defined
+\end{itemize}
 
 \subsubsection{Solutions for 7DoF numerically}
 

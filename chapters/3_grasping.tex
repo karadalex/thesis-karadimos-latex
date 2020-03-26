@@ -37,6 +37,8 @@ cos \left(φ_3 + \frac{π}{4} \right) = \frac{p^2 - L_2^2 - L_3^2}{2 L_2 L_3}
 φ_3 = atan2 \left[ \pm \sqrt{1 - \left( \frac{p^2 - L_2^2 - L_3^2}{2 L_2 L_3} \right)^2} , \frac{p^2 - L_2^2 - L_3^2}{2 L_2 L_3} \right] - \frac{π}{4}
 \end{equation}
 
+In a more general case, the first argument of the $atan2$ function in the expression of $φ_3$ could also be negative,
+but in this case this second solution is rejected, because due to mechanical constraints, this angle can't be negative. 
 After having calculated $φ_3$ we can calculate $φ_2 $
 
 \[
@@ -54,3 +56,11 @@ tan \left( ψ \right) = \frac{L_3 sin \left( φ_3 + \frac{π}{4} \right) }{L_2 +
 The planar case, the spatial case \& convex hull test.
 
 \subsection{Firm grasping algorithm \& Force control}
+
+\begin{center}
+\begin{figure}[H]
+\centering
+\includegraphics[width=12cm]{images/finger-force-control.png}\\
+\caption{Force control on a Barrett Hand gripper finger}
+\end{figure}
+\end{center}
