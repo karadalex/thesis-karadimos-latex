@@ -1,3 +1,79 @@
 \section{Laparoscopic tool manipulation}
 
+\subsection{Tool pose}
+
+\begin{center}
+\begin{figure}[H]
+\centering
+\includegraphics[width=12cm]{images/fulcrum-space.png}\\
+\caption{Tool pose at target point $B$ calculated with respect to Fulcrum's reference frame $\lbrace F \rbrace$}
+\end{figure}
+\end{center}
+
+The laparoscopic tool pose is given by the position and orientation vectors at target point $B$ with respect to the coordinate frame $\lbrace F \rbrace$.
+The pose is given by the following transformation matrix
+\[
+{}^{F}T_B = \begin{bmatrix}
+{}^{F}R_B & {}^{F}\mathbf{p}^{}_B \\
+\mathbf{0} & 1 \\
+\end{bmatrix}
+\;\; where \;\;
+{}^{F}R_B = \begin{bmatrix}
+\hat{\mathbf{x}}^{}_B & \hat{\mathbf{y}}^{}_B & \hat{\mathbf{z}}^{}_B \\
+\end{bmatrix}
+\]
+
+\[
+\hat{\mathbf{x}}^{}_B = \hat{\mathbf{θ}} = cos(θ)cos(φ)\hat{\mathbf{x}}^{}_F + cos(θ)sin(φ)\hat{\mathbf{y}}^{}_F - sin(θ)\hat{\mathbf{z}}^{}_F
+= \begin{bmatrix}
+cos(θ)cos(φ) \\
+cos(θ)sin(φ) \\
+- sin(θ) \\
+\end{bmatrix}
+\]
+
+\[
+\hat{\mathbf{y}}^{}_B = \hat{\mathbf{φ}} = -sin(φ)\hat{\mathbf{x}}^{}_F + cos(φ)\hat{\mathbf{y}}^{}_F
+= \begin{bmatrix}
+-sin(φ) \\
+cos(φ) \\
+0 \\
+\end{bmatrix}
+\]
+
+\[
+\hat{\mathbf{z}}^{}_B = - \hat{\mathbf{r}} = - (sin(θ)cos(φ)\hat{\mathbf{x}}^{}_F + sin(θ)sin(φ)\hat{\mathbf{y}}^{}_F + cos(θ)\hat{\mathbf{z}}^{}_F)
+= \begin{bmatrix}
+-sin(θ)cos(φ) \\
+-sin(θ)sin(φ) \\
+-cos(θ) \\
+\end{bmatrix}
+\]
+
+The position of the point $B$ is given in spherical coordinates by:
+\begin{itemize}
+	\item $r=ρ$ : outside penetration of laparoscopic tool
+	\item $θ=β$ : altitude angle
+	\item $φ=α$ : orientation angle
+\end{itemize}
+thus the position with respect to the coordinate frame $\lbrace F \rbrace$ is given by
+\[
+{}^{F}\mathbf{p}^{}_B = \begin{bmatrix}
+ρsin(β)cos(α) \\
+ρsin(β)sin(α) \\
+ρcos(β) \\
+\end{bmatrix}
+\]
+
+The above goal point must be the same as the $TCP$ point of the robot's end-effector. This means, that this pose must be converted with respect to the robot's reference frames.
+\[
+{}^{U}T^{}_{TCP} = {}^{U}T^{}_{B}
+\]
+\[
+{}^{U}T^{}_{0} \; {}^{0}T^{}_{7} \; {}^{7}T^{}_{TCP} = {}^{U}T^{}_{F} \; {}^{F}T^{}_{B}
+\]
+\begin{equation}
+{}^{0}T^{}_{7} = {}^{U}T^{-1}_{0} \; {}^{U}T^{}_{F} \; {}^{F}T^{}_{B} \; {}^{7}T^{-1}_{TCP}
+\end{equation}
+
 \subsection{Pivoting motion with respect to Fulcrum Point}
