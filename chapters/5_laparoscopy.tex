@@ -77,3 +77,38 @@ The above goal point must be the same as the $TCP$ point of the robot's end-effe
 \end{equation}
 
 \subsection{Pivoting motion with respect to Fulcrum Point}
+
+\subsubsection{Circular trajectory of tool tip}
+
+\begin{center}
+\begin{figure}[H]
+\centering
+\includegraphics[width=12cm]{images/circular-trajectory-wrt-fulcrum.png}\\
+\caption{Circular trajectory of tool tip with respect to Fulcrum reference frame}
+\end{figure}
+\end{center}
+
+
+We first consider the motion of the laparoscopic tool tip on a circle parallel to a z-plane, with respect to the $\lbrace F \rbrace$ coordinate frame.
+\[
+(x^{}_{F} - x^{}_{F0})^2 + (y^{}_{F} - y^{}_{F0})^2 = r_0^2, \;\; z^{}_{F} = z^{}_{F0}
+\]
+It's often more convenient to express trajectories in a parametric form
+\[
+\begin{cases}
+x^{}_{F} = r_0cos(2πt) + x^{}_{F0} \\
+y^{}_{F} = r_0sin(2πt) + y^{}_{F0} 
+\end{cases} ,
+\;\;
+t \in [0, 1]
+\]
+
+\subsubsection{Line segment trajectory of tool tip}
+
+\begin{center}
+\begin{figure}[H]
+\centering
+\includegraphics[width=10cm]{images/line-segment-trajectory-wrt-fulcrum.png}\\
+\caption{Line segment trajectory of tool tip with respect to Fulcrum reference frame}
+\end{figure}
+\end{center}
