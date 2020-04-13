@@ -40,17 +40,6 @@ keywords = "Analytic inverse kinematics, Configuration control, Joint limit avoi
 abstract = "This paper presents a novel analytic method to uniquely solve inverse kinematics of 7 degrees-of-freedom manipulators while avoiding joint limits and singularities. Two auxiliary parameters are introduced to deal with the self-motion manifolds: the global configuration (GC), which specifies the branch of inverse kinematics solutions; and the arm angle (ψ) that parametrizes the elbow redundancy within the specified branch. The relations between the joint angles and the arm angle are derived, in order to map the joint limits and singularities to arm angle values. Then, intervals of feasible arm angles for the specified target pose and global configuration are determined, taking joint limits and singularities into account. A simple metric is proposed to compute the elbow position according to the feasible intervals. When the arm angle is determined, the joint angles can be uniquely calculated from the position-based inverse kinematics algorithm. The presented method does not exhibit the disadvantages inherent to the use of the Jacobian matrix and can be implemented in real-time control systems. This novel algorithm is the first position-based inverse kinematics algorithm to solve both global and local manifolds, using a redundancy resolution strategy to avoid singularities and joint limits."
 }
 
-@article{article,
-author = {Faria, Carlos and Ferreira, Flora and Erlhagen, Wolfram and Monteiro, Sérgio and Bicho, Estela},
-year = {2018},
-month = {03},
-pages = {317-334},
-title = {Position-based kinematics for 7-DoF serial manipulators with global configuration control, joint limit and singularity avoidance},
-volume = {121},
-journal = {Mechanism and Machine Theory},
-doi = {10.1016/j.mechmachtheory.2017.10.025}
-}
-
 @book{reza,
 title = {Theory of Applied Robotics, Kinematics, Dynamics, and Control (2nd Edition)},
 author = {Reza N. Jazar},
@@ -151,3 +140,72 @@ abstract="This paper presents a robot manipulator for hand-over-hand guidance tr
 isbn="978-3-642-33932-5"
 }
 
+@book{OKa13,
+  title = {A Gentle Introduction to ROS},
+  author = {Jason M. O'Kane},
+  publisher = {Independently published},
+  month = oct,
+  year = {2013},
+  isbn = {978-1492143239},
+  note = {Available at \url{http://www.cse.sc.edu/~jokane/agitr/}}
+}
+
+@INPROCEEDINGS{525484,  
+author={J. {Funda} and K. {Gruben} and B. {Eldridge} and S. {Gomory} and R. {Taylor}},  
+booktitle={Proceedings of 1995 IEEE International Conference on Robotics and Automation},  
+title={Control and evaluation of a 7-axis surgical robot for laparoscopy},   
+year={1995},  
+volume={2},  
+number={},  
+pages={1477-1484 vol.2},
+}
+
+@INPROCEEDINGS{4399150,  
+author={A. A. {Navarro} and A. {Hernansanz} and E. A. {Villarraga} and X. {Giralt} and J. {Aranda}},  
+booktitle={2007 IEEE/RSJ International Conference on Intelligent Robots and Systems},  
+title={Automatic positioning of surgical instruments in minimally invasive robotic surgery through vision-based motion analysis},   
+year={2007},  
+volume={},  
+number={},  
+pages={202-207},  
+abstract={Robotic surgery has experienced a rapid progress in a diversity of interventions, especially in minimally invasive surgery (MIS). In this type of interventions the patient body is accessed by inserting especial instruments through small incisions. As these instruments are manipulated by robotic assistants, passive wrists are incorporated for free compliance with the port of entry. With this wrist configuration it is only possible to locate accurately an instrument tip if its port of entry or fulcrum point is known. A vision oriented method is proposed in this paper to estimate the position of this external point of incision. It is based on motion analysis in a sequence of images where geometric properties of projected features and 3D transformations of the instrument are related. In this work we show that it is possible to accurately estimate the position and orientation of this 3D point, as well as the orientation of the instrument with respect to the laparoscopic camera applying determined movements through the robotic assistant.},  
+keywords={endoscopes;image motion analysis;image sequences;medical robotics;robot vision;surgery;surgical instrument positioning;minimally invasive robotic surgery;vision-based motion analysis;image sequence;3D transformation;laparoscopic camera;Minimally invasive surgery;Surgical instruments;Robot vision systems;Robotics and automation;Motion analysis;Robot kinematics;Robot sensing systems;Cameras;Surges;Wrist},  
+doi={10.1109/IROS.2007.4399150},  
+ISSN={2153-0866},  
+month={Oct},
+}
+
+@INPROCEEDINGS{4957177,  
+author={E. {Bauzano} and V. F. {Munoz} and I. {Garcia-Morales} and B. {Estebanez}},  
+booktitle={2009 IEEE International Conference on Mechatronics},  
+title={Active wrists endoscope navigation in robotized laparoscopic surgery},   
+year={2009},  volume={},  number={},  pages={1-6},  
+abstract={This paper is focused on the motion control problem for a laparoscopic surgery robot assistant with an actuated wrist. These assistants may apply non-desired efforts through the patient abdomen. Therefore, this article studies these efforts, which have been measured by a force sensor located between the wrist and the endoscope, and how to remove gravity and friction actions in order to obtain the abdominal efforts. The measure of these efforts indicates if the movements are done accordingly to the fulcrum point. To achieve this goal, a new control strategy, based on the emulation of passive wrists behavior, is proposed. Such methodology allows the assistant to minimize efforts over the patient. Finally, this work presents the advantages of actuated wrists for possible future applications.},  
+keywords={biomedical optical imaging;endoscopes;force sensors;manipulators;medical robotics;motion control;surgery;motion control;laparoscopic surgery robot assistant;actuated wrist;endoscope navigation;patient abdomen;force sensor;fulcrum point;emulation;passive wrist;active wrist;Wrist;Endoscopes;Navigation;Minimally invasive surgery;Robot sensing systems;Abdomen;Motion control;Force measurement;Force sensors;Gravity},  
+doi={10.1109/ICMECH.2009.4957177},  
+ISSN={},  
+month={April},
+}
+
+@INPROCEEDINGS{7942675,  
+author={M. C. {Capolei} and  {Haiyan Wu} and N. A. {Andersen} and O. {Ravn}},  
+booktitle={2017 3rd International Conference on Control, Automation and Robotics (ICCAR)},  
+title={Positioning the laparoscopic camera with industrial robot arm},   
+year={2017},  volume={},  number={},  pages={138-143},  
+abstract={This paper introduces a solution for the movement control of the laparoscopic camera employing a teleoperated robotic assistant. The project propose an autonomous robotic solution based on an industrial manipulator, provided with a modular software which is applicable to large scale. The robot arm is envisioned to orient and move the optic device in direction of a fixed point, the incision on the wall of the abdominal cavity, accordingly to the surgeon's request. To manage the movements of the laparoscope around the fulcrum point a Cartesian control strategy is exploited. A six degrees of freedom industrial robot arm is designated to accomplish this manipulation task. The software is implemented in ROS in order to facilitate future extensions. The experimental results shows a manipulator capable of moving fast and smoothly the surgical tool around a remote center of motion.},  
+keywords={control engineering computing;image sensors;manipulators;medical computing;medical robotics;surgery;telerobotics;laparoscopic camera;industrial robot arm;teleoperated robotic assistant;autonomous robotic solution;industrial manipulator;modular software;surgeon request;Cartesian control strategy;manipulation task;surgical tool;remote center of motion;Cameras;Robot vision systems;Instruments;medical robotics;telerobotics;robot arm;cartesian robot control;ROS;laparoscopy},  
+doi={10.1109/ICCAR.2017.7942675},  
+ISSN={},  
+month={April},
+}
+
+@article{article,
+author = {Palep, Jaydeep},
+year = {2009},
+month = {02},
+pages = {1-7},
+title = {Robotic assisted minimally invasive surgery},
+volume = {5},
+journal = {Journal of minimal access surgery},
+doi = {10.4103/0972-9941.51313}
+}
