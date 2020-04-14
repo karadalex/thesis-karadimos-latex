@@ -18,8 +18,8 @@
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
    sodipodi:docname="line-segment-trajectory-wrt-fulcrum.svg"
    inkscape:export-filename="/media/workspacemount/UNIVERSITY/ΣΠΟΥΔΕΣ/ΔΙΠΛΩΜΑΤΙΚΗ ΕΡΓΑΣΙΑ/LATEX/images/line-segment-trajectory-wrt-fulcrum.png"
-   inkscape:export-xdpi="128"
-   inkscape:export-ydpi="128">
+   inkscape:export-xdpi="256"
+   inkscape:export-ydpi="256">
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -28,7 +28,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.979899"
-     inkscape:cx="522.02975"
+     inkscape:cx="433.38886"
      inkscape:cy="472.27528"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
@@ -120,7 +120,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
