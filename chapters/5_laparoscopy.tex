@@ -143,3 +143,17 @@ z^{}_{F} = tn + z^{}_{F1}
 \end{cases}
 \]
 After having calculated the cartesian coordinates we can calculate the spherical coordinates using the \ref{eqns:cartesian-to-spherical} equations.
+
+\subsection{Task space analysis}
+
+Dexterity analysis for tool's task space
+\begin{equation}
+\mathcal{D} = \mathcal{L}_q \mathcal{M}
+\end{equation}
+where
+\begin{equation}
+\mathcal{M} = \sqrt{det(J J^\top)}
+\end{equation}
+\begin{equation}
+\mathcal{L}_{q}=1-\exp\left\{-\kappa\prod_{i=1}^{n_{k}}\frac{(q_{ {i}}-q_{i,\min})(q_{i,\max}-q_{i})}{(q_{i,\max}-q_{i,\min})^{2}}\right\}
+\end{equation}

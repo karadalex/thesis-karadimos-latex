@@ -136,4 +136,22 @@ Singularity points:
 
 \subsubsection{Solutions for 7DoF numerically}
 
+Jacobian
+\[
+J = J( \mathbf{q} ) = [ J_1, J_2, \cdots, J_7 ] \in \mathbb{R}^{6 \times 7}
+\]
+\begin{equation}
+J_i = \begin{bmatrix}
+{}^0\mathbf{z}_i \times ({}^0\mathbf{p}_8 - {}^0\mathbf{p}_i) \\
+{}^0\mathbf{z}_i \\
+\end{bmatrix}
+\end{equation}
+
+$J( \mathbf{q} )$ is non rectangular and thus non-invertible. Instead of the inverse of the Jacobian the pseudoinverse is calculated which by the 
+equation
+\begin{equation}
+J^{\dagger} = J^\top ( J J^\top )^{-1}
+\end{equation}
+
+
 \subsubsection{Comparison of Inverse Kinematics Techniques}
