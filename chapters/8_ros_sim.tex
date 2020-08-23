@@ -10,6 +10,18 @@
 \end{figure}
 \end{center}
 
+The main environment setup of this thesis was designed using the Gazebo simulation environment and 
+it consists of the following objects:
+\begin{itemize}
+\item the robot arm, KUKA\textsuperscript \textregistered iiwa14 lbr, being at the center of the setup
+\item the robot base, so that the robot arm can better reach the tools and the surgical site and have more flexibility in movment
+\item 2 tables, one for the tools and one for the surgical site
+\item 4 surgical tools, using a modified version of the surgical tools used in the Raven II surgical platform
+\item a mounting dock, which has holes that have the same role as the trocars (small tubes from 
+which the surgical tool is inserted). Initially a mounting dock with 4 same holes of 4mm diameter was used, but it was later replaced with a new one with holes of variable diameters to test feasibility of pivot motions. Larger diameters means more space for motion planner to search for solution and thus more probable to find a solution.
+\end{itemize}
+
+
 \subsection{Visualization and Motion Planning with RViz and Moveit}
 
 Motion Planning parameters outside of body:
@@ -27,3 +39,59 @@ Motion Planning parameters inside of body:
 	\item End-effector interpolation step: 1mm
 	\item Maximum velocity scaling factor
 \end{itemize}
+
+Sometimes the motion planner finds a solution but the execution from the controller is aborted. 
+After many iterations of the same experiment this does not happen always, which means that the 
+feasibility of the execution of the movement by the controller depends on the initial state of 
+the robot, i.e. if initially some joints of the robot are at their boundaries, then the next 
+commanded trajectory maybe unfeasible.
+
+At each time step it is important to publish a custom message containing all the information 
+about the kinematic state of the robot. In this thesis a custom \textbf{ROS} message was created 
+containing a tf transform with a 3D vector for the position and a quaternion for the rotation and 
+a custom  6-by-7 matrix containing the values of the Jacobian. The MoveIt library, from which the 
+kinematic state of the robot is obtained, returns the orientation of the end effector as a 3-by-3 
+rotation matrix, but in the ROS tf message it must be expressed as a quaternion. To convert the 
+matrix to a quaternion we first calculate the euler angles and then use these values to construct 
+the quaternion “vector”. The quaternion representation of rotation is often preferred in robotic 
+applications due to its efficiency in calculations and memory. To convert the transformation 
+matrix to euler angles and then to quaternions the following formulas were used:
+\[
+T = 
+\begin{bmatrix}
+r_{11} & r_{12} & r_{13} & x \\
+r_{21} & r_{22} & r_{23} & y \\
+r_{31} & r_{32} & r_{33} & z \\
+0 & 0 & 0 & 1\\
+\end{bmatrix}
+\]
+
+\[
+φ = atan2(r_{21}, r_{11})
+\]
+
+\[
+θ = atan2(-r_{31}, \sqrt{r_{11}^2 + r_{21}^2})
+\]
+
+\[
+ψ = atan2(r_{32}, r_{33})
+\]
+
+where $T$ is the transformation matrix and $φ, θ, ψ$ are the roll, pitch and yaw (Euler) angles.
+
+
+
+
+\subsection{Experiments and Development methodology}
+
+\subsubsection{Robot Planner 1}
+
+\subsubsection{Robot Planner 2}
+
+\subsubsection{Robot Planner 3}
+
+\subsubsection{Robot Planner 4}
+
+\subsubsection{Robot Planner 5}
+

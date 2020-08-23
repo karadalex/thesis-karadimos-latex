@@ -88,6 +88,11 @@ The above goal point must be the same as the $TCP$ point of the robot's end-effe
 \end{figure}
 \end{center}
 
+To generate a circular trajectory for the pivot movement we must specify the center of the circle 
+and a vector whose magnitude is the radius of the circle and it’s direction gives the orientation 
+of the plane that the circle lies at. The simplest case of a circular trajectory is the one, 
+whose circle lies in a plane parallel to the xy plane.
+
 
 We first consider the motion of the laparoscopic tool tip on a circle parallel to a z-plane, with respect to the $\lbrace F \rbrace$ coordinate frame.
 \[
@@ -112,6 +117,12 @@ r = \sqrt{x^{2}_{F} + y^{2}_{F} + z^{2}_{F}} \\
 φ = atan2(y^{}_{F}, x^{}_{F})
 \end{cases}
 \end{equation}
+
+\subsubsection{Circular arc trajectory of tool tip}
+
+To generate a circular arc trajectory for a pivot motion we must specify the same parameters as 
+in the circular trajectory as well as the length of the arc or the total angle of the arc 
+section.
 
 
 \subsubsection{Line segment trajectory of tool tip}
@@ -144,6 +155,10 @@ z^{}_{F} = tn + z^{}_{F1}
 \]
 After having calculated the cartesian coordinates we can calculate the spherical coordinates using the \ref{eqns:cartesian-to-spherical} equations.
 
+The line segment trajectory of tool tip, as analysed in this section needs no implementation as 
+it is already implemented in the ROS MoveIt library and can be used by calling the method 
+\textbf{computeCartesianPath}.
+
 \subsection{Task space analysis}
 
 Dexterity analysis for tool's task space
@@ -157,3 +172,8 @@ where
 \begin{equation}
 \mathcal{L}_{q}=1-\exp\left\{-\kappa\prod_{i=1}^{n_{k}}\frac{(q_{ {i}}-q_{i,\min})(q_{i,\max}-q_{i})}{(q_{i,\max}-q_{i,\min})^{2}}\right\}
 \end{equation}
+\\
+For maximum dexterity at most points of a trajectory in a pivoting motion, the pivot sub-
+taskspace (i.e. the space of all configurations of feasible pivot motions) must be fully within 
+the robot’s whole reachable taskspace, otherwise only a small range of pivot movements will be 
+feasible.
