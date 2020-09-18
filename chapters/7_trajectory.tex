@@ -11,12 +11,12 @@ Connect the points from path planning with line segments and add more points if 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.7\textwidth]{images/simple_circular_traj1.png}\\
-\caption{Circlular trajectory around the z zxis of the home position of the robot}
+\caption{Circlular trajectory around the z axis of the home position of the robot}
 \label{fig:circ-traj-out-of-angle-range}
 \end{figure}
 \end{center}
 
-It is very important that the designed trajectory respects the joints' angles' range. For example
+It is very important that the designed trajectory respects the joints angles' range. For example
 depending on the starting position of the circular trajectory depicted at figure 
 \ref{fig:circ-traj-out-of-angle-range}, the robot arm may reach it's joint bounds and in order to 
 continue executing the trajectory it will have to make a sudden jump to reset the angles. 
