@@ -1,8 +1,10 @@
 \section{Introduction}
 
-\subsection{Surgery Robotics}
+\subsection{Surgical robotics}
 
-Surgery Robotics is a field of Surgery where the surgeon operaties on the patient via a computer, specialised equipment and robotic arms, 
+\subsubsection{Historical Overview of Surgical robotics}
+
+Surgical robotics is a field of Surgery where the surgeon operaties on the patient via a computer, specialised equipment and robotic arms, 
 to which the surgical tools needed for the operation are attached. According to surgical bibliography, robotics and laparoscopic procedures are used 
 in general surgery, cardiothoracic surgeries, colon surgeries, gynecology, neurosurgery and orthopedics. \\
 
@@ -33,20 +35,57 @@ for medical devices, drugs etc.).
 
 Some other important surgery robots are listed below:
 \begin{itemize}
-\item \textbf{AESOP\textsuperscript \textregistered Endoscope Positioner}
+\item \textbf{AESOP\textsuperscript \textregistered Endoscope Positioner}: A voice controlled endoscopic system
 \item \textbf{HERMES\textsuperscript \textregistered Control Center}
-\item \textbf{daVinci Surgical System\textsuperscript \textregistered}
+\item \textbf{daVinci Surgical System\textsuperscript \textregistered}: One of the most popular surgery robots and most used 
+in hospitals. It is a master-slave system, which means that the operation commands are sent uni-directionally from the master 
+console, which is controlled by the surgeon, and are executed by the robot. It also comes with a high definition 3D video feed 
+and advanced manipulator system, one for each hand, called EndoWrist\textsuperscript \textregistered. It is officially approved 
+by the FDA for laparoscopic surgeries.
 \item \textbf{SOCRATES Robotic Telecollaboration System}
 \item \textbf{Raven-II} \cite{Raven2}: An open platform for collaborative research on surgical robotics.
+\item \textbf{Monarch\textsuperscript \texttrademark Platform} by Auris Health Inc., an endoscopic system for robotic-assisted 
+bronchoscopy
 \end{itemize}
 
 \begin{center}
 \begin{figure}[H]
 \centering
-\includegraphics[width=9cm]{images/davinci-xi-patient-cart.png}\\
-\caption{DaVinci Xi Patient Cart}
+\includegraphics[width=0.7\textwidth]{images/intuitive-da-vinci-xi-patient-cart-front-view-1060867-lo-res.jpg}\\
+\caption{DaVinci Xi, \textsuperscript \textcopyright 2020 Intuitive Surgical, Inc. Patient Cart with the robotic arms that control the surgical tools}
 \end{figure}
 \end{center}
+
+\begin{center}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/Moarch_Platform_1200_x_676_1_.jpg}\\
+\caption[The Monarch\textsuperscript \texttrademark Platform endoscopic system]{The Monarch\textsuperscript \texttrademark Platform endoscopic system \footnotemark}
+\end{figure}
+\end{center}
+% How to use caption with footnote https://tex.stackexchange.com/questions/10181/using-footnote-in-a-figures-caption 
+\footnotetext{\url{https://www.aurishealth.com/patients/robotic-bronchoscopy-patient-about-monarch-platform }}
+
+
+\subsubsection{Surgical Robotics Procedure}
+
+The robotic surgery procedure starts with total anesthesia of the patient. Then the surgeon makes small incisions at the anatomical region of interest, where the procedure will take place. Through 
+these small incisions special tubes, called trocars, are mounted, through which the laparoscopic tools are inserted. After the patient is prepared and after the patient cart, which carries the robotic arms, 
+is successfully positioned and callibrated, the surgeon sits on a console, from where they control they robot via special sensitive joysticks. The surgeon has vision access (often in 3D) to the surgical site via a
+small endoscopic camera and the video is displayed on the console. In some cases, the surgeon gets force feedback from the joysticks via haptic mechanisms. Haptic force feedback is very important for the doctor 
+in order to have a better sense of the anatomy and the surgical site, and it has gained a lot of interest in the reasearch community.
+
+\begin{center}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{images/intuitive-davinci-console-front-lowres.jpg}\\
+\caption[DaVinci Xi \textsuperscript \textcopyright 2020 Intuitive Surgical, Inc. Surgeon Console]{DaVinci Xi \textsuperscript \textcopyright 2020 Intuitive Surgical, Inc. Surgeon Console \footnotemark}
+\end{figure}
+\end{center}
+\footnotetext{\url{https://www.intuitive.com/en-us/about-us/press/press-resources}}
+
+
+\subsubsection{Advantages \& Disadvantages of Surgical robotics}
 
 Surgical robotics have a huge impact in Medicine and Healthcare in general. Some of the advantages are the following:
 \begin{itemize}
@@ -64,18 +103,25 @@ Surgical robotics have a huge impact in Medicine and Healthcare in general. Some
 	\item Detection and correction of errors caused by hand tremble
 	\end{itemize}
 \item \textbf{No fulcrum effect} and intuitive manipulation of surgical tools
-\item \textbf{Haptic feedback}
+\item \textbf{Haptic feedback}. This technology uses small mechanical forces and vibrations to give the user the sense of touch or force. Force feedback gives the ability to the surgeon to understand the 
+mechanical properties of the tissue they operate on, such as resistance and elasticity, and thus distinguish between healthy from unhealthy tissue
 \item \textbf{Teleoperation} (currently in the same room only): the surgeon operates while they sit on a special \textbf{ergonomic} console, which makes 
 the long procedures more comfortable and efficient.
 \end{itemize} 
 
-\begin{center}
-\begin{figure}[H]
-\centering
-\includegraphics[width=7cm]{images/davinci-xi-surgeon-console.png}\\
-\caption{DaVinci Xi Surgeon Console}
-\end{figure}
-\end{center}
+\subsection{Problem statement}
+
+The goal of this thesis is to design the kinematic models and algorithms necessary for a robotic arm to detect, pick and manipulate a laparoscopic surgical tool. To achieve these goals the robotic arm must 
+successfully do the following:
+\begin{itemize}
+\item Use computer vision to detect the scene and laparoscopic tools and with the help of stereoscopic vision, calculate the position and orientation of the center of mass of each tool, with respect to the 
+universal reference frame
+\item Calculate the contact points on the tool, on which the fingers of the gripper will be placed, so that there is a firm grasp (force closure)
+\item Calculate the path from the tools' table to the surgical site table
+\item Calculate the trajectory that needs to be executed when the tool is inserted in the trocar. This is a special type of trajectory, because the motion is constrained and is known in the bibliography as
+a \textbf{Remote Center of Motion} (RCM) control. The constraint is that, at each time one point of the inserted tool must coincide with the RCM point (this point will also be referenced in this thesis as the center of the 
+trocar, or the fulcrum reference frame point).
+\end{itemize}
 
 \subsection{Bibliography Overview}
 
