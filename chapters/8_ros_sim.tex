@@ -31,7 +31,7 @@ The main environment setup of this thesis was designed using the Gazebo simulati
 it consists of the following objects:
 \begin{itemize}
 \item the robot arm, KUKA\textsuperscript \textregistered iiwa14 lbr, being at the center of the setup
-\item the robot base, so that the robot arm can better reach the tools and the surgical site and have more flexibility in movment
+\item the robot base, so that the robot arm can better reach the tools and the surgical site and have more flexibility in movement
 \item 2 tables, one for the tools and one for the surgical site
 \item 4 surgical tools, using a modified version of the surgical tools used in the Raven II surgical platform
 \item a mounting dock, which has holes that have the same role as the trocars (small tubes from 
@@ -68,14 +68,29 @@ It is important to mention, that every such object is taken into consideration i
 
 \subsection{Motion Planning with Moveit}
 
-Motion Planning parameters outside of body:
+When using the Moveit ROS library a set of parameters need to be configured in order to generate the desired commands for the controller:
+\begin{itemize}
+	\item Position tolerance:
+	\item Orientation tolerance:
+	\item Maximum planning time:
+	\item Replanning:
+	\item Maximum planning attempts:
+	\item Base frame:
+	\item Jump threshold:
+	\item Velocity scaling factor:
+	\item End-effector step:
+	\item Planner algorithm:
+	\item Fraction:
+\end{itemize}
+
+Typical motion planning parameter values outside of surgical site:
 \begin{itemize}
 	\item Position tolerance: 50μm
 	\item Orientation tolerance: 0.00005 deg
 	\item Planning time: 10s
 \end{itemize}
 
-Motion Planning parameters inside of body:
+Typical motion planning parameter values inside surgical site:
 \begin{itemize}
 	\item Position tolerance:
 	\item Orientation tolerance:
@@ -88,7 +103,8 @@ Sometimes the motion planner finds a solution but the execution from the control
 After many iterations of the same experiment this does not happen always, which means that the 
 feasibility of the execution of the movement by the controller depends on the initial state of 
 the robot, i.e. if initially some joints of the robot are at their boundaries, then the next 
-commanded trajectory maybe unfeasible.
+commanded trajectory maybe unfeasible. Another reason that the path planner may fail is the 
+probabilistic nature of the path planning algorithms (see also RRT and PRM algorithms in chapter 6).
 
 At each time step it is important to publish a custom message containing all the information 
 about the kinematic state of the robot. In this thesis a custom \textbf{ROS} message was created 

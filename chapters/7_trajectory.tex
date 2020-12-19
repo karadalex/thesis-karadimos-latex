@@ -1,7 +1,9 @@
 \section{Trajectory Planning}
 
 At this step, given the points of the desired path, a more detailed trajectory is calculated, 
-which will contain all the waypoints that the robot will have to visit.
+which will contain all the waypoints that the robot will have to visit. Trajectory planning is executed after a desired path is generated,
+and consists in mapping the geometric points to specific time points, as well as assigning specific velocities, accelerations and jerks, 
+in order to generate the commands needed for the robot controller to execute a smooth motion.
 
 \subsection{Trajectory planning in cartesian coordinates}
 

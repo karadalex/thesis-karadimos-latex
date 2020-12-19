@@ -1,8 +1,14 @@
 \section{Path Planning}
 
+Path Planning is a geometric problem, where it is desired to find a path from a starting point to a goal point and also satisfying a set of constraints, such as: 
+restricting the solutions inside the robot's configuration space, avoiding obstacles in the task space, avoiding singularity points and respecting the robot's 
+joint limits.
+
 \subsection{Sampling methods}
 
-The path planning algorithms that were mostly used in this thesis belong to the category of sampling methods
+The path planning algorithms that were mostly used in this thesis belong to the category of sampling methods. These methods use random functions to choose a sample from 
+the configuration space or the state space. Sampling methods differ from the deterministic grid methods which, which discretize the whole space. Sampling methods are less 
+computationally expensive than the grid methods, but they do not deliver optimal solutions like the latter.
 
 
 \subsubsection{RRT Algorithms}
@@ -24,7 +30,7 @@ of goal states, because apart from the one desired goal state there can be other
 			$V \leftarrow V \cup \lbrace x_{new} \rbrace $\;
 			$E \leftarrow E \cup \lbrace (x_{nearest}, x_{rand}) \rbrace $\;
 			\If{$x_{new} \in \mathcal{X}_{goal}$}{
-				%\Return SUCCESS and path plan $ T=(V,E) $ \;
+				\Return SUCCESS and path plan $ T=(V,E) $ \;
 			}
 		}
 	}
