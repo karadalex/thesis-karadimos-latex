@@ -35,7 +35,6 @@
 }
 
 
-
 \begin{document}
 
 \selectlanguage{greek}
@@ -99,8 +98,13 @@
 
 
 %----------------------------------------------------------------------------------------
-%	BIBLIOGRAPHY, REFERENCES, TABLES
+%	BIBLIOGRAPHY, REFERENCES, TABLES, APPENDIXES
 %----------------------------------------------------------------------------------------
+\newpage
+\appendix
+\appendixpage
+\input{chapters/appendix}
+
 \newpage
 \input{nomenclature}
 \printnomenclature
@@ -114,9 +118,10 @@
 %\newpage
 %\cleardoublepage
 \phantomsection
-\renewcommand{\listoflistingscaption}{List of programs}
-\addcontentsline{toc}{section}{\listoflistingscaption}
-\listoflistings
+%\renewcommand{\listoflistingscaption}{List of programs}
+%\addcontentsline{toc}{section}{\listoflistingscaption}
+%\listoflistings
+\listofalgorithms
 
 \newpage
 \nocite{*}

@@ -1,7 +1,59 @@
 \section{Path Planning}
 
-\subsection{Path searching} 
-Find path points (position and orientation) by avoiding collisions, asserting that path points is within 
-robot's workspace and by avoiding singularity points.
+\subsection{Sampling methods}
+
+The path planning algorithms that were mostly used in this thesis belong to the category of sampling methods
+
+\subsubsection{RRT Algorithms}
+
+The RRT algorithm is a sampling planning method that searches for an obstacle-free motion plan from an initial state $x_{init}$ to a set of goal states $\mathcal{X}_{goal}$. We refer to a set of goal states, because
+apart from the one desired goal state there can be other neighbor states that are within the allowed position and orientation tolerances.
+
+\begin{algorithm}[H]
+\SetAlgoLined
+initialize vertices $V \leftarrow \lbrace x_{init} \rbrace$\;
+initialize edges $E \leftarrow \varnothing$\;
+initialize search tree $T \leftarrow (V,E)$\;
+\While{time \leq maxPlanningTime}{
+	$x_{rand} \leftarrow$ getSampleStateFrom(\mathcal{X})\;
+	$x_{nearest} \leftarrow$ getNearestNodeInTreeToState($T, x_{rand}$)\;
+	$x_{new} \leftarrow$ findLocalPlanFromTo($x_{nearest}, x_{rand}$)\;
+	\If{isMotionCollisionFree($x_{nearest}, x_{rand}$)}{
+		$V \leftarrow V \cup \lbrace x_{new} \rbrace $\;
+		$E \leftarrow E \cup \lbrace (x_{nearest}, x_{rand}) \rbrace $\;
+		\If{$x_{new} \in \mathcal{X}_{goal}$}{
+			\Return SUCCESS and path plan $T=(V,E)$
+		}
+	}
+}
+\Return FAILURE and $T=(V,E)$
+\caption{RRT Algorithm}
+\end{algorithm}
+
 
 \subsection{Pick and place algorithm}
+
+% Help on using the algorithme package
+% http://ftp.ntua.gr/mirror/ctan/macros/latex/contrib/algorithm2e/doc/algorithm2e.pdf 
+\begin{algorithm}[H]
+\SetAlgoLined
+\ForAll{surgical tools}{
+	\tcc{Plan the Pick pipeline}
+	set grasp pose\;
+	set pre-grasp approach\;
+	set post-grasp retreat\;
+	set posture of eef before grasp (open gripper)\;
+	set posture of eef during grasp (closed gripper)\;
+	\tcc{Plan the Place pipeline}
+	set place location pose\;
+	set pre-place approach\;
+	set post-grasp retreat\;
+	set posture of eef after placing object\;
+	Plan pick and place paths\;
+}
+\caption{Pick and Place algorithm}
+\end{algorithm}
+
+If the pick and place algorithm targets small objects, such as cubes or spheres or other small convex objects then the path planning is straightforward. In the case where, the object to pick and place has at least one 
+dimension that is bigger than the others like a rod or other long objects, such as the surgical tools, used in this thesis, then the path planning becomes more complicated, because of the almost certain collisions 
+of the tool with the links of the rest of the robot (the link of the end-effector will probably not collide with the tool).
