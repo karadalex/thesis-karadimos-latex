@@ -38,8 +38,35 @@ it consists of the following objects:
 which the surgical tool is inserted). Initially a mounting dock with 4 same holes of 4mm diameter was used, but it was later replaced with a new one with holes of variable diameters to test feasibility of pivot motions. Larger diameters means more space for motion planner to search for solution and thus more probable to find a solution.
 \end{itemize}
 
+\begin{center}
+\begin{figure}[H]
+\centering
+\includegraphics[width=12cm]{images/Gazebo_ros_transmission.png}\\
+\caption{Control \& Hardware Interfaces in Gazebo and ROS}
+\end{figure}
+\end{center}
 
-\subsection{Visualization and Motion Planning with RViz and Moveit}
+
+\subsection{Visualization with RViz}
+
+RViz is one of the most important and most used tools in robotic applications development and is a 3D visualizer for the Robot Operating System framework. RViz functionality should not be confused 
+with that of Gazebo, because the first one visualizes the robot state and the \textbf{perceived} world (perceived objects or other calculations related to the world) whereas the second one simulates the real world.
+
+\begin{center}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{images/rviz.png}\\
+\caption{RViz: Visualizing the robot state as well as the state of the perceived world\\
+In this screenshot, various poses of the robot are shown: 1) the current actual real pose of the robot, 2) the planned pose and 3) the goal pose, which can 
+freely be moved within the RViz environment}
+\end{figure}
+\end{center}
+
+The objects that appear in RViz can either be visualized from approximations calculated from actual measurements from the robot (for example a point cloud) or can be manually loaded, in which case we make 
+an assumption that the robot already "knows" the exact position, orientation, size and shape of the object, which is rarely the case in real life scenarios.
+It is important to mention, that every such object is taken into consideration in collision checks and in path planning algorithms.
+
+\subsection{Motion Planning with Moveit}
 
 Motion Planning parameters outside of body:
 \begin{itemize}
@@ -104,6 +131,14 @@ where $T$ is the transformation matrix and $φ, θ, ψ$ are the roll, pitch and 
 
 \subsubsection{Robot Planner 1}
 
+In this first experiment we are testing some simple trajectories with the surgical tool already attached to the robot arm's end effector.
+The path is designed using the appropriate coordinates and orientations so that the robot begins from the home position, then visits the table with the surgical 
+tools and then visits the other table on top of which the mounting dock is placed. Upon arrival at the mounting dock, the robot inserts the tool inside a hole
+(we consider these holes to be a simplistic alternative to the trocars used in real operations), then executes a simple pivot motion, while the tool is still 
+inserted and then the tool gets ejected from the mounting dock's hole.\\
+
+The aim of this experiment is to test the overall behaviour of the robot inside the work space, before implementing more complex path planning algorithms.
+
 \begin{center}
 \begin{figure}[H]
 \centering
@@ -120,7 +155,58 @@ where $T$ is the transformation matrix and $φ, θ, ψ$ are the roll, pitch and 
 \end{figure}
 \end{center}
 
+
 \subsubsection{Robot Planner 2}
+
+In this experiment, we plan a path such that the robot arm will visit all holes of the mounting dock and will try the insertion movement of the surgical tool.
+This experiment is very useful, because it shows whether all holes of the mounting dock are \textbf{reachable} (inside the robot's work space) and if so, how 
+\textbf{dexterous} the robot will be in pivoting around each hole, i.e. how free the robot arm is to execute pivot motions.
+
+\begin{center}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.3\textwidth]{images/robot_planner2/robot_planner2_1}
+\includegraphics[width=0.3\textwidth]{images/robot_planner2/robot_planner2_2}
+\includegraphics[width=0.3\textwidth]{images/robot_planner2/robot_planner2_3}\\
+\includegraphics[width=0.3\textwidth]{images/robot_planner2/robot_planner2_4}
+\includegraphics[width=0.3\textwidth]{images/robot_planner2/robot_planner2_5}
+\includegraphics[width=0.3\textwidth]{images/robot_planner2/robot_planner2_6}\\
+\includegraphics[width=0.3\textwidth]{images/robot_planner2/robot_planner2_7}
+\includegraphics[width=0.3\textwidth]{images/robot_planner2/robot_planner2_8}\\
+\caption{Experiment 2a:}
+\label{experiment-robot-planner2a}
+\end{figure}
+\end{center}
+
+To overcome the reachability issue shown in Figure \ref{experiment-robot-planner2a}, the algorithm was repeated, but this time using a different simulation layout 
+in Gazebo, in which the mounting dock is closer to the robot and in front of it. This new layout enables the robot to reach all mounting holes with ease and 
+with sufficient dexterity, the robot is free to pivot around.
+
+\begin{center}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.3\textwidth]{images/robot_planner2b/robot_planner2b_1}
+\includegraphics[width=0.3\textwidth]{images/robot_planner2b/robot_planner2b_2}
+\includegraphics[width=0.3\textwidth]{images/robot_planner2b/robot_planner2b_3}\\
+\includegraphics[width=0.3\textwidth]{images/robot_planner2b/robot_planner2b_4}
+\includegraphics[width=0.3\textwidth]{images/robot_planner2b/robot_planner2b_5}
+\includegraphics[width=0.3\textwidth]{images/robot_planner2b/robot_planner2b_6}\\
+\includegraphics[width=0.3\textwidth]{images/robot_planner2b/robot_planner2b_7}
+\includegraphics[width=0.3\textwidth]{images/robot_planner2b/robot_planner2b_8}
+\includegraphics[width=0.3\textwidth]{images/robot_planner2b/robot_planner2b_9}\\
+\caption{Experiment 2b:}
+\end{figure}
+\end{center}
+
+Due to the probabilistic nature of the motion planner (in these experiments the OMPL library is used with the RRTConnect path planning algorithm), the solutions 
+to the path planning problem are not always the same and thus it is possible that the robot arm reaches a pose which is close to a singularity
+\begin{center}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{images/robot_planner2b/singularity_failure.png}
+\caption{Experiment 2b: Singularity failure}
+\end{figure}
+\end{center}
 
 \subsubsection{Robot Planner 3}
 

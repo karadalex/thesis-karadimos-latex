@@ -1,6 +1,40 @@
 \section{Scene and object recognition with Computer Vision}
 
+At this section we explore ways to detect and recognize the surgical tools as well as other objects of the simulation scene. To reduce the complexity of 
+this thesis and focus on the more important features of this thesis, we assume in the simulation that the surgical tools are blue and the mounting dock, 
+where the tools will be placed, is green. These assumptions make the scene and object recognition much easier without the need of more advanced image 
+processing and/or machine learning recognition algorithms.\\
+
+\textbf{Camera setup} used in this thesis:
+\begin{itemize}
+\item 2 HD RGB cameras with resolution $1280 \times 720$
+\item near clipping plane: 0.02
+\item far clipping plane: 300 
+\item horizontal FoV (field of view): 1.396
+\item update rate: 30fps
+\end{itemize}
+
 \subsection{Laparoscopic tool detection}
+
+In order to detect the shape of the tool there are some standard steps that need to be executed. After having loaded the input image we convert it to grayscale, so that we can work on only one channel instead of
+3 color channels and thus reduce the amount of calculations. Also for the purposes of extracting the shape of an object, the color doesn't have a very significant role in the algorithm. Next step is 
+to remove the unwanted noise. In this thesis we only assume that the video frames have only Additive White Gaussian Noise (AWGN). To remove some of the
+noise we use a moving average filter (the filter is also known as a kernel), which is convoluted around the whole image. The filter that was used is the following 3-by-3 matrix
+\[
+h = \frac{1}{9} \begin{bmatrix}
+1 & 1 & 1 \\
+1 & 1 & 1 \\
+1 & 1 & 1 \\
+\end{bmatrix}
+\]
+the output, filtered image is the result of the convolution of the image with the filter and is calculated as following
+\[
+g(i,j) = \sum_{k,l} f(i+k,j+l)h(k,l)
+\]
+where $g(\cdot, \cdot)$ is the output image and $f(\cdot, \cdot)$ is the input image.
+
+After the noise is removed the image is getting binarized. To do that, we set a threshold, below which the pixels will be black and the rest will be white. This conversion to binary format, makes it 
+easier to extract the boundaries of the black shapes, which will correspnd to the boundaries of the objects of the initial image.
 
 \begin{center}
 \begin{figure}[H]

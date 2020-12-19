@@ -1,5 +1,10 @@
 \section{Laparoscopic tool manipulation}
 
+The biggest challenge in manipulating a laparoscopic tool with a robot is overcoming the \textbf{fulcrum effect} problem. This is also one of the reasons that 
+robotic assisted surgery replaced the traditional laparoscopic procedures. The fulcrum effect means that the surgeon's hand motions are inverted and scaled 
+with respect to the Remote Center of Motion point, which lies approximately on the center of the incision. Apart from the scaling and inversion, laparoscopic 
+procedures add an additional motion constraint that demands at each time one point of the laparoscopic tool to coincide with the RCM point.
+
 \subsection{Tool pose}
 
 \begin{center}
@@ -78,6 +83,9 @@ The above goal point must be the same as the $TCP$ point of the robot's end-effe
 
 \subsection{Pivoting motion with respect to Fulcrum Point}
 
+On this section, some basic pivoting trajectories around the fulcrum point, are presented. In all of the following three example pivoting motions, we have made 
+the assumption that the position and orientation of the ${F}$ reference frame is precisely known, which is however not applicable in real-life scenarios ()
+
 \subsubsection{Circular trajectory of tool tip}
 
 \begin{center}
@@ -148,9 +156,9 @@ t = \frac{x^{}_{F} - x^{}_{F1}}{l} = \frac{y^{}_{F} - y^{}_{F1}}{m} = \frac{z^{}
 \]
 \[
 \begin{cases}
-x^{}_{F} = tl + x^{}_{F1} \\
-y^{}_{F} = tm + y^{}_{F1} \\
-z^{}_{F} = tn + z^{}_{F1}
+x^{}_{F} = tl + x^{}_{F1} = (1-t)x^{}_{F1} + tx^{}_{F2} \\
+y^{}_{F} = tm + y^{}_{F1} = (1-t)y^{}_{F1} + ty^{}_{F2} \\
+z^{}_{F} = tn + z^{}_{F1} = (1-t)z^{}_{F1} + tz^{}_{F2}
 \end{cases}
 \]
 After having calculated the cartesian coordinates we can calculate the spherical coordinates using the \ref{eqns:cartesian-to-spherical} equations.
