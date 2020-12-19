@@ -1,7 +1,9 @@
 \section{Results and Future Work}
 
 \subsection{Results}
-\begin{table}
+
+% Robot Planner 4 with RRTConnect
+\begin{table}[H]
 \centering
 \scalebox{0.8}{
 \begin{tabular}{|p{2cm}|c|p{2cm}|p{2cm}|p{2cm}|c|p{2cm}|p{2cm}|p{2cm}|}
@@ -13,6 +15,54 @@ Robot Planner 4           & \multicolumn{4}{c}{\textbf{Pick Pipeline}}          
 Experiment                & Status & Solution Time & Path Simplification Time & Planning Attempts & Status & Solution Time & Path Simplification Time & Planning Attempts  \\
 \hline
 1                         & 1      & 0.026189      & 0.065173                 & 1                 & 1      & 0.014644      & 0.020947                 & 1                  \\
+2                         &        &               &                          &                   &        &               &                          &                    \\
+3                         &        &               &                          &                   &        &               &                          &                    \\
+4                         &        &               &                          &                   &        &               &                          &                    \\
+5                         &        &               &                          &                   &        &               &                          &                    \\
+\hline
+\textbf{Average}          &        &               &                          &                   &        &               &                          &                    \\
+\hline
+\end{tabular}
+}
+\end{table}
+
+% Robot Planner 4 with RRT*
+\begin{table}[H]
+\centering
+\scalebox{0.8}{
+\begin{tabular}{|p{2cm}|c|p{2cm}|p{2cm}|p{2cm}|c|p{2cm}|p{2cm}|p{2cm}|}
+\hline
+                          & \multicolumn{8}{c}{\textbf{RRT*}}                                                                                                 \vline \\
+\hline
+Robot Planner 4           & \multicolumn{4}{c}{\textbf{Pick Pipeline}}                     \vline & \multicolumn{4}{c}{\textbf{Place Pipeline}}                     \vline \\
+\hline
+Experiment                & Status & Solution Time & Path Simplification Time & Planning Attempts & Status & Solution Time & Path Simplification Time & Planning Attempts  \\
+\hline
+1                         &        &               &                          &                   &        &               &                          &                    \\
+2                         &        &               &                          &                   &        &               &                          &                    \\
+3                         &        &               &                          &                   &        &               &                          &                    \\
+4                         &        &               &                          &                   &        &               &                          &                    \\
+5                         &        &               &                          &                   &        &               &                          &                    \\
+\hline
+\textbf{Average}          &        &               &                          &                   &        &               &                          &                    \\
+\hline
+\end{tabular}
+}
+\end{table}
+
+% Robot Planner 4 with PRM*
+\begin{table}[H]
+\centering
+\scalebox{0.8}{
+\begin{tabular}{|p{2cm}|c|p{2cm}|p{2cm}|p{2cm}|c|p{2cm}|p{2cm}|p{2cm}|}
+\hline
+                          & \multicolumn{8}{c}{\textbf{PRM*}}                                                                                                 \vline \\
+\hline
+Robot Planner 4           & \multicolumn{4}{c}{\textbf{Pick Pipeline}}                     \vline & \multicolumn{4}{c}{\textbf{Place Pipeline}}                     \vline \\
+\hline
+Experiment                & Status & Solution Time & Path Simplification Time & Planning Attempts & Status & Solution Time & Path Simplification Time & Planning Attempts  \\
+\hline
+1                         &        &               &                          &                   &        &               &                          &                    \\
 2                         &        &               &                          &                   &        &               &                          &                    \\
 3                         &        &               &                          &                   &        &               &                          &                    \\
 4                         &        &               &                          &                   &        &               &                          &                    \\
