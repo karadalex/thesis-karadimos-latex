@@ -3,6 +3,20 @@
 
 \subsection{Robotic arm, DH parameters \& Forward Kinematics}
 
+The Forward Kinematics problem seeks to specify the way in which the robot's links are connected together. In other wants, we want to specify 
+the transformations between every pair of consecutive robot links. It is known that the forward kinematics of a robot can be calculated given only four 
+parameters for each link. These parameters are known in robotics as the \textbf{Denavit-Hartenberg} (DH) parameters. Two of these parameters describe the link 
+itself and the other two describe the link's relation to the neighboring link.
+
+\begin{itemize}
+\item The \textbf{length} $L_i$ of the i-th link is equal to the distance between the axes $z_i$ and $z_{i+1}$
+\item The \textbf{twist angle} $α_i$ of the i-th link, is the angle between the axes $z_i$ and $z_{i+1}$
+\item The \textbf{rotation angle} $θ_i$ of the link $\left\lbrace i \right\rbrace $ with respect to the $\left\lbrace i-1 \right\rbrace$ link, is the angle 
+between the axes $x_{i-1}$ and $x_i$
+\item The \textbf{distance} $d_i$ of the link $\left\lbrace i \right\rbrace$ with respect to the $\left\lbrace i-1 \right\rbrace$ link, is the distance 
+between the axes $x_{i-1}$ and $x_i$
+\end{itemize}
+
 \begin{center}
 \begin{figure}[H]
 \centering
@@ -27,6 +41,8 @@ i & $θ_i$ (rad) & $L_{i-1}$ (m) & $d_i$ (m) & $α_{i-1}$ (rad) \\
 \end{tabular}
 \end{center}
 
+Using the DH parameters of the above table, one can calculate the transformation matrix between two consecutive links, and is calculated as the following
+
 \[
 ^{i-1}T_i = 
 \begin{bmatrix}
@@ -35,6 +51,14 @@ s\theta_ica_{i-1} & c\theta_ica_{i-1} & -sa_{i-1} & -sa_{i-1}d_i \\
 s\theta_isa_{i-1} & c\theta_isa_{i-1} & ca_{i-1} & ca_{i-1}d_i \\
 0 & 0 & 0 & 1\\
 \end{bmatrix}
+\]
+
+When all the neighboring transformations are calculated, then one can calculate the total transformation $^{0}T_N$, which represents the position and the 
+orientation of the local coordinate system of the end-effector with respect to the global coordinate system of the robot's base. The orientation is the 
+upper-left 3x3 matrix and the position is given by the fourth column of the matrix $^{0}T_N$.
+
+\[
+^{0}T_N = {}^{0}T_1 \cdot {}^{1}T_0 \cdots {}^{N-1}T_N
 \]
 
 

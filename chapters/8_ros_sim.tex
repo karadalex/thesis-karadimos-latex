@@ -70,17 +70,21 @@ It is important to mention, that every such object is taken into consideration i
 
 When using the Moveit ROS library a set of parameters need to be configured in order to generate the desired commands for the controller:
 \begin{itemize}
-	\item Position tolerance:
-	\item Orientation tolerance:
-	\item Maximum planning time:
-	\item Replanning:
-	\item Maximum planning attempts:
-	\item Base frame:
-	\item Jump threshold:
-	\item Velocity scaling factor:
-	\item End-effector step:
-	\item Planner algorithm:
-	\item Fraction:
+	\item \textbf{Position tolerance}: The radius of the sphere that the end-effector must reach. This is the maximum allowed error in the target's position.
+	This tolerance is typically much smaller inside the surgical site, to avoid fatalities.
+	\item \textbf{Orientation tolerance}: The tolerance or maximum allowed error for roll, pitch and yaw, in radians
+	\item \textbf{Maximum planning time}: Maximum amount of time to be used when planning a trajectory
+	\item \textbf{Replanning}: Specify whether the robot is allowed to replan if it detects changes in the environment
+	\item \textbf{Maximum planning attempts}: Number of times the motion plan is to be computed from scratch before the shortest solution is returned
+	\item \textbf{Base frame}: The frame in respect to which the motion plan is calculated.
+	\item \textbf{Jump threshold}: This parameter sets an upper bound to the amount of "jump" (change in distance) that can occur between two consecutive trajectory points in joint 
+	positions. Disabling the jump threshold while operating real hardware can cause large unpredictable motions of redundant joints 
+	and could be a safety issue
+	\item \textbf{Velocity scaling factor}: The approaching motion needs to be slower. We reduce the speed of the robot arm via a scaling factor of the 
+	maxiumum speed of each joint. Note this is not the speed of the end effector point
+	\item \textbf{End-effector step}: The resolution at which the Cartesian path is interpolated or the max step in Cartesian translation
+	\item \textbf{Planner algorithm}:
+	\item \textbf{Fraction}: The fraction of the path achieved as described by the waypoints
 \end{itemize}
 
 Typical motion planning parameter values outside of surgical site:
@@ -226,7 +230,34 @@ to the path planning problem are not always the same and thus it is possible tha
 
 \subsubsection{Robot Planner 3}
 
+The goal of this third experiment is to design and test only some pivot trajectories. The pivot motions follow the equations described in 
+\ref{subsection:pivot-motions}. The trajectories that were designed and tested in this experiments are the following:
+\begin{itemize}
+\item Circular
+\item Arc
+\item Line segment
+\end{itemize}
+
 \subsubsection{Robot Planner 4}
+
+In this experiment we plan a simple pick-and-place path for a cube. The robotic arm first visits the left table and starts from the pre-grasp posture and then 
+slowly approaches the cube until the grasp posture. When the gripper has reached the grasp posture, it closes the fingers to grasp the object and then retreats 
+to the post-grasp posture. After that the robotic arm visits the right table to execute the place steps which are similar to the pick steps. The images below 
+show some frames from the experiment with the first three to show the pick steps in the simulation environment and then other three images show the place steps 
+in the visualization program.
+
+\begin{center}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.3\textwidth]{images/robot_planner4/robot_planner4_1}
+\includegraphics[width=0.3\textwidth]{images/robot_planner4/robot_planner4_3}
+\includegraphics[width=0.3\textwidth]{images/robot_planner4/robot_planner4_5}\\
+\includegraphics[width=0.3\textwidth]{images/robot_planner4/robot_planner4_6}
+\includegraphics[width=0.3\textwidth]{images/robot_planner4/robot_planner4_8}
+\includegraphics[width=0.3\textwidth]{images/robot_planner4/robot_planner4_10}\\
+\caption{Experiment 4: Simple pick-and-place experiment of a cube}
+\end{figure}
+\end{center}
 
 \subsubsection{Robot Planner 5}
 
