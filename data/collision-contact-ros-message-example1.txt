@@ -1,0 +1,41 @@
+header: 
+  seq: 327978
+  stamp: 
+    secs: 564
+    nsecs: 468000000
+  frame_id: "world"
+states: 
+  - 
+    info: "Debug: geom:surgical_tool4::surgical_tool_link::collision ..."
+    collision1_name: "surgical_tool4::surgical_tool_link::collision"
+    collision2_name: "robot::bh_finger_33_link::bh_finger_33_link_collision"
+    wrenches: 
+      - 
+        force: 
+          x: -1.42463913929e-91
+          y: 1.47711790023e-91
+          z: -1.58225043603e-91
+        torque: 
+          x: 5.44545932609e-93
+          y: -3.73283810062e-93
+          z: -8.38783555513e-93
+    total_wrench: 
+      force: 
+        x: -1.42463913929e-91
+        y: 1.47711790023e-91
+        z: -1.58225043603e-91
+      torque: 
+        x: 5.44545932609e-93
+        y: -3.73283810062e-93
+        z: -8.38783555513e-93
+    contact_positions: 
+      - 
+        x: -0.00130886196029
+        y: -0.587570558845
+        z: 1.0584908858
+    contact_normals: 
+      - 
+        x: 0.041868681791
+        y: -0.00620219851863
+        z: -0.999103871586
+    depths: [4.625789111756262e-07]
