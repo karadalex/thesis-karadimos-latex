@@ -179,6 +179,7 @@ where
 \mathcal{M} = \sqrt{det(J J^\top)}
 \end{equation}
 \begin{equation}
+\label{dexterity-measure}
 \mathcal{L}_{q}=1-\exp\left\{-\kappa\prod_{i=1}^{n_{k}}\frac{(q_{ {i}}-q_{i,\min})(q_{i,\max}-q_{i})}{(q_{i,\max}-q_{i,\min})^{2}}\right\}
 \end{equation}
 
@@ -189,6 +190,16 @@ where
 \caption{Plot the manipulability of the robot arm at sample points of the executed trajectory}
 \end{figure}
 \end{center}
+
+The \ref{joint-limit-measure} equation calculates a joint limit measure which is multiplied with the manipulability measure and gives the dexterity measure.
+From that equation we can conclude the following:
+\begin{itemize}
+\item If $q_i = q_{min}$ or $q_i = q_{max}$ then the exponential is equal to 1 which means that $\mathcal{L}_{q}$ and $\mathcal{D}$ are both 0, which means 
+that the robot has \textbf{no dexterity at the boundary of the task space}.
+\item If the value of $q_i$ is close to it's boundary value then the dexterity approches 0. The how mush close or far it is from the boundary (or in other words 
+how fast the exponential term converges) depends on the parameter $\kappa$
+\item The $q_{min}, q_{max}$ are calculated from the geometry of the task-space
+\end{itemize}
 
 For maximum dexterity at most points of a trajectory in a pivoting motion, the pivot sub-
 taskspace (i.e. the space of all configurations of feasible pivot motions) must be fully within 
