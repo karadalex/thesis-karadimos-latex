@@ -259,5 +259,26 @@ in the visualization program.
 \end{figure}
 \end{center}
 
+
 \subsubsection{Robot Planner 5}
 
+The goal of this fifth experiment is to control the KUKA robot using the camera via the visual servoing technique. In the first part of the experiment the 
+robotic arm goes to an initial known position (e.g. the corner of the table) and then moves around until it detects a surgical tool. When that happens, the 
+image-based visual servoing will send commands to the robot so that the detected tool is at the center of the video frame and with the same orientation 
+as the video frame. At the second part of the experiment, the robot follows a similar algorithm. It starts with a known position, like the corner of the second 
+table, then moves around until the mounting dock starts to appear inside the frame. When that happens, the image-based visual servoing will send commands to the 
+robot so that the center of the trocar or the fulcrum reference frame is at the center and with the same orientation as the video frame. Similar results can be 
+achieved by using position-based visual servoing, but that was not chosen at this implementation for simplicity and less operations. Position-based servoing 
+requires more calculations because it is required to get the camera's transformation, express it with respect to the end-effector and then calculate the 
+end-effector pose which is then used as an input to a Cartesian Controller.
+
+\begin{center}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.45\textwidth]{images/robot_planner5/visual_servo_controller3.png}
+\includegraphics[width=0.45\textwidth]{images/robot_planner5/visual_servo_controller4.png}\\
+\caption{Visual servo controller error diagrams. On the left image in the error graphs appear some spikes. These spikes occur from the sudden temporary detection 
+of a nearby surgical tool. On the right image, these spikes are filtered out, and only the error graphs of the visual servoing of one tool are shown. The  
+controller parameters are $K_p = 0.9, K_d = 0.2$}
+\end{figure}
+\end{center}
