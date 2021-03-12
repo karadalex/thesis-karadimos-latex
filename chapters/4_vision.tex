@@ -123,8 +123,28 @@ and the white rectangle is it's ROI as calculated from the convex hull}
 \end{figure}
 \end{center}
 
+The calculation of the candidate grasping points is a problem where we seek to find the points that lie on the contour of the detected object such that the gripper can make a good grasp of the object and preferably with 
+force closure. The method that was implemented in this thesis for a simplistic calculation of these points is by using a \textbf{growing circle}. This circle is initiated with a small radius and has at all times it's center at the 
+center of mass of the detected tool. At each step of the method the radius is incremented by a fixed amount and then we check if this circle has any intersection with the contour of the detected tool. If no intersection 
+is found the method proceeds with a new radius. The method is terminated when at least 3 intersections are found, and that's because the gripper that is used in this thesis has three fingers.
+
 \begin{equation}
-\mathbb{G} = \argmax_{(x,y)} I_1(x,y) \cdot I_2(x,y)
+\label{grasping-intersections}
+\mathbb{G} = \argmax_{(x,y)} I_1(x,y) \odot I_2(x,y)
+\end{equation}
+
+At the equation \ref{grasping-intersections}, the set of intersection points $\mathbb{G}$ is calculated. Given one binary image $I_1(x,y)$ which contains the contour of the detected tool (all white pixels are the contour) 
+and one second binary image $I_2(x,y)$ which contains the growing circle, then the set of intersection points are the $(x, y)$ coordinates where the Hadamard product $I_1(x,y) \odot I_2(x,y)$ (element-wise product) of the 
+two binary images is 
+maximum (or equivalently has a value of 1).\\ 
+
+It is often the case that for one intersection multiple pixels are returned from this method due to the "pixelated nature" of all curves. To filter all these pixels and get only one pixel for each intersection point 
+we initialize a list of the final points with the first pixel found and then iterate over all of the other pixels. For each pixel we check if it has a Manhattan distance bigger than a threshold (e.g. 10) from the pixels that 
+are already added in the list of the final pixels. If two pixels have a Manhattan distance bigger than a selected threshold then we consider them to be two different intersection points. The Manhattan distance of two 
+points $\mathbf{p}_1=(x_1,y_1)$, ${\mathbf{p}_2=(x_2,y_2)}$ is given by
+
+\begin{equation}
+d_1(\mathbf{p}_1, \mathbf{p}_2) = |x_1 - x_2| + |y_1 - y_2|
 \end{equation}
 
 \subsection{Trocar detection \& Estimation of fulcrum point}
