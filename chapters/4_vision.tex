@@ -113,6 +113,20 @@ and the white rectangle is it's ROI as calculated from the convex hull}
 
 \subsection{Calculation of grasping points}
 
+\begin{center}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.25\textwidth]{images/grasp_points_1.png}
+\includegraphics[width=0.25\textwidth]{images/grasp_points_2.png}
+\includegraphics[width=0.25\textwidth]{images/grasp_points_3.png}\\
+\caption{Finding candidate grasping points from the intersections of a growing circle and the contour of the detected surgical tool}
+\end{figure}
+\end{center}
+
+\begin{equation}
+\mathbb{G} = \argmax_{(x,y)} I_1(x,y) \cdot I_2(x,y)
+\end{equation}
+
 \subsection{Trocar detection \& Estimation of fulcrum point}
 
 \begin{center}
