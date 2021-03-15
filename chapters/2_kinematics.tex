@@ -43,7 +43,7 @@ i & $θ_i$ (rad) & $L_{i-1}$ (m) & $d_i$ (m) & $α_{i-1}$ (rad) \\
 
 Using the DH parameters of the above table, one can calculate the transformation matrix between two consecutive links, and is calculated as the following
 
-\[
+\begin{equation}
 ^{i-1}T_i = 
 \begin{bmatrix}
 c\theta_i & -s\theta_i & 0 & L_{i-1} \\
@@ -51,15 +51,15 @@ s\theta_ica_{i-1} & c\theta_ica_{i-1} & -sa_{i-1} & -sa_{i-1}d_i \\
 s\theta_isa_{i-1} & c\theta_isa_{i-1} & ca_{i-1} & ca_{i-1}d_i \\
 0 & 0 & 0 & 1\\
 \end{bmatrix}
-\]
+\end{equation}
 
 When all the neighboring transformations are calculated, then one can calculate the total transformation $^{0}T_N$, which represents the position and the 
 orientation of the local coordinate system of the end-effector with respect to the global coordinate system of the robot's base. The orientation is the 
 upper-left 3x3 matrix and the position is given by the fourth column of the matrix $^{0}T_N$.
 
-\[
+\begin{equation}
 ^{0}T_N = {}^{0}T_1 \cdot {}^{1}T_0 \cdots {}^{N-1}T_N
-\]
+\end{equation}
 
 
 \subsection{Inverse Kinematics}
@@ -74,25 +74,27 @@ they form an Euler wrist. \\
 
 To solve for the joints' angles, the transformation matrix $^0T_7$ of the end-effector with respect to the robot's base is required. Usually the transformation ${}^UT_{tcp}$ is known, which is the pose of Tool's center point (TCP) with respect to the Universal Coordinate Frame $\lbrace U \rbrace$ from which the required $^0T_7$ can be calculated
 
-\[
+\begin{equation}
 {}^UT_{tcp} = {}^UT_0  \;\;  {}^0T_7  \;\;   {}^7T_{tcp}
-\]
-\[
+\end{equation}
+
+\begin{equation}
 {}^0T_7 = {}^UT_0^{-1}  \;\;  {}^UT_{tcp}  \;\;  {}^7T_{tcp}^{-1}
-\]
-\[
+\end{equation}
+
+\begin{equation}
 {}^0T_7 = \begin{bmatrix}
 R_t & \mathbf{p}_t \\
 0 & 1 \\
 \end{bmatrix}
-\]
+\end{equation}
 
 where ${}^UT_0,  \;\;   {}^7T_{tcp}$ are translation transformations by a constant distance and $R_t,  \;\; \mathbf{p}_t$ are the target's orientation 
 and position respectively.
 
-\[
+\begin{equation}
 {}^0\mathbf{p}_5 = {}^0T_4 {}^4\mathbf{p}_5 = \begin{bmatrix} p_x \\ p_y \\ p_z \\ \end{bmatrix}
-\]
+\end{equation}
 
 \begin{equation}
 θ_1 = 
@@ -110,9 +112,9 @@ atan2 \left( p_y, p_x \right) \\
 \end{figure}
 \end{center}
 
-\[
+\begin{equation}
 φ = acos \left( \frac{d_3^2 + \Vert{}^1p_{5}\Vert ^2 - d_5^2}{2d_3 \Vert{}^1p_{5}\Vert} \right)
-\]
+\end{equation}
 \begin{equation}
 θ_2 = atan2 \left( \sqrt{p_x^2 + p_y^2}, {}^1p_{5z} \right) \pm φ
 \end{equation}
