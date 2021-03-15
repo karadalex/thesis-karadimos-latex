@@ -28,9 +28,9 @@ h = \frac{1}{9} \begin{bmatrix}
 \end{bmatrix}
 \]
 the output, filtered image is the result of the convolution of the image with the filter and is calculated as following
-\[
+\begin{equation}
 g(i,j) = \sum_{k,l} f(i+k,j+l)h(k,l)
-\]
+\end{equation}
 where $g(\cdot, \cdot)$ is the output image and $f(\cdot, \cdot)$ is the input image.
 
 After the noise is removed the image is getting binarized. To do that, we set a threshold, below which the pixels will be black and the rest will be white. This conversion to binary format, makes it 
@@ -46,6 +46,7 @@ estimated center of mass}
 \end{center}
 
 \subsection{Stereoscopic vision}
+\label{stereoscopic-vision}
 
 \begin{center}
 \begin{figure}[H]
@@ -69,9 +70,9 @@ In order for the gripper to grasp correctly the laparoscopic tool, it is require
 which must then be converted with respect to the robot's workspace. From all the pixels that have been classified as part of the laparoscopic tool, 
 one can estimate the center of mass and two perpendicular vectors 
 attached to that point that define the orientation. The center of mass is simply the average of the $(x,y)$ coordinates of all the tool's pixels
-\[
+\begin{equation}
 \left( \bar{x}, \bar{y} \right) = \left( \frac{1}{N}\sum_{i=1}^{N} x_i , \frac{1}{N}\sum_{i=1}^{N} y_i \right)
-\]
+\end{equation}
 
 The easiest way to calculate the center of mass is by calculating the average using the first moments of the contour points. However, since the contour is only using
 the boundary of the object and not it's area, this method is not very accurate. To get a more accurate value for the center of mass, one must use the pixels that are inside 
@@ -88,19 +89,23 @@ some of the pixels of the tool so that we can more accurately calculate it's cen
 
 The two orientation vectors are the eigenvectors of the covariance matrix of the above pixels. Let $\mathbf{a},\mathbf{b}$ be the orientation vectors, 
 then $\mathbf{a},\mathbf{b}$ are solutions of the equation
-\[
+
+\begin{equation}
 C \mathbf{v} = λ \mathbf{v}
-\]
+\end{equation}
+
 where $C$ is the covariance matrix given by
-\[
+
+\begin{equation}
 C = \begin{bmatrix}
 σ(x,x) & σ(x,y) \\
 σ(y,x) & σ(y,y) \\
 \end{bmatrix}
-\]
-\[
+\end{equation}
+
+\begin{equation}
 σ(x,y) = \frac{1}{n-1} \sum_{i=1}^{N} ( x_i - \bar{x} )( y_i - \bar{y} )
-\]
+\end{equation}
 
 \begin{center}
 \begin{figure}[H]
@@ -178,19 +183,29 @@ using position-based servoing or in the camera's space (also known as "pixel spa
 
 \begin{itemize}
 \item \textbf{Photogrammetric technique}
-\item \textbf{Stereoscopic vision}
-\item \textbf{Extracting depth from motion}
+\item \textbf{Stereoscopic vision}: This methodology uses two separate views of the scene as taken from two viewports (from two cameras) 
+and calculates the depth of various objects and areas using information from both views. For more details about stereoscopic vision see chapter \ref{stereoscopic-vision}
+\item \textbf{Extracting depth from motion} This methodology is very similar to stereoscopic vision and is also known as \textit{monocular} or \textit{motion stereo}. The difference is that instead of using two views fromtwo distinct cameras this methodology 
+uses two views from the same camera but from different points in time. A very important assumption for this methodology is to assume that two consecutive views from the video frame do not change significantly, so that some feature points can be matched in both views in order to calculate the depth information. This methodology 
+is cheaper in terms of hardware but it fails to extract depth informations in cases where the robot is completely still.
+\item \textbf{Servoing using 3D sensors}
 \end{itemize}
-
-\subsubsection{Image based servoing}
 
 \begin{center}
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.8\textwidth]{images/visual-servoing-image-based.png}\\
-\caption{Image based visual servoing closed loop control}
+\includegraphics[width=0.6\textwidth]{images/visual-servoing-position-based2.png}\\
+\caption{Position based visual servoing using depth from motion, stereo vision or 3D sensors, from which the desired position $\mathbf{x}_d$ is calculated and 
+used to drive the robot.}
 \end{figure}
 \end{center}
+
+\subsubsection{Image based servoing}
+
+Image based servoing is a methodology for controlling a robot by directly using features extracted from the image as well as positions on the image plane. The goal of this methodology is 
+to drive the robot in such a way so that the video frame is changed from an initial view to a final, desired view (see figure \ref{image-based-servoing-start-end} left and right frames). The commands 
+that are sent to the robot from this methodology are defined in image space and not in the robot's task space. Moreover the distances calculated in image space are not directly related to distances 
+in task space.
 
 \begin{center}
 \begin{figure}[H]
@@ -200,5 +215,32 @@ using position-based servoing or in the camera's space (also known as "pixel spa
 \caption{Image based visual servoing. The robot arm is controlled using the information gained from the video frames. The frames are 2Dimensional and thus 
 the detected objects can have only 3 degrees of freedom which means we can mainly control 3 independent variables, here the $x,y,θ$ variables. The left image 
 is the initial frame and the right image is the frame where the object is at the target pose.}
+\label{image-based-servoing-start-end}
+\end{figure}
+\end{center}
+
+The image based visual servoing control system as depicted in figure \ref{visual-servoing-image-based-control} consists of the \textbf{Image Controller}, the \textbf{Plant} (robot) and the \textbf{feedback term}. The Image controller is a simple 
+\textbf{PD Controller} (PID can also be used, but in servo systems PD is more common) which outputs commands to be executed in the plant. These commands are not to be confused with the robot's internal controller commands. 
+These commands are to be used to control the robot in task space, whereas the internal controller drives each joint to the desired angle. The feedback used to calculate the error for the controller, uses the camera's 
+output and based on that it calculates the vector from the detected tool's center of mass to the center of the image frame (feature extraction).
+
+\begin{equation}
+\mathbf{x}[(k+1)T] = \mathbf{x}[kT] + \mathbf{u}[kT]
+\end{equation}
+
+where $\mathbf{x}[kT] = [x, y, z, θ, φ, ψ]^\top$ and the discrete PID control law is given by equation \ref{discrete-pid-control-law}
+\begin{equation}
+\label{discrete-pid-control-law}
+\mathbf{u}[kT] = K_p \left[ \mathbf{e}[kT] + \frac{T}{T_i} \sum_{i=0}^{k-1} \mathbf{e}[iT] + \frac{T_d}{T} \left( \mathbf{e}[kT] - \mathbf{e}[(k-1)T] \right) \right]
+\end{equation}
+
+where $\mathbf{e}[kT] = [e_x, e_y, e_z, e_θ, e_φ, e_ψ]^\top$.
+
+\begin{center}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/visual-servoing-image-based.png}\\
+\caption{Image based visual servoing closed loop control}
+\label{visual-servoing-image-based-control}
 \end{figure}
 \end{center}
