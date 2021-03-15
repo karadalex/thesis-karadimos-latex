@@ -114,12 +114,12 @@ We first consider the motion of the laparoscopic tool tip on a circle parallel t
 It's often more convenient to express trajectories in a parametric form, which makes it easier to calculate all the waypoints of the trajectory
 \begin{equation}
 \begin{cases}
-x^{}_{F} = r_0cos(2πt) + x^{}_{F0} \\
-y^{}_{F} = r_0sin(2πt) + y^{}_{F0} \\
+x^{}_{F} = r_0cos(2πs) + x^{}_{F0} \\
+y^{}_{F} = r_0sin(2πs) + y^{}_{F0} \\
 z^{}_{F} = z^{}_{F0}
 \end{cases} ,
 \;\;
-t \in [0, 1]
+s \in [0, 1]
 \end{equation}
 
 After having calculated the cartesian coordinates we can calculate the spherical coordinates as follows
@@ -156,17 +156,17 @@ section.
 {}^{F}\mathbf{p}^{}_{T} = [x^{}_{F}, y^{}_{F}, z^{}_{F}]^\top
 \]
 \[
-{}^{F}\mathbf{p}^{}_{T} = {}^{F}\mathbf{p}^{}_{T1} + t\mathbf{d}
+{}^{F}\mathbf{p}^{}_{T} = {}^{F}\mathbf{p}^{}_{T1} + s\mathbf{d}
 \]
 \[
-t = \frac{x^{}_{F} - x^{}_{F1}}{l} = \frac{y^{}_{F} - y^{}_{F1}}{m} = \frac{z^{}_{F} - z^{}_{F1}}{n} \;\; t \in [0, 1]
+s = \frac{x^{}_{F} - x^{}_{F1}}{l} = \frac{y^{}_{F} - y^{}_{F1}}{m} = \frac{z^{}_{F} - z^{}_{F1}}{n} \;\; s \in [0, 1]
 \]
 
 \begin{equation}
 \begin{cases}
-x^{}_{F} = tl + x^{}_{F1} = (1-t)x^{}_{F1} + tx^{}_{F2} \\
-y^{}_{F} = tm + y^{}_{F1} = (1-t)y^{}_{F1} + ty^{}_{F2} \\
-z^{}_{F} = tn + z^{}_{F1} = (1-t)z^{}_{F1} + tz^{}_{F2}
+x^{}_{F} = sl + x^{}_{F1} = (1-s)x^{}_{F1} + sx^{}_{F2} \\
+y^{}_{F} = sm + y^{}_{F1} = (1-s)y^{}_{F1} + sy^{}_{F2} \\
+z^{}_{F} = sn + z^{}_{F1} = (1-s)z^{}_{F1} + sz^{}_{F2}
 \end{cases}
 \end{equation}
 
@@ -192,30 +192,30 @@ The \textbf{B-Splines} are smooth curves which are constructed from \textbf{B\'e
 
 We first calculate the linear interpolation of the control points
 \begin{equation}
-\mathbf{L}_0(t) = (1-t)\mathbf{P}_0 + t\mathbf{P}_1
+\mathbf{L}_0(s) = (1-s)\mathbf{P}_0 + s\mathbf{P}_1
 \end{equation}
 \[
-\mathbf{L}_1(t) = (1-t)\mathbf{P}_1 + t\mathbf{P}_2
+\mathbf{L}_1(s) = (1-s)\mathbf{P}_1 + s\mathbf{P}_2
 \]
 \[
-\mathbf{L}_2(t) = (1-t)\mathbf{P}_2 + t\mathbf{P}_3
+\mathbf{L}_2(s) = (1-s)\mathbf{P}_2 + s\mathbf{P}_3
 \]
 The next step is to calculate the quadratic interpolation of the control points or equivalently, the linear interpolation of the previously calculated points $\mathbf{L}_0,\mathbf{L}_1,\mathbf{L}_2$
 \[
-\mathbf{Q}_0(t) = (1-t)\mathbf{L}_0(t) + t\mathbf{L}_1(t)
+\mathbf{Q}_0(s) = (1-s)\mathbf{L}_0(s) + s\mathbf{L}_1(s)
 \]
 \begin{equation}
-\mathbf{Q}_0(t) = (1-t)^2\mathbf{P}_0 + 2(1-t)t\mathbf{P}_1 + t^2\mathbf{P}_2
+\mathbf{Q}_0(s) = (1-s)^2\mathbf{P}_0 + 2(1-s)s\mathbf{P}_1 + s^2\mathbf{P}_2
 \end{equation}
 \[
-\mathbf{Q}_1(t) = (1-t)^2\mathbf{P}_1 + 2(1-t)t\mathbf{P}_2 + t^2\mathbf{P}_3
+\mathbf{Q}_1(s) = (1-s)^2\mathbf{P}_1 + 2(1-s)s\mathbf{P}_2 + s^2\mathbf{P}_3
 \]
 Similarly for the last step, we calculate the cubic interpolation of the control points or equivalently, the linear interpolation of the previously calculated points $\mathbf{Q}_0,\mathbf{Q}_1$
 \[
-\mathbf{C}_0(t) = (1-t)\mathbf{Q}_0(t) + t\mathbf{Q}_1(t)
+\mathbf{C}_0(s) = (1-s)\mathbf{Q}_0(s) + s\mathbf{Q}_1(s)
 \]
 \begin{equation}
-\mathbf{C}_0(t) = (1-t)^3\mathbf{P}_0 +3(1-t)^2 t\mathbf{P}_1 + 3(1-t)t^2\mathbf{P}_2 + t^3\mathbf{P}_3
+\mathbf{C}_0(s) = (1-s)^3\mathbf{P}_0 +3(1-s)^2 s\mathbf{P}_1 + 3(1-s)s^2\mathbf{P}_2 + s^3\mathbf{P}_3
 \end{equation}
 
 The cubic B\'ezier curve can also be calculated using the following more compact equation, in matrix form
@@ -228,7 +228,7 @@ The cubic B\'ezier curve can also be calculated using the following more compact
 1 & 0 & 0 & 0
 \end{bmatrix}
 \begin{bmatrix}
-t^3 \\ t^2 \\ t \\ 1
+s^3 \\ s^2 \\ s \\ 1
 \end{bmatrix}
 \end{equation}
 
@@ -264,7 +264,7 @@ From that equation we can conclude the following:
 \begin{itemize}
 \item If $q_i = q_{min}$ or $q_i = q_{max}$ then the exponential is equal to 1 which means that $\mathcal{L}_{q}$ and $\mathcal{D}$ are both 0, which means 
 that the robot has \textbf{no dexterity at the boundary of the task space}.
-\item If the value of $q_i$ is close to it's boundary value then the dexterity approches 0. The how mush close or far it is from the boundary (or in other words 
+\item If the value of $q_i$ is close to it's boundary value then the dexterity approaches 0. The how much close or far it is from the boundary (or in other words 
 how fast the exponential term converges) depends on the parameter $\kappa$
 \item The $q_{min}, q_{max}$ are calculated from the geometry of the task-space
 \end{itemize}
