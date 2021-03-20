@@ -178,6 +178,84 @@ it is already implemented in the ROS MoveIt library and can be used by calling t
 
 \subsubsection{Cubic Spline path of tool tip}
 
+A useful mathematical tool to construct a smooth curve that visits every point from a given set of waypoints are \textbf{cubic splines}. A cubic spline is 
+constructed using smaller curves that are described by a polynomial of 3rd order. Let $\left\lbrace \mathbf{P}_0, \mathbf{P}_1, \ldots , \mathbf{P}_n \right\rbrace$ 
+be a set of waypoints, where each point has coordinates $\mathbf{P}_i = [x_i, y_i, z_i]^\top$. Then between each 2 points a cubic 
+polynomial can be constructed (one for each coordinate, 3 in total). The following equations are for the $x$-coordinate and in the exact same way one can 
+calculate the cubic polynomials for the $y,z$ coordinates as well. For each pair of waypoints we want to calculate the following cubic polynomial
+\begin{equation}
+\label{cubic-polynomial}
+x_i(s) = a_i(s-s_i)^3 + b_i(s-s_i)^2 + c_i(s-s_i) + d_i, \hspace{3em} s_i \leqslant s \leqslant s_{i+1}
+\end{equation}
+
+The polynomial in equation \ref{cubic-polynomial} has four unknowns which means that four additional equations are needed to get a unique solution and fully 
+define the polynomial. These equations can be formed using the boundary conditions for the first and last point of each curve.
+\begin{equation}
+x_i(s_i) = x_i
+\end{equation}
+\begin{equation}
+x_i(s_{i+1}) = x_{i+1}
+\end{equation}
+\begin{equation}
+\dot{x}_i(s_i) = \dot{x}_i
+\end{equation}
+\begin{equation}
+\dot{x}_i(s_{i+1}) = \dot{x}_{i+1}
+\end{equation}
+
+First we solve for $c_i$ and $d_i$, which can easily be calculated as follows
+\begin{equation}
+\label{di-eq}
+d_i = x_i(s_i) = x_i
+\end{equation}
+and by taking the derivative of \ref{cubic-polynomial}, we can calculate $c_i$
+\begin{equation}
+\label{cubic-polynomial-first-derivative}
+\dot{x}_i(s_i) = 3a_i(s-s_i)^2 + 2b_i(s-s_i) + c_i
+\end{equation}
+\begin{equation}
+\label{ci-eq}
+c_i = \dot{x}_i(s_i) = \dot{x}_i
+\end{equation}
+
+By substituting $s = s_{i+1}$ in \ref{cubic-polynomial} and \ref{cubic-polynomial-first-derivative}, by using equations \ref{ci-eq}, \ref{di-eq} and if 
+we set $σ = s_{i+1}-s_i$ for brevity, we get the following two equations
+\begin{equation}
+\label{xi1}
+x_{i+1} = x_i(s_{i+1}) = a_i σ^3 + b_i σ^2 + c_i σ + x_i
+\end{equation}
+and
+\begin{equation}
+\label{xdi1}
+\dot{x}_{i+1} = \dot{x}_i(s_{i+1}) = 3a_i σ^2 + 2b_i σ + \dot{x}_i
+\end{equation}
+
+By multiplying \ref{xdi1} by $σ$ and \ref{xi1} by $-3$ and add them together we get
+\[
+\dot{x}_{i+1}σ - 3x_{i+1} = -b_iσ^2 -2\dot{x}_iσ - 3x_i
+\]
+\begin{equation}
+b_i = \frac{1}{σ^2} (3x_{i+1} -3x_i - \dot{x}_{i+1}σ - 2\dot{x}_iσ)
+\end{equation}
+
+Similarly, by multiplying \ref{xdi1} by $σ$ and \ref{xi1} by $-2$ and add them together we get
+\[
+\dot{x}_{i+1}σ - 2x_{i+1} = a_iσ^3 -\dot{x}_iσ - 2x_i
+\]
+\begin{equation}
+a_i = \frac{1}{σ^3} (\dot{x}_{i+1}σ - 2x_{i+1} + \dot{x}_iσ +2x_i)
+\end{equation}
+
+\begin{center}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{images/cubic-spline-path1.png}\\
+\caption{Cubic Spline curve with 10 waypoints} 
+\label{b-spline-explanation}
+\end{figure}
+\end{center}
+
+
 \subsubsection{B-Spline path of tool tip}
 
 The \textbf{B-Splines} are smooth curves which are constructed from \textbf{B\'ezier} curves. A B\'ezier curve is a parametric smooth curve and is a $k$-th order interpolation of $k+1$ control points.
@@ -234,6 +312,21 @@ s^3 \\ s^2 \\ s \\ 1
 
 A $k$-degree \textbf{B-Spline} curve defined by $n+1$ control points will consist of $n-k+1$ B\'ezier curves. For example if we want to construct a cubic B-Spline using 6 control points, then we will need to construct 
 and connect together 3 B\'ezier curves.
+
+\begin{center}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\textwidth]{images/b-spline-explanation.png}\\
+\caption{B-Spline curve constructed from 3 B\'ezier curves. The first B\'ezier curve colored in red is a quadratic one and the following two are both cubic.} 
+\label{b-spline-explanation}
+\end{figure}
+\end{center}
+
+In most cases the B-Spline curves are constructed by starting from a quadratic B\'ezier curve, which is constructed from 3 control points and then all other 
+parts of the curve are constructed from cubic B\'ezier curves, each constructed from 4 control points. As shown in figure \ref{b-spline-explanation}, the B-Spline 
+curves do not pass from all control points. This means that if we have a path formed by a set of waypoints and we want the robot to pass from all of them, then 
+in order to construct a B-Spline trajectory we will need additional intermediary points. The first and last points are part of the curve and the other control 
+points are not. If no additional points can be calculated then the robot will not pass from all the points, which in some cases is also acceptable and useful.
 
 
 \subsection{Task space analysis}
