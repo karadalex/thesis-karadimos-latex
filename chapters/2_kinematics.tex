@@ -61,6 +61,18 @@ upper-left 3x3 matrix and the position is given by the fourth column of the matr
 ^{0}T_N = {}^{0}T_1 \cdot {}^{1}T_0 \cdots {}^{N-1}T_N
 \end{equation}
 
+All transformations $^{i-1}T_i$ are members of a special set of matrices (Lie Group), called \textbf{Special Euclidean Group}
+\[
+^{i-1}T_i \in SE(3) = \left\lbrace \begin{bmatrix}
+R & \mathbf{p}\\
+\mathbf{0} & 1
+\end{bmatrix} : R \in SO(3), \mathbf{p} \in \mathbb{R}^{3} \right\rbrace
+\]
+where $SO(3)$ is another Lie Group called \textbf{Special Orthogonal Group}
+\[
+SO(3) = \left\lbrace R \in \mathbb{R}^{3 \times 3}: R^{-1}=R^\top, det(R)=1 \right\rbrace
+\]
+
 
 \subsection{Inverse Kinematics}
 
@@ -142,6 +154,14 @@ i_z & j_z & k_z\\
 \[
 θ_5 = atan2 \left( - k_z, k_x \right)
 \]
+
+\begin{center}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/ik-4-solutions.png}\\
+\caption{The first 4 out of 8 solutions of the Inverse Kinematics problem, using the decoupling technique}
+\end{figure}
+\end{center}
 
 
 \subsubsection{Workspace constraints \& Singularity points}
