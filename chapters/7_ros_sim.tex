@@ -79,7 +79,7 @@ which the surgical tool is inserted). Initially a mounting dock with 4 same hole
 \begin{center}
 \begin{figure}[H]
 \centering
-\includegraphics[width=12cm]{images/Gazebo_ros_transmission.png}\\
+\includegraphics[width=0.6\textwidth]{images/Gazebo_ros_transmission.png}\\
 \caption{Control \& Hardware Interfaces in Gazebo and ROS}
 \end{figure}
 \end{center}
@@ -105,6 +105,14 @@ an assumption that the robot already "knows" the exact position, orientation, si
 It is important to mention, that every such object is taken into consideration in collision checks and in path planning algorithms.
 
 \subsection{Motion Planning with Moveit}
+
+\begin{center}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\textwidth]{images/moveit_move_group.png}\\
+\caption{MoveIt ROS Architecture}
+\end{figure}
+\end{center}
 
 When using the Moveit ROS library a set of parameters need to be configured in order to generate the desired commands for the controller:
 \begin{itemize}
@@ -181,3 +189,10 @@ r_{31} & r_{32} & r_{33} & z \\
 \]
 
 where $T$ is the transformation matrix and $φ, θ, ψ$ are the roll, pitch and yaw (Euler) angles.
+
+
+\subsection{Tools, Packages and Libraries}
+
+\textbf{Stereo Vision with stereo image proc} \\
+
+\textbf{State machines with Smach} \\

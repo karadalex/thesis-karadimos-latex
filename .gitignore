@@ -14,3 +14,7 @@
 *.nlo
 *.nls
 *.loa
+*.pygtex
+*.nav
+*.snm
+*.pygstyle

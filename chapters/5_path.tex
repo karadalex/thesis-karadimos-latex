@@ -150,3 +150,38 @@ For maximum dexterity at most points of a trajectory in a pivoting motion, the p
 taskspace (i.e. the space of all configurations of feasible pivot motions) must be fully within 
 the robot’s whole reachable taskspace, otherwise only a small range of pivot movements will be 
 feasible.
+
+\begin{listing}[H]
+\begin{minted}[tabsize=2,breaklines,frame=lines,framesep=2mm,baselinestretch=1.2,fontsize=\footnotesize, linenos]{matlab}
+x = []; y = []; z = [];
+r = [];
+s = 0:0.005:0.5;
+L = 0.48;
+k = 4.5;
+
+for z0=-L:0.01:0
+    if abs(z0)*sqrt(2) <= L
+        rmax = abs(z0);
+    else
+        rmax = sqrt(L^2-z0^2);
+    end
+    for r0=0:0.02:rmax
+        x = [x, r0*cos(2*pi*s)];
+        y = [y, r0*sin(2*pi*s)];
+        z = [z, z0*ones(size(s))];
+        lp = 1-exp(-k*(rmax-r0));
+        r = [r, lp*ones(size(s))];
+    end
+end
+\end{minted}
+\caption{RCM Taskpace calculation using MATLAB}
+\label{code:rcm_taskspace_matlab}
+\end{listing}
+
+\begin{center}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/rcm_taskspace.png}\\
+\caption{Task space inside patients body. Colors with 0 or low value correspond to points with low dexterity}
+\end{figure}
+\end{center}
