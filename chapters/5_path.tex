@@ -149,7 +149,18 @@ how fast the exponential term converges) depends on the parameter $\kappa$
 For maximum dexterity at most points of a trajectory in a pivoting motion, the pivot sub-
 taskspace (i.e. the space of all configurations of feasible pivot motions) must be fully within 
 the robot’s whole reachable taskspace, otherwise only a small range of pivot movements will be 
-feasible.
+feasible.\\
+
+Finding $q_{i,min}, q_{i,max}$ at \ref{joint-limit-measure} is very difficul and time-consuming especially at task spaces with more intricate geometries. 
+A similar and more practical equation to \ref{joint-limit-measure} can be written for calculating the dexterity of the robot in task space:
+
+\begin{equation}
+\label{rcm-taskspace-limit-measure}
+\mathcal{L}_{p}=1-e^{-\kappa (r_{max} - r)}
+\end{equation}
+where $r_{max}$ is the maximum radius of a circle that the tool tip can follow at a given insertion depth $z$. Moreover, at every point of the taskspace, it is $L^2 = r^2 + z^2$. 
+The equation \ref{rcm-taskspace-limit-measure} however only shows dexterity in terms of approaching the boundary of the taskspace and it does not take into consideration internal points of low 
+dexterity and singularities like equation \ref{joint-limit-measure}.
 
 \begin{listing}[H]
 \begin{minted}[tabsize=2,breaklines,frame=lines,framesep=2mm,baselinestretch=1.2,fontsize=\footnotesize, linenos]{matlab}

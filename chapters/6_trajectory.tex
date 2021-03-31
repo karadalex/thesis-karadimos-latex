@@ -195,9 +195,27 @@ r = \sqrt{x^{2}_{F} + y^{2}_{F} + z^{2}_{F}} \\
 \subsubsection{Circular arc trajectory of tool tip}
 
 To generate a circular arc trajectory for a pivot motion we must specify the same parameters as 
-in the circular trajectory as well as the length of the arc or the total angle of the arc 
-section.
+in the circular trajectory as well as the length of the arc or the total angle $φ$ of the arc 
+section. Another parameter has more significance in circular arc trajectories that plain circles is the phase of the arc. This initial phase can be expressed as either an angle $φ_0$ added to the arguments of 
+sine and cosine functions or it can be expressed as $s$ values that have as initial value different from $0$. The parametric equations for a circular arc are:
 
+\begin{equation}
+\begin{cases}
+x^{}_{F} = r_0cos(2πs + φ_0) + x^{}_{F0} \\
+y^{}_{F} = r_0sin(2πs + φ_0) + y^{}_{F0} \\
+z^{}_{F} = z^{}_{F0}
+\end{cases} ,
+\;\;
+s \in \left[ 0, \frac{φ}{2π} \right]
+\end{equation}
+
+\begin{center}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{images/rcm_trajectories/rcm_arcs_traj.png}\\
+\caption{Circular arc trajectory of tool tip with respect to Fulcrum reference frame and it's transformation via the Fulcrum Effect. In this trajectory 2 circular arcs are used}
+\end{figure}
+\end{center}
 
 \subsubsection{Line segment trajectory of tool tip}
 
