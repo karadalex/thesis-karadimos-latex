@@ -84,6 +84,46 @@ of inverse matrices.
 \end{figure}
 \end{center}
 
+\subsubsection{End-effector to tool-tip transformations}
+
+\begin{center}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{images/eef_tcp_tip_tf.png}\\
+\caption{Reference frames of last link $\lbrace 7 \rbrace$, end-effector $\lbrace TCP \rbrace$, surgical tool base (center of mass) $\lbrace B \rbrace$ and tool-tip frame $\lbrace T \rbrace$}
+\end{figure}
+\end{center}
+
+\[
+^{7}T_{TCP} = 
+\begin{bmatrix}
+1 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 0.094 \\
+0 & 0 & 0 & 1 \\
+\end{bmatrix}
+\]
+
+\[
+^{TCP}T_{B} = 
+\begin{bmatrix}
+1 & 0 & 0 & 0.05 \\
+0 & 0 & -1 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 0 & 1 \\
+\end{bmatrix}
+\]
+
+\[
+^{B}T_T = 
+\begin{bmatrix}
+1 & 0 & 0 & -0.01 \\
+0 & 1 & 0 & 0.022 \\
+0 & 0 & 1 & 0.455 \\
+0 & 0 & 0 & 1 \\
+\end{bmatrix}
+\]
+
 
 \subsection{Inverse Kinematics}
 
