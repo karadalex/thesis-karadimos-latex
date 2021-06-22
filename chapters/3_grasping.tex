@@ -88,6 +88,19 @@ tan \left( ψ \right) = \frac{L_3 sin \left( φ_3 + \frac{π}{4} \right) }{L_2 +
 \end{equation}
 
 \subsection{Force closure}
-The planar case, the spatial case \& convex hull test.
 
-\lstinputlisting[frame=single,basicstyle=\ttfamily\small\color{blue},caption=Example ROS message with collision/contact information between one finger of the gripper and one surgical tool]{data/collision-contact-ros-message-example1.txt}
+In order to achieve a firm grasp of the surgical tool, the gripper fingers must be positioned in such a way around the object so that there is \textbf{force closure}. According to the \textbf{Nguyen} theorem, a plannar 
+object that is constrained by 2 points, is in force closure if the line which connects the two constraint points lies inside both friction cones of these points. A simplistic explanation of a friction cone is 
+that it is a set of forces that result the contact point to be in friction and all other forces outside of the cone will result in sliding. \\
+
+For the three dimensional case, a spatial body which is constrained by 3 contact points. These 3 contact points have friction and they define a unique plane $S$ and also the 3D friction cone of each point 
+intersects the plane $S$ in a 2D cone. Then the spatial body is in force closure if and only if the plane $S$ is in a planar force closure group.\\
+
+To check for force closure, one must know the contact points and the direction of the forces that are applied there. In the Gazebo simulator program that was used in this thesis, the information of the contact 
+between a gripper's finger and an object is easily available as shown in listing \ref{list:ros-contact-msg}. However this kind of information is much harder to acquire in real scenarios. The Barrett gripper that is used in this thesis comes with arrays 
+of tactile sensors in each surface of the gripper and there are methodologies to use these spatially distributed sensors to approximate the intensity as well as and most importantly the direction of the forces \cite{tactile-sensors-force}.
+
+\lstinputlisting[
+frame=single,basicstyle=\ttfamily\small\color{blue},
+caption=Example ROS message with collision/contact information between one finger of the gripper and one surgical tool, 
+label=list:ros-contact-msg]{data/collision-contact-ros-message-example1.txt}
