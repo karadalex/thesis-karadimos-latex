@@ -1,12 +1,12 @@
 \documentclass{beamer}
 
 \usepackage[utf8]{inputenc}
-\usetheme{default}
+\usetheme{Madrid}
 
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{hyperref}
-\usepackage[T1,LGR]{fontenc}
+%\usepackage[T1,LGR]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[greek,english]{babel}
 \usepackage{alphabeta}
@@ -25,11 +25,11 @@
 \urlstyle{same}
 
 %Information to be included in the title page:
-\title{Robotic surgical tool manipulator - Recognition, control and manipulation of laparoscopic tools}
+\title[Robotic surgical tool manipulator]{Robotic surgical tool manipulator - Recognition, control and manipulation of laparoscopic tools}
 \author{Alexios Karadimos}
-\institute{Deparment of Electrical and Computer Engineering}
+\institute[ECE U. Patras]{Deparment of Electrical and Computer Engineering}
 \titlegraphic{\includegraphics[height=1.5cm]{../images/up_2017_logo_gr.png}}
-\date{2021}
+\date{Patras, September 2021}
 
 \AtBeginSection[]
 {
@@ -48,13 +48,21 @@
 
 \frame{\titlepage}
 
-\section{Introduction}
-
-
 \begin{frame}
-\frametitle{Introduction to Surgery Robotics}
-
+\frametitle{Table of Contents}
+\tableofcontents
 \end{frame}
+
+\input{chapters/1_introduction}
+\input{chapters/2_kinematics}
+\input{chapters/3_grasping}
+\input{chapters/4_vision}
+\input{chapters/5_path}
+\input{chapters/6_trajectory}
+\input{chapters/7_control}
+\input{chapters/8_ros_sim}
+\input{chapters/9_results}
+\input{chapters/10_conclusions}
 
 
 
