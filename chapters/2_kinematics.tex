@@ -240,21 +240,56 @@ Singularity points:
 
 \subsubsection{Solutions for 7DoF numerically}
 
-Jacobian
+To solve numerically for the joint angles, we use a relationship between the derivative of the spatial coordinates and the joint derivatives. These two vectors 
+are related by a matrix known as the \textbf{Jacobian} and is given by the following equation
+
+\begin{equation}
+\mathbf{\dot{x}} = J( \mathbf{q} ) \mathbf{\dot{q}}
+\end{equation}
+
+where
+
+\begin{equation}
+J( \mathbf{q} ) = \begin{bmatrix}
+\dfrac{\partial \mathbf{f}_1(\mathbf{q})}{\partial q_{1}} & \cdots & \dfrac{\partial \mathbf{f}_1(\mathbf{q})}{\partial q_{7}} \\
+\vdots & \ddots & \vdots \\
+\dfrac{\partial \mathbf{f}_6(\mathbf{q})}{\partial q_{1}} & \cdots & \dfrac{\partial \mathbf{f}_6(\mathbf{q})}{\partial q_{7}} \\
+\end{bmatrix}
+\end{equation}
+
+and the functions $\mathbf{f}_i(\mathbf{q})$ are calculated using the robot's forward kinematics.
+
+$J( \mathbf{q} )$ is non rectangular and thus non-invertible, due to the extra degree of freedom. Instead of the inverse of the Jacobian the pseudoinverse is calculated which by the 
+equation
+\begin{equation}
+J^{\dagger} = J^\top ( J J^\top )^{-1}
+\end{equation}
+
+\begin{algorithm}[H]
+\SetAlgoLined
+initialize $\mathbf{q}^0 \in \mathbb{R}^{7}$ with an initial guess, given a desired position and orientation $\mathbf{x}_d \in \mathbb{R}^{6}$\;
+set error $e = \mathbf{x}_d - f(\mathbf{q^i})$\;
+set error tolerance $ε$ with some small value\;
+\While{$e \geq ε$}{
+	set $\mathbf{q}^{i+1} = \mathbf{q}^i + J^{\dagger}( \mathbf{q} )e$\;
+	$i \leftarrow i + 1$\;
+}
+\caption{Newton-Raphson numerical method}
+\end{algorithm}
+
+If the numerical method has more than one solutions, then the method will converge to the one which is closest to the initial guess or it will not converge at all, 
+if the initial error is too big. One way to get some approximate initial guesses is if we use a solution from the previous section (which solves for 6 dof) and use these 
+solutions as input to this numerical method.
+
+The numerical calculation of the inverse kinematics can also be calculated using the geometric Jacobian, given by the following equation
 \[
-J = J( \mathbf{q} ) = [ J_1, J_2, \cdots, J_7 ] \in \mathbb{R}^{6 \times 7}
+J_v = J_v( \mathbf{q} ) = [ J_{v1}, J_{v2}, \cdots, J_{v7} ] \in \mathbb{R}^{6 \times 7}
 \]
 \begin{equation}
 J_i = \begin{bmatrix}
 {}^0\mathbf{z}_i \times ({}^0\mathbf{p}_8 - {}^0\mathbf{p}_i) \\
 {}^0\mathbf{z}_i \\
 \end{bmatrix}
-\end{equation}
-
-$J( \mathbf{q} )$ is non rectangular and thus non-invertible. Instead of the inverse of the Jacobian the pseudoinverse is calculated which by the 
-equation
-\begin{equation}
-J^{\dagger} = J^\top ( J J^\top )^{-1}
 \end{equation}
 
 
