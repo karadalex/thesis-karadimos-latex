@@ -163,6 +163,7 @@ We first consider the motion of the laparoscopic tool tip on a circle parallel t
 \end{equation}
 It's often more convenient to express trajectories in a parametric form, which makes it easier to calculate all the waypoints of the trajectory
 \begin{equation}
+\label{circle-z-plane-traj}
 \begin{cases}
 x^{}_{F} = r_0cos(2πs) + x^{}_{F0} \\
 y^{}_{F} = r_0sin(2πs) + y^{}_{F0} \\
@@ -188,6 +189,18 @@ r = \sqrt{x^{2}_{F} + y^{2}_{F} + z^{2}_{F}} \\
 \centering
 \includegraphics[width=\textwidth]{images/rcm_trajectories/rcm_circle_traj.png}\\
 \caption{Circular trajectory of tool tip with respect to Fulcrum reference frame and it's transformation via the Fulcrum Effect}
+\end{figure}
+\end{center}
+
+Although the equations \ref{circle-z-plane-traj} are very simple to calculate, it is more often the case that the circular trajectory will lie on an arbitrary plane that will not be parallel to the z-plane. This means 
+that the equations \ref{circle-z-plane-traj} must first be transformed inside the task space (with the desired rotation and translation) and then these transformed equations should be used as an input to the 
+Fulcrum Effect transformation.
+
+\begin{center}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{images/rcm_trajectories/robot-pose-random-rcm-circle-traj.png}\\
+\caption{Circular trajectory that lies on an a plane of arbitrary orientation with respect to the fulcrum point}
 \end{figure}
 \end{center}
 
