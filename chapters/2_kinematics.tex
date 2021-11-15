@@ -41,7 +41,58 @@ i & $θ_i$ (rad) & $L_{i-1}$ (m) & $d_i$ (m) & $α_{i-1}$ (rad) \\
 \end{tabular}
 \end{center}
 
-Using the DH parameters of the above table, one can calculate the transformation matrix between two consecutive links, and is calculated as the following
+The goal of the forward kinematics problem is to find the transformation of the reference frame of the end-effector with respect to the universal reference frame. To achieve that, we must first calculate the 
+transformations between each pair of joints. To simplify each such transformation, i.e. the transformation from a frame $\left\lbrace i-1 \right\rbrace$ to a frame $\left\lbrace i \right\rbrace$, we 
+consider 3 intermediary reference frames $\left\lbrace A \right\rbrace$, $\left\lbrace B \right\rbrace$ and $\left\lbrace C \right\rbrace$. Then the transformations between the two joints is given by
+\begin{equation}
+^{i-1}T_i = ^{i-1}T_C \cdot ^{C}T_B \cdot ^{B}T_A \cdot ^{A}T_i
+\end{equation}
+
+The matrix $^{A}T_i$ expresses the translation of the coordinate system $\left\lbrace i \right\rbrace$ with respect to $\left\lbrace A \right\rbrace$ by a distance $d_i$ along the axis $z_i$
+\begin{equation}
+^{A}T_i = 
+\begin{bmatrix}
+1 & 0 & 0 & 0\\
+0 & 1 & 0 & 0\\
+0 & 0 & 1 & d_i\\
+0 & 0 & 0 & 1\\
+\end{bmatrix}
+\end{equation}
+
+The matrix $^{B}T_A$ expresses the rotation of the coordinate system $\left\lbrace A \right\rbrace$ with respect to $\left\lbrace B \right\rbrace$ by an angle $θ_i$ around the axis $z_i$
+\begin{equation}
+^{B}T_A = 
+\begin{bmatrix}
+c\theta_i & -s\theta_i & 0 & 0\\
+s\theta_i & c\theta_i & 0 & 0\\
+0 & 0 & 1 & 0\\
+0 & 0 & 0 & 1\\
+\end{bmatrix}
+\end{equation}
+
+The matrix $^{C}T_B$ expresses the translation of the coordinate system $\left\lbrace B \right\rbrace$ with respect to $\left\lbrace C \right\rbrace$ by a distance $L_{i-1}$ along the axis $x_{i-1}$
+\begin{equation}
+^{C}T_B = 
+\begin{bmatrix}
+1 & 0 & 0 & L_{i-1}\\
+0 & 1 & 0 & 0\\
+0 & 0 & 1 & 0\\
+0 & 0 & 0 & 1\\
+\end{bmatrix}
+\end{equation}
+
+The matrix $^{i-1}T_C$ expresses the rotation of the coordinate system $\left\lbrace C \right\rbrace$ with respect to $\left\lbrace i-1 \right\rbrace$ by an angle $a_{i-1}$ around the axis $x_{i-1}$
+\begin{equation}
+^{i-1}T_C = 
+\begin{bmatrix}
+1 & 0 & 0 & L_{i-1}\\
+0 & ca_{i-1} & -sa_{i-1} & 0\\
+0 & sa_{i-1} & ca_{i-1} & 0\\
+0 & 0 & 0 & 1\\
+\end{bmatrix}
+\end{equation}
+
+Using the DH parameters of the above table and the product of the above 4 matrices, one can calculate the transformation matrix between two consecutive links, and is calculated as the following
 
 \begin{equation}
 ^{i-1}T_i = 

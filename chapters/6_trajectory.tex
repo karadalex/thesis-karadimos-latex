@@ -230,6 +230,29 @@ s \in \left[ 0, \frac{φ}{2π} \right]
 \end{figure}
 \end{center}
 
+\subsubsection{Helical trajectory of tool tip}
+
+The helical trajectory is another useful trajectory that was studied in this thesis. The importance of this trajectory lies in the fact that the helical movement of the surgical tool can be considered as an ideal 
+approximation of a suturing trajectory, a very common task in surgery which is extensively studied and researched in surgery robotics. A helical trajectory can be expressed by the following parametric equations:
+
+\begin{equation}
+\begin{cases}
+x^{}_{F} = r_0cos(2πs) + x^{}_{F0} \\
+y^{}_{F} = r_0sin(2πs) + y^{}_{F0} \\
+z^{}_{F} = \pm βs
+\end{cases}
+\end{equation}
+
+where $s \in \left[ 0, τ \right]$ expresses the range along the trajectory, $τ$ the cycles, and $β/r_0$ is the slope (or also known as the pitch which is given by $2πβ$)
+
+\begin{center}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{images/rcm_trajectories/rcm_helical_traj.png}\\
+\caption{Helical trajectory of tool tip with respect to Fulcrum reference frame and it's transformation via the Fulcrum Effect}
+\end{figure}
+\end{center}
+
 \subsubsection{Line segment trajectory of tool tip}
 
 \begin{center}

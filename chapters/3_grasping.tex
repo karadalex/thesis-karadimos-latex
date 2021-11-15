@@ -49,42 +49,76 @@ i & $θ_i$ (rad) & $L_{i-1}$ (m) & $d_i$ (m) & $α_{i-1}$ (rad) \\
 \subsection{Gripper Inverse Kinematics}
 
 The following Inverse Kinematics analysis referes to one finger of the Barrett Hand gripper, which has 3 revolute joints. Finger 3 has only 2 
-revolute joints for which the angle solutions are the same with the solutions of the last 2 joints of the other fingers. Let
+revolute joints for which the angle solutions are the same with the solutions of the last 2 joints of the other fingers. 
+
+
+\begin{center}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{images/grasper-rrr-top.png}\\
+\caption{Top view of one of the 3 fingers of the gripper with 3 joints (RRR kinematic chain)}
+\label{grasper-rrr-top}
+\end{figure}
+\end{center}
+
+Let
 
 \[
 \mathbf{p} = \begin{bmatrix} p_x \\ p_y \\ p_z \\ \end{bmatrix}
 \]
 
-be the position of the grasp point for one finger. The first angle can easily be calculated as
+be the position of the grasp point for one finger. The first angle can easily be calculated using the top view of the figure \ref{grasper-rrr-top} from the following equation
 
 \begin{equation}
 φ_1 = atan2 \left( p_y, p_x \right)
 \end{equation}
 
-Next, we calculate the third angle based on the law of cosines (see fig.)
-\[
-cos \left( π - φ_3 - \frac{π}{4} \right) = \frac{L_2^2 + L_3^2 - p^2}{2 L_2 L_3}
-\]
-\[
-cos \left(φ_3 + \frac{π}{4} \right) = \frac{p^2 - L_2^2 - L_3^2}{2 L_2 L_3}
-\]
+\begin{center}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{images/grasper-rrr-side.png}\\
+\caption{Side view of one of the 3 fingers of the gripper with 3 joints (RRR kinematic chain)}
+\label{grasper-rrr-side}
+\end{figure}
+\end{center}
+
 \begin{equation}
-φ_3 = atan2 \left[ \pm \sqrt{1 - \left( \frac{p^2 - L_2^2 - L_3^2}{2 L_2 L_3} \right)^2} , \frac{p^2 - L_2^2 - L_3^2}{2 L_2 L_3} \right] - \frac{π}{4}
+BD = L_3 cos(φ_3 + \frac{2π}{9})
+\end{equation}
+\begin{equation}
+BC = L_3 sin(φ_3 + \frac{2π}{9})
+\end{equation}
+\begin{equation}
+p_{xy} = \sqrt{p_x^2 + p_y^2}
+\end{equation}
+
+Next, we calculate the third angle based on the law of cosines applied on the triangle $ACD$ (see figure \ref{grasper-rrr-side})
+\begin{equation}
+cos \left( π - φ_3 - \frac{2π}{9} \right) = \frac{L_2^2 + L_3^2 - p^2}{2 L_2 L_3}
+\end{equation}
+\begin{equation}
+cos \left(φ_3 + \frac{2π}{9} \right) = \frac{p^2 - L_2^2 - L_3^2}{2 L_2 L_3}
+\end{equation}
+\begin{equation}
+φ_3 = atan2 \left[ \pm \sqrt{1 - \left( \frac{p^2 - L_2^2 - L_3^2}{2 L_2 L_3} \right)^2} , \frac{p^2 - L_2^2 - L_3^2}{2 L_2 L_3} \right] - \frac{2π}{9}
 \end{equation}
 
 In a more general case, the first argument of the $atan2$ function in the expression of $φ_3$ could also be negative,
 but in this case this second solution is rejected, because due to mechanical constraints, this angle can't be negative. 
 After having calculated $φ_3$ we can calculate $φ_2 $
 
-\[
+\begin{equation}
 tan \left( ψ + φ_2 \right) = \frac{p_z}{\sqrt{p_x^2 + p_y^2}}
-\]
-\[
+\end{equation}
+\begin{equation}
+ψ + φ_2 = atan2 \left( p_z, \sqrt{p_x^2 + p_y^2} \right)
+\end{equation}
+\begin{equation}
 tan \left( ψ \right) = \frac{L_3 sin \left( φ_3 + \frac{π}{4} \right) }{L_2 + L_3 cos \left( φ_3 + \frac{π}{4} \right)}
-\]
+\end{equation}
 
 \begin{equation}
-φ_2 = atan2 \left( pz, \sqrt{p_x^2 + p_y^2} \right) - atan2 \left[ L_3 sin \left( φ_3 + \frac{π}{4} \right), L_2 + L_3 cos \left( φ_3 + \frac{π}{4} \right) \right]
+φ_2 = atan2 \left( pz, \sqrt{p_x^2 + p_y^2} \right) - atan2 \left[ L_3 sin \left( φ_3 + \frac{2π}{9} \right), L_2 + L_3 cos \left( φ_3 + \frac{2π}{9} \right) \right]
 \end{equation}
 
 \subsection{Force closure}
@@ -104,3 +138,8 @@ of tactile sensors in each surface of the gripper and there are methodologies to
 frame=single,basicstyle=\ttfamily\small\color{blue},
 caption=Example ROS message with collision/contact information between one finger of the gripper and one surgical tool, 
 label=list:ros-contact-msg]{data/collision-contact-ros-message-example1.txt}
+
+\lstinputlisting[
+frame=single,basicstyle=\ttfamily\small\color{blue},
+caption=Example values from the Barrett Hand tactile array. Units N/cm² message type: bhand\_controller/TactArray \url{https://github.com/RobotnikAutomation/barrett_hand/tree/kinetic-devel/bhand_controller}, 
+label=list:ros-contact-msg]{data/tactile-sensor-data-barrett.txt}
