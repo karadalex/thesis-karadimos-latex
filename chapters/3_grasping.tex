@@ -11,13 +11,21 @@
 \end{center}
 
 \begin{center}
+\begin{figure}[H]
+\centering
+\includegraphics[width=12cm]{images/bh8-282-generalized-finger-fwd-kin.png}\\
+\caption{Coordinates systems for forward kinematics for a generalized finger of the gripper}
+\end{figure}
+\end{center}
+
+\begin{center}
 \begin{tabular}{ |c|c|c|c|c| } 
 \hline
 i & $θ_i$ (rad) & $L_{i-1}$ (m) & $d_i$ (m) & $α_{i-1}$ (rad) \\
 \hline
-1 (J11) & $θ_{11}$ & 0 & 0 & 0 \\
-2 (J12) & $θ_{12}$ & 0 & 0 & 0 \\
-3 (J13) & $θ_{13}$ & 0 & 0 & 0 \\
+1 (J11) & $θ_{11} - π/2$ & 0.025 & 0.0034 & 0 \\
+2 (J12) & $θ_{12} + 0.04$ & 0.05 & 0 & $π/2$ \\
+3 (J13) & $θ_{13} + 0.69$ & 0.07 & 0 & 0 \\
 \hline
 \end{tabular}
 \end{center}
@@ -27,9 +35,9 @@ i & $θ_i$ (rad) & $L_{i-1}$ (m) & $d_i$ (m) & $α_{i-1}$ (rad) \\
 \hline
 i & $θ_i$ (rad) & $L_{i-1}$ (m) & $d_i$ (m) & $α_{i-1}$ (rad) \\
 \hline
-1 (J21) & $θ_{21}$ & 0 & 0 & 0 \\
-2 (J22) & $θ_{22}$ & 0 & 0 & 0 \\
-3 (J23) & $θ_{23}$ & 0 & 0 & 0 \\
+1 (J21) & $θ_{21} - π/2$ & 0.025 & 0.0034 & 0 \\
+2 (J22) & $θ_{22} + 0.04$ & 0.05 & 0 & $π/2$ \\
+3 (J23) & $θ_{23} + 0.69$ & 0.07 & 0 & 0 \\
 \hline
 \end{tabular}
 \end{center}
@@ -39,8 +47,9 @@ i & $θ_i$ (rad) & $L_{i-1}$ (m) & $d_i$ (m) & $α_{i-1}$ (rad) \\
 \hline
 i & $θ_i$ (rad) & $L_{i-1}$ (m) & $d_i$ (m) & $α_{i-1}$ (rad) \\
 \hline
-1 (J32) & $θ_{32}$ & 0 & 0 & 0 \\
-2 (J33) & $θ_{33}$ & 0 & 0 & 0 \\
+1 & $π/2$ & 0 & 0.0034 & 0 \\
+2 (J32) & $θ_{32} + 0.04$ & 0.05 & 0 & $π/2$ \\
+3 (J33) & $θ_{33} + 0.69$ & 0.07 & 0 & 0 \\
 \hline
 \end{tabular}
 \end{center}
