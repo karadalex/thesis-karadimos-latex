@@ -15,6 +15,7 @@ processing and/or machine learning recognition algorithms.\\
 \end{itemize}
 
 \subsection{Laparoscopic tool detection}
+\label{laparoscopic-tool-detection}
 
 In order to detect the shape of the tool there are some standard steps that need to be executed. After having loaded the input image we convert it to grayscale, so that we can work on only one channel instead of
 3 color channels and thus reduce the amount of calculations. Also for the purposes of extracting the shape of an object, the color doesn't have a very significant role in the algorithm. Next step is 
@@ -153,6 +154,8 @@ d_1(\mathbf{p}_1, \mathbf{p}_2) = |x_1 - x_2| + |y_1 - y_2|
 \end{equation}
 
 \subsection{Trocar detection \& Estimation of fulcrum point}
+
+The detection of the trocar, which is a small tube through which the surgical tool is inserted, is accomplished using a similar simple trivial detection algorithm as the one used in \ref{laparoscopic-tool-detection}
 
 \begin{center}
 \begin{figure}[H]
