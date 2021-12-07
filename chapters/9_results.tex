@@ -248,6 +248,12 @@ in the visualization program.
 \end{figure}
 \end{center}
 
+Observing the results from table \ref{robot-planner4-rrtconnect-data}, the time duration for the pick pipeline of this experiment using the RRTConnect path planning algorithm, 
+ranges from approximately 0.01 to 0.02 seconds, whereas in the Place pipeline we observe mainly 2 distinct groups of time ranges. One group has values around 0.02 seconds and the other 
+has bigger values around 0.14 seconds. In the case with the bigger time durations, the solution made the robot go around the obstacle whereas in the other cases the path planning solution avoided the obstacle, 
+which means that an easier path was found, it was solved quicker and the path solution was much simpler (in terms of kinematic constraints) which led to smaller path simplification time durations. 
+It is also possible, that due to the obstacle and the initial conditions, the robot may not find a solution at the first attempt or none at all.
+
 % Robot Planner 4 with RRTConnect
 \begin{table}[H]
 \centering
@@ -278,6 +284,9 @@ Experiment                & Status & Solution Time & Path Simplification Time & 
 \caption{Time results for robot planner 4 using the RRTConnect path planner algorithm}
 \label{robot-planner4-rrtconnect-data}
 \end{table}
+
+The main observation from the results of table \ref{robot-planner4-rrtstar-data} is that RRT* time durations are much bigger than those from RRTConnect, but the RRT* algorithm has the advantage of finding better, more accurate solutions (approximately the same solutions at most attempts) and with less collisions. Although these time durations are not optimal for real-time applications, they could be useful in pick-and-place pipelines 
+if the solutions are pre-computed (memoized) and saved for later use.
 
 % Robot Planner 4 with RRT*
 \begin{table}[H]
