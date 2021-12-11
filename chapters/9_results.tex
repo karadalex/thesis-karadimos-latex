@@ -1,6 +1,6 @@
-\section{Experiments and Results}
+\chapter{Experiments and Results}
 
-\subsection{Robot Planner 1: Simple MoveIt planning}
+\section{Robot Planner 1: Simple MoveIt planning}
 
 In this first experiment we are testing some simple trajectories with the surgical tool already attached to the robot arm's end effector.
 The path is designed using the appropriate coordinates and orientations so that the robot begins from the home position, then visits the table with the surgical 
@@ -51,7 +51,7 @@ Experiment                & Status & Solution Time & Path Simplification Time & 
 \end{table}
 
 
-\subsection{Robot Planner 2: Simulation layout and reachability experiments}
+\section{Robot Planner 2: Simulation layout and reachability experiments}
 
 In this experiment, we plan a path such that the robot arm will visit all holes of the mounting dock and will try the insertion movement of the surgical tool.
 This experiment is very useful, because it shows whether all holes of the mounting dock are \textbf{reachable} (inside the robot's work space) and if so, how 
@@ -60,14 +60,14 @@ This experiment is very useful, because it shows whether all holes of the mounti
 \begin{center}
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.3\textwidth]{images/robot_planner2/robot_planner2_1}
-\includegraphics[width=0.3\textwidth]{images/robot_planner2/robot_planner2_2}
-\includegraphics[width=0.3\textwidth]{images/robot_planner2/robot_planner2_3}\\
-\includegraphics[width=0.3\textwidth]{images/robot_planner2/robot_planner2_4}
-\includegraphics[width=0.3\textwidth]{images/robot_planner2/robot_planner2_5}
-\includegraphics[width=0.3\textwidth]{images/robot_planner2/robot_planner2_6}\\
-\includegraphics[width=0.3\textwidth]{images/robot_planner2/robot_planner2_7}
-\includegraphics[width=0.3\textwidth]{images/robot_planner2/robot_planner2_8}\\
+\includegraphics[width=0.31\textwidth]{images/robot_planner2/robot_planner2_1}
+\includegraphics[width=0.31\textwidth]{images/robot_planner2/robot_planner2_2}
+\includegraphics[width=0.31\textwidth]{images/robot_planner2/robot_planner2_3}\\
+\includegraphics[width=0.31\textwidth]{images/robot_planner2/robot_planner2_4}
+\includegraphics[width=0.31\textwidth]{images/robot_planner2/robot_planner2_5}
+\includegraphics[width=0.31\textwidth]{images/robot_planner2/robot_planner2_6}\\
+\includegraphics[width=0.31\textwidth]{images/robot_planner2/robot_planner2_7}
+\includegraphics[width=0.31\textwidth]{images/robot_planner2/robot_planner2_8}\\
 \caption{Experiment 2a:}
 \label{experiment-robot-planner2a}
 \end{figure}
@@ -103,17 +103,17 @@ to the path planning problem are not always the same and thus it is possible tha
 \end{figure}
 \end{center}
 
-\subsection{Robot Planner 3: Trajectory planning}
+\section{Robot Planner 3: Trajectory planning}
 
 The goal of this third experiment is to design and test only some pivot trajectories. The pivot motions follow the equations described in 
-\ref{subsection:pivot-motions}. The trajectories that were designed and tested in this experiments are the following:
+\ref{section:pivot-motions}. The trajectories that were designed and tested in this experiments are the following:
 \begin{itemize}
 \item Circular
 \item Arc
 \item Line segment
 \end{itemize}
 
-\subsubsection{Circular and Circular arc trajectories in task space}
+\subsection{Circular and Circular arc trajectories in task space}
 
 % Robot Planner 3a with RRTConnect
 \begin{table}[H]
@@ -140,7 +140,7 @@ Experiment                & Status & Solution Time & Path Simplification Time & 
 \end{table}
 
 
-\subsubsection{Line segment trajectories in task space}
+\subsection{Line segment trajectories in task space}
 
 % Robot Planner 3b with RRTConnect
 \begin{table}[H]
@@ -167,7 +167,7 @@ Experiment                & Status & Solution Time & Path Simplification Time & 
 \end{table}
 
 
-\subsubsection{Cubic Spline trajectories in task space}
+\subsection{Cubic Spline trajectories in task space}
 
 % Robot Planner 3c with RRTConnect
 \begin{table}[H]
@@ -194,7 +194,7 @@ Experiment                & Status & Solution Time & Path Simplification Time & 
 \end{table}
 
 
-\subsubsection{B-Spline trajectories in task space}
+\subsection{B-Spline trajectories in task space}
 
 % Robot Planner 3d with RRTConnect
 \begin{table}[H]
@@ -221,13 +221,13 @@ Experiment                & Status & Solution Time & Path Simplification Time & 
 \end{table}
 
 
-\subsubsection{Polynomial trajectories in joint space}
+\subsection{Polynomial trajectories in joint space}
 
-\subsubsection{Trajectories in joint space with trapezoidal velocity profile}
+\subsection{Trajectories in joint space with trapezoidal velocity profile}
 
-\subsubsection{Trajectories in joint space with s-curve velocity profile}
+\subsection{Trajectories in joint space with s-curve velocity profile}
 
-\subsection{Robot Planner 4: Simple cube pick-and-place experiment}
+\section{Robot Planner 4: Simple cube pick-and-place experiment}
 
 In this experiment we plan a simple pick-and-place path for a cube. The robotic arm first visits the left table and starts from the pre-grasp posture and then 
 slowly approaches the cube until the grasp posture. When the gripper has reached the grasp posture, it closes the fingers to grasp the object and then retreats 
@@ -346,7 +346,7 @@ Experiment                & Status & Solution Time & Path Simplification Time & 
 \end{table}
 
 
-\subsection{Robot Planner 5: Visual servoing}
+\section{Robot Planner 5: Visual servoing}
 
 The goal of this fifth experiment is to control the KUKA robot using the camera via the visual servoing technique. In the first part of the experiment the 
 robotic arm goes to an initial known position (e.g. the corner of the table) and then moves around until it detects a surgical tool. When that happens, the 
@@ -377,8 +377,8 @@ controller parameters are $K_p = 0.9, K_d = 0.2$}
 \end{figure}
 \end{center}
 
-\subsection{Robot Planner 6}
+\section{Robot Planner 6}
 
-\subsection{Robot Planner 7}
+\section{Robot Planner 7}
 
-\subsection{Robot Planner 8: State machine \& ROS Actions}
+\section{Robot Planner 8: State machine \& ROS Actions}

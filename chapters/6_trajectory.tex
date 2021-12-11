@@ -1,4 +1,4 @@
-\section{Trajectory Planning - Laparoscopic tool manipulation}
+\chapter{Trajectory Planning - Laparoscopic tool manipulation}
 
 At this step, given the points of the desired path, a more detailed trajectory is calculated, 
 which will contain all the waypoints that the robot will have to visit. Trajectory planning is executed after a desired path is generated,
@@ -15,7 +15,7 @@ robotic assisted surgery replaced the traditional laparoscopic procedures. The f
 with respect to the Remote Center of Motion point, which lies approximately on the center of the incision. Apart from the scaling and inversion, laparoscopic 
 procedures add an additional motion constraint that demands at each time one point of the laparoscopic tool to coincide with the RCM point.\\
 
-\subsection{Tool pose \& the Fulcrum Effect}
+\section{Tool pose \& the Fulcrum Effect}
 
 \begin{center}
 \begin{figure}[H]
@@ -121,8 +121,8 @@ end
 \end{listing}
 
 
-\subsection{Trajectory planning in cartesian coordinates}
-\label{subsection:pivot-motions}
+\section{Trajectory planning in cartesian coordinates}
+\label{section:pivot-motions}
 
 On this section, some basic pivoting trajectories around the fulcrum point, are presented. In all of the following three example pivoting motions, we have made 
 the assumption that the position and orientation of the ${F}$ reference frame is precisely known, which is however not applicable in real-life scenarios. The trajectories 
@@ -141,7 +141,7 @@ even more problematic when the IK problem is not solved with analytical equation
 \item A smooth trajectory in task space is not necessarily smooth in Joint Space.
 \end{itemize}
 
-\subsubsection{Circular trajectory of tool tip}
+\subsection{Circular trajectory of tool tip}
 
 \begin{center}
 \begin{figure}[H]
@@ -205,7 +205,7 @@ Fulcrum Effect transformation.
 \end{center}
 
 
-\subsubsection{Circular arc trajectory of tool tip}
+\subsection{Circular arc trajectory of tool tip}
 
 To generate a circular arc trajectory for a pivot motion we must specify the same parameters as 
 in the circular trajectory as well as the length of the arc or the total angle $φ$ of the arc 
@@ -230,7 +230,7 @@ s \in \left[ 0, \frac{φ}{2π} \right]
 \end{figure}
 \end{center}
 
-\subsubsection{Helical trajectory of tool tip}
+\subsection{Helical trajectory of tool tip}
 
 The helical trajectory is another useful trajectory that was studied in this thesis. The importance of this trajectory lies in the fact that the helical movement of the surgical tool can be considered as an ideal 
 approximation of a suturing trajectory, a very common task in surgery which is extensively studied and researched in surgery robotics. A helical trajectory can be expressed by the following parametric equations:
@@ -253,7 +253,7 @@ where $s \in \left[ 0, τ \right]$ expresses the range along the trajectory, $τ
 \end{figure}
 \end{center}
 
-\subsubsection{Line segment trajectory of tool tip}
+\subsection{Line segment trajectory of tool tip}
 
 \begin{center}
 \begin{figure}[H]
@@ -296,7 +296,7 @@ After having calculated the cartesian coordinates we can calculate the spherical
 The line segment trajectory of tool tip, as analysed above, \textbf{should not be confused with the} computeCartesianPath method provided by ROS MoveIt library that can be used to create line segment 
 trajectories. This method produces line segment trajectories for the end effector of the robot which are not transformed as line segments via the Fulcrum Effect.
 
-\subsubsection{Cubic Spline trajectory of tool tip}
+\subsection{Cubic Spline trajectory of tool tip}
 
 A useful mathematical tool to construct a smooth curve that visits every point from a given set of waypoints are \textbf{cubic splines}. A cubic spline is 
 constructed using smaller curves that are described by a polynomial of 3rd order. Let $\left\lbrace \mathbf{P}_0, \mathbf{P}_1, \ldots , \mathbf{P}_n \right\rbrace$ 
@@ -384,7 +384,7 @@ a_i = \frac{1}{σ^3} (\dot{x}_{i+1}σ - 2x_{i+1} + \dot{x}_iσ +2x_i)
 \end{center}
 
 
-\subsubsection{B-Spline trajectory of tool tip}
+\subsection{B-Spline trajectory of tool tip}
 
 The \textbf{B-Splines} are smooth curves which are constructed from \textbf{B\'ezier} curves. A B\'ezier curve is a parametric smooth curve and is a $k$-th order interpolation of $k+1$ control points.
 
@@ -487,7 +487,7 @@ for the operating staff, who control the robot.
 \end{center}
 
 
-\subsection{Trajectory planning in joint angles space}
+\section{Trajectory planning in joint angles space}
 
 \underline{Advantages of planning in Joint Space}
 \begin{itemize}
@@ -510,10 +510,10 @@ and not at the intermediate points (the points between the waypoints).
 \end{center}
 
 
-\subsubsection{Polynomials of 5th order}
+\subsection{Polynomials of 5th order}
 
 
-\subsubsection{Planning with velocity profiles}
+\subsection{Planning with velocity profiles}
 
 \begin{center}
 \begin{figure}[H]

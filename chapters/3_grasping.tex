@@ -1,6 +1,6 @@
-\section{Grasping}
+\chapter{Grasping}
 
-\subsection{Gripper \& Forward Kinematics}
+\section{Gripper \& Forward Kinematics}
 
 \begin{center}
 \begin{figure}[H]
@@ -55,7 +55,7 @@ i & $θ_i$ (rad) & $L_{i-1}$ (m) & $d_i$ (m) & $α_{i-1}$ (rad) \\
 \end{center}
 
 
-\subsection{Gripper Inverse Kinematics}
+\section{Gripper Inverse Kinematics}
 
 The following Inverse Kinematics analysis referes to one finger of the Barrett Hand gripper, which has 3 revolute joints. Finger 3 has only 2 
 revolute joints for which the angle solutions are the same with the solutions of the last 2 joints of the other fingers. 
@@ -130,7 +130,7 @@ tan \left( ψ \right) = \frac{L_3 sin \left( φ_3 + \frac{π}{4} \right) }{L_2 +
 φ_2 = atan2 \left( pz, \sqrt{p_x^2 + p_y^2} \right) - atan2 \left[ L_3 sin \left( φ_3 + \frac{2π}{9} \right), L_2 + L_3 cos \left( φ_3 + \frac{2π}{9} \right) \right]
 \end{equation}
 
-\subsection{Force closure}
+\section{Force closure}
 
 In order to achieve a firm grasp of the surgical tool, the gripper fingers must be positioned in such a way around the object so that there is \textbf{force closure}. According to the \textbf{Nguyen} theorem, a plannar 
 object that is constrained by 2 points, is in force closure if the line which connects the two constraint points lies inside both friction cones of these points. A simplistic explanation of a friction cone is 

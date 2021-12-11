@@ -1,7 +1,7 @@
-\section{Robotic arm Kinematic Analysis}
+\chapter{Robotic arm Kinematic Analysis}
 
 
-\subsection{Robotic arm, DH parameters \& Forward Kinematics}
+\section{Robotic arm, DH parameters \& Forward Kinematics}
 
 The Forward Kinematics problem seeks to specify the way in which the robot's links are connected together. In other wants, we want to specify 
 the transformations between every pair of consecutive robot links. It is known that the forward kinematics of a robot can be calculated given only four 
@@ -135,7 +135,7 @@ of inverse matrices.
 \end{figure}
 \end{center}
 
-\subsubsection{End-effector to tool-tip transformations}
+\subsection{End-effector to tool-tip transformations}
 
 \begin{center}
 \begin{figure}[H]
@@ -176,7 +176,7 @@ of inverse matrices.
 \]
 
 
-\subsection{Inverse Kinematics}
+\section{Inverse Kinematics}
 
 The Inverse Kinematics problem is one of the most important problems a roboticist must solve to design trajectories and control the robot's motion to do useful tasks. The IK problem seeks to find 
 those joint values that make the robot's end effector to be at a specific desired position and orientation or equivalently the input to this problem is the desired pose (position and orientation of the end-effector) 
@@ -185,7 +185,7 @@ to the I.K. problem are typically 8. For robots with more actuators than the 6 d
 the I.K. problem has infinite solutions for a given pose, which means that an additional constraint is required to find a specific solution. This extra degree of freedom is very useful in finding kinematic solutions 
 that are optimal under some circumstances and are also useful in avoiding \textbf{singularity points} where the robot loses some degrees of freedom.
 
-\subsubsection{Decoupling Technique}
+\subsection{Decoupling Technique}
 
 In this section the inverse kinematics problem is solved for only the 6 out of the 7 total degrees of freedom. The third joint is not used in this 
 analysis and it's angle is set to zero $θ_3 = 0$ . The rest of the joints form a special kind of kinematic chain that can be solved using the 
@@ -273,7 +273,7 @@ i_z & j_z & k_z\\
 \end{center}
 
 
-\subsubsection{Workspace constraints \& Singularity points}
+\subsection{Workspace constraints \& Singularity points}
 
 \begin{center}
 \begin{figure}[H]
@@ -289,7 +289,7 @@ Singularity points:
 	\item When $sin\left( θ_6 \right) = 0$ then the angles $θ_5, θ_7$ are not defined
 \end{itemize}
 
-\subsubsection{Solutions for 7DoF numerically}
+\subsection{Solutions for 7DoF numerically}
 
 To solve numerically for the joint angles, we use a relationship between the derivative of the spatial coordinates and the joint derivatives. These two vectors 
 are related by a matrix known as the \textbf{Jacobian} and is given by the following equation
@@ -344,4 +344,4 @@ J_i = \begin{bmatrix}
 \end{equation}
 
 
-\subsubsection{Comparison of Inverse Kinematics Techniques}
+\subsection{Comparison of Inverse Kinematics Techniques}

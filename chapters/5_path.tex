@@ -1,18 +1,18 @@
-\section{Path Planning}
+\chapter{Path Planning}
 
 \textbf{Path Planning} is a geometric problem, where it is desired to find a path from a starting point to a goal point and also satisfying a set of constraints, such as: 
 restricting the solutions inside the robot's configuration space, avoiding obstacles in the task space, avoiding singularity points and respecting the robot's 
 joint limits.
 
 
-\subsection{Sampling methods}
+\section{Sampling methods}
 
 The path planning algorithms that were mostly used in this thesis belong to the category of sampling methods. These methods use random functions to choose a sample from 
 the configuration space or the state space. Sampling methods differ from the deterministic grid methods which, which discretize the whole space. Sampling methods are less 
 computationally expensive than the grid methods, but they do not deliver optimal solutions like the latter.
 
 
-\subsubsection{RRT Algorithms}
+\subsection{RRT Algorithms}
 
 The \textbf{Rapidly-exploring Random Trees} algorithm is a sampling planning method that searches for an obstacle-free motion plan from an initial state $x_{init}$ to a set of goal states $\mathcal{X}_{goal}$. We refer to a set 
 of goal states, because apart from the one desired goal state there can be other neighbor states that are within the allowed position and orientation tolerances.
@@ -50,7 +50,7 @@ Other variations of the RRT Algorithm, which are also available in the OMPL libr
 \end{itemize}
 
 
-\subsubsection{PRM Algorithms}
+\subsection{PRM Algorithms}
 
 The \textbf{Probabilistic Roadmap} (PRM) algorithm is a sampling planning method that constructs a roadmap representation of $\mathcal{C}_{free}$ \textbf{before searching} for a solution. After the roadmap is successfully built, then the algorithm searches 
 for a solution using a traditional graph-based search algorithm. A very important aspect of this algorithm is how the sampling of the free configuration space will be done. The sampling is usually performed using a 
@@ -85,7 +85,7 @@ Other variations of the PRM Algorithm, which are also available in the OMPL libr
 \end{itemize}
 
 
-\subsection{Pick and place algorithm}
+\section{Pick and place algorithm}
 
 % Help on using the algorithme package
 % http://ftp.ntua.gr/mirror/ctan/macros/latex/contrib/algorithm2e/doc/algorithm2e.pdf 
@@ -113,7 +113,7 @@ dimension that is bigger than the others like a rod or other long objects, such 
 of the tool with the links of the rest of the robot (the link of the end-effector will probably not collide with the tool).
 
 
-\subsection{Task space analysis}
+\section{Task space analysis}
 
 Dexterity analysis for tool's task space
 \begin{equation}

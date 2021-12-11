@@ -1,4 +1,4 @@
-\section{Scene and object recognition with Computer Vision}
+\chapter{Scene and object recognition with Computer Vision}
 
 At this section we explore ways to detect and recognize the surgical tools as well as other objects of the simulation scene. To reduce the complexity of 
 this thesis and focus on the more important features of this thesis, we assume in the simulation that the surgical tools are blue and the mounting dock, 
@@ -14,7 +14,7 @@ processing and/or machine learning recognition algorithms.\\
 \item update rate: 30fps
 \end{itemize}
 
-\subsection{Laparoscopic tool detection}
+\section{Laparoscopic tool detection}
 \label{laparoscopic-tool-detection}
 
 In order to detect the shape of the tool there are some standard steps that need to be executed. After having loaded the input image we convert it to grayscale, so that we can work on only one channel instead of
@@ -46,7 +46,7 @@ estimated center of mass}
 \end{figure}
 \end{center}
 
-\subsection{Stereoscopic vision}
+\section{Stereoscopic vision}
 \label{stereoscopic-vision}
 
 \begin{center}
@@ -65,7 +65,7 @@ estimated center of mass}
 \end{figure}
 \end{center}
 
-\subsection{Calculation of tool position and orientation}
+\section{Calculation of tool position and orientation}
 
 In order for the gripper to grasp correctly the laparoscopic tool, it is required to calculate the tool's position and orientation in the pixel space 
 which must then be converted with respect to the robot's workspace. From all the pixels that have been classified as part of the laparoscopic tool, 
@@ -117,7 +117,7 @@ and the white rectangle is it's ROI as calculated from the convex hull}
 \end{figure}
 \end{center}
 
-\subsection{Calculation of grasping points}
+\section{Calculation of grasping points}
 
 \begin{center}
 \begin{figure}[H]
@@ -153,7 +153,7 @@ points $\mathbf{p}_1=(x_1,y_1)$, ${\mathbf{p}_2=(x_2,y_2)}$ is given by
 d_1(\mathbf{p}_1, \mathbf{p}_2) = |x_1 - x_2| + |y_1 - y_2|
 \end{equation}
 
-\subsection{Trocar detection \& Estimation of fulcrum point}
+\section{Trocar detection \& Estimation of fulcrum point}
 
 The detection of the trocar, which is a small tube through which the surgical tool is inserted, is accomplished using a similar simple trivial detection algorithm as the one used in \ref{laparoscopic-tool-detection}
 
