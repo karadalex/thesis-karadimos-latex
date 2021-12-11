@@ -21,10 +21,20 @@
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {9.1}{\ignorespaces Time results for robot planner 4 using the RRTConnect path planner algorithm\relax }}{82}{table.caption.62}
+\contentsline {table}{\numberline {9.1}{\ignorespaces Time results for robot planner 1 using the RRTConnect path planner algorithm\relax }}{78}{table.caption.53}
 \defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {9.2}{\ignorespaces Time results for robot planner 4 using the RRT* path planner algorithm\relax }}{83}{table.caption.63}
+\contentsline {table}{\numberline {9.2}{\ignorespaces Time results for robot planner 3a using the RRTConnect path planner algorithm\relax }}{81}{table.caption.57}
 \defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {9.3}{\ignorespaces Time results for robot planner 4 using the PRM* path planner algorithm\relax }}{84}{table.caption.64}
+\contentsline {table}{\numberline {9.3}{\ignorespaces Time results for robot planner 3b using the RRTConnect path planner algorithm\relax }}{82}{table.caption.58}
+\defcounter {refsection}{0}\relax 
+\contentsline {table}{\numberline {9.4}{\ignorespaces Time results for robot planner 3c using the RRTConnect path planner algorithm\relax }}{83}{table.caption.59}
+\defcounter {refsection}{0}\relax 
+\contentsline {table}{\numberline {9.5}{\ignorespaces Time results for robot planner 3d using the RRTConnect path planner algorithm\relax }}{84}{table.caption.60}
+\defcounter {refsection}{0}\relax 
+\contentsline {table}{\numberline {9.6}{\ignorespaces Time results for robot planner 4 using the RRTConnect path planner algorithm\relax }}{86}{table.caption.62}
+\defcounter {refsection}{0}\relax 
+\contentsline {table}{\numberline {9.7}{\ignorespaces Time results for robot planner 4 using the RRT* path planner algorithm\relax }}{87}{table.caption.63}
+\defcounter {refsection}{0}\relax 
+\contentsline {table}{\numberline {9.8}{\ignorespaces Time results for robot planner 4 using the PRM* path planner algorithm\relax }}{88}{table.caption.64}
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
