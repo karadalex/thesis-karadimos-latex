@@ -86,7 +86,7 @@ Experiment                & Reverse pivot planning time & Execution status & Rev
 \hline
 \end{tabular}
 \caption{Time results for robot planner 1 using the RRTConnect path planner algorithm. Planning time is the sum of solution time and path simplification time. Execution status is 
-1 for success and 0 for failure}
+1 for success and 0 for failure. Parameters: tolerances: 0.000005, max planning time: 5 seconds, replanning: true, max planning attempts: 6. Experiments start from home position.}
 \label{robot-planner1-rrtconnect-data}
 \end{table}
 
@@ -151,7 +151,7 @@ Experiment                & Reverse pivot planning time & Execution status & Rev
 \hline
 \end{tabular}
 \caption{Time results for robot planner 1 using the RRT* path planner algorithm. Planning time is the sum of solution time and path simplification time. Execution status is 
-1 for success and 0 for failure}
+1 for success and 0 for failure. Parameters: tolerances: 0.000005, max planning time: 5 seconds, replanning: true, max planning attempts: 6. Experiments start from home position.}
 \label{robot-planner1-rrtstar-data}
 \end{table}
 
@@ -177,6 +177,85 @@ This experiment is very useful, because it shows whether all holes of the mounti
 \label{experiment-robot-planner2a}
 \end{figure}
 \end{center}
+
+% Robot Planner 2a with RRTConnect
+\begin{longtable}{|p{2cm}|c|p{2cm}|p{2cm}|p{2cm}|}
+\hline
+Robot Planner 2a           & \multicolumn{4}{c}{\textbf{RRTConnect}}                                                                                                 \vline \\
+\hline
+                          & \multicolumn{4}{c}{\textbf{Insertion \& Pivot trajectories}}                     \vline \\
+\hline
+Experiment                & Trocar1 insertion time & Execution status & Trocar1 reverse insertion time & Execution status  \\
+\hline
+1	& 0.060728	& 1	& 2.875072	& 1 \\
+2	& 0.070508	& 1	& 5.235667	& 1 \\
+3	& 0.071487	& 1	& 5.239014	& 1 \\
+4	& 0.059288	& 1	& 1.733352	& 1 \\
+5	& 0.053619	& 1	& 3.376982	& 1 \\
+6	& 0.062	& 1	& 5.389454	& 1 \\
+7	& 0.084007	& 1	& -	& 0 \\
+8	& 0.058306	& 1	& 5.254352	& 1 \\
+9	& 0.046925	& 1	& 4.90185	& 1 \\
+10	& 0.060491	& 1	& 5.073171	& 1 \\
+\hline
+\textbf{Average} & 	0.062736	& 1	& 4.342102	& 0.9 \\
+\hline
+                          & \multicolumn{4}{c}{\textbf{Insertion \& Pivot trajectories}}                     \vline \\
+\hline
+Experiment                & Approach trocar2 time & Execution status & Trocar2 insertion time & Execution status  \\
+\hline
+1 & 2.67618	& 1	& 0.168283	& 1 \\
+2 & 5.187283	& 1	& 0.179048	& 1 \\
+3 & 0.050117	& 1	& 0.057194	& 1 \\
+4 & 1.538822	& 1	& 0.184641	& 1 \\
+5 & 1.62114	& 1	& 0.253224	& 1 \\
+6 & 5.397757	& 1	& 0.268188	& 1 \\
+7 & 5.379305	& 1	& 0.384924	& 1 \\
+8 & 5.401832	& 1	& 0.193265	& 1 \\
+9 & 2.845741	& 1	& 0.267069	& 1 \\
+10  & 5.355111	& 1	& 0.250265	& 1 \\
+\hline
+\textbf{Average} & 3.545329	& 1	& 0.220610	& 1 \\
+\hline
+                          & \multicolumn{4}{c}{\textbf{Insertion \& Pivot trajectories}}                     \vline \\
+\hline
+Experiment                & Trocar2 reverse insertion time & Execution status & Approach trocar3 time & Execution status  \\
+\hline
+1 & 0.152233	& 1	& 0.214332	& 1 \\
+2 & 0.321677	& 1	& 0.361712	& 1 \\
+3 & 5.404121	& 1	& 5.271597	& 1 \\
+4 & 0.147981	& 1	& 0.15915	& 1 \\
+5 & 0.333447	& 1	& 0.298799	& 1 \\
+6 & 0.246624	& 1	& 0.209347	& 1 \\
+7 & 0.381983	& 1	& 0.473779	& 1 \\
+8 & 0.219369	& 1	& 0.167211	& 1 \\
+9 & 0.227563	& 1	& 0.297372	& 1 \\
+10  & 5.149372	& 1	& 5.3578	& 1 \\
+\hline
+\textbf{Average} & 1.258437	& 1	& 1.281110	& 1 \\
+\hline
+                          & \multicolumn{4}{c}{\textbf{Insertion \& Pivot trajectories}}                     \vline \\
+\hline
+Experiment                & Trocar3 insertion time & Execution status & Trocar3 reverse insertion time & Execution status  \\
+\hline
+1 & 0.196175	& 1	& 0.855452	& 0 \\
+2 & 0.412455	& 1	& 1.133213	& 0 \\
+3 & 0.355923	& 1	& 0.814161	& 0 \\
+4 & 0.194839	& 1	& 0.885119	& 0 \\
+5 & 0.351561	& 1	& 0.364089	& 0 \\
+6 & 0.355251	& 1	& 0.826636	& 0 \\
+7 & 0.336123	& 1	& 0.30715	& 1 \\
+8 & 0.147867	& 1	& 1.053035	& 0 \\
+9 & 0.347956	& 0.6	& 0.80884	& 0.37  \\
+10  & 0.28364	& 0.6	& 0.229825	& 1 \\
+\hline
+\textbf{Average} & 	0.298179	& 0.92 &	0.727752	& 0.237 \\
+\hline
+
+\caption{Time results for robot planner 2a using the RRTConnect path planner algorithm. Planning time is the sum of solution time and path simplification time. Execution status is 
+1 for success and 0 for failure. Parameters: tolerances: 0.0005, max planning time: 5 seconds, replanning: true, max planning attempts: 6. Experiments start from home position.}
+\label{robot-planner2a-rrtconnect-data}
+\end{longtable}
 
 To overcome the reachability issue shown in Figure \ref{experiment-robot-planner2a}, the algorithm was repeated, but this time using a different simulation layout 
 in Gazebo, in which the mounting dock is closer to the robot and in front of it. This new layout enables the robot to reach all mounting holes with ease and 
@@ -207,6 +286,7 @@ to the path planning problem are not always the same and thus it is possible tha
 \caption{Experiment 2b: Singularity failure}
 \end{figure}
 \end{center}
+
 
 \section{Robot Planner 3: Trajectory planning}
 
