@@ -230,6 +230,7 @@ atan2 \left( p_y, p_x \right) \\
 \centering
 \includegraphics[width=8cm]{images/th2-4-calculation.png}\\
 \caption{Calculation of angles $θ_2, θ_4$}
+\label{iiwa14-solution-configurations}
 \end{figure}
 \end{center}
 
@@ -272,22 +273,6 @@ i_z & j_z & k_z\\
 \end{figure}
 \end{center}
 
-
-\subsection{Workspace constraints \& Singularity points}
-
-\begin{center}
-\begin{figure}[H]
-\centering
-\includegraphics[width=10cm]{images/iiwa-workspace.png}\\
-\caption{KUKA iiwa LBR14 workspace dimensions}
-\end{figure}
-\end{center}
-
-Singularity points:
-\begin{itemize}
-	\item When $p_x^2 + p_y^2 = 0$ then the end-effector lies on the z-axis and $θ_1$ is not defined
-	\item When $sin\left( θ_6 \right) = 0$ then the angles $θ_5, θ_7$ are not defined
-\end{itemize}
 
 \subsection{Solutions for 7DoF numerically}
 
@@ -345,3 +330,66 @@ J_i = \begin{bmatrix}
 
 
 \subsection{Comparison of Inverse Kinematics Techniques}
+
+
+\subsection{Constraints \& Singularity points}
+
+\subsubsection{Workspace constraints \& Singularity points}
+\begin{center}
+\begin{figure}[H]
+\centering
+\includegraphics[width=10cm]{images/iiwa-workspace.png}\\
+\caption{KUKA iiwa LBR14 workspace dimensions}
+\end{figure}
+\end{center}
+
+Singularity points:
+\begin{itemize}
+	\item When $p_x^2 + p_y^2 = 0$ then the end-effector lies on the z-axis and $θ_1$ is not defined
+	\item When $sin\left( θ_6 \right) = 0$ then the angles $θ_5, θ_7$ are not defined
+\end{itemize}
+
+\subsubsection{Remote Center of Motion constraint}
+\label{rcm-subsubsection}
+
+
+\subsubsection{Elbow-up constraint}
+
+The inverse kinematic problem usually outputs 8 different solutions, all of which satisfy the same target position and orientation for the end-effector, but with different arm configurations (see figures 
+\ref{iiwa14-solution-configurations} and \ref{elbow-up-vs-down}). These solutions offer more flexibility to each case, and a different solution is chosen based on the conditions (e.g. previous robot pose) and 
+requirements (e.g. collision avoidance). In this thesis, there are 2 distinct use cases in terms of choosing a specific robot configuration picking the surgical tools from one table, which does not impose any constraint
+and the insertion and pivoting of the surgical tool at the mounting dock, which imposes the RCM constraint (see \ref{rcm-subsubsection}) and a constraint to of collision avoidance between the robot arm and the mounting dock.
+In the latter use case, in order to satisfy the collision avoidance, all path planning kinematic solutions must be in a elbow-up configuration at all times.
+
+\begin{center}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{images/elbow-down.png}\\
+\includegraphics[width=\textwidth]{images/elbow-up.png}\\
+\caption{Top: elbow-down solution, bottom: elbow-up solution}
+\label{elbow-up-vs-down}
+\end{figure}
+\end{center}
+
+Observing the screenshots at \ref{elbow-up-vs-down}, there are 2 ways to mathematically describe the elbow-up constraint (see figure \ref{elbow-up-constraint-geometry} below), either using distance between the robot base and 
+the 3rd link or by using the relative angle of the base link and the 3rd link. From the iiwa14 specifications, the following calculations are done using $d_1 = 360mm$ and $d_3 = 420mm$.
+
+\begin{center}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{images/elbow-up-constraint-geometry.png}\\
+\caption{Elbow-up constraint description with relative distance or angle between links with lengths $d_1$ and $d_3$}
+\label{elbow-up-constraint-geometry}
+\end{figure}
+\end{center}
+
+The distance constraint is $d_{min} \leq d \leq d_{max} $, where
+\[
+d_{min} = \sqrt{d_1^2 + d_3^2} = 553mm  \quad \textrm{and} \quad  d_{max} = d_1 + d_3 = 780mm
+\]
+The distance-based description of the elbow-up constraint is not very convenient, because it can not be easily transformed to a description that uses the robot's forward kinematic transformations and reference frames. 
+For this reason, the angle-based description is more convenient because it directly describes the orientation that the 3rd reference frame must have, with respect to the reference frame of the base. Thus for each orientation 
+angle (pitch, yaw, roll) the following constraint must be satisfied
+\[
+-\frac{\pi}{2} \leq θ \leq \frac{\pi}{2}
+\]
