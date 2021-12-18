@@ -273,10 +273,20 @@ with sufficient dexterity, the robot is free to pivot around.
 \includegraphics[width=0.3\textwidth]{images/robot_planner2b/robot_planner2b_7}
 \includegraphics[width=0.3\textwidth]{images/robot_planner2b/robot_planner2b_8}
 \includegraphics[width=0.3\textwidth]{images/robot_planner2b/robot_planner2b_9}\\
-\caption{Experiment 2b: Running robot planner 2b with a different table layout so that all target poses have imporved reachability. Note that all trajectories shown in the screenshots are collision-free, 
+\caption{Experiment 2b: Running robot planner 2b with a different table layout so that all target poses have improved reachability. Note that all trajectories shown in the screenshots are collision-free, 
 because the robotic arm is in an elbow-up configuration, so that it avoids the collision between the 3rd link of the robot and the mounting dock (green object shown in simulation).}
+\label{experiment-robot-planner2b}
 \end{figure}
 \end{center}
+
+Observing the screenshots at figure \ref{experiment-robot-planner2b}, it is clear that the robot must always be in an elbow-up configuration in order to avoid collisions with the mounting dock. This constraint can be 
+described either using the relative distance of the third link with the base or the relative angles of the third link's axis with respect to the axis of the base, as described with more detail in 
+\ref{section-elbow-up-constraints}. The latter description with angles is easier to implement using the ROS MoveIt! framework,  but it would require to solve an extra inverse and forward kinematics problem targeting the third 
+link, instead of the end-effector. To avoid these additional, computationally expensive calculations and simplify the experiments, instead of mathematically describing the constraint, 
+some extra points were added in the trajectory. 
+These points are usually close to the robot's axis and are such, that 
+moveit will be forced to find a solution with an elbow-up configuration (because there will be no other solution satisfying the target point). Starting with an elbow-up configuration makes the path planner stick with that 
+configuration for most of the path, because otherwise it would make a big jump in the joint state space which is not allowed from the parameters used in the experiments.
 
 % Robot Planner 2b with RRTConnect
 \begin{longtable}{|p{2cm}|c|p{2cm}|p{2cm}|p{2cm}|}
