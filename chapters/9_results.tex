@@ -273,9 +273,89 @@ with sufficient dexterity, the robot is free to pivot around.
 \includegraphics[width=0.3\textwidth]{images/robot_planner2b/robot_planner2b_7}
 \includegraphics[width=0.3\textwidth]{images/robot_planner2b/robot_planner2b_8}
 \includegraphics[width=0.3\textwidth]{images/robot_planner2b/robot_planner2b_9}\\
-\caption{Experiment 2b:}
+\caption{Experiment 2b: Running robot planner 2b with a different table layout so that all target poses have imporved reachability. Note that all trajectories shown in the screenshots are collision-free, 
+because the robotic arm is in an elbow-up configuration, so that it avoids the collision between the 3rd link of the robot and the mounting dock (green object shown in simulation).}
 \end{figure}
 \end{center}
+
+% Robot Planner 2b with RRTConnect
+\begin{longtable}{|p{2cm}|c|p{2cm}|p{2cm}|p{2cm}|}
+\hline
+Robot Planner 2b           & \multicolumn{4}{c}{\textbf{RRTConnect}}                                                                                                 \vline \\
+\hline
+                          & \multicolumn{4}{c}{\textbf{Insertion \& Pivot trajectories}}                     \vline \\
+\hline
+Experiment                & Trocar1 insertion time & Execution status & Trocar1 reverse insertion time & Execution status  \\
+\hline
+1	& 0.269901	& 1	& 0.355588	& 1 \\
+2	& 0.220509	& 1	& 0.255968	& 1 \\
+3	& 0.260483	& 1	& 5.28604	& 1 \\
+4	& 0.267778	& 1	& 0.267796	& 1 \\
+5	& 0.388487	& 1	& 5.321684	& 1 \\
+6	& 0.316275	& 1	& 0.2088	& 1 \\
+7	& 0.202614	& 1	& 0.14469	& 1 \\
+8	& 0.289368	& 1	& 0.275917	& 1 \\
+9	& 0.353631	& 1	& 0.353631	& 1 \\
+10	& 0.185345	& 1	& 0.154755	& 1 \\
+\hline
+\textbf{Average} & 0.275439 &	1	& 1.262487	& 1 \\
+\hline
+                          & \multicolumn{4}{c}{\textbf{Insertion \& Pivot trajectories}}                     \vline \\
+\hline
+Experiment                & Approach trocar2 time & Execution status & Trocar2 insertion time & Execution status  \\
+\hline
+1 & 0.322578	& 1	& 0.283497	& 1 \\
+2 & 0.209871	& 1	& 0.410543	& 1 \\
+3 & 5.099769	& 1	& 0.296228	& 1 \\
+4 & 0.216997	& 1	& 0.342776	& 1 \\
+5 & 5.328204	& 1	& 0.394472	& 1 \\
+6 & 0.450936	& 1	& 0.249248	& 1 \\
+7 & 0.336209	& 1	& 0.165375	& 1 \\
+8 & 0.397699	& 1	& 0.202118	& 1 \\
+9 & 0.235555	& 1	& 0.333129	& 1 \\
+10  & 0.320059	& 1	& 0.343595	& 1 \\
+\hline
+\textbf{Average} & 1.291788	& 1	& 0.302098	& 1 \\
+\hline
+                          & \multicolumn{4}{c}{\textbf{Insertion \& Pivot trajectories}}                     \vline \\
+\hline
+Experiment                & Trocar2 reverse insertion time & Execution status & Approach trocar3 time & Execution status  \\
+\hline
+1 & 5.374646	& 1	& 5.451335	& 1 \\
+2 & 0.452231	& 1	& 0.253669	& 1 \\
+3 & 0.22638	& 1	& 0.383933	& 1 \\
+4 & 5.371822	& 1	& 5.611649	& 1 \\
+5 & 0.395787	& 1	& 0.309212	& 1 \\
+6 & 5.15406	& 1	& 5.515007	& 1 \\
+7 & 4.189377	& 1	& 5.570568	& 1 \\
+8 & 5.167346	& 1	& 5.522056	& 1 \\
+9 & 5.101735	& 1	& 5.452301	& 1 \\
+10  & 5.273342	& 1	& 5.467273	& 1 \\
+\hline
+\textbf{Average} & 3.670673	& 1	& 3.953700	& 1 \\
+\hline
+                          & \multicolumn{4}{c}{\textbf{Insertion \& Pivot trajectories}}                     \vline \\
+\hline
+Experiment                & Trocar3 insertion time & Execution status & Trocar3 reverse insertion time & Execution status  \\
+\hline
+1 & 0.372382	& 1	& 5.34059	& 1 \\
+2 & 0.280432	& 1	& 0.261765	& 1 \\
+3 & 0.179581	& 1	& 0.187589	& 1 \\
+4 & 0.121094	& 1	& 5.152808	& 1 \\
+5 & 0.472468	& 1	& -	& 0 \\
+6 & 0.251195	& 1	& 0.442282	& 0 \\
+7 & 0.20647	& 1	& 0.318481	& 1 \\
+8 & 0.178941	& 1	& 0.185758	& 1 \\
+9 & 0.188906	& 1	& 0.222821	& 1 \\
+10  & 0.165681	& 1	& 0.170876	& 1 \\
+\hline
+\textbf{Average} & 	0.241715  &	1 &	1.364774 &	0.8 \\
+\hline
+\caption{Time results for robot planner 2b using the RRTConnect path planner algorithm and a different table layout from robot planner 2a. Planning time is the sum of solution time and path simplification time. Execution status is 
+1 for success and 0 for failure. Parameters: tolerances: 0.0005, max planning time: 5 seconds, replanning: true, max planning attempts: 6. Experiments start from home position.}
+\label{robot-planner2b-rrtconnect-data}
+\end{longtable}
+
 
 Due to the probabilistic nature of the motion planner (in these experiments the OMPL library is used with the RRTConnect path planning algorithm), the solutions 
 to the path planning problem are not always the same and thus it is possible that the robot arm reaches a pose which is close to a singularity
