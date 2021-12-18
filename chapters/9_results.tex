@@ -374,6 +374,21 @@ to the path planning problem are not always the same and thus it is possible tha
 \centering
 \includegraphics[width=0.9\textwidth]{images/robot_planner2b/singularity_failure.png}
 \caption{Experiment 2b: Singularity failure}
+\label{robot-planner2b-singularity-failure}
+\end{figure}
+\end{center}
+
+Sometimes, when planning or executing a trajectory the robot may fail to complete the task because it has approached a singularity point. The points of singularity or of low dexterity are those points shown in the screenshot 
+\ref{robot-planner2b-singularity-failure} which have red color. The color coding is calculated using the equation \ref{dexterity-measure}. The values of the Jacobian matrix are calculated at every kinematic state using 
+a custom ROS node that subscribes to the robot's kinematic state (joints' angle positions, velocities, etc) and publishes the values of the Jacobian matrix as well as the forward kinematics solutions, to the 
+/kinematic\_state topic (see figure \ref{kinematic-state-topic-graph}).
+
+\begin{center}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{images/kinematic_state_topic_graph.png}
+\caption{Custom kinematic state node that subscribes to the joint values and publishes forward kinematics solutions and the jacobian matrix values.}
+\label{kinematic-state-topic-graph}
 \end{figure}
 \end{center}
 
