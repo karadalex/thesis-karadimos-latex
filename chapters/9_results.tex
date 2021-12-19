@@ -405,158 +405,60 @@ The goal of this third experiment is to design and test only some pivot trajecto
 
 \subsection{Circular and Circular arc trajectories in task space}
 
-% Robot Planner 3a with RRTConnect
-\begin{table}[H]
+\begin{center}
+\begin{figure}[H]
 \centering
-\begin{tabular}{|p{2cm}|c|p{3cm}|p{3cm}|p{3cm}|}
-\hline
-Robot Planner 3a           & \multicolumn{4}{c}{\textbf{RRTConnect}}                                                                                                 \vline \\
-\hline
-                          & \multicolumn{4}{c}{\textbf{Place \& Insert tool}}                     \vline \\
-\hline
-Experiment                & Status & Solution Time & Path Simplification Time & Planning Attempts  \\
-\hline
-1                         &        &               &                          &  \\
-2                         &        &               &                          &  \\
-3                         &        &               &                          &  \\
-4                         &        &               &                          &  \\
-5                         &        &               &                          &  \\
-\hline
-\textbf{Average} & 	& 	& 	&  \\
-\hline
-                          & \multicolumn{4}{c}{\textbf{Pivot Trajectory}}                     \vline \\
-\hline
-Experiment                & Status & Solution Time & Path Simplification Time & Planning Attempts  \\
-\hline
-1                         &        &               &                          &  \\
-2                         &        &               &                          &  \\
-3                         &        &               &                          &  \\
-4                         &        &               &                          &  \\
-5                         &        &               &                          &  \\
-\hline
-\textbf{Average} & 	& 	& 	&  \\
-\hline
-\end{tabular}
-\caption{Time results for robot planner 3a using the RRTConnect path planner algorithm}
-\label{robot-planner3a-rrtconnect-data}
-\end{table}
+\includegraphics[width=\textwidth]{images/robot_planner3/3a_circle.png}
+\caption{Experiment 3a: Create circular trajectory inside the surgical site (below the green mounting dock) and transform it via the fulcrum transformation to a trajectory for the robot's TCP.}
+\label{robot-planner3a-circle}
+\end{figure}
+\end{center}
+
+% Robot Planner 3a with RRTConnect
+% \begin{table}[H]
+% \centering
+% \begin{tabular}{|p{2cm}|c|p{3cm}|p{3cm}|p{3cm}|}
+% \hline
+% Robot Planner 3a           & \multicolumn{4}{c}{\textbf{RRTConnect}}                                                                                                 \vline \\
+% \hline
+%                           & \multicolumn{4}{c}{\textbf{Place \& Insert tool}}                     \vline \\
+% \hline
+% Experiment                & Status & Solution Time & Path Simplification Time & Planning Attempts  \\
+% \hline
+% 1                         &        &               &                          &  \\
+% 2                         &        &               &                          &  \\
+% 3                         &        &               &                          &  \\
+% 4                         &        &               &                          &  \\
+% 5                         &        &               &                          &  \\
+% \hline
+% \textbf{Average} & 	& 	& 	&  \\
+% \hline
+%                           & \multicolumn{4}{c}{\textbf{Pivot Trajectory}}                     \vline \\
+% \hline
+% Experiment                & Status & Solution Time & Path Simplification Time & Planning Attempts  \\
+% \hline
+% 1                         &        &               &                          &  \\
+% 2                         &        &               &                          &  \\
+% 3                         &        &               &                          &  \\
+% 4                         &        &               &                          &  \\
+% 5                         &        &               &                          &  \\
+% \hline
+% \textbf{Average} & 	& 	& 	&  \\
+% \hline
+% \end{tabular}
+% \caption{Time results for robot planner 3a using the RRTConnect path planner algorithm}
+% \label{robot-planner3a-rrtconnect-data}
+% \end{table}
 
 
 \subsection{Line segment trajectories in task space}
 
-% Robot Planner 3b with RRTConnect
-\begin{table}[H]
-\centering
-\begin{tabular}{|p{2cm}|c|p{3cm}|p{3cm}|p{3cm}|}
-\hline
-Robot Planner 3b           & \multicolumn{4}{c}{\textbf{RRTConnect}}                                                                                                 \vline \\
-\hline
-                          & \multicolumn{4}{c}{\textbf{Place \& Insert tool}}                     \vline \\
-\hline
-Experiment                & Status & Solution Time & Path Simplification Time & Planning Attempts  \\
-\hline
-1                         &        &               &                          &  \\
-2                         &        &               &                          &  \\
-3                         &        &               &                          &  \\
-4                         &        &               &                          &  \\
-5                         &        &               &                          &  \\
-\hline
-\textbf{Average} & 	& 	& 	&  \\
-\hline
-                          & \multicolumn{4}{c}{\textbf{Pivot Trajectory}}                     \vline \\
-\hline
-Experiment                & Status & Solution Time & Path Simplification Time & Planning Attempts  \\
-\hline
-1                         &        &               &                          &  \\
-2                         &        &               &                          &  \\
-3                         &        &               &                          &  \\
-4                         &        &               &                          &  \\
-5                         &        &               &                          &  \\
-\hline
-\textbf{Average} & 	& 	& 	&  \\
-\hline
-\end{tabular}
-\caption{Time results for robot planner 3b using the RRTConnect path planner algorithm}
-\label{robot-planner3b-rrtconnect-data}
-\end{table}
 
 
 \subsection{Cubic Spline trajectories in task space}
 
-% Robot Planner 3c with RRTConnect
-\begin{table}[H]
-\centering
-\begin{tabular}{|p{2cm}|c|p{3cm}|p{3cm}|p{3cm}|}
-\hline
-Robot Planner 3c           & \multicolumn{4}{c}{\textbf{RRTConnect}}                                                                                                 \vline \\
-\hline
-                          & \multicolumn{4}{c}{\textbf{Place \& Insert tool}}                     \vline \\
-\hline
-Experiment                & Status & Solution Time & Path Simplification Time & Planning Attempts  \\
-\hline
-1                         &        &               &                          &  \\
-2                         &        &               &                          &  \\
-3                         &        &               &                          &  \\
-4                         &        &               &                          &  \\
-5                         &        &               &                          &  \\
-\hline
-\textbf{Average} & 	& 	& 	&  \\
-\hline
-                          & \multicolumn{4}{c}{\textbf{Pivot Trajectory}}                     \vline \\
-\hline
-Experiment                & Status & Solution Time & Path Simplification Time & Planning Attempts  \\
-\hline
-1                         &        &               &                          &  \\
-2                         &        &               &                          &  \\
-3                         &        &               &                          &  \\
-4                         &        &               &                          &  \\
-5                         &        &               &                          &  \\
-\hline
-\textbf{Average} & 	& 	& 	&  \\
-\hline
-\end{tabular}
-\caption{Time results for robot planner 3c using the RRTConnect path planner algorithm}
-\label{robot-planner3c-rrtconnect-data}
-\end{table}
-
 
 \subsection{B-Spline trajectories in task space}
-
-% Robot Planner 3d with RRTConnect
-\begin{table}[H]
-\centering
-\begin{tabular}{|p{2cm}|c|p{3cm}|p{3cm}|p{3cm}|}
-\hline
-Robot Planner 3d           & \multicolumn{4}{c}{\textbf{RRTConnect}}                                                                                                 \vline \\
-\hline
-                          & \multicolumn{4}{c}{\textbf{Place \& Insert tool}}                     \vline \\
-\hline
-Experiment                & Status & Solution Time & Path Simplification Time & Planning Attempts  \\
-\hline
-1                         &        &               &                          &  \\
-2                         &        &               &                          &  \\
-3                         &        &               &                          &  \\
-4                         &        &               &                          &  \\
-5                         &        &               &                          &  \\
-\hline
-\textbf{Average} & 	& 	& 	&  \\
-\hline
-                          & \multicolumn{4}{c}{\textbf{Pivot Trajectory}}                     \vline \\
-\hline
-Experiment                & Status & Solution Time & Path Simplification Time & Planning Attempts  \\
-\hline
-1                         &        &               &                          &  \\
-2                         &        &               &                          &  \\
-3                         &        &               &                          &  \\
-4                         &        &               &                          &  \\
-5                         &        &               &                          &  \\
-\hline
-\textbf{Average} & 	& 	& 	&  \\
-\hline
-\end{tabular}
-\caption{Time results for robot planner 3d using the RRTConnect path planner algorithm}
-\label{robot-planner3a-rrtconnect-data}
-\end{table}
 
 
 \subsection{Polynomial trajectories in joint space}
@@ -755,8 +657,8 @@ controller parameters are $K_p = 0.9, K_d = 0.2$}
 \end{figure}
 \end{center}
 
-\section{Robot Planner 6}
+% \section{Robot Planner 6}
 
-\section{Robot Planner 7}
+% \section{Robot Planner 7}
 
-\section{Robot Planner 8: State machine \& ROS Actions}
+% \section{Robot Planner 8: State machine \& ROS Actions}
