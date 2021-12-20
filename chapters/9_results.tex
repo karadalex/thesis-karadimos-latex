@@ -396,14 +396,14 @@ a custom ROS node that subscribes to the robot's kinematic state (joints' angle 
 \section{Robot Planner 3: Trajectory planning}
 
 The goal of this third experiment is to design and test only some pivot trajectories. The pivot motions follow the equations described in 
-\ref{section:pivot-motions}. The trajectories that were designed and tested in this experiments are the following:
+\ref{section:pivot-motions}. The trajectories that were designed and tested in this group of experiments are the following:
 \begin{itemize}
 \item Circular
 \item Arc
 \item Line segment
 \end{itemize}
 
-\subsection{Circular and Circular arc trajectories in task space}
+\subsection{Circular trajectories in task space}
 
 \begin{center}
 \begin{figure}[H]
@@ -453,6 +453,14 @@ The goal of this third experiment is to design and test only some pivot trajecto
 
 \subsection{Line segment trajectories in task space}
 
+\begin{center}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{images/robot_planner3/3b_line_seg.png}
+\caption{Experiment 3b: Create the line segment trajectory inside the surgical site (below the green mounting dock) and transform it via the fulcrum transformation to a trajectory for the robot's TCP.}
+\label{robot-planner3b-line-seg}
+\end{figure}
+\end{center}
 
 
 \subsection{Cubic Spline trajectories in task space}
