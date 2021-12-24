@@ -465,6 +465,38 @@ The goal of this third experiment is to design and test only some pivot trajecto
 
 \subsection{Cubic Spline trajectories in task space}
 
+\begin{center}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{images/robot_planner3/3c_cubic_spline.png}
+\caption{Experiment 3c: Create the cubic spline trajectory inside the surgical site (below the green mounting dock) and transform it via the fulcrum transformation to a trajectory for the robot's TCP.}
+\label{robot-planner3c-cubic-spline}
+\end{figure}
+\end{center}
+
+In this experiment, as seen on the screenshot \ref{robot-planner3c-cubic-spline}, for the surgical task there are 4 four points that were selected to create 3 cubic splines. The points that define the trajectory were:
+\[
+\begin{aligned}
+\mathbf{x}_1 ={}& [-0.1, -0.1, -0.2] \\
+\mathbf{x}_2 ={}& [0.1, -0.1, -0.1] \\
+\mathbf{x}_3 ={}& [0.1, 0.1, -0.2] \\
+\mathbf{x}_4 ={}& [-0.1, -0.1, -0.2] = \mathbf{x}_1
+\end{aligned}
+\]
+
+and a constant derivative for all points of $\mathbf{x}_d = [0.1, 0.1, 0.1]$. Note that this derivative describes the shape and smoothness at the points that connect 
+2 consecutive splines. These derivatives may not necessarily express a velocity in the cartesian space. That is because this derivative is calculated with respect 
+to the path variable $s$. The time derivative of the trajectory would be calculated using the chain rule:
+
+\begin{equation}
+\begin{aligned}
+\mathbf{\dot{x}} ={}& \frac{d\mathbf{x}}{dt}  \\
+	={}& \frac{d\mathbf{x}(s)}{dt} = \frac{d\mathbf{x}(s(t))}{dt}   \\
+    ={}& \frac{d\mathbf{x}}{ds} \cdot \frac{ds}{dt} \\
+    ={}& \mathbf{x}_d \cdot \frac{ds}{dt}
+\end{aligned}
+\end{equation}
+
 
 \subsection{B-Spline trajectories in task space}
 
