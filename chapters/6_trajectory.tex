@@ -530,26 +530,26 @@ The constants $a_i, b_i, \cdots, f_i$ are computed from the boundary conditions,
 
 \begin{equation}
 \label{polynomial5th-bound-conditions-eq}
-\begin{gathered}
-q_i = a_i \\
-q_{i+1} = a_i + b_it_{i+1} + c_it_{i+1}^2 + d_it_{i+1}^3 + e_it_{i+1}^4 + f_it_{i+1}^5 \\
-\dot{q}_i = b_i \\ 
-\dot{q}_{i+1} = b_i + 2c_it_{i+1} + 3d_it_{i+1}^2 + 4e_it_{i+1}^3 + 5f_it_{i+1}^4 \\
-\ddot{q}_i = 2c_i \\
-\ddot{q}_{i+1} = 2c_i + 6d_it_{i+1} + 12e_it_{i+1}^2 + 20f_it_{i+1}^3
-\end{gathered}
+\begin{aligned}
+q_i ={}& a_i \\
+q_{i+1} ={}& a_i + b_it_{i+1} + c_it_{i+1}^2 + d_it_{i+1}^3 + e_it_{i+1}^4 + f_it_{i+1}^5 \\
+\dot{q}_i ={}& b_i \\ 
+\dot{q}_{i+1} ={}& b_i + 2c_it_{i+1} + 3d_it_{i+1}^2 + 4e_it_{i+1}^3 + 5f_it_{i+1}^4 \\
+\ddot{q}_i ={}& 2c_i \\
+\ddot{q}_{i+1} ={}& 2c_i + 6d_it_{i+1} + 12e_it_{i+1}^2 + 20f_it_{i+1}^3
+\end{aligned}
 \end{equation}
 
 Solving the system of boundary condition equations \ref{polynomial5th-bound-conditions-eq}, the solution for the constants is the following
 \begin{equation}
-\begin{gathered}
-a_i = q_i \\
-b_i = \dot{q}_i \\
-c_i = \frac{\ddot{q}_i}{2} \\
-d_i = \frac{20q_{i+1} - 20q_i - (8\dot{q}_{i+1} + 12\dot{q}_i)t_{i+1} - (3\ddot{q}_i - \ddot{q}_{i+1})t_{i+1}^2 }{2t_{i+1}^3} \\
-e_i = \frac{30q_i - 30q_{i+1} - (14\dot{q}_{i+1} + 16\dot{q}_i)t_{i+1} + (3\ddot{q}_i - 2\ddot{q}_{i+1})t_{i+1}^2}{2t_{i+1}^4} \\
-f_i = \frac{12q_{i+1} - 12q_i - (6\dot{q}_{i+1} + 6\dot{q}_i)t_{i+1} - (\ddot{q}_i - \ddot{q}_{i+1})t_{i+1}^2 }{2t_{i+1}^5}
-\end{gathered}
+\begin{aligned}
+a_i ={}& q_i \\
+b_i ={}& \dot{q}_i \\
+c_i ={}& \frac{\ddot{q}_i}{2} \\
+d_i ={}& \frac{20q_{i+1} - 20q_i - (8\dot{q}_{i+1} + 12\dot{q}_i)t_{i+1} - (3\ddot{q}_i - \ddot{q}_{i+1})t_{i+1}^2 }{2t_{i+1}^3} \\
+e_i ={}& \frac{30q_i - 30q_{i+1} - (14\dot{q}_{i+1} + 16\dot{q}_i)t_{i+1} + (3\ddot{q}_i - 2\ddot{q}_{i+1})t_{i+1}^2}{2t_{i+1}^4} \\
+f_i ={}& \frac{12q_{i+1} - 12q_i - (6\dot{q}_{i+1} + 6\dot{q}_i)t_{i+1} - (\ddot{q}_i - \ddot{q}_{i+1})t_{i+1}^2 }{2t_{i+1}^5}
+\end{aligned}
 \end{equation}
 
 

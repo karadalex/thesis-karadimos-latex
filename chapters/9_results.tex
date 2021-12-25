@@ -405,6 +405,12 @@ The goal of this third experiment is to design and test only some pivot trajecto
 
 \subsection{Circular trajectories in task space}
 
+The goal of this experiment is to generate a circular trajectory inside the surgical taskspace which will then be transformed via the fulcrum transformation 
+to a trajectory that the robotic arm can execute. To define a circular trajectory in the taskspace, two parameters are required: the $(x,y,z)$ coordinates of the 
+circle's center and it's radius $r$. Note that in this experiment, the trivial case is examined where the circle is parallel to the $xy$ plane of the fulcrum's 
+coordinate system. That is because the parametric definition if the circle, can be easily expressed when in a standard plane of the coordinate system i.e. $xy, xz$ 
+or $yz$ planes and not in an arbitrary orientation.
+
 \begin{center}
 \begin{figure}[H]
 \centering
@@ -453,6 +459,12 @@ The goal of this third experiment is to design and test only some pivot trajecto
 
 \subsection{Line segment trajectories in task space}
 
+The goal of this experiment is to generate a line segment trajectory inside the surgical
+taskspace which will then be transformed via the fulcrum transformation to a trajectory that the robotic arm can execute. To define a line segment only 
+2 points are needed, the coordinates of the start and those of the end of the line segment. An other, way of defining a line segment trajectory, 
+is by passing as parameters the coordinates of the start point and a vector attached to that point, whose and points to the end point. The second definition 
+of the line segment can be very useful in cases where the direction of the line is needed.
+
 \begin{center}
 \begin{figure}[H]
 \centering
@@ -462,8 +474,34 @@ The goal of this third experiment is to design and test only some pivot trajecto
 \end{figure}
 \end{center}
 
+Note that although this type of trajectory is trivial in robot planner, this specific line segment trajectory should not be confused with ROS MoveIt line segment trajectories. The line-segment studied in this experiment 
+is linear when defined in the surgical taskpsace, but it is highly non-linear when transformed via the fulcrum transformation and it has a curved shape. The only exceptions to this transformation is for line segments that 
+lie on the direction defined by the radius unit vector $\mathbf{\hat{r}}$ of the spherical coordinate system of the Fulcrum reference frame, or equivalently the points $A,B$ defining the line-segment and the origin $O$ 
+of the reference frame, must be collinear. These exceptions can also be planned by the MoveIt framework and are also known 
+as and referenced throughout this thesis, as insertion movements. Let $\overrightarrow{AB}$ be the vector representing the line segment, then for the points $A, B$ the following must hold, in order for the line segment to be 
+invariant under the fulcrum transformation in terms of shape (i.e. the line to remain a line).
+\begin{equation}
+\overrightarrow{AB} = \overrightarrow{OB} - \overrightarrow{OA}
+\end{equation} 
+and
+\begin{equation}
+\overrightarrow{OB} = r \overrightarrow{OA}, \quad r \in \mathbb{R}
+\end{equation}
+
+\begin{center}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{images/robot_planner3/3b_line_seg_invariant.png}
+\caption{Experiment 3b: Line segment trajectory that is invariant under the fulcrum transformation, in terms of shape (the line remains a line).}
+\label{robot-planner3b-line-seg}
+\end{figure}
+\end{center}
+
 
 \subsection{Cubic Spline trajectories in task space}
+
+The goal of this experiment is to generate a cubic spline trajectory inside the surgical
+taskspace which will then be transformed via the fulcrum transformation to a trajectory that the robotic arm can execute.
 
 \begin{center}
 \begin{figure}[H]
@@ -474,7 +512,7 @@ The goal of this third experiment is to design and test only some pivot trajecto
 \end{figure}
 \end{center}
 
-In this experiment, as seen on the screenshot \ref{robot-planner3c-cubic-spline}, for the surgical task there are 4 four points that were selected to create 3 cubic splines. The points that define the trajectory were:
+As seen on the screenshot \ref{robot-planner3c-cubic-spline}, for the surgical task there are 4 four points that were selected to create 3 cubic splines. The points that define the trajectory were:
 \[
 \begin{aligned}
 \mathbf{x}_1 ={}& [-0.1, -0.1, -0.2] \\
@@ -499,6 +537,15 @@ to the path variable $s$. The time derivative of the trajectory would be calcula
 
 
 \subsection{B-Spline trajectories in task space}
+
+\begin{center}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{images/robot_planner3/3d_bezier_spline.png}
+\caption{Experiment 3d: Create the B-spline trajectory inside the surgical site (below the green mounting dock) and transform it via the fulcrum transformation to a trajectory for the robot's TCP.}
+\label{robot-planner3d-bezier-spline}
+\end{figure}
+\end{center}
 
 
 \subsection{Polynomial trajectories in joint space}
