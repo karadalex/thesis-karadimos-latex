@@ -3,7 +3,7 @@
 \section{Firm grasping algorithm \& Force control}
 
 \begin{center}
-\begin{figure}[H]
+\begin{figure}[!htb]
 \centering
 \includegraphics[width=12cm]{images/finger-force-control.png}\\
 \caption{Force control on a Barrett Hand gripper finger}
@@ -21,7 +21,7 @@ using position-based servoing or in the camera's space (also known as "pixel spa
 \subsection{Position based servoing}
 
 \begin{center}
-\begin{figure}[H]
+\begin{figure}[!htb]
 \centering
 \includegraphics[width=0.8\textwidth]{images/visual-servoing-position-based.png}\\
 \caption{Position based visual servoing closed loop control}
@@ -39,7 +39,7 @@ is cheaper in terms of hardware but it fails to extract depth informations in ca
 \end{itemize}
 
 \begin{center}
-\begin{figure}[H]
+\begin{figure}[!htb]
 \centering
 \includegraphics[width=0.6\textwidth]{images/visual-servoing-position-based2.png}\\
 \caption{Position based visual servoing using depth from motion, stereo vision or 3D sensors, from which the desired position $\mathbf{x}_d$ is calculated and 
@@ -55,7 +55,7 @@ that are sent to the robot from this methodology are defined in image space and 
 in task space.
 
 \begin{center}
-\begin{figure}[H]
+\begin{figure}[!htb]
 \centering
 \includegraphics[width=0.45\textwidth]{images/visual_servo_start.png}
 \includegraphics[width=0.45\textwidth]{images/visual_servo_end.png}\\
@@ -84,7 +84,7 @@ where $\mathbf{x}[kT] = [x, y, z, θ, φ, ψ]^\top$ and the discrete PID control
 where $\mathbf{e}[kT] = [e_x, e_y, e_z, e_θ, e_φ, e_ψ]^\top$.
 
 \begin{center}
-\begin{figure}[H]
+\begin{figure}[!htb]
 \centering
 \includegraphics[width=0.8\textwidth]{images/visual-servoing-image-based.png}\\
 \caption{Image based visual servoing closed loop control}

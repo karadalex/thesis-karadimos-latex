@@ -11,7 +11,7 @@ inserted and then the tool gets ejected from the mounting dock's hole.\\
 The aim of this experiment is to test the overall behaviour of the robot inside the work space, before implementing more complex path planning algorithms.
 
 \begin{center}
-\begin{figure}[H]
+\begin{figure}[!htb]
 \centering
 \includegraphics[width=0.3\textwidth]{images/robot_planner1/robot_planner1_1}
 \includegraphics[width=0.3\textwidth]{images/robot_planner1/robot_planner1_2}
@@ -163,7 +163,7 @@ This experiment is very useful, because it shows whether all holes of the mounti
 \textbf{dexterous} the robot will be in pivoting around each hole, i.e. how free the robot arm is to execute pivot motions.
 
 \begin{center}
-\begin{figure}[H]
+\begin{figure}[!htb]
 \centering
 \includegraphics[width=0.31\textwidth]{images/robot_planner2/robot_planner2_1}
 \includegraphics[width=0.31\textwidth]{images/robot_planner2/robot_planner2_2}
@@ -262,7 +262,7 @@ in Gazebo, in which the mounting dock is closer to the robot and in front of it.
 with sufficient dexterity, the robot is free to pivot around.
 
 \begin{center}
-\begin{figure}[H]
+\begin{figure}[!htb]
 \centering
 \includegraphics[width=0.3\textwidth]{images/robot_planner2b/robot_planner2b_1}
 \includegraphics[width=0.3\textwidth]{images/robot_planner2b/robot_planner2b_2}
@@ -370,7 +370,7 @@ Experiment                & Trocar3 insertion time & Execution status & Trocar3 
 Due to the probabilistic nature of the motion planner (in these experiments the OMPL library is used with the RRTConnect path planning algorithm), the solutions 
 to the path planning problem are not always the same and thus it is possible that the robot arm reaches a pose which is close to a singularity
 \begin{center}
-\begin{figure}[H]
+\begin{figure}[!htb]
 \centering
 \includegraphics[width=0.9\textwidth]{images/robot_planner2b/singularity_failure.png}
 \caption{Experiment 2b: Singularity failure}
@@ -384,7 +384,7 @@ a custom ROS node that subscribes to the robot's kinematic state (joints' angle 
 /kinematic\_state topic (see figure \ref{kinematic-state-topic-graph}).
 
 \begin{center}
-\begin{figure}[H]
+\begin{figure}[!htb]
 \centering
 \includegraphics[width=\textwidth]{images/kinematic_state_topic_graph.png}
 \caption{Custom kinematic state node that subscribes to the joint values and publishes forward kinematics solutions and the jacobian matrix values.}
@@ -407,18 +407,20 @@ The goal of this third experiment is to design and test only some pivot trajecto
 
 The goal of this experiment is to generate a circular trajectory inside the surgical taskspace which will then be transformed via the fulcrum transformation 
 to a trajectory that the robotic arm can execute. To define a circular trajectory in the taskspace, two parameters are required: the $(x,y,z)$ coordinates of the 
-circle's center and it's radius $r$. Note that in this experiment, the trivial case is examined where the circle is parallel to the $xy$ plane of the fulcrum's 
-coordinate system. That is because the parametric definition if the circle, can be easily expressed when in a standard plane of the coordinate system i.e. $xy, xz$ 
-or $yz$ planes and not in an arbitrary orientation.
+circle's center and it's radius $r$.\\ 
 
 \begin{center}
-\begin{figure}[H]
+\begin{figure}[!htb]
 \centering
 \includegraphics[width=\textwidth]{images/robot_planner3/3a_circle.png}
 \caption{Experiment 3a: Create circular trajectory inside the surgical site (below the green mounting dock) and transform it via the fulcrum transformation to a trajectory for the robot's TCP.}
 \label{robot-planner3a-circle}
 \end{figure}
 \end{center}
+
+Note that in this experiment (see screenshot \ref{robot-planner3a-circle}), the trivial case is examined where the circle is parallel to the $xy$ plane of the fulcrum's 
+coordinate system. That is because the parametric definition if the circle, can be easily expressed when in a standard plane of the coordinate system i.e. $xy, xz$ 
+or $yz$ planes and not in an arbitrary orientation.
 
 % Robot Planner 3a with RRTConnect
 % \begin{table}[H]
@@ -466,7 +468,7 @@ is by passing as parameters the coordinates of the start point and a vector atta
 of the line segment can be very useful in cases where the direction of the line is needed.
 
 \begin{center}
-\begin{figure}[H]
+\begin{figure}[!htb]
 \centering
 \includegraphics[width=\textwidth]{images/robot_planner3/3b_line_seg.png}
 \caption{Experiment 3b: Create the line segment trajectory inside the surgical site (below the green mounting dock) and transform it via the fulcrum transformation to a trajectory for the robot's TCP.}
@@ -489,7 +491,7 @@ and
 \end{equation}
 
 \begin{center}
-\begin{figure}[H]
+\begin{figure}[!htb]
 \centering
 \includegraphics[width=\textwidth]{images/robot_planner3/3b_line_seg_invariant.png}
 \caption{Experiment 3b: Line segment trajectory that is invariant under the fulcrum transformation, in terms of shape (the line remains a line).}
@@ -504,7 +506,7 @@ The goal of this experiment is to generate a cubic spline trajectory inside the 
 taskspace which will then be transformed via the fulcrum transformation to a trajectory that the robotic arm can execute.
 
 \begin{center}
-\begin{figure}[H]
+\begin{figure}[!htb]
 \centering
 \includegraphics[width=\textwidth]{images/robot_planner3/3c_cubic_spline.png}
 \caption{Experiment 3c: Create the cubic spline trajectory inside the surgical site (below the green mounting dock) and transform it via the fulcrum transformation to a trajectory for the robot's TCP.}
@@ -539,7 +541,7 @@ to the path variable $s$. The time derivative of the trajectory would be calcula
 \subsection{B-Spline trajectories in task space}
 
 \begin{center}
-\begin{figure}[H]
+\begin{figure}[!htb]
 \centering
 \includegraphics[width=\textwidth]{images/robot_planner3/3d_bezier_spline.png}
 \caption{Experiment 3d: Create the B-spline trajectory inside the surgical site (below the green mounting dock) and transform it via the fulcrum transformation to a trajectory for the robot's TCP.}
@@ -590,9 +592,7 @@ and the solutions chosen for each point are
 1.168518 \\ 
 -0.523555 \\
 \end{bmatrix}
-\]
-and
-\[
+\quad \textrm{and} \quad
 \mathbf{q_B} = 
 \begin{bmatrix}
 2.293053 \\ 
@@ -627,7 +627,7 @@ show some frames from the experiment with the first three to show the pick steps
 in the visualization program.
 
 \begin{center}
-\begin{figure}[H]
+\begin{figure}[!htb]
 \centering
 \includegraphics[width=0.3\textwidth]{images/robot_planner4/robot_planner4_1}
 \includegraphics[width=0.3\textwidth]{images/robot_planner4/robot_planner4_3}
@@ -646,9 +646,7 @@ which means that an easier path was found, it was solved quicker and the path so
 It is also possible, that due to the obstacle and the initial conditions, the robot may not find a solution at the first attempt or none at all.
 
 % Robot Planner 4 with RRTConnect
-\begin{table}[H]
-\centering
-\begin{tabular}{|p{2cm}|c|p{3cm}|p{3cm}|p{3cm}|}
+\begin{longtable}{|p{2cm}|c|p{3cm}|p{3cm}|p{3cm}|}
 \hline
 Robot Planner 4           & \multicolumn{4}{c}{\textbf{RRTConnect}}                                                                                                 \vline \\
 \hline
@@ -686,18 +684,15 @@ Experiment                & Status & Solution Time & Path Simplification Time & 
 \hline
 \textbf{Average} & 1	& 0.0781998	& 0.4379681	& 1 \\
 \hline
-\end{tabular}
 \caption{Time results for robot planner 4 using the RRTConnect path planner algorithm}
 \label{robot-planner4-rrtconnect-data}
-\end{table}
+\end{longtable}
 
 The main observation from the results of table \ref{robot-planner4-rrtstar-data} is that RRT* time durations are much bigger than those from RRTConnect, but the RRT* algorithm has the advantage of finding better, more accurate solutions (approximately the same solutions at most attempts) and with less collisions. Although these time durations are not optimal for real-time applications, they could be useful in pick-and-place pipelines 
 if the solutions are pre-computed (memoized) and saved for later use.
 
 % Robot Planner 4 with RRT*
-\begin{table}[H]
-\centering
-\begin{tabular}{|p{2cm}|c|p{3cm}|p{3cm}|p{3cm}|}
+\begin{longtable}{|p{2cm}|c|p{3cm}|p{3cm}|p{3cm}|}
 \hline
 Robot Planner 4           & \multicolumn{4}{c}{\textbf{RRT*}}                                                                                                 \vline \\
 \hline
@@ -731,15 +726,12 @@ Experiment                & Status & Solution Time & Path Simplification Time & 
 \hline
 \textbf{Average} & 1	& 45.0165155	& 0.411763	& 1 \\
 \hline
-\end{tabular}
 \caption{Time results for robot planner 4 using the RRT* path planner algorithm}
 \label{robot-planner4-rrtstar-data}
-\end{table}
+\end{longtable}
 
 % Robot Planner 4 with PRM*
-\begin{table}[H]
-\centering
-\begin{tabular}{|p{2cm}|c|p{3cm}|p{3cm}|p{3cm}|}
+\begin{longtable}{|p{2cm}|c|p{3cm}|p{3cm}|p{3cm}|}
 \hline
 Robot Planner 4           & \multicolumn{4}{c}{\textbf{PRM*}}                                                                                                 \vline \\
 \hline
@@ -771,10 +763,9 @@ Experiment                & Status & Solution Time & Path Simplification Time & 
 \hline
 \textbf{Average}	& 1	& 45.421346	& 0.0019276	& 1 \\
 \hline
-\end{tabular}
 \caption{Time results for robot planner 4 using the PRM* path planner algorithm}
 \label{robot-planner4-prmstar-data}
-\end{table}
+\end{longtable}
 
 
 \section{Robot Planner 5: Visual servoing}
@@ -790,7 +781,7 @@ requires more calculations because it is required to get the camera's transforma
 end-effector pose which is then used as an input to a Cartesian Controller.
 
 \begin{center}
-\begin{figure}[H]
+\begin{figure}[!htb]
 \centering
 \includegraphics[width=0.45\textwidth]{images/robot_planner5/visual_servo_controller3.png}
 \includegraphics[width=0.45\textwidth]{images/robot_planner5/visual_servo_controller4.png}\\
@@ -801,7 +792,7 @@ controller parameters are $K_p = 0.9, K_d = 0.2$}
 \end{center}
 
 \begin{center}
-\begin{figure}[H]
+\begin{figure}[!htb]
 \centering
 \includegraphics[width=0.6\textwidth]{images/grasp-points-triangle.png}\\
 \caption{Image based visual servoing and calculation of grasp points. The yellow points are the grasp points and the thin black circumscribed circle is the growing circle that was used to calculate them.}

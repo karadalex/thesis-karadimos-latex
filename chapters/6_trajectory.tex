@@ -18,7 +18,7 @@ procedures add an additional motion constraint that demands at each time one poi
 \section{Tool pose \& the Fulcrum Effect}
 
 \begin{center}
-\begin{figure}[H]
+\begin{figure}[!htb]
 \centering
 \includegraphics[width=12cm]{images/fulcrum-space.png}\\
 \caption{Tool pose at target point $B$ calculated with respect to Fulcrum's reference frame $\lbrace F \rbrace$}
@@ -144,7 +144,7 @@ even more problematic when the IK problem is not solved with analytical equation
 \subsection{Circular trajectory of tool tip}
 
 \begin{center}
-\begin{figure}[H]
+\begin{figure}[!htb]
 \centering
 \includegraphics[width=0.8\textwidth]{images/circular-trajectory-wrt-fulcrum.png}\\
 \caption{Circular trajectory of tool tip with respect to Fulcrum reference frame}
@@ -185,7 +185,7 @@ r = \sqrt{x^{2}_{F} + y^{2}_{F} + z^{2}_{F}} \\
 \end{equation}
 
 \begin{center}
-\begin{figure}[H]
+\begin{figure}[!htb]
 \centering
 \includegraphics[width=\textwidth]{images/rcm_trajectories/rcm_circle_traj.png}\\
 \caption{Circular trajectory of tool tip with respect to Fulcrum reference frame and it's transformation via the Fulcrum Effect}
@@ -197,7 +197,7 @@ that the equations \ref{circle-z-plane-traj} must first be transformed inside th
 Fulcrum Effect transformation.
 
 \begin{center}
-\begin{figure}[H]
+\begin{figure}[!htb]
 \centering
 \includegraphics[width=\textwidth]{images/rcm_trajectories/robot-pose-random-rcm-circle-traj.png}\\
 \caption{Circular trajectory that lies on an a plane of arbitrary orientation with respect to the fulcrum point}
@@ -223,7 +223,7 @@ s \in \left[ 0, \frac{φ}{2π} \right]
 \end{equation}
 
 \begin{center}
-\begin{figure}[H]
+\begin{figure}[!htb]
 \centering
 \includegraphics[width=\textwidth]{images/rcm_trajectories/rcm_arcs_traj.png}\\
 \caption{Circular arc trajectory of tool tip with respect to Fulcrum reference frame and it's transformation via the Fulcrum Effect. In this trajectory 2 circular arcs are used}
@@ -246,7 +246,7 @@ z^{}_{F} = \pm βs
 where $s \in \left[ 0, τ \right]$ expresses the range along the trajectory, $τ$ the cycles, and $β/r_0$ is the slope (or also known as the pitch which is given by $2πβ$)
 
 \begin{center}
-\begin{figure}[H]
+\begin{figure}[!htb]
 \centering
 \includegraphics[width=\textwidth]{images/rcm_trajectories/rcm_helical_traj.png}\\
 \caption{Helical trajectory of tool tip with respect to Fulcrum reference frame and it's transformation via the Fulcrum Effect}
@@ -256,7 +256,7 @@ where $s \in \left[ 0, τ \right]$ expresses the range along the trajectory, $τ
 \subsection{Line segment trajectory of tool tip}
 
 \begin{center}
-\begin{figure}[H]
+\begin{figure}[!htb]
 \centering
 \includegraphics[width=10cm]{images/line-segment-trajectory-wrt-fulcrum.png}\\
 \caption{Line segment trajectory of tool tip with respect to Fulcrum reference frame}
@@ -286,7 +286,7 @@ z^{}_{F} = sn + z^{}_{F1} = (1-s)z^{}_{F1} + sz^{}_{F2}
 After having calculated the cartesian coordinates we can calculate the spherical coordinates using the \ref{eqns:cartesian-to-spherical} equations.
 
 \begin{center}
-\begin{figure}[H]
+\begin{figure}[!htb]
 \centering
 \includegraphics[width=\textwidth]{images/rcm_trajectories/rcm_lineseg_traj.png}\\
 \caption{A Line segment trajectory and it's transformation via the Fulcrum Effect}
@@ -367,7 +367,7 @@ a_i = \frac{1}{σ^3} (\dot{x}_{i+1}σ - 2x_{i+1} + \dot{x}_iσ +2x_i)
 \end{equation}
 
 \begin{center}
-\begin{figure}[H]
+\begin{figure}[!htb]
 \centering
 \includegraphics[width=\textwidth]{images/cubic-spline-path1.png}\\
 \caption{Cubic Spline curve with 10 waypoints} 
@@ -376,7 +376,7 @@ a_i = \frac{1}{σ^3} (\dot{x}_{i+1}σ - 2x_{i+1} + \dot{x}_iσ +2x_i)
 \end{center}
 
 \begin{center}
-\begin{figure}[H]
+\begin{figure}[!htb]
 \centering
 \includegraphics[width=\textwidth]{images/rcm_trajectories/rcm_cubic_traj.png}\\
 \caption{A Cubic Spline trajectory and it's transformation via the Fulcrum Effect}
@@ -389,7 +389,7 @@ a_i = \frac{1}{σ^3} (\dot{x}_{i+1}σ - 2x_{i+1} + \dot{x}_iσ +2x_i)
 The \textbf{B-Splines} are smooth curves which are constructed from \textbf{B\'ezier} curves. A B\'ezier curve is a parametric smooth curve and is a $k$-th order interpolation of $k+1$ control points.
 
 \begin{center}
-\begin{figure}[H]
+\begin{figure}[!htb]
 \centering
 \includegraphics[width=0.5\textwidth]{images/bezier-curve.png}\\
 \caption{Cubic B\'ezier curve calculated using cubic interpolation of 4 control points} 
@@ -439,7 +439,7 @@ s^3 \\ s^2 \\ s \\ 1
 \end{equation}
 
 \begin{center}
-\begin{figure}[H]
+\begin{figure}[!htb]
 \centering
 \includegraphics[width=\textwidth]{images/bezier_path.png}\\
 \caption{A cubic B\'ezier curve calculated and plotted in MATLAB} 
@@ -450,7 +450,7 @@ A $k$-degree \textbf{B-Spline} curve defined by $n+1$ control points will consis
 and connect together 3 B\'ezier curves.
 
 \begin{center}
-\begin{figure}[H]
+\begin{figure}[!htb]
 \centering
 \includegraphics[width=0.6\textwidth]{images/b-spline-explanation.png}\\
 \caption{B-Spline curve constructed from 3 B\'ezier curves. The first B\'ezier curve colored in red is a quadratic one and the following two are both cubic.} 
@@ -479,7 +479,7 @@ This could have serious side-effects for both the surgical task and thus the pat
 for the operating staff, who control the robot.
 
 \begin{center}
-\begin{figure}[H]
+\begin{figure}[!htb]
 \centering
 \includegraphics[width=\textwidth]{images/rcm_trajectories/rcm_bezier_traj.png}\\
 \caption{A B\'ezier curve trajectory and it's transformation via the Fulcrum Effect}
@@ -502,7 +502,7 @@ and not at the intermediate points (the points between the waypoints).
 \end{itemize}
 
 \begin{center}
-\begin{figure}[H]
+\begin{figure}[!htb]
 \centering
 \includegraphics[width=\textwidth]{images/trajectory1-test1.png}\\
 \caption{Trajectory diagrams in joints space.}
@@ -557,7 +557,7 @@ f_i ={}& \frac{12q_{i+1} - 12q_i - (6\dot{q}_{i+1} + 6\dot{q}_i)t_{i+1} - (\ddot
 \subsection{Planning with velocity profiles}
 
 \begin{center}
-\begin{figure}[H]
+\begin{figure}[!htb]
 \centering
 \includegraphics[width=\textwidth]{images/vel-profiles.png}\\
 \caption{Joint trajectory generated using velocity porfiles. Calculated and plotted in MATLAB} 

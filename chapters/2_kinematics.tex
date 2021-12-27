@@ -18,7 +18,7 @@ between the axes $x_{i-1}$ and $x_i$
 \end{itemize}
 
 \begin{center}
-\begin{figure}[H]
+\begin{figure}[!htb]
 \centering
 \includegraphics[height=12cm]{images/iiwa-frames.png}\\
 \caption{Joint reference frames of the KUKA iiwa14 robot}
@@ -128,7 +128,7 @@ The properties of $SE(3)$ and $SO(3)$ are very useful in all the calculations of
 of inverse matrices.
 
 \begin{center}
-\begin{figure}[H]
+\begin{figure}[!htb]
 \centering
 \includegraphics[width=0.5\textwidth]{images/workspace_sampling_1e3.png}\\
 \caption{Approximation of the KUKA iiwa14 workspace, calculated with Forward Kinematics by randomly sampling the value ranges of the joints.}
@@ -138,7 +138,7 @@ of inverse matrices.
 \subsection{End-effector to tool-tip transformations}
 
 \begin{center}
-\begin{figure}[H]
+\begin{figure}[!htb]
 \centering
 \includegraphics[width=\textwidth]{images/eef_tcp_tip_tf.png}\\
 \caption{Reference frames of last link $\lbrace 7 \rbrace$, end-effector $\lbrace TCP \rbrace$, surgical tool base (center of mass) $\lbrace B \rbrace$ and tool-tip frame $\lbrace T \rbrace$}
@@ -226,7 +226,7 @@ atan2 \left( p_y, p_x \right) \\
 \end{equation}
 
 \begin{center}
-\begin{figure}[H]
+\begin{figure}[!htb]
 \centering
 \includegraphics[width=8cm]{images/th2-4-calculation.png}\\
 \caption{Calculation of angles $θ_2, θ_4$}
@@ -266,7 +266,7 @@ i_z & j_z & k_z\\
 \]
 
 \begin{center}
-\begin{figure}[H]
+\begin{figure}[!htb]
 \centering
 \includegraphics[width=0.8\textwidth]{images/ik-4-solutions.png}\\
 \caption{The first 4 out of 8 solutions of the Inverse Kinematics problem, using the decoupling technique}
@@ -336,7 +336,7 @@ J_i = \begin{bmatrix}
 
 \subsubsection{Workspace constraints \& Singularity points}
 \begin{center}
-\begin{figure}[H]
+\begin{figure}[!htb]
 \centering
 \includegraphics[width=10cm]{images/iiwa-workspace.png}\\
 \caption{KUKA iiwa LBR14 workspace dimensions}
@@ -363,7 +363,7 @@ and the insertion and pivoting of the surgical tool at the mounting dock, which 
 In the latter use case, in order to satisfy the collision avoidance, all path planning kinematic solutions must be in a elbow-up configuration at all times.
 
 \begin{center}
-\begin{figure}[H]
+\begin{figure}[!htb]
 \centering
 \includegraphics[width=\textwidth]{images/elbow-down.png}\\
 \includegraphics[width=\textwidth]{images/elbow-up.png}\\
@@ -376,7 +376,7 @@ Observing the screenshots at \ref{elbow-up-vs-down}, there are 2 ways to mathema
 the 3rd link or by using the relative angle of the base link and the 3rd link. From the iiwa14 specifications, the following calculations are done using $d_1 = 360mm$ and $d_3 = 420mm$.
 
 \begin{center}
-\begin{figure}[H]
+\begin{figure}[!htb]
 \centering
 \includegraphics[width=\textwidth]{images/elbow-up-constraint-geometry.png}\\
 \caption{Elbow-up constraint description with relative distance or angle between links with lengths $d_1$ and $d_3$}
