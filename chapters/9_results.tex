@@ -550,6 +550,70 @@ to the path variable $s$. The time derivative of the trajectory would be calcula
 
 \subsection{Polynomial trajectories in joint space}
 
+The goal of this experiment is to generate a trajectory in joint space using a polynomial of 5th degree (see \ref{section-polynomials-5}). To generate this trajectory, at least 2 points are needed in the cartesian 
+space. For each of these points the inverse kinematics problem is solved. The joint values of the first point are used as the start points of the trajectory and the joint values of the second point are used as the end points.
+The velocities and accelerations are chosen to be zero for both start and end positions. The poses of the 2 points that were used as input to the 2 IK problems are
+
+\[
+T_A = 
+\begin{bmatrix}
+  &            &   & 0.1 \\
+  & \mathbf{R_{rpy}} &   & 0.1 \\
+  &            &   & 1.95 \\
+0 &     0      & 0 & 1 \\
+\end{bmatrix}
+\]
+\[
+T_B = 
+\begin{bmatrix}
+  &            &   & 0.4 \\
+  & \mathbf{R_{rpy}} &   & 0.1 \\
+  &            &   & 1.95 \\
+0 &     0      & 0 & 1 \\
+\end{bmatrix}
+\]
+where 
+\[
+\mathbf{R_{rpy}} = \mathbf{Rot}(\mathbf{\hat{z}}, 2.952052) \cdot \mathbf{Rot}(\mathbf{\hat{y}}, 1.311528) \cdot \mathbf{Rot}(\mathbf{\hat{x}}, -1.750799)
+\]
+
+and the solutions chosen for each point are
+
+\[
+\mathbf{q_A} =
+\begin{bmatrix}
+1.148534 \\
+-0.583084 \\ 
+-0.212395 \\ 
+-1.430756 \\
+0.609015 \\ 
+1.168518 \\ 
+-0.523555 \\
+\end{bmatrix}
+\]
+and
+\[
+\mathbf{q_B} = 
+\begin{bmatrix}
+2.293053 \\ 
+-0.277892 \\
+-1.795364 \\ 
+-0.941923 \\ 
+0.876039 \\
+1.451593 \\
+-0.916277 \\
+\end{bmatrix}
+\]
+
+\begin{center}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{images/robot_planner3/3e_joint_polynomial.png}
+\caption{Experiment 3e: Polynomial trajectories of 5th degree for each of the 7 joints}
+\label{robot-planner3e-joint-polynomial}
+\end{figure}
+\end{center}
+
 \subsection{Trajectories in joint space with trapezoidal velocity profile}
 
 \subsection{Trajectories in joint space with s-curve velocity profile}
