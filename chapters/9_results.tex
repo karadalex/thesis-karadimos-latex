@@ -614,7 +614,31 @@ and the solutions chosen for each point are
 \end{figure}
 \end{center}
 
+
 \subsection{Trajectories in joint space with trapezoidal velocity profile}
+
+The goal of this experiment is to generate a trajectory in joint space using a trapezoidal velocity profile. 
+
+\begin{center}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{images/robot_planner3/3f_trapezoid1.png}
+\caption{Experiment 3f: Trajectory using a trapezoid velocity profile. The time constant (also known as blend time) is $τ = 15$ seconds and the total trajectory duration is 60 seconds.}
+\label{robot-planner3e-joint-trapezoid1}
+\end{figure}
+\end{center}
+
+\begin{center}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{images/robot_planner3/3f_trapezoid2.png}
+\caption{Experiment 3f: Trajectory using a trapezoid velocity profile. The time constant (also known as blend time) is $τ = 30$ seconds and the total trajectory duration is 60 seconds. Note that 
+the blend time is chosen as half of the total duration which has as a result the linear segment (constant velocity) to disappear and create a "bang-bang" trajectory. In control theory, a "bang-bang" controller, 
+is a controller that switches abruptly between two states.}
+\label{robot-planner3e-joint-trapezoid2}
+\end{figure}
+\end{center}
+
 
 \subsection{Trajectories in joint space with s-curve velocity profile}
 
