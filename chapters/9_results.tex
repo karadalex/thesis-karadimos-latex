@@ -551,6 +551,7 @@ to the path variable $s$. The time derivative of the trajectory would be calcula
 
 
 \subsection{Polynomial trajectories in joint space}
+\label{section:9-2-polynomial-traj}
 
 The goal of this experiment is to generate a trajectory in joint space using a polynomial of 5th degree (see \ref{section-polynomials-5}). To generate this trajectory, at least 2 points are needed in the cartesian 
 space. For each of these points the inverse kinematics problem is solved. The joint values of the first point are used as the start points of the trajectory and the joint values of the second point are used as the end points.
@@ -609,7 +610,7 @@ and the solutions chosen for each point are
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{images/robot_planner3/3e_joint_polynomial.png}
-\caption{Experiment 3e: Polynomial trajectories of 5th degree for each of the 7 joints}
+\caption{Experiment 3e: Polynomial trajectories of 5th degree for each of the 7 joints. The trajectory is computed at 60 sampling points.}
 \label{robot-planner3e-joint-polynomial}
 \end{figure}
 \end{center}
@@ -617,14 +618,15 @@ and the solutions chosen for each point are
 
 \subsection{Trajectories in joint space with trapezoidal velocity profile}
 
-The goal of this experiment is to generate a trajectory in joint space using a trapezoidal velocity profile. 
+The goal of this experiment is to generate a trajectory in joint space using a trapezoidal velocity profile. The start and end points as well as the inverse kinematics solutions for these points are the same as those 
+in \ref{section:9-2-polynomial-traj}.
 
 \begin{center}
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{images/robot_planner3/3f_trapezoid1.png}
-\caption{Experiment 3f: Trajectory using a trapezoid velocity profile. The time constant (also known as blend time) is $τ = 15$ seconds and the total trajectory duration is 60 seconds.}
-\label{robot-planner3e-joint-trapezoid1}
+\caption{Experiment 3f: Trajectory using a trapezoid velocity profile. The time constant (also known as blend time) is $τ = 15$ seconds and the total trajectory duration is 60 seconds. The trajectory is computed at 60 sampling points.}
+\label{robot-planner3f-joint-trapezoid1}
 \end{figure}
 \end{center}
 
@@ -634,13 +636,23 @@ The goal of this experiment is to generate a trajectory in joint space using a t
 \includegraphics[width=\textwidth]{images/robot_planner3/3f_trapezoid2.png}
 \caption{Experiment 3f: Trajectory using a trapezoid velocity profile. The time constant (also known as blend time) is $τ = 30$ seconds and the total trajectory duration is 60 seconds. Note that 
 the blend time is chosen as half of the total duration which has as a result the linear segment (constant velocity) to disappear and create a "bang-bang" trajectory. In control theory, a "bang-bang" controller, 
-is a controller that switches abruptly between two states.}
-\label{robot-planner3e-joint-trapezoid2}
+is a controller that switches abruptly between two states. The trajectory is computed at 60 sampling points.}
+\label{robot-planner3f-joint-trapezoid2}
 \end{figure}
 \end{center}
 
 
 \subsection{Trajectories in joint space with s-curve velocity profile}
+
+\begin{center}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{images/robot_planner3/3g_s_curve.png}
+\caption{Experiment 3g: Trajectory using a s-curve velocity profile. The time constants are $τ_1 = τ_2 = 6$ seconds and the total trajectory duration is 60 seconds. The trajectory is computed at 60 sampling points.}
+\label{robot-planner3g-joint-s-curve}
+\end{figure}
+\end{center}
+
 
 \section{Robot Planner 4: Simple cube pick-and-place experiment}
 

@@ -29,10 +29,10 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {table}{\numberline {9.4}{\ignorespaces Time results for robot planner 2b using the RRTConnect path planner algorithm and a different table layout from robot planner 2a. Planning time is the sum of solution time and path simplification time. Execution status is 1 for success and 0 for failure. Parameters: tolerances: 0.0005, max planning time: 5 seconds, replanning: true, max planning attempts: 6. Experiments start from home position.\relax }}{82}{table.9.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {9.5}{\ignorespaces Time results for robot planner 4 using the RRTConnect path planner algorithm\relax }}{92}{table.9.5}
+\contentsline {table}{\numberline {9.5}{\ignorespaces Time results for robot planner 4 using the RRTConnect path planner algorithm\relax }}{93}{table.9.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {9.6}{\ignorespaces Time results for robot planner 4 using the RRT* path planner algorithm\relax }}{93}{table.9.6}
+\contentsline {table}{\numberline {9.6}{\ignorespaces Time results for robot planner 4 using the RRT* path planner algorithm\relax }}{94}{table.9.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {9.7}{\ignorespaces Time results for robot planner 4 using the PRM* path planner algorithm\relax }}{93}{table.9.7}
+\contentsline {table}{\numberline {9.7}{\ignorespaces Time results for robot planner 4 using the PRM* path planner algorithm\relax }}{94}{table.9.7}
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
