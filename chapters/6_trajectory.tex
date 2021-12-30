@@ -556,10 +556,112 @@ f_i ={}& \frac{12q_{i+1} - 12q_i - (6\dot{q}_{i+1} + 6\dot{q}_i)t_{i+1} - (\ddot
 
 \subsection{Planning with velocity profiles}
 
+\subsubsection{Trapezoid velocity profile - LSPB}
+
+Trapezoid velocity profiles are a family of trajectories in motion control, that combines (blends) a linear segment with two parabolic segments. This type of trajectory is also known in the bibliography as 
+Linear Segments with Parabolic Blends or LSPB. The equations of motions are studied in 3 intervals $[t_i, t_a], [t_a, t_d]$ and $[td, t_{i+1}$ where $t_a = t_i + τ$ and $t_d = t_{i+1} - τ$ where $τ$ is 
+the time duration for both the acceleration and deceleration phases (symmetric trapezoid profile). \\
+
+For $t_i \leq t \leq t_a$ the equations of the trajectory are the following:
+
+\begin{equation}
+q_i(t) = c_0, c_1t + c_2t^2, \quad c_0,c_1,c_2 \in \mathbb{R}
+\end{equation}
+
+\begin{equation}
+\dot{q}_i(t) = c_1 + 2c_2t
+\end{equation}
+
+Using the initial conditions $q_i(0) = q_i$, $\dot{q}_i(0) = 0$ and $\dot{q}_i(t_a) = \dot{q}_{ic}$ we can solve for the constants $c_i$. $\dot{q}_{ic}$ is the desired constant velocity for the linear segment.
+\begin{equation}
+c_0 = q_i \quad \textrm{and} \quad c_1 = 0
+\end{equation}
+
+\[
+\dot{q}_i + 2c_2t_a = \dot{q}_{ic}
+\]
+
+\begin{equation}
+c_2 = \frac{\dot{q}_{ic}}{2t_a}
+\end{equation}
+
+The trajectory solution for $t_i \leq t \leq t_a$ is
+
+\begin{equation}
+\begin{aligned}
+q_i(t) ={}& q_i + \frac{\dot{q}_{ic}}{2t_a}t^2 \\
+\dot{q}_i(t) ={}& \frac{\dot{q}_{ic}}{t_a}t \\
+\ddot{q}_i(t) ={}& \frac{\dot{q}_{ic}}{t_a} \\
+\end{aligned}
+\end{equation}
+
+For $t_a \leq t \leq t_d$ the equations of the trajectory are the following:
+
+\begin{equation}
+q_i(t) = q_i(t_a) + \dot{q}_{ic}(t-t_a)
+\end{equation}
+
+Due to the symmetry of the trajectory, at half time the following equation must hold, that incorporates the 2 boundary conditions for the joint position
+\begin{equation}
+\label{eq:trap1}
+q_i(t_{h}) = \frac{q_i + q_{i+1}}{2}, \quad \textrm{where} \quad t_h = \frac{t_{i+1} - t_i}{2}
+\end{equation}
+and
+\begin{equation}
+\label{eq:trap2}
+q_i(t_{h}) = q_i(t_a) + \dot{q}_{ic}(t_h - t_a)
+\end{equation}
+
+Combining \ref{eq:trap1} and \ref{eq:trap2} the joint position at $t_a$ is
+\begin{equation}
+q_i(t_a) = \frac{q_i + q_{i+1}}{2} - \dot{q}_{ic}(t_h - t_a)
+\end{equation}
+
+The trajectory solution for $t_a \leq t \leq t_d$ is
+\begin{equation}
+\begin{aligned}
+q_i(t) ={}& \frac{q_i + q_{i+1}}{2} - \dot{q}_{ic}(t_h - t_a) + \dot{q}_{ic}(t-t_a) \\
+\dot{q}_i(t) ={}& \dot{q}_{ic} \\
+\ddot{q}_i(t) ={}& 0 \\
+\end{aligned}
+\end{equation}
+
+For $t_d \leq t \leq t_{i+1}$ the equations of the trajectory are similar to those of the first interval. Let $q_{i1}$ be the parabolic function of the first segment. From that the other 
+parabolic segment will be calculated by mirroring $q_{i1}$ by the $t$-axis, shift to $t_{i+1}$ on the $t$-axis and translate by $q_{i+1} + q_i$ on the $y$-axis.
+
+\begin{equation}
+q_i(t) = -q_{i1}(t-t_{i+1}) + (q_{i+1} + q_i)
+\end{equation}
+
+The trajectory solution for $t_d \leq t \leq t_{i+1}$ is
+\begin{equation}
+\begin{aligned}
+q_i(t) ={}& q_{i+1} - \frac{\dot{q}_{ic}}{2t_a}t^2 \\
+\dot{q}_i(t) ={}& -\frac{\dot{q}_{ic}}{t_a}t \\
+\ddot{q}_i(t) ={}& -\frac{\dot{q}_{ic}}{t_a} \\
+\end{aligned}
+\end{equation}
+
+
+\subsubsection{S-Curve velocity profile}
+
+
 \begin{center}
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=\textwidth]{images/vel-profiles.png}\\
-\caption{Joint trajectory generated using velocity porfiles. Calculated and plotted in MATLAB} 
+\caption{Joint trajectory generated using velocity profiles. Calculated and plotted in MATLAB} 
+\end{figure}
+\end{center}
+
+
+\subsubsection{Comparison of velocity profiles}
+
+
+\begin{center}
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=\textwidth]{images/cart-pendulum-passive-wrist-analogy.png}\\
+\caption{Trapezoid vs s-curve velocity profiles applied to the cart-inverted-pendulum system.} 
 \end{figure}
 \end{center}
