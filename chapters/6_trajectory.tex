@@ -559,13 +559,13 @@ f_i ={}& \frac{12q_{i+1} - 12q_i - (6\dot{q}_{i+1} + 6\dot{q}_i)t_{i+1} - (\ddot
 \subsubsection{Trapezoid velocity profile - LSPB}
 
 Trapezoid velocity profiles are a family of trajectories in motion control, that combines (blends) a linear segment with two parabolic segments. This type of trajectory is also known in the bibliography as 
-Linear Segments with Parabolic Blends or LSPB. The equations of motions are studied in 3 intervals $[t_i, t_a], [t_a, t_d]$ and $[td, t_{i+1}$ where $t_a = t_i + τ$ and $t_d = t_{i+1} - τ$ where $τ$ is 
+Linear Segments with Parabolic Blends or LSPB. The equations of motions are studied in 3 intervals $[t_i, t_a], [t_a, t_d]$ and $[t_d, t_{i+1}]$ where $t_a = t_i + τ$ and $t_d = t_{i+1} - τ$ where $τ$ is 
 the time duration for both the acceleration and deceleration phases (symmetric trapezoid profile). \\
 
 For $t_i \leq t \leq t_a$ the equations of the trajectory are the following:
 
 \begin{equation}
-q_i(t) = c_0, c_1t + c_2t^2, \quad c_0,c_1,c_2 \in \mathbb{R}
+q_i(t) = c_0 + c_1t + c_2t^2, \quad c_0,c_1,c_2 \in \mathbb{R}
 \end{equation}
 
 \begin{equation}
@@ -642,8 +642,106 @@ q_i(t) ={}& q_{i+1} - \frac{\dot{q}_{ic}}{2t_a}t^2 \\
 \end{aligned}
 \end{equation}
 
+It is important to note that in order for the motion control using a trapezoid velocity profile to be feasible, the desired constant velocity $\dot{q}_{ic}$ must satisfy a velocity constraint. The constraint is 
+calculated using the equations at time $t_a = t_i + τ$
+
+\begin{equation}
+q_i(t_a) = \frac{q_i + q_{i+1}}{2} - \dot{q}_{ic} \left( \frac{t_f}{2} - t_a \right) = q_i + \frac{\dot{q}_{ic}}{2t_a}t_a^2
+\end{equation}
+where $t_f/2 = t_h$
+
+\begin{equation}
+\frac{q_i + q_{i+1} - \dot{q}_{ic}t_f}{2} + \dot{q}_{ic}t_a = q_i + \frac{\dot{q}_{ic}}{2}t_a
+\end{equation}
+
+\begin{equation}
+\frac{q_{i+1} - q_i - \dot{q}_{ic}t_f}{2} = -\frac{\dot{q}_{ic}}{2}t_a
+\end{equation}
+
+\begin{equation}
+\label{eq:ta}
+t_a = \frac{\dot{q}_{ic}t_f + q_i - q_{i+1}}{\dot{q}_{ic}}
+\end{equation}
+
+For the time constant $t_a$ the following inequalities must hold (to simplify calculations we consider the case where $t_i = 0$)
+
+\begin{equation}
+0 \leq t_a \leq \frac{t_f}{2} = t_h
+\end{equation}
+
+Substituting $t_a$ with \ref{eq:ta}
+\begin{equation}
+0 \leq \frac{\dot{q}_{ic}t_f + q_i - q_{i+1}}{\dot{q}_{ic}} \leq \frac{t_f}{2}
+\end{equation}
+
+\begin{equation}
+0 \leq 2\dot{q}_{ic}t_f + 2(q_i-q_{i+1}) \leq \dot{q}_{ic}t_f
+\end{equation}
+
+\begin{equation}
+-2\dot{q}_{ic}t_f \leq 2(q_i - q_{i+1}) \leq -\dot{q}_{ic}t_f
+\end{equation}
+
+\begin{equation}
+- \frac{t_f}{q_i - q_{i+1}} \geq \frac{1}{\dot{q}_{ic}} \geq -\frac{t_f}{2(q_i - q_{i+1})}
+\end{equation}
+
+\begin{equation}
+\frac{q_i - q_{i+1}}{t_f} \leq \dot{q}_{ic} \leq \frac{2(q_i - q_{i+1})}{t_f}
+\end{equation}
+
 
 \subsubsection{S-Curve velocity profile}
+
+The s-curve trajectories introduce a cubic term to joint position polynomial, which has as a result the derivative of the acceleration, also known in the bibliography as jerk, to be non-zero. When introducing jerk
+in the equations of motion, then we can no longer have discontinuities in the acceleration which means generating a smoother trajectory than the trapezoid profile's trajectory. The equations of motions are studied 
+in 7 intervals $[t_i, t_a], [t_a, t_b], [t_b, t_c], [t_c, t_d], [t_d, t_e], [t_e, t_g]$ and $[tg, t_{i+1}]$ where 
+
+\begin{equation}
+\begin{aligned}
+t_a ={}& t_i + τ_1 \\
+t_b ={}& t_i + τ_1 + τ_2 \\
+t_c ={}& t_i + 2τ_1 + τ_2 \\
+t_d ={}& t_{i+1} - 2τ_1 - τ_2 \\
+t_e ={}& t_{i+1} - τ_1 - τ_2 \\
+t_g ={}& t_{i+1} - τ_1 \\
+\end{aligned}
+\end{equation}
+$t_a = t_i + τ$ and $t_d = t_{i+1} - τ$ 
+
+where $τ_1$ is the time duration for both the acceleration and deceleration phases (symmetric trapezoid acceleration profile) and $τ_2$ is the time duration of constant, non-zero acceleration. \\
+
+For $t_i \leq t \leq t_a$ the equations of the trajectory are the following:
+
+\begin{equation}
+q_i(t) = c_0 + c_1t + c_2t^2 + c_3t^3, \quad c_0,c_1,c_2,c_3 \in \mathbb{R}
+\end{equation}
+
+\begin{equation}
+\dot{q}_i(t) = c_1 + 2c_2t + 3c_3t^2
+\end{equation}
+
+\begin{equation}
+\ddot{q}_i(t) = 2c_2t + 6c_3t
+\end{equation}
+
+Using the following initial conditions, 
+
+\begin{equation}
+q_i(0) = q_i, \quad \dot{q}_i(0) = 0, \quad \textrm{and} \quad \ddot{q}_i(0) = 0
+\end{equation}
+
+the constants $c_0,c_1$ and $c_2$ can be calculated
+
+\begin{equation}
+c_0 = q_i, \quad c_1 = 0, \quad \textrm{and} \quad c_2 = 0
+\end{equation}
+
+Using a desired acceleration $\ddot{q}_a$ at time $t_a$, the constant $c_3$ can be calculated
+
+\begin{equation}
+q^{(4)}(t) = 6c_3 = J_a \quad \textrm{and} \quad J_a = \frac{\ddot{q}_a}{t_a}
+\end{equation}
 
 
 \begin{center}
