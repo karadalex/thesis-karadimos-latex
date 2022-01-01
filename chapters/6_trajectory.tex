@@ -695,7 +695,7 @@ Substituting $t_a$ with \ref{eq:ta}
 
 The s-curve trajectories introduce a cubic term to joint position polynomial, which has as a result the derivative of the acceleration, also known in the bibliography as jerk, to be non-zero. When introducing jerk
 in the equations of motion, then we can no longer have discontinuities in the acceleration which means generating a smoother trajectory than the trapezoid profile's trajectory. The equations of motions are studied 
-in 7 intervals $[t_i, t_a], [t_a, t_b], [t_b, t_c], [t_c, t_d], [t_d, t_e], [t_e, t_g]$ and $[tg, t_{i+1}]$ where 
+in 7 intervals $[t_i, t_a], [t_a, t_b], [t_b, t_c], [t_c, t_d], [t_d, t_e], [t_e, t_g]$ and $[t_g, t_{i+1}]$ where 
 
 \begin{equation}
 \begin{aligned}
@@ -707,7 +707,6 @@ t_e ={}& t_{i+1} - τ_1 - τ_2 \\
 t_g ={}& t_{i+1} - τ_1 \\
 \end{aligned}
 \end{equation}
-$t_a = t_i + τ$ and $t_d = t_{i+1} - τ$ 
 
 where $τ_1$ is the time duration for both the acceleration and deceleration phases (symmetric trapezoid acceleration profile) and $τ_2$ is the time duration of constant, non-zero acceleration. \\
 
@@ -737,10 +736,91 @@ the constants $c_0,c_1$ and $c_2$ can be calculated
 c_0 = q_i, \quad c_1 = 0, \quad \textrm{and} \quad c_2 = 0
 \end{equation}
 
-Using a desired acceleration $\ddot{q}_a$ at time $t_a$, the constant $c_3$ can be calculated
+Using a desired acceleration $\ddot{q}_a$ at time $t_a = t_i + τ_1$, the constant $c_3$ can be calculated
 
 \begin{equation}
-q^{(4)}(t) = 6c_3 = J_a \quad \textrm{and} \quad J_a = \frac{\ddot{q}_a}{t_a}
+q^{(4)}(t) = 6c_3 = J_a \quad \textrm{and} \quad J_a = \frac{\ddot{q}_a}{τ_1}
+\end{equation}
+
+The trajectory solution for $t_i \leq t \leq t_a = t_i + τ_1$ is
+\begin{equation}
+\begin{aligned}
+q_i(t) ={}& q_i - \frac{\ddot{q}_{a}}{6τ_1}t^3 \\
+\dot{q}_i(t) ={}& \frac{\ddot{q}_{a}}{2τ_1}t^2 \\
+\ddot{q}_i(t) ={}& \frac{\ddot{q}_{a}}{τ_1}t \\
+\end{aligned}
+\end{equation}
+
+The trajectory solution for $t_a \leq t \leq t_b$ is
+\begin{equation}
+\begin{aligned}
+q_i(t) ={}& q_a + \dot{q}_a(t-t_a) + \frac{\ddot{q}_a}{2}(t-t_a)^2 \\
+\dot{q}_i(t) ={}& \dot{q}_a + \ddot{q}_a(t-t_a) \\
+\ddot{q}_i(t) ={}& \ddot{q}_a \\
+\end{aligned}
+\end{equation}
+
+The trajectory solution for $t_b \leq t \leq t_c$ is
+\begin{equation}
+\begin{aligned}
+q_i(t) ={}& q_b + \dot{q}_b(t-t_b) + \frac{\ddot{q}_a}{2}(t-t_b)^2 - \frac{\ddot{q}_a}{6τ_1}(t-t_b)^3 \\
+\dot{q}_i(t) ={}& \dot{q}_β + \ddot{q}_a(t-t_b) - \frac{\ddot{q}_a}{2τ_1}(t-t_b)^2 \\
+\ddot{q}_i(t) ={}& \ddot{q}_a - \frac{\ddot{q}_a}{τ_1}(t-t_b) \\
+\end{aligned}
+\end{equation}
+
+The trajectory solution for $t_c \leq t \leq t_d$ is
+\begin{equation}
+\begin{aligned}
+q_i(t) ={}& q_c + \dot{q}_c(t-t_c) \\
+\dot{q}_i(t) ={}& \dot{q}_c \\
+\ddot{q}_i(t) ={}& 0 \\
+\end{aligned}
+\end{equation}
+
+The trajectory solution for $t_d \leq t \leq t_e$ is
+\begin{equation}
+\begin{aligned}
+q_i(t) ={}& q_d + \dot{q}_c(t-t_d) - \frac{\ddot{q}_a}{6τ_1}(t-t_d)^3 \\
+\dot{q}_i(t) ={}& \dot{q}_c - \frac{\ddot{q}_a}{2τ_1}(t-t_d)^2 \\
+\ddot{q}_i(t) ={}& -\frac{\ddot{q}_a}{τ_1}(t-t_d) \\
+\end{aligned}
+\end{equation}
+
+The trajectory solution for $t_e \leq t \leq t_g$ is
+\begin{equation}
+\begin{aligned}
+q_i(t) ={}& q_e + \dot{q}_e(t-t_e) - \frac{\ddot{q}_a}{2}(t-t_e)^2 \\
+\dot{q}_i(t) ={}& \dot{q}_e - \ddot{q}_a(t-t_e) \\
+\ddot{q}_i(t) ={}& -\ddot{q}_a \\
+\end{aligned}
+\end{equation}
+
+The trajectory solution for $t_g \leq t \leq t_{i+1}$ is
+\begin{equation}
+\begin{aligned}
+q_i(t) ={}& q_g + \dot{q}_g(t-t_g) - \frac{\ddot{q}_a}{2}(t-t_g)^2 + \frac{\ddot{q}_a}{6τ_1}(t-t_g)^3 \\
+\dot{q}_i(t) ={}& \dot{q}_g - \ddot{q}_a(t-t_g) + \frac{\ddot{q}_a}{2τ_1}(t-t_g)^2 \\
+\ddot{q}_i(t) ={}& -\ddot{q}_a + \frac{\ddot{q}_a}{τ_1}(t-t_g) \\
+\end{aligned}
+\end{equation}
+
+The equations of the s-curve profile trajectories can also be calculated numerically using integrals, which is however susceptible to small error accumulations. The integral trajectory solution for 
+$t_k < t \leq t_{k+1}$ is
+\begin{equation}
+\begin{aligned}
+q_k(t) ={}& q_k + \int_{t_k}^t \dot{q}_k(τ)dτ \\
+\dot{q}_k(t) ={}& \dot{q}_k + \int_{t_k}^t \ddot{q}_k(τ)dτ \\
+\ddot{q}_k(t) ={}& \ddot{q}_k + \int_{t_k}^t \dddot{q}_k(τ)dτ \\
+\end{aligned}
+\end{equation}
+
+In order to better impose the boundary conditions for the start and end joint positions as well as fix any calculation errors, the following correction (normalization) formula can be used. 
+Let $\tilde{q}_1$ and $\tilde{q}_2$ be the calculated start and end joint positions respectively. Then for each calculated joint position $\tilde{q}_k = q_i(t_k), \quad t_i \leq t_k \leq t_{i+1}$, 
+the corrected joint position $q_k$ is calculated using the following equation
+
+\begin{equation}
+q_k = (\tilde{q}_k - q_1) \frac{q_2 - q_1}{\tilde{q}_2 - \tilde{q}_1} + q_1
 \end{equation}
 
 
