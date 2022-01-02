@@ -335,6 +335,7 @@ J_i = \begin{bmatrix}
 \subsection{Constraints \& Singularity points}
 
 \subsubsection{Workspace constraints \& Singularity points}
+
 \begin{center}
 \begin{figure}[!htb]
 \centering
@@ -351,6 +352,34 @@ Singularity points:
 
 \subsubsection{Remote Center of Motion constraint}
 \label{rcm-subsubsection}
+
+The most common characteristic in the kinematics of all Minimally Invasive Surgery robotics platforms is the Remote Center of Motion (RCM) constraint. The RCM point, also known in the bibliography as fulcrum point, 
+trocar point, incision point and/or insertion point, is a virtual point in space around which the robot is constrained to rotate (pivot). The RCM constraint means that at all times one point along the axis of the surgical 
+tool must coincide with the RCM point. This constraint reduces the number of degrees of freedom from 6 (position and orientation in Cartesian 3D space) to only 4:
+\begin{enumerate}
+\item \textbf{insertion} and \textbf{retraction}: translation along the $\mathbf{\hat{r}}$ vector of the spherical coordinate system of the Fulcrum Reference frame
+\item \textbf{roll}, also known as pan: rotation around the $\mathbf{\hat{z}}$ unit vector by an angle $\phi$
+\item \textbf{pitch}, also known as tilt: rotation around the $\mathbf{\hat{y}}$ unit vector by an angle $\theta$
+\item \textbf{yaw}, also known as spin: rotation around the $\mathbf{\hat{x}}$ unit vector by an angle $\psi$
+\end{enumerate}
+
+\begin{center}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{images/rcm-surgical-tool.png}\\
+\caption{Illustration of pivoting motion of surgical laparoscopic tool around RCM point (also known as fulcrum or trocar point). Due to the RCM constraint, the tool has only 4 degrees of freedom.}
+\end{figure}
+\end{center}
+
+The RCM constraint does not have a direct implication in the solutions of the inverse kinematics solution, because it only reduces the taskspace to a very specific subspace and a very specific set of robot positions 
+and orientations.\\
+
+To satisfy the RCM constraint many MIS robots have special mechanical structures that make it easier for the laparoscopic tools to pivot around the fulcrum point. The most common examples of these types of mechanisms 
+are parallelograms, spherical linkages and circular tracking arcs, all of which have usually 2 RCM degrees of freedom which are either decoupled or coupled. Other types of RCM mechanisms are isocenters, 
+synchronous belt transmission, parallel manipulators, passive RCMs and compliant mechanisms. All these structures are more thoroughly described in article \cite{dai2009HIstoricalMISKinematicsRCM}. In the simulation setup 
+of this thesis there is no special RCM mechanism to satisfy the RCM constraint. A typical industrial robot arm is used and the RCM constraint is satisfied by calculating at each time the correct pose the robot must have 
+which is used as input to the Inverse Kinematics problem. To achieve this, the RCM point must be known beforehand (or be estimated) and then all RCM poses are calculated using a spherical coordinate system, whose origin 
+of axes is the RCM point.
 
 
 \subsubsection{Elbow-up constraint}

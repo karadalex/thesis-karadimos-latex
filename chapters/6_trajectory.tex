@@ -835,11 +835,29 @@ q_k = (\tilde{q}_k - q_1) \frac{q_2 - q_1}{\tilde{q}_2 - \tilde{q}_1} + q_1
 
 \subsubsection{Comparison of velocity profiles}
 
+Both trapezoid and s-curve velocity profiles are widely used in industrial control systems, to design trajectories that are smooth and have a linear segment of constant velocity. Although both profiles are continuous in
+position and velocity, the trapezoid profile does not have continuous acceleration and thus the generated trajectory is not smooth. These discontinuities in acceleration cause load oscillation or vibrations. This 
+phenomenon can be easily observed in a cart-pendulum system like the one illustrated in \ref{cart-pendulum-passive-wrist-analogy}. The s-curve velocity profile can generate a smooth trajectory which at the start and end of 
+the motion will have significantly less oscillation (overshoot in position). Experimental data showing this difference in motion (in one case there is overshoot/oscillation and in the other case there is not), for the cart-
+pendulum system are available at the following article \url{https://www.pmdcorp.com/resources/type/articles/get/s-curve-profiles-deep-dive-article}.
 
 \begin{center}
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=\textwidth]{images/cart-pendulum-passive-wrist-analogy.png}\\
 \caption{Trapezoid vs s-curve velocity profiles applied to the cart-inverted-pendulum system.} 
+\label{cart-pendulum-passive-wrist-analogy}
 \end{figure}
 \end{center}
+
+The smoothness and absence of vibration/oscillation/overshoot in the point-to-point trajectory of a s-curve trajectory are especially useful in surgical robots that use passive wrists. A \textbf{passive wrist} is a mechanical 
+device attached at the end-effector of a robot arm and it usually has 3 degrees of freedom which are passive, i.e. not actuated. Passive wrists are very useful in minimally-invasive surgery because they allow to use surgical 
+tools (usually endoscopic cameras) that are inserted in the human body at the surgical site, through the trocar and the incision, without exerting much pressure. Passive wrists, however have the downside of passiveness 
+(e.g. they can not be used for active tasks such as lifting an object, suturing etc.) and the difficulty in position control. Experimental data showing the overshoot and oscillation in position control of a
+laparoscopic camera attached to a passive wrist, are available at figure 7 of article \cite{Bauzano2009ControlMF}.\\
+
+An active-robot-passive-wrist system and the effect of trapezoid vs s-curve profile trajectories, can be studied using the analogous system of a cart-pendulum system as the one show in figure \ref{cart-pendulum-passive-wrist-analogy}. 
+In figure \ref{cart-pendulum-passive-wrist-analogy} the cart is the actuated mechanism (the one that will have a motor) and the pendulum is the passive mechanism (i.e. the joint that attached the pendulum to the cart 
+is not actuated). The pendulum is also attached to a spring-damper system to better simulate the oscillating response to sudden changes in acceleration/force. The pendulum, although not actuated, moves based on the sudden 
+changes of motion of the cart. Using this analogy, the actuated cart can be thought of as the active robotic arm's end-effector and the passive pendulum can be thought of as the passive wrist which is attached to the 
+end-effector.
