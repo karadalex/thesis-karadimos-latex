@@ -860,4 +860,7 @@ An active-robot-passive-wrist system and the effect of trapezoid vs s-curve prof
 In figure \ref{cart-pendulum-passive-wrist-analogy} the cart is the actuated mechanism (the one that will have a motor) and the pendulum is the passive mechanism (i.e. the joint that attached the pendulum to the cart 
 is not actuated). The pendulum is also attached to a spring-damper system to better simulate the oscillating response to sudden changes in acceleration/force. The pendulum, although not actuated, moves based on the sudden 
 changes of motion of the cart. Using this analogy, the actuated cart can be thought of as the active robotic arm's end-effector and the passive pendulum can be thought of as the passive wrist which is attached to the 
-end-effector.
+end-effector.\\
+
+Trapezoid and s-curve velocity profiles can be further extended and generalized using higher order s-curves where the jerk is also bounded and continuous. Based on each use case the higher order s-curves can be used to 
+generated trajectories that are both controllable smooth and time-optimal. Higher order s-curve profiles can be found at \cite{Nguyen2008HigherOrderSCurves}.
