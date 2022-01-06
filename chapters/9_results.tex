@@ -829,7 +829,7 @@ requires more calculations because it is required to get the camera's transforma
 end-effector pose which is then used as an input to a Cartesian Controller.
 
 \begin{center}
-\begin{figure}[!htb]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.45\textwidth]{images/robot_planner5/visual_servo_controller3.png}
 \includegraphics[width=0.45\textwidth]{images/robot_planner5/visual_servo_controller4.png}\\
@@ -847,7 +847,26 @@ controller parameters are $K_p = 0.9, K_d = 0.2$}
 \end{figure}
 \end{center}
 
-% \section{Robot Planner 6}
+
+
+\section{Robot Planner 6: RCM alignment error in insertion and retraction}
+
+\begin{center}
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=\textwidth]{images/robot_planner6/robot_planner6.png}
+\caption{Robot planner6: Path from home, to point above Fulcrum point and path of insertion/retraction}
+\end{figure}
+\end{center}
+
+\begin{center}
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=\textwidth]{images/robot_planner6/rcm_fulcrum_alignment_error.png}
+\includegraphics[width=\textwidth]{images/robot_planner6/rcm_fulcrum_alignment_error2.png}\\
+\caption{RCM alignment error, diagrams from 2 executions of the same experiment. The x-axis is measured in seconds (ROS time) and the y-axis is the distance error measured in meters in logarithmic scale.}
+\end{figure}
+\end{center}
 
 % \section{Robot Planner 7}
 
