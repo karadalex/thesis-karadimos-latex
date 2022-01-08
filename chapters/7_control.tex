@@ -65,7 +65,8 @@ probably generates a force $f \propto e$ which exerts pressure to the incision p
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=0.4\textwidth]{images/rcm-error-yz.png}
-\caption{RCM error calculation in yz plane}
+\caption{RCM error calculation in yz plane. The RCM error or yz-error is the distance between the line of the $\mathbf{\hat{x}}$ vector (here seen as a point) and the estimated position of the origin of the
+fulcrum reference frame $\tilde{O}_F$}
 \label{rcm-error-yz-plane}
 \end{figure}
 \end{center}
@@ -77,13 +78,18 @@ correct the goal pose of the robot so that is fixes the RCM misalignment.
 
 \begin{equation}
 e_y = e_{yz}sinψ \quad \textrm{and} \quad e_z = e_{yz}cosψ
-\end{equation}
+\end{equation}\\
+
+Using the estimated RCM error $\tilde{e}_{rcm}$ and the estimated position of the origin of the fulcrum reference frame, then an adaptive motion control system can be designed that corrects the trajectory to avoid RCM 
+misalignment. The proposed control system is illustrated in the block diagram \ref{rcm-control-system-block-diagram} and a similar pivoting motion control system is also described in the bibliography 
+in \cite{Muoz2005PivotingMC}.
 
 \begin{center}
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=\textwidth]{images/rcm-system-control.png}
-\caption{RCM tracking proposed control system}
+\caption{RCM tracking proposed control system. The RCM error is used as input in the trajectory generator to correct the trajectory command in order to fix the RCM misalignment}
+\label{rcm-control-system-block-diagram}
 \end{figure}
 \end{center}
 
