@@ -851,39 +851,8 @@ controller parameters are $K_p = 0.9, K_d = 0.2$}
 
 \section{Robot Planner 6: RCM alignment error in insertion and retraction}
 
-The goal of this experiment is to measure the alignment error of the long axis of the surgical tool with the fulcrum point. In other words, this error tracks whether the robot pose satisfies the RCM constraint, 
-in which the axis of the tool must always pass through the fulcrum point. To calculate this error, the line of the long axis of the surgical tool must be first defined. To define this line, 2 points are needed. Both of these 
-points can be calculated using the transformation of the surgical tool, which is attached to the robot's TCP on the end-effector. Let the following be the pose of the surgical tool with respect to the global reference frame
-\begin{equation}
-{}^UT_{T0} = \begin{bmatrix}
-\mathbf{\hat{x}} & \mathbf{\hat{y}} & \mathbf{\hat{z}} & \mathbf{p} \\
-0                & 0                & 0                & 1 \\
-\end{bmatrix}
-\end{equation}
-Using this pose, let $A,B$ be the points such that 
-\begin{equation}
-\overrightarrow{O_FA} = \mathbf{p}, \quad \textrm{and} \quad \overrightarrow{O_FB} = \mathbf{p} + \mathbf{\hat{x}}
-\end{equation}
-where $O_F$ is the origin point of the fulcrum reference frame. The the line of interest is defined as the line $l$ that passes through the points $A$ and $B$. \\
-
-The alignment error is calculated using a known position and orientation for the second fulcrum reference frame. In real-case scenarios the exact position and orientation of the fulcrum points are not precisely known 
-but can be estimated. To model the uncertainty of the pose, the pose message of the fulcrum point includes also a covariance matrix. The ROS message that was used was the \textbf{PoseWithCovarianceStamped} which needs the 
-following information (with respect to the global frame) to be fully defined:
-\[
-( \mathbf{p}, \mathbf{q}, \mathbf{C} ), \quad \mathbf{p} \in \mathbb{R}^3, \mathbf{q} \in \mathbb{H}, \mathbf{C} \in \mathbb{R}^{6 \times 6}
-\]
-where 
-\begin{equation}
-\mathbf{C} = \begin{bmatrix}
-σ_{xx} & σ_{xy} & σ_{xz} & σ_{xψ} & σ_{xθ} & σ_{xφ} \\
-σ_{xy} & σ_{yy} & σ_{yz} & σ_{yψ} & σ_{yθ} & σ_{yφ} \\
-σ_{xz} & σ_{yy} & σ_{zz} & σ_{zψ} & σ_{zθ} & σ_{zφ} \\
-σ_{xψ} & σ_{yψ} & σ_{zψ} & σ_{ψψ} & σ_{ψθ} & σ_{ψφ} \\
-σ_{xθ} & σ_{yθ} & σ_{zθ} & σ_{ψθ} & σ_{θθ} & σ_{θφ} \\
-σ_{xφ} & σ_{yφ} & σ_{zφ} & σ_{ψφ} & σ_{θφ} & σ_{φφ} \\
-\end{bmatrix}
-\end{equation}
-The covariance matrix and its coefficients can be calculated using equations \ref{eq:cov-matrix} and \ref{eq:cov-matrix-coeff}, using the mean values of the estimations of $x,y,z,ψ,θ,φ$. To simplify the experiment, 
+The goal of this experiment is to measure the alignment error of the long axis of the surgical tool with the fulcrum point. This error tracks whether the robot pose satisfies the RCM constraint, 
+in which the axis of the tool must always pass through the fulcrum point and is explained in more detail in \ref{section:rcm-tracking}. To simplify the experiment, 
 constant values are assumed for both position coordinates and orientation angles and a constant arbitrary diagonal covariance matrix.
 \begin{equation}
 \begin{bmatrix}
@@ -894,22 +863,6 @@ x \\ y \\ z \\ ψ \\ θ \\ φ \\
 \end{bmatrix}, \quad \mathbf{C} = diag(0.001, \cdots, 0.001)
 \end{equation}
 where $\mathbf{p} = [x,y,z]$ and the Euler angles $ψ, θ, φ$ are later used to calculate the quaternion $\mathbf{q}$. \\
-
-\begin{center}
-\begin{figure}[!htb]
-\centering
-\includegraphics[width=0.5\textwidth]{images/robot_planner6/rcm-error-geometry.png}
-\caption{Geometric calculation of the RCM alignment error $e$ using the distance between the line $l$ and the RCM (aka Fulcrum) point.}
-\end{figure}
-\end{center}
-
-Since both the origin of the fulcrum reference frame and the line of the long axis of the tool are known then the alignment error of this experiment can be calculated as the distance of the line $l$ from the point $O_F$
-\begin{equation}
-e_{rcm} = d(l, O_F)
-\end{equation}
-
-If $e_{rcm} \leq 3_{max} = 1mm$ then the surgical tool axis passes through the fulcrum point and executes RCM trajectories, otherwise the robot is considered to have slipped from alignment, it does not execute RCM motion and 
-probably generates a force $f \propto e$ which exerts pressure to the incision point and the abdominal wall (or the tissue around the incision point), which can have negative side-effects in the recovery of the incision.
 
 \begin{center}
 \begin{figure}[!htb]

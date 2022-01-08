@@ -21,18 +21,18 @@
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {9.1}{\ignorespaces Time results for robot planner 1 using the RRTConnect path planner algorithm. Planning time is the sum of solution time and path simplification time. Execution status is 1 for success and 0 for failure. Parameters: tolerances: 0.000005, max planning time: 5 seconds, replanning: true, max planning attempts: 6. Experiments start from home position.\relax }}{84}{table.caption.58}
+\contentsline {table}{\numberline {9.1}{\ignorespaces Time results for robot planner 1 using the RRTConnect path planner algorithm. Planning time is the sum of solution time and path simplification time. Execution status is 1 for success and 0 for failure. Parameters: tolerances: 0.000005, max planning time: 5 seconds, replanning: true, max planning attempts: 6. Experiments start from home position.\relax }}{86}{table.caption.59}
 \defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {9.2}{\ignorespaces Time results for robot planner 1 using the RRT* path planner algorithm. Planning time is the sum of solution time and path simplification time. Execution status is 1 for success and 0 for failure. Parameters: tolerances: 0.000005, max planning time: 5 seconds, replanning: true, max planning attempts: 6. Experiments start from home position.\relax }}{85}{table.caption.59}
+\contentsline {table}{\numberline {9.2}{\ignorespaces Time results for robot planner 1 using the RRT* path planner algorithm. Planning time is the sum of solution time and path simplification time. Execution status is 1 for success and 0 for failure. Parameters: tolerances: 0.000005, max planning time: 5 seconds, replanning: true, max planning attempts: 6. Experiments start from home position.\relax }}{87}{table.caption.60}
 \defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {9.3}{\ignorespaces Time results for robot planner 2a using the RRTConnect path planner algorithm. Planning time is the sum of solution time and path simplification time. Execution status is 1 for success and 0 for failure. Parameters: tolerances: 0.0005, max planning time: 5 seconds, replanning: true, max planning attempts: 6. Experiments start from home position.\relax }}{88}{table.9.3}
+\contentsline {table}{\numberline {9.3}{\ignorespaces Time results for robot planner 2a using the RRTConnect path planner algorithm. Planning time is the sum of solution time and path simplification time. Execution status is 1 for success and 0 for failure. Parameters: tolerances: 0.0005, max planning time: 5 seconds, replanning: true, max planning attempts: 6. Experiments start from home position.\relax }}{90}{table.9.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {9.4}{\ignorespaces Time results for robot planner 2b using the RRTConnect path planner algorithm and a different table layout from robot planner 2a. Planning time is the sum of solution time and path simplification time. Execution status is 1 for success and 0 for failure. Parameters: tolerances: 0.0005, max planning time: 5 seconds, replanning: true, max planning attempts: 6. Experiments start from home position.\relax }}{90}{table.9.4}
+\contentsline {table}{\numberline {9.4}{\ignorespaces Time results for robot planner 2b using the RRTConnect path planner algorithm and a different table layout from robot planner 2a. Planning time is the sum of solution time and path simplification time. Execution status is 1 for success and 0 for failure. Parameters: tolerances: 0.0005, max planning time: 5 seconds, replanning: true, max planning attempts: 6. Experiments start from home position.\relax }}{92}{table.9.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {9.5}{\ignorespaces Time results for robot planner 4 using the RRTConnect path planner algorithm\relax }}{101}{table.9.5}
+\contentsline {table}{\numberline {9.5}{\ignorespaces Time results for robot planner 4 using the RRTConnect path planner algorithm\relax }}{103}{table.9.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {9.6}{\ignorespaces Time results for robot planner 4 using the RRT* path planner algorithm\relax }}{102}{table.9.6}
+\contentsline {table}{\numberline {9.6}{\ignorespaces Time results for robot planner 4 using the RRT* path planner algorithm\relax }}{104}{table.9.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {9.7}{\ignorespaces Time results for robot planner 4 using the PRM* path planner algorithm\relax }}{103}{table.9.7}
+\contentsline {table}{\numberline {9.7}{\ignorespaces Time results for robot planner 4 using the PRM* path planner algorithm\relax }}{105}{table.9.7}
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
