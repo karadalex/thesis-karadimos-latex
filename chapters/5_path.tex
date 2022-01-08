@@ -115,7 +115,37 @@ of the tool with the links of the rest of the robot (the link of the end-effecto
 
 \section{Task space analysis}
 
-Dexterity analysis for tool's task space
+Before designing any paths and trajectories it is very important to better understand the taskspace in which the surgical tool will operate in. When the robot arm is in the pick-and-place phase where it detexts the surgical 
+tool and grasps and then go to the mounting dock to insert it, then at this phase, the taskspace is the same as the robot's taskspace. However, when the surgical tool is inserted in the patient's body and starts executing 
+pivoting motions, then there are 2 taskspaces that are studied. The first one is the surgical taskspace, which is where the surgical movements are planned (sutures, laparoscopic camera movements etc.) and the second 
+taskspace is the one outside of patient's body in which the planned paths are "mirrored" so that the robot can execute them. The surgical taspace $\mathbb{S}$ is the one shown in figure \ref{surgical-taskspace}. The paths inside 
+the surgical task are transformed via the Fulcrum effect transformation, which is described in more detail in \ref{section:fulcrum-effect}, to the pivot paths taskspace $\mathbb{P}$ which is a subset of the robot's taskspace 
+$\mathbb{T}$ (we assume that all pivot motions can be executed, i.e. that all motions are reachable and fully inside the robot's taskspace). The paths are then used as input to a trajectory generator whose output 
+is transformed via the Inverse Kinematics equations to the joint angles that belong to the joint space $\mathbb{J}$. \\
+
+Alternatively in a mathematical notation, the fulcrum effect transformation is notated as
+\begin{equation}
+Φ: \mathbb{S} \longrightarrow \mathbb{P}
+\end{equation}
+the inverse kinematics transformation is described as
+\begin{equation}
+IK: \mathbb{P} \subset \mathbb{T} \longrightarrow \mathbb{J}
+\end{equation}
+and similarly the forward kinematics transformation can be described as
+\begin{equation}
+FK: \mathbb{J} \longrightarrow \mathbb{T}
+\end{equation}\\
+
+\begin{center}
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=\textwidth]{images/spaces-and-transformations.png}\\
+\caption{The spaces studied in this thesis and how they are connected with each other via transformations}
+\label{surgical-taskspace}
+\end{figure}
+\end{center}
+
+Having defined all the spaces, the Dexterity metric of the tool's task space (same as the surgical taskspace) can be defined as
 \begin{equation}
 \mathcal{D} = \mathcal{L}_q \mathcal{M}
 \label{dexterity-measure}
@@ -152,7 +182,7 @@ taskspace (i.e. the space of all configurations of feasible pivot motions) must 
 the robot’s whole reachable taskspace, otherwise only a small range of pivot movements will be 
 feasible.\\
 
-Finding $q_{i,min}, q_{i,max}$ at \ref{joint-limit-measure} is very difficul and time-consuming especially at task spaces with more intricate geometries. 
+Finding $q_{i,min}, q_{i,max}$ at \ref{joint-limit-measure} is very difficult and time-consuming especially at task spaces with more intricate geometries. 
 A similar and more practical equation to \ref{joint-limit-measure} can be written for calculating the dexterity of the robot in task space:
 
 \begin{equation}
@@ -195,5 +225,12 @@ end
 \centering
 \includegraphics[width=0.8\textwidth]{images/rcm_taskspace.png}\\
 \caption{Task space inside patients body. Colors with 0 or low value correspond to points with low dexterity. This is the trivial case, where no collision objects are taken into consideration}
+\label{surgical-taskspace}
 \end{figure}
 \end{center}
+
+All of the metrics above, measure how much reachable are various points of the surgical taskspace, but they are calculated from different perspectives, using input values from different spaces.
+\begin{equation}
+\mathcal{L}_{q}, \mathcal{M}: \mathbb{J} \longrightarrow \mathbb{R} \\
+\mathcal{L}_{p}: \mathbb{S} \longrightarrow \mathbb{R}
+\end{equation}
