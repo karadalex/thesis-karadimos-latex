@@ -78,7 +78,9 @@ correct the goal pose of the robot so that is fixes the RCM misalignment.
 
 \begin{equation}
 e_y = e_{yz}sinψ \quad \textrm{and} \quad e_z = e_{yz}cosψ
-\end{equation}\\
+\end{equation}
+
+The angle $ψ$ that is used to split $e_{rcm}$ in the two components, is already known from the robot's pose and it is the yaw (also known as spin) angle of the surgical tool.\\
 
 Using the estimated RCM error $\tilde{e}_{rcm}$ and the estimated position of the origin of the fulcrum reference frame, then an adaptive motion control system can be designed that corrects the trajectory to avoid RCM 
 misalignment. The proposed control system is illustrated in the block diagram \ref{rcm-control-system-block-diagram} and a similar pivoting motion control system is also described in the bibliography 
@@ -179,10 +181,24 @@ where $\mathbf{e}[kT] = [e_x, e_y, e_z, e_θ, e_φ, e_ψ]^\top$.
 
 \section{Firm grasping algorithm \& Force control}
 
+In order to control the Barrett hand gripper of this thesis and make sure that the gripper grasps firmly the surgical tool, a hybrid force control scheme must be implemented. This control scheme is hybrid because it 
+combines positions measurements with force measurements. In the context of the Barrett hand, the position of a finger is known using the forward kinematics of the finger's joint angles and the forces are measured using 
+the tactile sensors array which are distributed in the surface of the gripper and the fingers. The proposed force control system is illustrated in the block diagram \ref{finger-force-control}.\\
+
 \begin{center}
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=12cm]{images/finger-force-control.png}\\
 \caption{Force control on a Barrett Hand gripper finger}
+\label{finger-force-control}
 \end{figure}
 \end{center}
+
+To ensure a firm grasp of the surgical tool, so that it can later be more easily and precisely manipulated to do pivot surgical motions, a reference force is required to be defined. The following analysis is 
+for one of the 3 fingers of the gripper and it is the same for all of them. Following the block diagram of \ref{finger-force-control}, if the actual measured force is 0, then the finger is not in contact, which means that 
+there is an error in force. This force error produces a position error via a first PD controller. This position error will be positive and will be added to the current measured position and thus will make the finger move 
+closer to the object. When the finger contacts for the first time the object, then the measured force is non-zero, 
+but it is still less than the desired force that is required for a firm grasp. This means that there is still a force error, which again produces a positions error and again makes the finger move even closer ("squeeze") the 
+object. This control loop repeats until a satisfactory contact is reached and until the desired force is exerted on the object. If the measured force is bigger than the desired value, then the force error is negative and thus
+a negative position error is generated which in its turn makes the finger to move slightly away from the object, in order to reduce the exerted force. More about force control principles can be found at 
+\url{http://www.osrobotics.org/osr/control/principles.html} as well as an example of force control in ROS and Gazebo at \url{http://www.osrobotics.org/osr/control/examples.html}.
