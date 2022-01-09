@@ -124,6 +124,7 @@ an assumption that the robot already "knows" the exact position, orientation, si
 It is important to mention, that every such object is taken into consideration in collision checks and in path planning algorithms.
 
 \section{Motion Planning with Moveit}
+\label{section:moveit}
 
 \begin{center}
 \begin{figure}[!htb]
@@ -215,6 +216,21 @@ where $T$ is the transformation matrix and $φ, θ, ψ$ are the roll, pitch and 
 
 \section{Tools, Packages and Libraries}
 
-\textbf{Stereo Vision with stereo image proc} \\
-
-\textbf{State machines with Smach} \\
+\begin{itemize}
+	\item \textbf{moveit} libraries for path planning and kinematics solutions (see more in \ref{section:moveit}). More specifically the following libraries, among others, were used 
+	moveit\_core, moveit\_ros\_planning\_interface, moveit\_ros\_planning, moveit\_visual\_tools
+	\item \textbf{tf2} is an important library that allows to keep track of multiple coordinate frames over time as well as calculate poses with respect to a given reference frame and apply
+	transformations to vectors or other transformations.
+	\item \textbf{geometry\_msgs}: used mostly for the Pose and PoseWithCovarianceStamped messages to exchange robot and object poses between nodes and give them as input to moveit's path planners
+	\item \textbf{Eigen}: a c++ library to efficiently do linear algebra calculations (matrix multiplications, inversions, vector calculations and simple geometrix calculations like finding the distance between a line and a 
+	point)
+	\item \textbf{OpenCV2} together with the \textbf{cv\_bridge} ROS package for the computer vision tasks of this thesis
+	\item \textbf{numpy}
+	\item Stereo Vision with \textbf{stereo\_image\_proc}
+	\item State machines with \textbf{Smach}
+	\item \textbf{actionlib}
+	\item \textbf{barrett\_hand} \url{https://github.com/RobotnikAutomation/barrett\_hand.git}
+	\item \textbf{gazebo-pkgs} \url{https://github.com/JenniferBuehler/gazebo-pkgs.git}
+	\item \textbf{moveit-pkgs} \url{https://github.com/JenniferBuehler/moveit-pkgs.git}
+	\item \textbf{general-message-pkgs} \url{https://github.com/JenniferBuehler/general-message-pkgs.git}
+\end{itemize}
