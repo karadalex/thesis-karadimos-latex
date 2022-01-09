@@ -6,7 +6,7 @@
 abstractions on top of the host's operating system including filesystem, hardware abstractions, low-level device control, 
 package management and networking. It also provides tools and services to develop large, scalable 
 robotics software, it supports a wide variety of libraries and programming languages and it has a huge community, support and 
-documentation resources.
+documentation resources.\\
 
 
 \begin{enumerate}
@@ -54,8 +54,27 @@ documentation resources.
 \end{figure}
 \end{center}
 
+A \textbf{node} is a small piece of code that runs in a process and executes a task. Usually nodes should execute one task and in cases of more complex robot applications, multiple nodes are combined and run together 
+to run more complicated tasks. Nodes are combined together into a graph and communicate with each other using topics, remote procedure call services and the parameter server. Splitting the robot application into multiple 
+smaller nodes is more fault tolerant, because an issue or a crash in one node does not have affect much the other nodes (individual nodes are isolated). Scalability (i.e. the ability to easily add new features and code) using
+nodes is also much easier, but the code complexity increases with the number of nodes, the more the number of nodes, the more the interconnections between them and the harder it is to debug issues or to run and maintain the 
+nodes.\\
+
+\textbf{Topics} are namespaced buses over which nodes exchange messages. A topic is a stream of messages with a \textbf{publish and subscribe} mechanism, which decouples the production of information from its consumption. 
+Topics connect nodes in a many-to-many relationship, which means that all nodes that are interested in the topic data subscribe to the relevant topic and all nodes that generate data publish to the relevant topic. Topic data 
+have a predefined \textbf{message} type that can be a String, Float, Integer, Array or even more complicated custom object structures.
+
 
 \section{Gazebo simulation environment}
+
+Gazebo \url{http://gazebosim.org/} is the most popular simulation software used in most ROS projects and it is a very important tool that mimics the real world and how the robot would realistically interact with it. It comes with a wide range of 
+features such as:
+\begin{itemize}
+	\item Dynamics simulation with physics engines including ODE, Bullet and others, to efficiently simulate forces, torques and collisions
+	\item Advanced 3D graphics utilizing OGRE that provide realistic environment rendering, lighting, shadows and textures.
+	\item Sensors like 2D/3D cameras (optionally with simulated noise), laser range finders, contact sensors, force and torque sensors
+	\item customizable plugins, pre-made 3D objects, environments and robots and many more
+\end{itemize}
 
 \begin{center}
 \begin{figure}[!htb]

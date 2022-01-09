@@ -333,6 +333,14 @@ J_i = \begin{bmatrix}
 
 \subsubsection{Workspace constraints \& Singularity points}
 
+When studying the kinematics of a robotic arm it very crucial to also study the singularity points, which must be known before path planning in order to be avoided as much as possible. From a mathematical point of view, 
+singularity points are points or set of points where the kinematics equations are not defined, e.g. when dividing by a quantity that becomes zero or is very close to zero or when the determinant of the robot's Jacobian 
+approaches zero (as shown in figure \ref{robot-planner1-manipulability-plot}), or even when the inverse kinematics solutions are infinite. \\
+
+From a more empirical point of view, singularity points are those points that reduce the kinematic capability of the robot. An example of that are points where the end-effector cannot move at all or it cannot move in some 
+directions. An other example of singularity points, are those in which small displacements/velocities in the taskspace require very large displacements/velocities in the joint space and sometimes with velocities much higher 
+than the rated values of the actuators.
+
 \begin{center}
 \begin{figure}[!htb]
 \centering
@@ -344,7 +352,17 @@ J_i = \begin{bmatrix}
 Singularity points:
 \begin{itemize}
 	\item When $p_x^2 + p_y^2 = 0$ then the end-effector lies on the z-axis and $θ_1$ is not defined
-	\item When $sin\left( θ_6 \right) = 0$ then the angles $θ_5, θ_7$ are not defined
+	\item Similar to the above singularity, when the axes $z_1,z_7$ coincide, then $θ_1,θ_7$ can no longer be defined
+	\item When $sin\left( θ_6 \right) = 0$ then the angles $θ_5, θ_7$ are not defined. According to the robot's manual and the equations of inverse kinematics above, there are an infinite number of combinations of
+	$θ_5, θ_7$ to get the same position on the end-effector.
+	\item Similar to the above singularity, when the shoulder is fully extended, $θ_1$ and $θ_3$ are not defined (there are infinite combinations for the same result)
+\end{itemize}
+Other kinematic singularities that are explained in more details KUKA Sunrise.OS 1.11 manual are the following:
+\begin{itemize}
+	\item Extended position $θ_4 = 0$: motion is blocked in the direction of $z_3$ and $z_5$ axes
+	\item When $θ_4 = \frac{π}{2}$ and $θ_6 = 0$ the motion parallel to $z_6$ or $z_2$ is blocked
+	\item When $θ_2 = 0$ and $θ_3 = \pm \frac{π}{2}$ the the motion is blocked in the direction of the robot or parallel to axes $z_2,z_5$
+	\item When $θ_5 = \frac{π}{2}$ and $θ_6 = 0$ the motion parallel to axis $z_6$ is blocked
 \end{itemize}
 
 \subsubsection{Remote Center of Motion constraint}
