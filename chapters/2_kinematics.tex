@@ -428,13 +428,57 @@ the 3rd link or by using the relative angle of the base link and the 3rd link. F
 \end{figure}
 \end{center}
 
-The distance constraint is $d_{min} \leq d \leq d_{max} $, where
+The distance constraint is
+\begin{equation}
+\label{eq:elbow-up-constraint-distance-inequality}
+d_{min} \leq d \leq d_{max}
+\end{equation}
+where
 \[
 d_{min} = \sqrt{d_1^2 + d_3^2} = 553mm  \quad \textrm{and} \quad  d_{max} = d_1 + d_3 = 780mm
 \]
-The distance-based description of the elbow-up constraint is not very convenient, because it can not be easily transformed to a description that uses the robot's forward kinematic transformations and reference frames. 
-For this reason, the angle-based description is more convenient because it directly describes the orientation that the 3rd reference frame must have, with respect to the reference frame of the base. Thus for each orientation 
-angle (pitch, yaw, roll) the following constraint must be satisfied
-\[
+The distance-based description of the elbow-up constraint is not very convenient, because it can not be easily forward-transformed to a description that uses the robot's forward kinematic transformations and reference frames, 
+but it can be easily used after the inverse kinematics solution to check which solutions satisfy this distance constraint. 
+The angle-based description can sometimes be more convenient because it directly describes the orientation that the 3rd reference frame must have, with respect to the reference frame of the base. Thus for each orientation 
+angle (pitch, yaw, roll) the following constraint must be satisfied.\\
+\begin{equation}
+\label{eq:elbow-up-constraint-angle-inequality}
 -\frac{\pi}{2} \leq θ \leq \frac{\pi}{2}
-\]
+\end{equation}
+
+When the inverse kinematics problem is solved, then some of the solutions may be rejected from the elbow-up constraint after the following calculations. For each solution the forward kinematics up to the 3rd joint must be 
+calculated. Note that although the forward kinematics from the universal frame to the end-effector should be the same for all solutions, the same does not hold for the forward kinematic transformations of the intermediate 
+links.
+
+\begin{equation}
+{}^UT_{tcp} = {}^UT_0  \;\;  {}^0T_3  \;\;   {}^3T_{tcp}
+\end{equation}
+
+\begin{equation}
+{}^0T_3 = {}^UT_0^{-1}  \;\;  {}^UT_{tcp}  \;\;   {}^3T_{tcp}^{-1}
+\end{equation}
+
+Let the calculated ${}^0T_3$ have the following form
+\begin{equation}
+{}^0T_3 = \begin{bmatrix}
+{}^0R_3 & {}^0\mathbf{p}_3 \\
+0       & 1 \\
+\end{bmatrix}
+\end{equation}
+
+then the distance that must satisfy the inequality \ref{eq:elbow-up-constraint-distance-inequality} is 
+\begin{equation}
+d = \Vert {}^0\mathbf{p}_3 \Vert
+\end{equation}
+
+In a similar way, the angle version of the elbow-up constraint can be used to check if a solution is accepted. Let the orientation matrix ${}^0R_3$ of the calculated pose ${}^0T_3$ have the following form
+\begin{equation}
+{}^0R_3 = [ {}^0\mathbf{\hat{x}}_3 \quad {}^0\mathbf{\hat{y}}_3 \quad {}^0\mathbf{\hat{z}}_3 ]
+\end{equation}
+
+then the angle that must satisfy the inequality \ref{eq:elbow-up-constraint-angle-inequality} is
+\begin{equation}
+θ = acos \left( \frac{ {}^0\mathbf{\hat{z}}_3 \cdot {}^0\mathbf{\hat{z}} }{ \Vert {}^0\mathbf{\hat{z}}_3 \Vert  \Vert {}^0\mathbf{\hat{z}} \Vert } \right)
+\end{equation}
+
+where ${}^0\mathbf{\hat{z}}$ is the unit vector of the z-axis of the frame $\lbrace 0 \rbrace$ with respect to itself, i.e. ${}^0\mathbf{\hat{z}} = [0, 0, 1]^\top$
