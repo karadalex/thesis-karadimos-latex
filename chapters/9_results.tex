@@ -900,6 +900,17 @@ fulcrum reference frame.}
 \end{figure}
 \end{center}
 
-% \section{Robot Planner 7}
 
-% \section{Robot Planner 8: State machine \& ROS Actions}
+\section{Robot Planner 7: State machine - End-to-end running}
+
+The goal of this experiment is to run all stages of this thesis together to study the end-to-end result. Each stage is run by a different node and the sequence in which every task is executed is dictated by the status 
+of the state machine as shown in figure \ref{smack-state-machine}.
+
+\begin{center}
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=\textwidth]{images/state-machine-all-tasks.png}
+\caption{State machine status, shown in smach viewer}
+\label{smack-state-machine}
+\end{figure}
+\end{center}

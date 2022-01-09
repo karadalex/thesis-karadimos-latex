@@ -135,18 +135,21 @@ When using the Moveit ROS library a set of parameters need to be configured in o
 
 Typical motion planning parameter values outside of surgical site:
 \begin{itemize}
-	\item Position tolerance: 50μm
+	\item Position tolerance: 50 - 500μm
 	\item Orientation tolerance: 0.00005 deg
-	\item Planning time: 10s
+	\item Planning time: 5-10s
+	\item Replanning allowed: true
 \end{itemize}
 
 Typical motion planning parameter values inside surgical site:
 \begin{itemize}
-	\item Position tolerance:
-	\item Orientation tolerance:
-	\item Planning time
+	\item Position tolerance: 5μm
+	\item Orientation tolerance: 0.000005deg
+	\item Planning time: 5s
+	\item Replanning allowed: true
 	\item End-effector interpolation step: 1mm
-	\item Maximum velocity scaling factor
+	\item Maximum velocity scaling factor: 0.5
+	\item Maximum planning attempts: 6
 \end{itemize}
 
 Sometimes the motion planner finds a solution but the execution from the controller is aborted. 

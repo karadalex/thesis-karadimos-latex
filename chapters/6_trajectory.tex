@@ -840,7 +840,10 @@ Both trapezoid and s-curve velocity profiles are widely used in industrial contr
 position and velocity, the trapezoid profile does not have continuous acceleration and thus the generated trajectory is not smooth. These discontinuities in acceleration cause load oscillation or vibrations. This 
 phenomenon can be easily observed in a cart-pendulum system like the one illustrated in \ref{cart-pendulum-passive-wrist-analogy}. The s-curve velocity profile can generate a smooth trajectory which at the start and end of 
 the motion will have significantly less oscillation (overshoot in position). Experimental data showing this difference in motion (in one case there is overshoot/oscillation and in the other case there is not), for the cart-
-pendulum system are available at the following article \url{https://www.pmdcorp.com/resources/type/articles/get/s-curve-profiles-deep-dive-article}.
+pendulum system are available at the following article \url{https://www.pmdcorp.com/resources/type/articles/get/s-curve-profiles-deep-dive-article}. However, it is very important to note, that using smooth acceleration 
+profiles in trajectories in the joint space $\mathbb{J}$ does not necessarily mean that the acceleration profile in the task space $\mathbb{P}$ will be equally smooth or any smooth at all due to the non-linear transformation 
+between the spaces $\mathbb{J} \longleftrightarrow \mathbb{P}$ as well as the limits in the joint angles' ranges. This means that although smooth trajectories will cause less vibrations in the joint space, the vibrations/
+oscillations are not necessarily avoided in the task space.
 
 \begin{center}
 \begin{figure}[!htb]
