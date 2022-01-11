@@ -60,8 +60,29 @@ d(l, O_F) = \frac{\Vert \overrightarrow{O_FA} \times \mathbf{\hat{x}} \Vert}{\Ve
 
 Similar approaches to calculate this error/distance are presented in bibliography at \cite{Dong2016RobustTD} and \cite{Bauzano2009ControlMF}.\\
 
+\begin{center}
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=0.5\textwidth]{images/rcm-force-interaction-model.png}
+\caption{Force interaction model of the laparoscopic tool and the abdominal wall around the fulcrum point (RCM point)}
+\label{rcm-force-interaction-model}
+\end{figure}
+\end{center}
+
+
 If $e_{rcm} \leq 3_{max} = 1mm$ then the surgical tool axis passes through the fulcrum point and executes RCM trajectories, otherwise the robot is considered to have slipped from alignment, it does not execute RCM motion and 
-probably generates a force $f \propto e$ which exerts pressure to the incision point and the abdominal wall (or the tissue around the incision point), which can have negative side-effects in the recovery of the incision.\\
+probably generates a force $f \propto e$ which exerts pressure to the incision point and the abdominal wall (or the tissue around the incision point), which can have negative side-effects in the recovery of the incision.
+In paper \cite{Bauzano2009ControlMF} a different distance $e_s$ is calculated as the RCM error as shown in figure \ref{rcm-force-interaction-model}, which is along the x-axis of the fulcrum reference frame or the axis 
+of the abdominal wall (we assume local to the Fulcrum point the abdominal wall is a straight line). Using this deviation distance $e_s$ the force interaction between the surgical tool and the abdominal wall can be modelled 
+with the following force
+
+\begin{equation}
+\Vert \mathbf{f}_s \Vert = λ e_s
+\end{equation}
+where $λ$ is the elasticity of the abdominal wall and can be measured experimentally and
+\begin{equation}
+e_s = \frac{1}{cosγ} e
+\end{equation}
 
 \begin{center}
 \begin{figure}[!htb]
