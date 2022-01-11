@@ -644,6 +644,9 @@ is a controller that switches abruptly between two states. The trajectory is com
 
 \subsection{Trajectories in joint space with s-curve velocity profile}
 
+The goal of this experiment is to generate a trajectory in joint space using a smooth s-curve velocity profile. The start and end points as well as the inverse kinematics solutions for these points are the same as those 
+in \ref{section:9-2-polynomial-traj}.
+
 \begin{center}
 \begin{figure}[H]
 \centering
@@ -655,6 +658,10 @@ is a controller that switches abruptly between two states. The trajectory is com
 
 
 \subsection{Helical trajectories in task space}
+
+The goal of this experiment is to generate a helical trajectory inside the surgical taskspace which will then be transformed via the fulcrum transformation 
+to a trajectory that the robotic arm can execute. To define a helical trajectory in the taskspace, two parameters are required: the $(x,y,z)$ coordinates of the 
+helix center, it's radius $r$, as well as the number of cycles $τ$ of the helix and slope parameter $β$.\\ 
 
 \begin{center}
 \begin{figure}[!htb]

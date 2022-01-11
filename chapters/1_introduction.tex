@@ -123,7 +123,34 @@ a \textbf{Remote Center of Motion} (RCM) control. The constraint is that, at eac
 trocar, or the fulcrum reference frame point).
 \end{itemize}
 
+
 \section{Bibliography Overview}
+
+Surgery robotics, in terms of robot mechanics, can be divided into two categories, specialized surgical robots and generic robotic arms that are programmed for surgical tasks. The specialized surgical robots have specific 
+mechanisms which ensure that the RCM constraint is satisfied mechanically. These robots are easier to control but are only suitable for very specific operations and are usually big in size, with complicated structures that 
+require more maintenance.\\
+
+A new methodology to do Minimally Invasive Surgical operations is by using industrial robots which are programmable to respect the RCM constraint. This methodology is studied in \cite{Marinho2014APR}, where a controller is designed to minimize 
+the deviation from the RCM point using kinematics with the dual quaternion framework. A similar approach is studied in \cite{Bauzano2009ControlMF}, where a controller is designed for an active wrist robot to mimic the passive wrist mechanism, which 
+means not exerting pressure on the abdominal wall and respecting the RCM constraint while executing the trajectory with smaller error. This thesis also follows a similar approach, the laparoscopic tool is attached on an 
+active wrist end-effector of a popular non-surgical industrial robot (KUKA lwr iiwa14) and the RCM constraint is satisfied programmatically, i.e. with non specialized mechanisms or a passive wrist.\\
+
+Minimizing the RCM error is important in order to execute precise trajectories but also to minimize the force exerted to the patient. In paper \cite{4957177}, this deviation error is studied more thoroughly and is used to study the 
+force interaction model of the surgical tool (endoscopic camera) and the abdominal wall. The force that is exerted can be calculated from the fulcrum displacement and the abdominal wall elasticity constant which can be 
+estimated experimentally.\\
+
+The trajectories that a laparoscopic tool must follow, pivot around the RCM constraint point. This point is also known in the bibliography as the fulcrum point, pivot point, trocar point, incision point. To design a 
+trajectory, this point is assumed to be known, which is generally not the case and the fulcrum point is usually estimated. In \cite{Dong2016RobustTD} an algorithm is proposed that estimates the position of the trocar during a robot-assisted 
+endoscopic surgery. The trocar position is estimated with the Least Square Algorithm which is used to calculate the intersection of surgical tool axes measured from a given number of consecutive robot configurations. A 
+different approach of estimating the Fulcrum point is presented in \cite{Gruijthuijsen2018LeveragingTF}, where the fulcrum point is estimated using an Extended Kalman FIlter which uses a stochastic measurement and prediction model and it is able to produce 
+better results even if the measurements are noisy.\\
+
+When designing a control system for the robot, capable of executing the pivot motions, there are two approaches. The first approach is to directly design a control system whose control parameters adapt to the errors (direct 
+adaptive control) and the second approach is to first estimate the fulcrum parameters or assume they are known and then apply a usual control system (indirect adaptive control). An example of the second approach is studied in 
+\cite{Muoz2005PivotingMC}, where a geometrical estimator is used to estimate the outside penetration of the surgical tool, which is then used in a PI controller and a trajectory generator.\\
+
+
+
 
 \section{Methodology \& Approach}
 

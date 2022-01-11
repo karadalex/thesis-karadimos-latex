@@ -58,6 +58,8 @@ can be calculated using \ref{line-point-distance-formula}.
 d(l, O_F) = \frac{\Vert \overrightarrow{O_FA} \times \mathbf{\hat{x}} \Vert}{\Vert \mathbf{\hat{x}} \Vert}
 \end{equation}
 
+Similar approaches to calculate this error/distance are presented in bibliography at \cite{Dong2016RobustTD} and \cite{Bauzano2009ControlMF}.\\
+
 If $e_{rcm} \leq 3_{max} = 1mm$ then the surgical tool axis passes through the fulcrum point and executes RCM trajectories, otherwise the robot is considered to have slipped from alignment, it does not execute RCM motion and 
 probably generates a force $f \propto e$ which exerts pressure to the incision point and the abdominal wall (or the tissue around the incision point), which can have negative side-effects in the recovery of the incision.\\
 
@@ -71,7 +73,7 @@ fulcrum reference frame $\tilde{O}_F$}
 \end{figure}
 \end{center}
 
-The error $e_{rcm}$ can be provide further information if the distance of the line $l$ (or of the $\mathbf{\hat{x}}$ axis) from the fulcrum point, is seen from a different perspective than that of 
+The error $e_{rcm}$ can provide further information if the distance of the line $l$ (or of the $\mathbf{\hat{x}}$ axis) from the fulcrum point, is seen from a different perspective than that of 
 figure \ref{rcm-error-geometry}. If this distance is seen from a plane that is perpendicular to $\mathbf{\hat{x}}$, then the line is seen as a point and the distance $d(l, O_F)$ is seen as a distance between 2 points, 
 as illustrated in figure \ref{rcm-error-yz-plane}. This perspective of the RCM error (will also be referenced as yz-error $e_{yz}$) is more useful because it decomposes the error distance in 2 components that can be used to 
 correct the goal pose of the robot so that is fixes the RCM misalignment.
