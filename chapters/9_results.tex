@@ -543,7 +543,8 @@ circle's center and it's radius $r$.\\
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=\textwidth]{images/robot_planner3/3a_circle_details.png}
-\caption{Experiment 3a: }
+\caption{Experiment 3a: A more detailed view of the circular trajectories. (a) the original circular trajectory designed inside the surgical taskspace, (b) the transformed trajectory that the base of the surgical tool will
+ follow, (c) the actual transformed trajectory that the robot's end-effector will follow}
 \label{robot-planner3a-circle-details}
 \end{figure}
 \end{center}
@@ -551,42 +552,6 @@ circle's center and it's radius $r$.\\
 Note that in this experiment (see screenshot \ref{robot-planner3a-circle}), the trivial case is examined where the circle is parallel to the $xy$ plane of the fulcrum's 
 coordinate system. That is because the parametric definition if the circle, can be easily expressed when in a standard plane of the coordinate system i.e. $xy, xz$ 
 or $yz$ planes and not in an arbitrary orientation.
-
-% Robot Planner 3a with RRTConnect
-% \begin{table}[H]
-% \centering
-% \begin{tabular}{|p{2cm}|c|p{3cm}|p{3cm}|p{3cm}|}
-% \hline
-% Robot Planner 3a           & \multicolumn{4}{c}{\textbf{RRTConnect}}                                                                                                 \vline \\
-% \hline
-%                           & \multicolumn{4}{c}{\textbf{Place \& Insert tool}}                     \vline \\
-% \hline
-% Experiment                & Status & Solution Time & Path Simplification Time & Planning Attempts  \\
-% \hline
-% 1                         &        &               &                          &  \\
-% 2                         &        &               &                          &  \\
-% 3                         &        &               &                          &  \\
-% 4                         &        &               &                          &  \\
-% 5                         &        &               &                          &  \\
-% \hline
-% \textbf{Average} & 	& 	& 	&  \\
-% \hline
-%                           & \multicolumn{4}{c}{\textbf{Pivot Trajectory}}                     \vline \\
-% \hline
-% Experiment                & Status & Solution Time & Path Simplification Time & Planning Attempts  \\
-% \hline
-% 1                         &        &               &                          &  \\
-% 2                         &        &               &                          &  \\
-% 3                         &        &               &                          &  \\
-% 4                         &        &               &                          &  \\
-% 5                         &        &               &                          &  \\
-% \hline
-% \textbf{Average} & 	& 	& 	&  \\
-% \hline
-% \end{tabular}
-% \caption{Time results for robot planner 3a using the RRTConnect path planner algorithm}
-% \label{robot-planner3a-rrtconnect-data}
-% \end{table}
 
 
 \subsection{Cubic Spline trajectories in task space}

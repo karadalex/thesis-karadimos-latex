@@ -139,8 +139,20 @@ presented in this section are planned in cartesian coordinates or also known as 
 \begin{itemize}
 \item \textbf{Planning and execution are significantly slower}, because for each interpolation point in task space the Inverse Kinematics problem must be solved. This issue is
 even more problematic when the IK problem is not solved with analytical equations but numerically using optimization techniques.
-\item A smooth trajectory in task space is not necessarily smooth in Joint Space.
+\item A smooth trajectory in task space is not necessarily smooth in Joint Space (see figure \ref{interpolation-accuracy}).
 \end{itemize}
+
+\begin{center}
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=0.5\textwidth]{images/interpolation-accuracy.png}\\
+\caption{Path/trajectory interpolation done at two stages. (a) the initial desired circular trajectory, (b) sample waypoints that will approximate the circle and shape a polygon, (c) the line segments connecting the 
+waypoints and which the robot must theoretically follow exactly, (d) lower-level interpolation of the line segments (made by MoveIt in ROS or by the robot's controller when executing PtP), (e) the actual trajectory that 
+the robot will follow}
+\label{interpolation-accuracy}
+\end{figure}
+\end{center}
+
 
 \subsection{Circular trajectory of tool tip}
 
