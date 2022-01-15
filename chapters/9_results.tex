@@ -67,9 +67,9 @@ Experiment                & Insertion planning time & Execution status & Pivot p
 \hline
 \textbf{Average} & 	0.163102 & 1	& 0.5014398 &	0.9 \\
 \hline
-                          & \multicolumn{4}{c}{\textbf{Reverse pivot \& reverse insertion trajectories}}                     \vline \\
+                          & \multicolumn{4}{c}{\textbf{Reverse pivot \& retraction trajectories}}                     \vline \\
 \hline
-Experiment                & Reverse pivot planning time & Execution status & Reverse insertion planning time & Execution status  \\
+Experiment                & Reverse pivot planning time & Execution status & retraction planning time & Execution status  \\
 \hline
 1 & 2.419514	& 1	& 2.388166	& 1 \\
 2 & 1.386188	& 1	& 2.874223	& 0 \\
@@ -132,9 +132,9 @@ Experiment                & Insertion planning time & Execution status & Pivot p
 \hline
 \textbf{Average} & 	5.083449	& 0.9	& 5.090813	& 0.6 \\
 \hline
-                          & \multicolumn{4}{c}{\textbf{Reverse pivot \& reverse insertion trajectories}}                     \vline \\
+                          & \multicolumn{4}{c}{\textbf{Reverse pivot \& retraction trajectories}}                     \vline \\
 \hline
-Experiment                & Reverse pivot planning time & Execution status & Reverse insertion planning time & Execution status  \\
+Experiment                & Reverse pivot planning time & Execution status & retraction planning time & Execution status  \\
 \hline
 1 & -	& 0	& -	& 0 \\
 2 & -	& 0	& -	& 0 \\
@@ -185,7 +185,7 @@ Robot Planner 2a           & \multicolumn{4}{c}{\textbf{RRTConnect}}            
 \hline
                           & \multicolumn{4}{c}{\textbf{Insertion \& Pivot trajectories}}                     \vline \\
 \hline
-Experiment                & Trocar1 insertion time & Execution status & Trocar1 reverse insertion time & Execution status  \\
+Experiment                & Trocar1 insertion time & Execution status & Trocar1 retraction time & Execution status  \\
 \hline
 1	& 0.060728	& 1	& 2.875072	& 1 \\
 2	& 0.070508	& 1	& 5.235667	& 1 \\
@@ -219,7 +219,7 @@ Experiment                & Approach trocar2 time & Execution status & Trocar2 i
 \hline
                           & \multicolumn{4}{c}{\textbf{Insertion \& Pivot trajectories}}                     \vline \\
 \hline
-Experiment                & Trocar2 reverse insertion time & Execution status & Approach trocar3 time & Execution status  \\
+Experiment                & Trocar2 retraction time & Execution status & Approach trocar3 time & Execution status  \\
 \hline
 1 & 0.152233	& 1	& 0.214332	& 1 \\
 2 & 0.321677	& 1	& 0.361712	& 1 \\
@@ -236,7 +236,7 @@ Experiment                & Trocar2 reverse insertion time & Execution status & 
 \hline
                           & \multicolumn{4}{c}{\textbf{Insertion \& Pivot trajectories}}                     \vline \\
 \hline
-Experiment                & Trocar3 insertion time & Execution status & Trocar3 reverse insertion time & Execution status  \\
+Experiment                & Trocar3 insertion time & Execution status & Trocar3 retraction time & Execution status  \\
 \hline
 1 & 0.196175	& 1	& 0.855452	& 0 \\
 2 & 0.412455	& 1	& 1.133213	& 0 \\
@@ -295,7 +295,7 @@ Robot Planner 2b           & \multicolumn{4}{c}{\textbf{RRTConnect}}            
 \hline
                           & \multicolumn{4}{c}{\textbf{Insertion \& Pivot trajectories}}                     \vline \\
 \hline
-Experiment                & Trocar1 insertion time & Execution status & Trocar1 reverse insertion time & Execution status  \\
+Experiment                & Trocar1 insertion time & Execution status & Trocar1 retraction time & Execution status  \\
 \hline
 1	& 0.269901	& 1	& 0.355588	& 1 \\
 2	& 0.220509	& 1	& 0.255968	& 1 \\
@@ -329,7 +329,7 @@ Experiment                & Approach trocar2 time & Execution status & Trocar2 i
 \hline
                           & \multicolumn{4}{c}{\textbf{Insertion \& Pivot trajectories}}                     \vline \\
 \hline
-Experiment                & Trocar2 reverse insertion time & Execution status & Approach trocar3 time & Execution status  \\
+Experiment                & Trocar2 retraction time & Execution status & Approach trocar3 time & Execution status  \\
 \hline
 1 & 5.374646	& 1	& 5.451335	& 1 \\
 2 & 0.452231	& 1	& 0.253669	& 1 \\
@@ -346,7 +346,7 @@ Experiment                & Trocar2 reverse insertion time & Execution status & 
 \hline
                           & \multicolumn{4}{c}{\textbf{Insertion \& Pivot trajectories}}                     \vline \\
 \hline
-Experiment                & Trocar3 insertion time & Execution status & Trocar3 reverse insertion time & Execution status  \\
+Experiment                & Trocar3 insertion time & Execution status & Trocar3 retraction time & Execution status  \\
 \hline
 1 & 0.372382	& 1	& 5.34059	& 1 \\
 2 & 0.280432	& 1	& 0.261765	& 1 \\
@@ -398,10 +398,70 @@ a custom ROS node that subscribes to the robot's kinematic state (joints' angle 
 The goal of this third experiment is to design and test only some pivot trajectories. The pivot motions follow the equations described in 
 \ref{section:pivot-motions}. The trajectories that were designed and tested in this group of experiments are the following:
 \begin{itemize}
-\item Circular
-\item Arc
 \item Line segment
+\item Circle
+\item Cubic spline
+\item B-Spline
+\item Quintic polynomial in joint space
+\item Trapezoidal velocity profile in joint space
+\item S-Curve velocity profile in joint space
+\item Helix
 \end{itemize}
+
+\subsection{Line segment trajectories in task space}
+
+The goal of this experiment is to generate a line segment trajectory inside the surgical
+taskspace which will then be transformed via the fulcrum transformation to a trajectory that the robotic arm can execute. To define a line segment only 
+2 points are needed, the coordinates of the start and those of the end of the line segment. An other, way of defining a line segment trajectory, 
+is by passing as parameters the coordinates of the start point and a vector attached to that point, whose and points to the end point. The second definition 
+of the line segment can be very useful in cases where the direction of the line is needed.
+
+\begin{center}
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=\textwidth]{images/robot_planner3/3b_line_seg.png}
+\caption{Experiment 3b: Create the line segment trajectory inside the surgical site (below the green mounting dock) and transform it via the fulcrum transformation to a trajectory for the robot's TCP.
+(a) Preparatory path to achieve elbow-up pose, (b) transformed line segment trajectory for the end-effector to follow, (c) transformed line segment trajectory with respect to the tool base frame (there is an offset from the 
+end-effector see \ref{section:eef-tool-tip-transformations}), (d) fulcrum reference frame 2 $\lbrace F_2 \rbrace$, (e) line segment trajectory in surgical taskspace, (f) line of the axis along the length of the surgical tool, 
+which is used to calculated the distance error (RCM deviation)}
+\label{robot-planner3b-line-seg}
+\end{figure}
+\end{center}
+
+\begin{center}
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=0.49\textwidth]{images/robot_planner3/robot_planner3b_error1.png}
+\includegraphics[width=0.49\textwidth]{images/robot_planner3/robot_planner3b_error2.png}
+\caption{Experiment 3b: RCM errors from two iterations of the same experiment. The robot starts from the home position where the rcm error is bigger, then approaches the fulcrum point, where the errors decreases and then 
+it executes the line segment pivot trajectory where the error is bounded in the magnitude of less than a micrometer $10^{-6}m$. The x-axis shows the ROS time in seconds and the y-axis the RCM error in logarithmic scale.}
+\label{robot-planner3b-line-seg-rcm-errors}
+\end{figure}
+\end{center}
+
+Note that although this type of trajectory is trivial in robot planner, this specific line segment trajectory should not be confused with ROS MoveIt line segment trajectories. The line-segment studied in this experiment 
+is linear when defined in the surgical taskpsace, but it is highly non-linear when transformed via the fulcrum transformation and it has a curved shape. The only exceptions to this transformation is for line segments that 
+lie on the direction defined by the radius unit vector $\mathbf{\hat{r}}$ of the spherical coordinate system of the Fulcrum reference frame, or equivalently the points $A,B$ defining the line-segment and the origin $O$ 
+of the reference frame, must be collinear. These exceptions can also be planned by the MoveIt framework and are also known 
+as and referenced throughout this thesis, as insertion movements. Let $\overrightarrow{AB}$ be the vector representing the line segment, then for the points $A, B$ the following must hold, in order for the line segment to be 
+invariant under the fulcrum transformation in terms of shape (i.e. the line to remain a line).
+\begin{equation}
+\overrightarrow{AB} = \overrightarrow{OB} - \overrightarrow{OA}
+\end{equation} 
+and
+\begin{equation}
+\overrightarrow{OB} = r \overrightarrow{OA}, \quad r \in \mathbb{R}
+\end{equation}
+
+\begin{center}
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=\textwidth]{images/robot_planner3/3b_line_seg_invariant.png}
+\caption{Experiment 3b: Line segment trajectory that is invariant under the fulcrum transformation, in terms of shape (the line remains a line).}
+\label{robot-planner3b-line-seg}
+\end{figure}
+\end{center}
+
 
 \subsection{Circular trajectories in task space}
 
@@ -415,6 +475,15 @@ circle's center and it's radius $r$.\\
 \includegraphics[width=\textwidth]{images/robot_planner3/3a_circle.png}
 \caption{Experiment 3a: Create circular trajectory inside the surgical site (below the green mounting dock) and transform it via the fulcrum transformation to a trajectory for the robot's TCP.}
 \label{robot-planner3a-circle}
+\end{figure}
+\end{center}
+
+\begin{center}
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=\textwidth]{images/robot_planner3/3a_circle_details.png}
+\caption{Experiment 3a: }
+\label{robot-planner3a-circle-details}
 \end{figure}
 \end{center}
 
@@ -457,47 +526,6 @@ or $yz$ planes and not in an arbitrary orientation.
 % \caption{Time results for robot planner 3a using the RRTConnect path planner algorithm}
 % \label{robot-planner3a-rrtconnect-data}
 % \end{table}
-
-
-\subsection{Line segment trajectories in task space}
-
-The goal of this experiment is to generate a line segment trajectory inside the surgical
-taskspace which will then be transformed via the fulcrum transformation to a trajectory that the robotic arm can execute. To define a line segment only 
-2 points are needed, the coordinates of the start and those of the end of the line segment. An other, way of defining a line segment trajectory, 
-is by passing as parameters the coordinates of the start point and a vector attached to that point, whose and points to the end point. The second definition 
-of the line segment can be very useful in cases where the direction of the line is needed.
-
-\begin{center}
-\begin{figure}[!htb]
-\centering
-\includegraphics[width=\textwidth]{images/robot_planner3/3b_line_seg.png}
-\caption{Experiment 3b: Create the line segment trajectory inside the surgical site (below the green mounting dock) and transform it via the fulcrum transformation to a trajectory for the robot's TCP.}
-\label{robot-planner3b-line-seg}
-\end{figure}
-\end{center}
-
-Note that although this type of trajectory is trivial in robot planner, this specific line segment trajectory should not be confused with ROS MoveIt line segment trajectories. The line-segment studied in this experiment 
-is linear when defined in the surgical taskpsace, but it is highly non-linear when transformed via the fulcrum transformation and it has a curved shape. The only exceptions to this transformation is for line segments that 
-lie on the direction defined by the radius unit vector $\mathbf{\hat{r}}$ of the spherical coordinate system of the Fulcrum reference frame, or equivalently the points $A,B$ defining the line-segment and the origin $O$ 
-of the reference frame, must be collinear. These exceptions can also be planned by the MoveIt framework and are also known 
-as and referenced throughout this thesis, as insertion movements. Let $\overrightarrow{AB}$ be the vector representing the line segment, then for the points $A, B$ the following must hold, in order for the line segment to be 
-invariant under the fulcrum transformation in terms of shape (i.e. the line to remain a line).
-\begin{equation}
-\overrightarrow{AB} = \overrightarrow{OB} - \overrightarrow{OA}
-\end{equation} 
-and
-\begin{equation}
-\overrightarrow{OB} = r \overrightarrow{OA}, \quad r \in \mathbb{R}
-\end{equation}
-
-\begin{center}
-\begin{figure}[!htb]
-\centering
-\includegraphics[width=\textwidth]{images/robot_planner3/3b_line_seg_invariant.png}
-\caption{Experiment 3b: Line segment trajectory that is invariant under the fulcrum transformation, in terms of shape (the line remains a line).}
-\label{robot-planner3b-line-seg}
-\end{figure}
-\end{center}
 
 
 \subsection{Cubic Spline trajectories in task space}
