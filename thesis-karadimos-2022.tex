@@ -1,0 +1,132 @@
+\documentclass[a4paper,11pt,twoside]{book}
+
+\usepackage{my-thesis-template}
+
+
+%----------------------------------------------------------------------------------------
+%	METADATA
+%----------------------------------------------------------------------------------------
+\newcommand{\thesistitle}{Robotic surgical tool manipulator - Recognition, control and manipulation of laparoscopic tools}
+\newcommand{\division}{Division}
+\newcommand{\me}{Karadimos Alexios of Loukas}
+\newcommand{\nomme}{Karadimos Alexios of Loukas}
+\newcommand{\studnum}{1046820}
+\newcommand{\monthyear}{Month 2022}
+\newcommand{\supname}{Evangelos Dermatas}
+\newcommand{\suptitle}{Associate Professor Dr.}
+\newcommand{\cosupname}{Anthony Tzes}
+\newcommand{\cosuptitle}{Professor Dr.}
+\newcommand{\headofdivision}{Kazakos Demosthenes}
+\newcommand{\headofdivisiontitle}{Assistant Professor Dr.}
+\newcommand{\keywords}{surgery, robotics, control, laparoscopy, RCM, fulcrum, MIS, trajectory, ROS}
+\title{\thesistitle}
+\author{Karadimos Alexios}
+\date{2022}
+
+% PDF metadata
+\hypersetup
+{
+    pdfauthor={Alexios Karadimos},
+    pdftitle={thesis},
+    pdfsubject={\thesistitle},
+    pdfkeywords={\keywords},
+    pdfproducer={PdfLaTex},
+    pdfcreator={Alexios Karadimos}
+}
+
+
+\begin{document}
+
+\selectlanguage{greek}
+\selectlanguage{english}
+
+
+%----------------------------------------------------------------------------------------
+%	FRONT PAGE & CERTIFICATION
+%----------------------------------------------------------------------------------------
+\include{titlepage}
+\newpage{\pagestyle{empty}\cleardoublepage}
+
+\include{certification}
+\newpage{\pagestyle{empty}\cleardoublepage}
+
+\include{details}
+\newpage{\pagestyle{empty}\cleardoublepage}
+
+\include{abstract}
+\newpage{\pagestyle{empty}\cleardoublepage}
+
+\include{acknowledgements}
+
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+\pagestyle{fancy}
+
+\clearpage
+\tableofcontents
+\renewcommand*\contentsname{Table of Contents}
+
+%----------------------------------------------------------------------------------------
+%	MAIN SECTIONS
+%----------------------------------------------------------------------------------------
+
+\newpage
+\input{chapters/1_introduction}
+
+\newpage
+\input{chapters/2_kinematics}
+
+\newpage
+\input{chapters/3_grasping}
+
+\newpage
+\input{chapters/4_vision}
+
+\newpage
+\input{chapters/5_path}
+
+\newpage
+\input{chapters/6_trajectory}
+
+\newpage
+\input{chapters/7_control}
+
+\newpage
+\input{chapters/8_ros_sim}
+
+\newpage
+\input{chapters/9_results}
+
+\newpage
+\input{chapters/10_conclusions}
+
+
+%----------------------------------------------------------------------------------------
+%	BIBLIOGRAPHY, REFERENCES, TABLES, APPENDIXES
+%----------------------------------------------------------------------------------------
+\newpage
+\appendix
+\appendixpage
+\input{chapters/appendix}
+
+\newpage
+\input{nomenclature}
+\printnomenclature
+
+\listoffigures
+
+\addcontentsline{toc}{section}{\listoflistingscaption}
+\listoflistings
+
+\listofalgorithms
+
+\listoftables
+
+\nocite{*}
+\printbibliography[heading=bibintoc,title={Bibliography}]
+
+%\end{otherlanguage}
+\end{document}
