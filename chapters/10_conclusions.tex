@@ -87,7 +87,10 @@ be used for integration testing is proposed in the state machine of \ref{section
 
 \section{Future Work}
 
-\textbf{Simulation and interaction with deformable bodies} \\
+\textbf{Simulation and interaction with deformable bodies}. 
+In this thesis the laparoscopic tool is inserted through holes (trocars) in a mounting dock that simulates the patient. A more realistic approach would be instead of using such a rigid mounting dock, to use a deformable 
+phantom object to study the interaction between the laparoscopic tool, the trocar and the patient's abdominal wall. Such a simulation is not feasible using ROS Gazebo simulation environment because it does not support 
+collisions and physics with deformable objects. A framework that could be used with the help of a suitable ROS plugin to simulate deformable objects is the SOFA Framework.
 
 \begin{center}
 \begin{figure}[!htb]
@@ -99,7 +102,9 @@ be used for integration testing is proposed in the state machine of \ref{section
 \end{figure}
 \end{center}
 
-\textbf{Advanced visualization and Haptics feedback} \\
+\textbf{Advanced visualization and Haptics feedback}
+In this thesis, no medical imaging is used relevant to laparoscopic operations. It would be greatly beneficial to study pivot motions based on medical imaging or haptic feedback from endoscopic instruments. CHAI3D is 
+an open source, platform agnostic framework for computer haptics, visualization and interactive real-time simulation which supports haptic devices.
 
 \begin{center}
 \begin{figure}[!htb]
@@ -110,4 +115,12 @@ be used for integration testing is proposed in the state machine of \ref{section
 \end{figure}
 \end{center}
 
-\textbf{Applications of Machine Learning in Computer Vision and Path Planning} \\
+
+Other ideas for future work that could improve and further explore the outcomes of this thesis are:
+\begin{itemize}
+\item Using the trajectories from chapter \ref{chapter-6} as building blocks for more complicated trajectories like suturing or cauterization
+\item Design pivot trajectories without assuming that the Fulcrum point is known and constant and use estimation methods (like a Kalman filter) to estimate its pose
+\item Multiple robot arm collaboration: designing pivot trajectories for 2 or more robot arms that collaborate for a common surgical task, for example one robot controls an endoscopic camera and the other robot(s) control the
+surgical tools
+\item Applications of Machine Learning in Computer Vision: detection of laparoscopic tools
+\end{itemize}
