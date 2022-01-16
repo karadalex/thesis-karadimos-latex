@@ -16,7 +16,8 @@ or run following script `./build.sh`
 
 ```bash
 cd images
-for f in ./**/*.png ; do convert "$f" -resize 800x800\> "$f" ; done
+for f in ./**/*.png ; do convert "$f" -resize 740x740\> "$f" ; done
 cd ..
 ./reduce.sh
 ```
+careful not to commit the reduced version of pdf and images if you just want it temporarily
