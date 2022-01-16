@@ -1,6 +1,7 @@
 \chapter{Experiments and Results}
 
 \section{Robot Planner 1: Simple MoveIt planning}
+\label{section:robot-planner1}
 
 In this first experiment we are testing some simple trajectories with the surgical tool already attached to the robot arm's end effector.
 The path is designed using the appropriate coordinates and orientations so that the robot begins from the home position, then visits the table with the surgical 
@@ -157,6 +158,7 @@ Experiment                & Reverse pivot planning time & Execution status & ret
 
 
 \section{Robot Planner 2: Simulation layout and reachability experiments}
+\label{section:robot-planner2}
 
 In this experiment, we plan a path such that the robot arm will visit all holes of the mounting dock and will try the insertion movement of the surgical tool.
 This experiment is very useful, because it shows whether all holes of the mounting dock are \textbf{reachable} (inside the robot's work space) and if so, how 
@@ -409,6 +411,7 @@ The goal of this third experiment is to design and test only some pivot trajecto
 \end{itemize}
 
 \subsection{Line segment trajectories in task space}
+\label{section:robot-planner3b}
 
 The goal of this experiment is to generate a line segment trajectory inside the surgical
 taskspace which will then be transformed via the fulcrum transformation to a trajectory that the robotic arm can execute. To define a line segment only 
@@ -964,6 +967,7 @@ fulcrum reference frame.}
 
 \newpage
 \section{Robot Planner 7: State machine - End-to-end running}
+\label{section:robot-planner7}
 
 The goal of this experiment is to run all stages of this thesis together to study the end-to-end result. Each stage is run by a different node and the sequence in which every task is executed is dictated by the status 
 of the state machine as shown in figure \ref{smack-state-machine}.
