@@ -41,16 +41,7 @@ The pose is given by the following transformation matrix
 \]
 
 \begin{equation}
-\hat{\mathbf{x}}^{}_B = \hat{\mathbf{θ}} = cos(θ)cos(φ)\hat{\mathbf{x}}^{}_F + cos(θ)sin(φ)\hat{\mathbf{y}}^{}_F - sin(θ)\hat{\mathbf{z}}^{}_F
-= \begin{bmatrix}
-cos(θ)cos(φ) \\
-cos(θ)sin(φ) \\
-- sin(θ) \\
-\end{bmatrix}
-\end{equation}
-
-\begin{equation}
-\hat{\mathbf{y}}^{}_B = \hat{\mathbf{φ}} = -sin(φ)\hat{\mathbf{x}}^{}_F + cos(φ)\hat{\mathbf{y}}^{}_F
+\hat{\mathbf{x}}^{}_B = \hat{\mathbf{φ}} = -sin(φ)\hat{\mathbf{x}}^{}_F + cos(φ)\hat{\mathbf{y}}^{}_F
 = \begin{bmatrix}
 -sin(φ) \\
 cos(φ) \\
@@ -59,11 +50,20 @@ cos(φ) \\
 \end{equation}
 
 \begin{equation}
-\hat{\mathbf{z}}^{}_B = - \hat{\mathbf{r}} = - (sin(θ)cos(φ)\hat{\mathbf{x}}^{}_F + sin(θ)sin(φ)\hat{\mathbf{y}}^{}_F + cos(θ)\hat{\mathbf{z}}^{}_F)
+\hat{\mathbf{y}}^{}_B = \hat{\mathbf{θ}} = cos(θ)cos(φ)\hat{\mathbf{x}}^{}_F + cos(θ)sin(φ)\hat{\mathbf{y}}^{}_F - sin(θ)\hat{\mathbf{z}}^{}_F
 = \begin{bmatrix}
--sin(θ)cos(φ) \\
--sin(θ)sin(φ) \\
--cos(θ) \\
+cos(θ)cos(φ) \\
+cos(θ)sin(φ) \\
+- sin(θ) \\
+\end{bmatrix}
+\end{equation}
+
+\begin{equation}
+\hat{\mathbf{z}}^{}_B = \hat{\mathbf{r}} = sin(θ)cos(φ)\hat{\mathbf{x}}^{}_F + sin(θ)sin(φ)\hat{\mathbf{y}}^{}_F + cos(θ)\hat{\mathbf{z}}^{}_F
+= \begin{bmatrix}
+sin(θ)cos(φ) \\
+sin(θ)sin(φ) \\
+cos(θ) \\
 \end{bmatrix}
 \end{equation}
 
@@ -82,7 +82,11 @@ thus the position with respect to the coordinate frame $\lbrace F \rbrace$ is gi
 \end{bmatrix} = ρ \hat{\mathbf{r}}
 \end{equation}
 
-The above goal point must be the same as the $TCP$ point of the robot's end-effector. This means, that this pose must be converted with respect to the robot's reference frames.
+After having calculated the $\hat{\mathbf{x}},\hat{\mathbf{y}},\hat{\mathbf{z}},mathbf{p}$, then these are rotated according to how the tool is attached on the end-effector (e.g. in this thesis the $\hat{\mathbf{x}}$ vector 
+points towards the origin of the frame, see figure \ref{robot-planner3b-line-seg}) of the robot and they are also translated (see also figure \ref{robot-planner3b-line-seg})
+based on the offset between the end-effector and the tool (distance between end-effector and TCP). Note, that one can also use the $φ,θ$ angles as two of the Euler rotation angles and thus calculate the orientation 
+with these angles instead of using the spherical coordinate unit vectors method above.
+The final transformed goal pose must be the same as the $TCP$ point of the robot's end-effector. This means, that this pose must be converted with respect to the robot's reference frames.
 \[
 {}^{U}T^{}_{TCP} = {}^{U}T^{}_{B}
 \]

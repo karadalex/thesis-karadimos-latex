@@ -501,11 +501,11 @@ and
 \end{equation}
 
 \begin{center}
-\begin{figure}[!htb]
+\begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{images/robot_planner3/3b_line_seg_invariant.png}
 \caption{Experiment 3b: Line segment trajectory that is invariant under the fulcrum transformation, in terms of shape (the line remains a line).}
-\label{robot-planner3b-line-seg}
+\label{robot-planner3b-line-seg-invariant}
 \end{figure}
 \end{center}
 
@@ -993,19 +993,19 @@ where $\mathbf{p} = [x,y,z]$ and the Euler angles $ψ, θ, φ$ are later used to
 \begin{center}
 \begin{figure}[!htb]
 \centering
-\includegraphics[width=0.49\textwidth]{images/robot_planner6/rcm-error-collision.png}
-\includegraphics[width=0.49\textwidth]{images/robot_planner6/rcm-collision.png}\\
-\caption{Surgical tool slides from an aligned, RCM pose to a pose misaligned from the fulcrum point, no RCM motion and surgical tool is is collision, exerting pressure to the abdominal wall. The diagram on the 
-left shows the error starting from a correct position to a problematic position. The right image shows the tool in collision with the mounting dock (abdominal wall) and there is an obvious distance from the 
-fulcrum reference frame.}
+\includegraphics[width=\textwidth]{images/robot_planner6/topics-and-nodes.png}
+\caption{ROS nodes and topics used for the robot-planner6 experiment. In this experiment the trajectories and RCM fulcrum errors are with respect to the 2nd fulcrum reference frame only.}
 \end{figure}
 \end{center}
 
 \begin{center}
 \begin{figure}[!htb]
 \centering
-\includegraphics[width=\textwidth]{images/robot_planner6/topics-and-nodes.png}
-\caption{ROS nodes and topics used for the robot-planner6 experiment. In this experiment the trajectories and RCM fulcrum errors are with respect to the 2nd fulcrum reference frame only.}
+\includegraphics[width=0.49\textwidth]{images/robot_planner6/rcm-error-collision.png}
+\includegraphics[width=0.49\textwidth]{images/robot_planner6/rcm-collision.png}\\
+\caption{Surgical tool slides from an aligned, RCM pose to a pose misaligned from the fulcrum point, no RCM motion and surgical tool is is collision, exerting pressure to the abdominal wall. The diagram on the 
+left shows the error starting from a correct position to a problematic position. The right image shows the tool in collision with the mounting dock (abdominal wall) and there is an obvious distance from the 
+fulcrum reference frame.}
 \end{figure}
 \end{center}
 
