@@ -20,9 +20,7 @@ The aim of this experiment is to test the overall behaviour of the robot inside 
 \end{center}
 
 % Robot Planner 1 with RRTConnect
-\begin{table}[H]
-\centering
-\begin{tabular}{|p{2cm}|c|p{2cm}|p{2cm}|p{2cm}|}
+\begin{longtable}{|p{2cm}|c|p{2cm}|p{2cm}|p{2cm}|}
 \hline
 Robot Planner 1           & \multicolumn{4}{c}{\textbf{RRTConnect}}                                                                                                 \vline \\
 \hline
@@ -83,17 +81,14 @@ Experiment                & Reverse pivot planning time & Execution status & ret
 \hline
 \textbf{Standard deviation} & 	1.628910 &	- &	1.204682 & - \\
 \hline
-\end{tabular}
 \caption{Time results for robot planner 1 using the RRTConnect path planner algorithm. Planning time is the sum of solution time and path simplification time. Execution status is 
 1 for success and 0 for failure. Parameters: tolerances: 0.000005, max planning time: 5 seconds, replanning: true, max planning attempts: 6. Experiments start from home position.}
 \label{robot-planner1-rrtconnect-data}
-\end{table}
+\end{longtable}
 
 
 % Robot Planner 1 with RRT*
-\begin{table}[H]
-\centering
-\begin{tabular}{|p{2cm}|c|p{2cm}|p{2cm}|p{2cm}|}
+\begin{longtable}{|p{2cm}|c|p{2cm}|p{2cm}|p{2cm}|}
 \hline
 Robot Planner 1           & \multicolumn{4}{c}{\textbf{RRT*}}                                                                                                 \vline \\
 \hline
@@ -154,11 +149,10 @@ Experiment                & Reverse pivot planning time & Execution status & ret
 \hline
 \textbf{Standard deviation} & 	inconclusive &	- &	inconclusive & - \\
 \hline
-\end{tabular}
 \caption{Time results for robot planner 1 using the RRT* path planner algorithm. Planning time is the sum of solution time and path simplification time. Execution status is 
 1 for success and 0 for failure. Parameters: tolerances: 0.000005, max planning time: 5 seconds, replanning: true, max planning attempts: 6. Experiments start from home position.}
 \label{robot-planner1-rrtstar-data}
-\end{table}
+\end{longtable}
 
 
 \section{Robot Planner 2: Simulation layout and reachability experiments}
