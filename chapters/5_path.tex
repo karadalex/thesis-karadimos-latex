@@ -209,8 +209,8 @@ for z0=-L:0.01:0
         rmax = sqrt(L^2-z0^2);
     end
     for r0=0:0.02:rmax
-        x = [x, r0*cos(2*pi*s)];
-        y = [y, r0*sin(2*pi*s)];
+        x = [x, r0*\cos(2*pi*s)];
+        y = [y, r0*\sin(2*pi*s)];
         z = [z, z0*ones(size(s))];
         lp = 1-exp(-k*(rmax-r0));
         r = [r, lp*ones(size(s))];

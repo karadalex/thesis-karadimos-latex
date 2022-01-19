@@ -92,10 +92,10 @@ be the position of the grasp point for one finger. The first angle can easily be
 \end{center}
 
 \begin{equation}
-BD = L_3 cos(φ_3 + \frac{2π}{9})
+BD = L_3 \cos \left(φ_3 + \frac{2π}{9} \right)
 \end{equation}
 \begin{equation}
-BC = L_3 sin(φ_3 + \frac{2π}{9})
+BC = L_3 \sin \left(φ_3 + \frac{2π}{9} \right)
 \end{equation}
 \begin{equation}
 p_{xy} = \sqrt{p_x^2 + p_y^2}
@@ -103,10 +103,10 @@ p_{xy} = \sqrt{p_x^2 + p_y^2}
 
 Next, we calculate the third angle based on the law of cosines applied on the triangle $ACD$ (see figure \ref{grasper-rrr-side})
 \begin{equation}
-cos \left( π - φ_3 - \frac{2π}{9} \right) = \frac{L_2^2 + L_3^2 - p^2}{2 L_2 L_3}
+\cos \left( π - φ_3 - \frac{2π}{9} \right) = \frac{L_2^2 + L_3^2 - p^2}{2 L_2 L_3}
 \end{equation}
 \begin{equation}
-cos \left(φ_3 + \frac{2π}{9} \right) = \frac{p^2 - L_2^2 - L_3^2}{2 L_2 L_3}
+\cos \left(φ_3 + \frac{2π}{9} \right) = \frac{p^2 - L_2^2 - L_3^2}{2 L_2 L_3}
 \end{equation}
 \begin{equation}
 φ_3 = atan2 \left[ \pm \sqrt{1 - \left( \frac{p^2 - L_2^2 - L_3^2}{2 L_2 L_3} \right)^2} , \frac{p^2 - L_2^2 - L_3^2}{2 L_2 L_3} \right] - \frac{2π}{9}
@@ -123,11 +123,11 @@ tan \left( ψ + φ_2 \right) = \frac{p_z}{\sqrt{p_x^2 + p_y^2}}
 ψ + φ_2 = atan2 \left( p_z, \sqrt{p_x^2 + p_y^2} \right)
 \end{equation}
 \begin{equation}
-tan \left( ψ \right) = \frac{L_3 sin \left( φ_3 + \frac{π}{4} \right) }{L_2 + L_3 cos \left( φ_3 + \frac{π}{4} \right)}
+tan \left( ψ \right) = \frac{L_3 \sin \left( φ_3 + \frac{π}{4} \right) }{L_2 + L_3 \cos \left( φ_3 + \frac{π}{4} \right)}
 \end{equation}
 
 \begin{equation}
-φ_2 = atan2 \left( pz, \sqrt{p_x^2 + p_y^2} \right) - atan2 \left[ L_3 sin \left( φ_3 + \frac{2π}{9} \right), L_2 + L_3 cos \left( φ_3 + \frac{2π}{9} \right) \right]
+φ_2 = atan2 \left( pz, \sqrt{p_x^2 + p_y^2} \right) - atan2 \left[ L_3 \sin \left( φ_3 + \frac{2π}{9} \right), L_2 + L_3 \cos \left( φ_3 + \frac{2π}{9} \right) \right]
 \end{equation}
 
 \section{Force closure}
