@@ -200,7 +200,7 @@ Simple geometric principles can be used to infer the relationships for all angle
 \begin{center}
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=8cm]{images/th2-4-calculation.png}\\
+\includegraphics[width=6cm]{images/th2-4-calculation.png}\\
 \caption{Calculation of angles $θ_2, θ_4$}
 \label{iiwa14-solution-configurations}
 \end{figure}
@@ -215,13 +215,14 @@ atan2 \left( p_y, p_x \right) \\
 π - atan2 \left( p_y, p_x \right)
 \end{cases}
 \\
-φ &=& acos \left( \frac{d_3^2 + \Vert{}^1p_{5}\Vert ^2 - d_5^2}{2d_3 \Vert{}^1p_{5}\Vert} \right)
+φ &=& acos \left( \frac{d_3^2 + \Vert{}^1p_{5}\Vert ^2 - d_5^2}{2d_3 \Vert{}^1p_{5}\Vert} \right),
+~
+θ_2 = atan2 \left( \sqrt{p_x^2 + p_y^2}, {}^1p_{5z} \right) \pm φ
 \\
-θ_2 &=& atan2 \left( \sqrt{p_x^2 + p_y^2}, {}^1p_{5z} \right) \pm φ\\
-c_4 &=& \frac{ \Vert{}^1p_{5}\Vert ^2 - d_3^2 - d_5^2 }{2d_3d_5} \nonumber\\
-θ_4 &=& atan2 \left( \pm \sqrt{1 - c_4^2}, c_4 \right)
+c_4 &=& \frac{ \Vert{}^1p_{5}\Vert ^2 - d_3^2 - d_5^2 }{2d_3d_5},~
+θ_4 = atan2 \left( \pm \sqrt{1 - c_4^2}, c_4 \right)
 \end{eqnarray}
-Having computed $\theta_i,~i-1,\ldots,4$, the orientation matrix of the wrist can be calculated as following
+Having computed $\theta_i,~i=1,\ldots,4$, the orientation matrix of the wrist can be calculated as following
 \begin{eqnarray}
 R_{target} &=& 
 \begin{bmatrix}
@@ -242,37 +243,26 @@ i_z & j_z & k_z\\
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=0.8\textwidth]{images/ik-4-solutions.png}\\
-\caption{The first 4 out of 8 solutions of the IK=problem}
+\caption{The first 4 out of 8 solutions of the IK-problem}
 \end{figure}
 \end{center}
 
 \subsection{Numerical solutions for 7 DoF robot arm}
 
-To solve numerically for the joint angles, we use a relationship between the derivative of the spatial coordinates and the joint derivatives. These two vectors 
-are related by a matrix known as the \textbf{Jacobian} and is given by the following equation
-
+Tand the joint derivatives. These two vectors are related by a matrix known as the 
+The \textbf{Jacobian} of the manipulator is 
 \begin{equation}
-\mathbf{\dot{x}} = J( \mathbf{q} ) \mathbf{\dot{q}}
-\end{equation}
-
-where
-
-\begin{equation}
-J( \mathbf{q} ) = \begin{bmatrix}
+\mathbf{\dot{x}} = J( \mathbf{q} ) \mathbf{\dot{q}} =
+\begin{bmatrix}
 \dfrac{\partial \mathbf{f}_1(\mathbf{q})}{\partial q_{1}} & \cdots & \dfrac{\partial \mathbf{f}_1(\mathbf{q})}{\partial q_{7}} \\
 \vdots & \ddots & \vdots \\
 \dfrac{\partial \mathbf{f}_6(\mathbf{q})}{\partial q_{1}} & \cdots & \dfrac{\partial \mathbf{f}_6(\mathbf{q})}{\partial q_{7}} \\
-\end{bmatrix}
+\end{bmatrix} 
+\mathbf{\dot{q}},
 \end{equation}
+where $\mathbf{x} \in \mathbb{R}^6$ is the position and orientation of the robot's end-effector and $\mathbf{q} =\left[ \theta_1,\ldots,\theta_7\right]^{\top} \in \mathbb{R}^7$; in the sequel rather than using $\theta_i$ the adopted symbol $q_i$ is selected.
 
-and the functions $\mathbf{f}_i(\mathbf{q})$ are calculated using the robot's forward kinematics.
-
-$J( \mathbf{q} )$ is non rectangular and thus non-invertible, due to the extra degree of freedom. Instead of the inverse of the Jacobian the pseudoinverse is calculated which by the 
-equation
-\begin{equation}
-J^{\dagger} = J^\top ( J J^\top )^{-1}
-\end{equation}
-
+$J( \mathbf{q} )$ is non rectangular owing to the additional 7th DoF and its pseudoinverse is computed as $J^{\dagger} = J^\top ( J J^\top )^{-1}$. Then a sequenial algorithm is used to compute $\matbb{q}$, as
 \begin{algorithm}[H]
 \SetAlgoLined
 initialize $\mathbf{q}^0 \in \mathbb{R}^{7}$ with an initial guess, given a desired position and orientation $\mathbf{x}_d \in \mathbb{R}^{6}$\;
@@ -282,142 +272,114 @@ set error tolerance $ε$ with some small value\;
 	set $\mathbf{q}^{i+1} = \mathbf{q}^i + J^{\dagger}( \mathbf{q} )e$\;
 	$i \leftarrow i + 1$\;
 }
-\caption{Newton-Raphson numerical method}
+\caption{Newton-Raphson numerical method for computing $\mathbf{q}$.}
 \end{algorithm}
 
-If the numerical method has more than one solutions, then the method will converge to the one which is closest to the initial guess or it will not converge at all, 
-if the initial error is too big. One way to get some approximate initial guesses is if we use a solution from the previous section (which solves for 6 dof) and use these 
-solutions as input to this numerical method.
+The convergence to local minima needs attention and a recursive form that uses the previously computed solution to the 6 DoFs is used to provide $\theta_i,~i\in\{ 1,\ldots,7\}/3$.
 
-The numerical calculation of the inverse kinematics can also be calculated using the geometric Jacobian, given by the following equation
+The columns of the Jacobian matrix are 
+\begin{comment}
 \[
 J_v = J_v( \mathbf{q} ) = [ J_{v1}, J_{v2}, \cdots, J_{v7} ] \in \mathbb{R}^{6 \times 7}
 \]
+\end{comment}
 \begin{equation}
 J_i = \begin{bmatrix}
 {}^0\mathbf{z}_i \times ({}^0\mathbf{p}_8 - {}^0\mathbf{p}_i) \\
 {}^0\mathbf{z}_i \\
-\end{bmatrix}
+\end{bmatrix},~i=1,\ldots,7.
 \end{equation}
 
 
 \subsection{Constraints \& Singularity points}
-
+%
 \subsubsection{Workspace constraints \& Singularity points}
+%
+When studying the kinematics of a robotic arm it is important to study the singularity points, which must be known before path planning in order to be avoided. From a mathematical point of view, singularity points are defined as these spatial joint coordinates where the kinematics equations are not defined, e.g. when dividing by a quantity that becomes zero or is very close to zero or when the determinant of the robot's Jacobian approaches zero (as shown in Figure~\ref{robot-planner1-manipulability-plot}), or even when the inverse kinematics solutions are infinite. 
 
-When studying the kinematics of a robotic arm it very crucial to also study the singularity points, which must be known before path planning in order to be avoided as much as possible. From a mathematical point of view, 
-singularity points are points or set of points where the kinematics equations are not defined, e.g. when dividing by a quantity that becomes zero or is very close to zero or when the determinant of the robot's Jacobian 
-approaches zero (as shown in figure \ref{robot-planner1-manipulability-plot}), or even when the inverse kinematics solutions are infinite. \\
+Singularity points typically reduce the kinematic capability of the robot. An example of that are points where the end-effector cannot move at all or it cannot move in some directions. An other example of singularity points, are those in which small displacements/velocities in the taskspace require very large displacements/velocities in the joint space and sometimes with velocities much higher than the rated values of the actuators
 
-From a more empirical point of view, singularity points are those points that reduce the kinematic capability of the robot. An example of that are points where the end-effector cannot move at all or it cannot move in some 
-directions. An other example of singularity points, are those in which small displacements/velocities in the taskspace require very large displacements/velocities in the joint space and sometimes with velocities much higher 
-than the rated values of the actuators.
-
-\begin{center}
-\begin{figure}[!htb]
-\centering
-\includegraphics[width=10cm]{images/iiwa-workspace.png}\\
-\caption{KUKA iiwa LBR14 workspace dimensions}
-\end{figure}
-\end{center}
-
-Singularity points:
+For the Kuka iiwa 7 DoF arm, the singularity points are:
 \begin{itemize}
 	\item When $p_x^2 + p_y^2 = 0$ then the end-effector lies on the z-axis and $θ_1$ is not defined
-	\item Similar to the above singularity, when the axes $z_1,z_7$ coincide, then $θ_1,θ_7$ can no longer be defined
+	\item When the axes $z_1,z_7$ coincide, then $θ_1,θ_7$ can no longer be defined
 	\item When $\sin\left( θ_6 \right) = 0$ then the angles $θ_5, θ_7$ are not defined. According to the robot's manual and the equations of inverse kinematics above, there are an infinite number of combinations of
 	$θ_5, θ_7$ to get the same position on the end-effector.
-	\item Similar to the above singularity, when the shoulder is fully extended, $θ_1$ and $θ_3$ are not defined (there are infinite combinations for the same result)
+	\item When the shoulder is fully extended, $θ_1$ and $θ_3$ are not defined (there are infinite combinations for the same result)
 \end{itemize}
-Other kinematic singularities that are explained in more details KUKA Sunrise.OS 1.11 manual are the following:
+Other kinematic singularities that are explained in more details in KUKA's Sunrise.OS 1.11 manual are the following:
 \begin{itemize}
 	\item Extended position $θ_4 = 0$: motion is blocked in the direction of $z_3$ and $z_5$ axes
 	\item When $θ_4 = \frac{π}{2}$ and $θ_6 = 0$ the motion parallel to $z_6$ or $z_2$ is blocked
 	\item When $θ_2 = 0$ and $θ_3 = \pm \frac{π}{2}$ the the motion is blocked in the direction of the robot or parallel to axes $z_2,z_5$
 	\item When $θ_5 = \frac{π}{2}$ and $θ_6 = 0$ the motion parallel to axis $z_6$ is blocked
 \end{itemize}
+The workspace of the Kuka iiwa LBR14 is shown in the sequel taking into account the allowable region of the joint coordinates
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=10cm]{images/iiwa-workspace.png}\\
+\caption{KUKA iiwa LBR14 workspace}
+\end{figure}
 
 \subsubsection{Remote Center of Motion constraint}
 \label{rcm-subsubsection}
 
-The most common characteristic in the kinematics of all Minimally Invasive Surgery robotics platforms is the Remote Center of Motion (RCM) constraint. The RCM point, also known in the bibliography as fulcrum point, 
-trocar point, incision point and/or insertion point, is a virtual point in space around which the robot is constrained to rotate (pivot). The RCM constraint means that at all times one point along the axis of the surgical 
-tool must coincide with the RCM point. This constraint reduces the number of degrees of freedom from 6 (position and orientation in Cartesian 3D space) to only 4:
+The Remote Center of Motion (RCM) constraint is encountered frequently in MIS. The RCM point, also known in the bibliography as fulcrum point, trocar point, incision point and/or insertion point, is a virtual point in space around which the robot is constrained to rotate (pivot). The RCM constraint means that at all times one point along the axis of the surgical tool must coincide with the RCM point. This constraint reduces the number of degrees of freedom from 6 (position and orientation in Cartesian 3D space) to only four:
 \begin{enumerate}
 \item \textbf{insertion} and \textbf{retraction}: translation along the $\mathbf{\hat{r}}$ vector of the spherical coordinate system of the Fulcrum Reference frame
 \item \textbf{roll}, also known as pan: rotation around the $\mathbf{\hat{z}}$ unit vector by an angle $\phi$
 \item \textbf{pitch}, also known as tilt: rotation around the $\mathbf{\hat{y}}$ unit vector by an angle $\theta$
 \item \textbf{yaw}, also known as spin: rotation around the $\mathbf{\hat{x}}$ unit vector by an angle $\psi$
 \end{enumerate}
+The RCM constraint does not have a direct implication in the solutions of the inverse kinematics solution, because it only reduces the taskspace to a very specific subspace and a very specific set of robot positions and orientations.
 
-\begin{center}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{images/rcm-surgical-tool.png}\\
-\caption{Illustration of pivoting motion of surgical laparoscopic tool around RCM point (also known as fulcrum or trocar point). Due to the RCM constraint, the tool has only 4 degrees of freedom.}
-\end{figure}
-\end{center}
-
-The RCM constraint does not have a direct implication in the solutions of the inverse kinematics solution, because it only reduces the taskspace to a very specific subspace and a very specific set of robot positions 
-and orientations.\\
-
-To satisfy the RCM constraint many MIS robots have special mechanical structures that make it easier for the laparoscopic tools to pivot around the fulcrum point. The most common examples of these types of mechanisms 
-are parallelograms, spherical linkages and circular tracking arcs, all of which have usually 2 RCM degrees of freedom which are either decoupled or coupled. Other types of RCM mechanisms are isocenters, 
-synchronous belt transmission, parallel manipulators, passive RCMs and compliant mechanisms. All these structures are more thoroughly described in article \cite{dai2009HIstoricalMISKinematicsRCM}. In the simulation setup 
-of this thesis there is no special RCM mechanism to satisfy the RCM constraint. A typical industrial robot arm is used and the RCM constraint is satisfied by calculating at each time the correct pose the robot must have 
-which is used as input to the Inverse Kinematics problem. To achieve this, the RCM point must be known beforehand (or be estimated) and then all RCM poses are calculated using a spherical coordinate system, whose origin 
+To satisfy the RCM constraint many MIS robots have special mechanical structures that make it easier for the laparoscopic tools to pivot around the fulcrum point. The most common examples of these types of mechanisms are parallelograms, spherical linkages and circular tracking arcs, all of which have usually 2 RCM DoF. Other types of RCM mechanisms are isocenters, synchronous belt transmission, parallel manipulators, passive RCMs and compliant mechanisms~\cite{dai2009HIstoricalMISKinematicsRCM}. 
+\begin{comment}In the simulation setup of this thesis there is no special RCM mechanism to satisfy the RCM constraint. A typical industrial robot arm is used and the RCM constraint is satisfied by calculating at each time the correct pose the robot must have which is used as input to the Inverse Kinematics problem. To achieve this, the RCM point must be known beforehand (or be estimated) and then all RCM poses are calculated using a spherical coordinate system, whose origin 
 of axes is the RCM point.
-
+\end{comment}
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.8\textwidth]{images/rcm-surgical-tool.png}\\
+\caption{Pivoting motion of surgical laparoscopic tool around RCM point.}
+\end{figure}
 
 \subsubsection{Elbow-up constraint}
 \label{section-elbow-up-constraints}
 
-The inverse kinematic problem usually outputs 8 different solutions, all of which satisfy the same target position and orientation for the end-effector, but with different arm configurations (see figures 
-\ref{iiwa14-solution-configurations} and \ref{elbow-up-vs-down}). These solutions offer more flexibility to each case, and a different solution is chosen based on the conditions (e.g. previous robot pose) and 
-requirements (e.g. collision avoidance). In this thesis, there are 2 distinct use cases in terms of choosing a specific robot configuration picking the surgical tools from one table, which does not impose any constraint
-and the insertion and pivoting of the surgical tool at the mounting dock, which imposes the RCM constraint (see \ref{rcm-subsubsection}) and a constraint to of collision avoidance between the robot arm and the mounting dock.
+The IK typically provides 8 different solutions~(see Figures~\ref{iiwa14-solution-configurations} and~\ref{elbow-up-vs-down}). These solutions offer more flexibility to each case, and a different solution is chosen based on the conditions (e.g. previous robot pose) and requirements (e.g. collision avoidance). In this thesis, there are two distinct use cases in terms of choosing a specific robot configuration picking the surgical tools from one table, which does not impose any constraint and the insertion and pivoting of the surgical tool at the mounting dock, which imposes the RCM constraint (see \ref{rcm-subsubsection}) and a constraint to of collision avoidance between the robot arm and the mounting dock.
 In the latter use case, in order to satisfy the collision avoidance, all path planning kinematic solutions must be in a elbow-up configuration at all times.
 
 \begin{center}
-\begin{figure}[!htb]
+\begin{figure}[htbp]
 \centering
-\includegraphics[width=\textwidth]{images/elbow-down.png}\\
-\includegraphics[width=\textwidth]{images/elbow-up.png}\\
+\includegraphics[width=0.8\textwidth]{images/elbow-down.png}\\
+\includegraphics[width=0.8\textwidth]{images/elbow-up.png}\\
 \caption{Top: elbow-down solution, bottom: elbow-up solution}
 \label{elbow-up-vs-down}
 \end{figure}
 \end{center}
 
-Observing the screenshots at \ref{elbow-up-vs-down}, there are 2 ways to mathematically describe the elbow-up constraint (see figure \ref{elbow-up-constraint-geometry} below), either using distance between the robot base and 
-the 3rd link or by using the relative angle of the base link and the 3rd link. From the iiwa14 specifications, the following calculations are done using $d_1 = 360mm$ and $d_3 = 420mm$.
+Observing Figure~\ref{elbow-up-vs-down}, there are two ways to mathematically describe the elbow-up constraint (see Figure~ \ref{elbow-up-constraint-geometry}), either using the distance between the robot base and the 3rd link or by using the relative angle of the base link and the 3rd link. From the iiwa14 specifications, the following calculations are implemented using $d_1 = 360$mm and $d_3 = 420$mm.
 
-\begin{center}
-\begin{figure}[!htb]
+\begin{figure}[htbp]
 \centering
-\includegraphics[width=\textwidth]{images/elbow-up-constraint-geometry.png}\\
+\includegraphics[width=0.8\textwidth]{images/elbow-up-constraint-geometry.png}\\
 \caption{Elbow-up constraint description with relative distance or angle between links with lengths $d_1$ and $d_3$}
 \label{elbow-up-constraint-geometry}
 \end{figure}
-\end{center}
 
-The distance constraint is
-\begin{equation}
-\label{eq:elbow-up-constraint-distance-inequality}
-d_{min} \leq d \leq d_{max}
-\end{equation}
+The distance constraint is $d_{\min} \leq d \leq d_{\max}$,
+%\begin{equation}\label{eq:elbow-up-constraint-distance-inequality}d_{\min} \leq d \leq d_{\max},\end{equation}
 where
-\[
-d_{min} = \sqrt{d_1^2 + d_3^2} = 553mm  \quad \textrm{and} \quad  d_{max} = d_1 + d_3 = 780mm
-\]
+$d_{\min} = \sqrt{d_1^2 + d_3^2} = 553$mm and $d_{\max} = d_1 + d_3 = 780\mbox{mm}.
+$
 The distance-based description of the elbow-up constraint is not very convenient, because it can not be easily forward-transformed to a description that uses the robot's forward kinematic transformations and reference frames, 
 but it can be easily used after the inverse kinematics solution to check which solutions satisfy this distance constraint. 
 The angle-based description can sometimes be more convenient because it directly describes the orientation that the 3rd reference frame must have, with respect to the reference frame of the base. Thus for each orientation 
-angle (pitch, yaw, roll) the following constraint must be satisfied.\\
-\begin{equation}
-\label{eq:elbow-up-constraint-angle-inequality}
--\frac{\pi}{2} \leq θ \leq \frac{\pi}{2}
-\end{equation}
-
+angle (pitch, yaw, roll) the following constraint must be satisfied 
+$-\frac{\pi}{2} \leq θ \leq \frac{\pi}{2}$.
+%\begin{equation} \label{eq:elbow-up-constraint-angle-inequality} -\frac{\pi}{2} \leq θ \leq \frac{\pi}{2}. \end{equation}
 When the inverse kinematics problem is solved, then some of the solutions may be rejected from the elbow-up constraint after the following calculations. For each solution the forward kinematics up to the 3rd joint must be 
 calculated. Note that although the forward kinematics from the universal frame to the end-effector should be the same for all solutions, the same does not hold for the forward kinematic transformations of the intermediate 
 links.
