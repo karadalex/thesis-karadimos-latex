@@ -2,11 +2,91 @@
 
 \begin{frame}
 \frametitle{Robot Planner 1: Simple MoveIt planning}
+\textbf{Goal}: Benchmark MoveIt Path planning algorithms
+\begin{center}
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=0.9\textwidth]{../images/robot_planner1/robot_planner1_5.jpg}
+\end{figure}
+\end{center}
 \end{frame}
 
 \begin{frame}
-\frametitle{Robot Planner 2: Simulation layout and reachability experiments}
+\frametitle{Robot Planner 1: Simple MoveIt planning}
+\resizebox*{\textwidth}{!}{
+\begin{tabular}{|p{2cm}|c|p{2cm}|p{2cm}|p{2cm}|}
+\hline
+               & \multicolumn{4}{c}{\textbf{RRTConnect}}                                                                                                 \vline \\
+\hline
+               & \multicolumn{4}{c}{\textbf{Insertion \& Pivot trajectories}}                     \vline \\
+\hline
+10 Experiments & Insertion planning time & Execution status & Pivot planning time & Execution status  \\
+\hline
+\textbf{Average} & 	0.163102 & 1	& 0.5014398 &	0.9 \\
+\hline
+\textbf{Standard deviation} & 	0.110001 &	- &	1.110582 & - \\
+\hline
+\end{tabular}
+}
+
+\resizebox*{\textwidth}{!}{
+\begin{tabular}{|p{2cm}|c|p{2cm}|p{2cm}|p{2cm}|}
+\hline
+               & \multicolumn{4}{c}{\textbf{RRT*}}                                                                                                 \vline \\
+\hline
+               & \multicolumn{4}{c}{\textbf{Insertion \& Pivot trajectories}}                     \vline \\
+\hline
+10 Experiments & Insertion planning time & Execution status & Pivot planning time & Execution status  \\
+\hline
+\textbf{Average} & 	5.083449	& 0.9	& 5.090813	& 0.6 \\
+\hline
+\textbf{Standard deviation} & 	0.066253 &	- &	0.041338 & - \\
+\hline
+\end{tabular}
+}
 \end{frame}
+
+
+\begin{frame}
+\frametitle{Robot Planner 2: Simulation layout and reachability experiments}
+\begin{center}
+\textbf{Goal}: Find layout with better reachability
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=0.3\textwidth]{../images/robot_planner2/robot_planner2_1}
+\includegraphics[width=0.3\textwidth]{../images/robot_planner2/robot_planner2_2}
+\includegraphics[width=0.3\textwidth]{../images/robot_planner2/robot_planner2_3}\\
+\includegraphics[width=0.3\textwidth]{../images/robot_planner2/robot_planner2_4}
+\includegraphics[width=0.3\textwidth]{../images/robot_planner2/robot_planner2_5}
+\includegraphics[width=0.3\textwidth]{../images/robot_planner2/robot_planner2_6}\\
+\includegraphics[width=0.3\textwidth]{../images/robot_planner2/robot_planner2_7}
+\includegraphics[width=0.3\textwidth]{../images/robot_planner2/robot_planner2_8}\\
+\caption{Experiment 2a: first layout}
+\label{experiment-robot-planner2a}
+\end{figure}
+\end{center}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Robot Planner 2: Simulation layout and reachability experiments}
+\begin{center}
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=0.3\textwidth]{../images/robot_planner2b/robot_planner2b_1}
+\includegraphics[width=0.3\textwidth]{../images/robot_planner2b/robot_planner2b_2}
+\includegraphics[width=0.3\textwidth]{../images/robot_planner2b/robot_planner2b_3}\\
+\includegraphics[width=0.3\textwidth]{../images/robot_planner2b/robot_planner2b_4}
+\includegraphics[width=0.3\textwidth]{../images/robot_planner2b/robot_planner2b_5}
+\includegraphics[width=0.3\textwidth]{../images/robot_planner2b/robot_planner2b_6}\\
+\includegraphics[width=0.3\textwidth]{../images/robot_planner2b/robot_planner2b_7}
+\includegraphics[width=0.3\textwidth]{../images/robot_planner2b/robot_planner2b_8}
+\includegraphics[width=0.3\textwidth]{../images/robot_planner2b/robot_planner2b_9}\\
+\caption{Experiment 2b: second layout}
+\end{figure}
+\end{center}
+\end{frame}
+
 
 \begin{frame}
 \frametitle{Robot Planner 3b: Line segment trajectories in task space}
