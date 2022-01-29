@@ -54,10 +54,11 @@
 }
 
 %Information to be included in the title page:
-\title[]{\thesistitle}
-\author{\fullname}
+\title[\thesistitle]{\thesistitle}
+%\author{\fullname}
+\author[\fullname]{\textbf{\large \fullname}\\[7mm]{\small Supervisor: \suptitle , \textbf{\supname} \\ Co-Supervisor: \cosuptitle , \textbf{\cosupname}}}
 \institute[ECE U. Patras]{Deparment of Electrical and Computer Engineering}
-\titlegraphic{\includegraphics[height=1.5cm]{../images/up_2017_logo_gr.png}}
+\titlegraphic{\includegraphics[height=1.4cm]{../images/up_2017_logo_gr.png}}
 \date{Patras, February 2022}
 
 \AtBeginSection[]
