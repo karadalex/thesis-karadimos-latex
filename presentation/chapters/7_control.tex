@@ -1,12 +1,90 @@
 \section{System Control}
 
 \begin{frame}
-\frametitle{Firm grasping algorithm \& Force control}
+\frametitle{RCM Tracking}
+
+\begin{columns}
+\column{0.5\textwidth}
+\begin{center}
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=0.8\textwidth]{../images/robot_planner6/rcm-error-geometry.png}
+\caption{Geometric calculation of the RCM alignment error $e$ using the distance between the line $l$ and the RCM point.}
+\label{rcm-error-geometry}
+\end{figure}
+\end{center}
+
+\column{0.5\textwidth}
+\[
+{}^UT_{T0} = \begin{bmatrix}
+\mathbf{\hat{x}} & \mathbf{\hat{y}} & \mathbf{\hat{z}} & \mathbf{p} \\
+0                & 0                & 0                & 1 \\
+\end{bmatrix}
+\]
+
+\[
+\overrightarrow{O_FA} = \mathbf{p}, \quad \textrm{and} \quad \overrightarrow{O_FB} = \mathbf{p} + \mathbf{\hat{x}}
+\]
+
+\[
+e_{rcm} = d(l, O_F)
+\]
+
+\[
+d(l, O_F) = \frac{\Vert \overrightarrow{O_FA} \times \mathbf{\hat{x}} \Vert}{\Vert \mathbf{\hat{x}} \Vert}
+\]
+\end{columns}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{RCM Tracking}
+\begin{columns}
+\column{0.5\textwidth}
+\begin{center}
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=0.8\textwidth]{../images/rcm-force-interaction-model.png}
+\caption{Force interaction model of the laparoscopic tool and the abdominal wall around the fulcrum point (RCM point)}
+\label{rcm-force-interaction-model}
+\end{figure}
+\[
+\Vert \mathbf{f}_s \Vert = \frac{λ}{cosγ} e 
+\]
+\end{center}
+
+
+\column{0.5\textwidth}
+\begin{center}
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=0.6\textwidth]{../images/rcm-error-yz.png}
+\caption{RCM error calculation in yz plane. The RCM error or yz-error is the distance between the line of the $\mathbf{\hat{x}}$ vector (here seen as a point) and the estimated position of the origin of the
+fulcrum reference frame $\tilde{O}_F$}
+\label{rcm-error-yz-plane}
+\end{figure}
+\end{center}
+
+\end{columns}
 \end{frame}
 
 \begin{frame}
-\frametitle{Position based visual servoing}
+\frametitle{RCM Tracking}
+\begin{center}
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=\textwidth]{../images/rcm-system-control.png}
+\caption{RCM tracking proposed control system. The RCM error is used as input in the trajectory generator to correct the trajectory command in order to fix the RCM misalignment}
+\label{rcm-control-system-block-diagram}
+\end{figure}
+\end{center}
 \end{frame}
+
+
+\begin{frame}
+\frametitle{Image based visual servoing}
+\end{frame}
+
 
 \begin{frame}
 \frametitle{Image based visual servoing}
