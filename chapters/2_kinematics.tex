@@ -262,7 +262,7 @@ The \textbf{Jacobian} of the manipulator is
 \end{equation}
 where $\mathbf{x} \in \mathbb{R}^6$ is the position and orientation of the robot's end-effector and $\mathbf{q} =\left[ \theta_1,\ldots,\theta_7\right]^{\top} \in \mathbb{R}^7$; in the sequel rather than using $\theta_i$ the adopted symbol $q_i$ is selected.
 
-$J( \mathbf{q} )$ is non rectangular owing to the additional 7th DoF and its pseudoinverse is computed as $J^{\dagger} = J^\top ( J J^\top )^{-1}$. Then a sequenial algorithm is used to compute $\matbb{q}$, as
+$J( \mathbf{q} )$ is non rectangular owing to the additional 7th DoF and its pseudoinverse is computed as $J^{\dagger} = J^\top ( J J^\top )^{-1}$. Then a sequenial algorithm is used to compute $\mathbb{q}$, as
 \begin{algorithm}[H]
 \SetAlgoLined
 initialize $\mathbf{q}^0 \in \mathbb{R}^{7}$ with an initial guess, given a desired position and orientation $\mathbf{x}_d \in \mathbb{R}^{6}$\;
