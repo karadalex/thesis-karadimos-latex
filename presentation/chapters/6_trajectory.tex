@@ -1,29 +1,184 @@
 \section{Trajectory Planning - Laparoscopic tool manipulation}
 
 \begin{frame}
-\frametitle{Tool pose \& the Fulcrum Effect}
+\frametitle{Tool pose}
+
+\begin{columns}
+\column{0.4\textwidth}
+\begin{center}
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=\textwidth]{../images/fulcrum-space.png}\\
+\end{figure}
+\end{center}
+\[
+{}^{F}T_B = \begin{bmatrix}
+{}^{F}R_B & {}^{F}\mathbf{p}^{}_B \\
+\mathbf{0} & 1 \\
+\end{bmatrix}
+\]
+where
+\[
+{}^{F}R_B = \begin{bmatrix}
+\hat{\mathbf{x}}^{}_B & \hat{\mathbf{y}}^{}_B & \hat{\mathbf{z}}^{}_B \\
+\end{bmatrix}
+\]
+
+\column{0.5\textwidth}
+Calculate orientation vectors using spherical coordinate unit vectors
+\[
+\hat{\mathbf{x}}^{}_B = \hat{\mathbf{\phi}}
+= \begin{bmatrix}
+-\sin(φ) \\
+\cos(φ) \\
+0 \\
+\end{bmatrix}
+\]
+
+\[
+\hat{\mathbf{y}}^{}_B = \hat{\mathbf{\theta}}
+= \begin{bmatrix}
+\cos(θ)\cos(φ) \\
+\cos(θ)\sin(φ) \\
+- \sin(θ) \\
+\end{bmatrix}
+\]
+
+\[
+\hat{\mathbf{z}}^{}_B = \hat{\mathbf{r}}
+= \begin{bmatrix}
+\sin(θ)\cos(φ) \\
+\sin(θ)\sin(φ) \\
+\cos(θ) \\
+\end{bmatrix}
+\]
+
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{The Fulcrum Effect}
+\begin{center}
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=0.9\textwidth]{../images/circular-trajectory-wrt-fulcrum.png}\\
+\end{figure}
+\end{center}
 \end{frame}
 
 \subsection{Trajectory planning in cartesian coordinates}
 
 \begin{frame}
-\frametitle{Circular trajectory of tool tip}
-\end{frame}
-
-\begin{frame}
-\frametitle{Circular arc trajectory of tool tip}
-\end{frame}
-
-\begin{frame}
 \frametitle{Line segment trajectory of tool tip}
+
+\begin{columns}
+\column{0.6\textwidth}
+\begin{center}
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=\textwidth]{../images/rcm_trajectories/rcm_lineseg_traj.png}\\
+\caption{A Line segment trajectory and it's transformation due to the Fulcrum Effect}
+\end{figure}
+\end{center}
+
+\column{0.4\textwidth}
+\begin{center}
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=\textwidth]{../images/line-segment-trajectory-wrt-fulcrum.png}\\
+\end{figure}
+\end{center}
+\[
+\begin{cases}
+x^{}_{F} = (1-s)x^{}_{F1} + sx^{}_{F2} \\
+y^{}_{F} = (1-s)y^{}_{F1} + sy^{}_{F2} \\
+z^{}_{F} = (1-s)z^{}_{F1} + sz^{}_{F2}
+\end{cases}
+\]
+
+\end{columns}
 \end{frame}
+
+
+\begin{frame}
+\frametitle{Circular trajectory of tool tip}
+
+\begin{columns}
+\column{0.6\textwidth}
+\begin{center}
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=\textwidth]{../images/rcm_trajectories/rcm_circle_traj.png}\\
+\caption{Circular trajectory of tool tip with respect to Fulcrum reference frame and it's transformation via the Fulcrum Effect}
+\end{figure}
+\end{center}
+
+\column{0.4\textwidth}
+\[
+\begin{cases}
+x^{}_{F} = r_0\cos(2πs) + x^{}_{F0} \\
+y^{}_{F} = r_0\sin(2πs) + y^{}_{F0} \\
+z^{}_{F} = z^{}_{F0}
+\end{cases} ,
+\]
+\[
+s \in [0, 1]
+\]
+
+\[
+\begin{cases}
+r = \sqrt{x^{2}_{F} + y^{2}_{F} + z^{2}_{F}} \\
+θ = atan2 \left( \sqrt{x^{2}_{F} + y^{2}_{F}}, z^{}_{F} \right) \\
+φ = atan2(y^{}_{F}, x^{}_{F})
+\end{cases}
+\]
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{Circular trajectory of tool tip}
+
+\begin{columns}
+\column{0.5\textwidth}
+\begin{center}
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=\textwidth]{../images/rcm_trajectories/robot-pose-random-rcm-circle-traj.png}\\
+\caption{Circular trajectory that lies on an a plane of arbitrary orientation with respect to the fulcrum point}
+\end{figure}
+\end{center}
+
+\column{0.5\textwidth}
+\begin{center}
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=\textwidth]{../images/rcm_trajectories/rcm_arcs_traj.png}\\
+\caption{Circular arc trajectory of tool tip with respect to Fulcrum reference frame and it's transformation via the Fulcrum Effect. In this trajectory 2 circular arcs are used}
+\end{figure}
+\end{center}
+
+\end{columns}
+\end{frame}
+
 
 \begin{frame}
 \frametitle{Cubic Spline trajectory of tool tip}
+
+\begin{columns}
+\column{0.6\textwidth}
+
+\column{0.4\textwidth}
+\end{columns}
 \end{frame}
 
 \begin{frame}
 \frametitle{B-Spline trajectory of tool tip}
+
+\begin{columns}
+\column{0.6\textwidth}
+
+\column{0.4\textwidth}
+\end{columns}
 \end{frame}
 
 \subsection{Trajectory planning in joint angles space}
