@@ -83,6 +83,41 @@ fulcrum reference frame $\tilde{O}_F$}
 
 \begin{frame}
 \frametitle{Image based visual servoing}
+\begin{center}
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=0.45\textwidth]{../images/visual_servo_start.png}
+\includegraphics[width=0.45\textwidth]{../images/visual_servo_end.png}\\
+\caption{Image based visual servoing. The robot arm is controlled using the information gained from the video frames. The frames are 2-Dimensional and thus 
+the detected objects can have only 3 degrees of freedom which means we can mainly control 3 independent variables, here the $x,y,θ$ variables. The left image 
+is the initial frame and the right image is the frame where the object is at the target pose.}
+\label{image-based-servoing-start-end}
+\end{figure}
+
+\[
+\mathbf{e}[kT] = [e_x, e_y, e_θ]^\top
+\]
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Image based visual servoing}
+
+\begin{center}
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=0.8\textwidth]{../images/visual-servoing-image-based.png}\\
+\caption{Image based visual servoing closed loop control}
+\label{visual-servoing-image-based-control}
+\end{figure}
+
+\[
+\mathbf{x}[k+1] = \mathbf{x}[k] + \mathbf{u}[k]
+\]
+\[
+\mathbf{u}[k] = K_p\mathbf{e}[k] + K_i \sum_{i=0}^{k-1} \mathbf{e}[iT] + K_d \left( \mathbf{e}[kT] - \mathbf{e}[(k-1)T] \right)
+\]
+\end{center}
 \end{frame}
 
 
@@ -91,7 +126,7 @@ fulcrum reference frame $\tilde{O}_F$}
 \begin{center}
 \begin{figure}[!htb]
 \centering
-\includegraphics[width=\textwidth]{../images/finger-force-control.png}\\
+\includegraphics[width=0.8\textwidth]{../images/finger-force-control.png}\\
 \caption{Force control on a Barrett Hand gripper finger}
 \label{finger-force-control}
 \end{figure}
