@@ -2,6 +2,41 @@
 
 \begin{frame}
 \frametitle{Forward Kinematics}
+\begin{columns}
+\column{0.2\textwidth}
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{../images/iiwa-frames.png}
+\end{figure}
+\column{0.7\textwidth}
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{ |c|c|c|c|c| } 
+\hline
+$i$ & $θ_i$ (rad) & $L_{i-1}$ (m) & $d_i$ (m) & $α_{i-1}$ (rad) \\
+\hline
+1 & $θ_1$ & 0 & 0.36 & 0 \\
+2 & $θ_2$ & 0 & 0 & $-π/2$ \\
+3 & $θ_3$ & 0 & 0.36 & $π/2$ \\
+4 & $θ_4$ & 0 & 0 & $π/2$\\
+5 & $θ_5$ & 0 & 0.4 & $-π/2$ \\
+6 & $θ_6$ & 0 & 0 & $-π/2$ \\
+7 & $θ_7$ & 0 & 0 & $π/2$ \\
+\hline
+\end{tabular}
+\end{center}
+\caption{D-H parameters for Kuka iiwa14}
+\end{table}
+\[
+^{i-1}T_i = 
+\begin{bmatrix}
+c\theta_i & -s\theta_i & 0 & L_{i-1} \\
+s\theta_ica_{i-1} & c\theta_ica_{i-1} & -sa_{i-1} & -sa_{i-1}d_i \\
+s\theta_isa_{i-1} & c\theta_isa_{i-1} & ca_{i-1} & ca_{i-1}d_i \\
+0 & 0 & 0 & 1\\
+\end{bmatrix}
+\]
+\end{columns}
 \end{frame}
 
 \begin{frame}
