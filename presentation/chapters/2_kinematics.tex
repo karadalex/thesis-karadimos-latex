@@ -41,6 +41,37 @@ s\theta_isa_{i-1} & c\theta_isa_{i-1} & ca_{i-1} & ca_{i-1}d_i \\
 
 \begin{frame}
 \frametitle{Inverse Kinematics - Decoupling Technique}
+Solve separately for position and orientation (assume $θ_3 = 0$)
+\begin{columns}
+\column{0.4\textwidth}
+\begin{center}
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{../images/th2-4-calculation.png}\\
+\end{figure}
+\[
+{}^0\mathbf{p}_5 = {}^0T_4 {}^4\mathbf{p}_5 = \begin{bmatrix} p_x \\ p_y \\ p_z \\ \end{bmatrix}
+\]
+\end{center}
+
+\column{0.6\textwidth}
+
+\[
+R_{target} = 
+\begin{bmatrix}
+i_x & j_x & k_x\\
+i_y & j_y & k_y\\
+i_z & j_z & k_z\\
+\end{bmatrix}
+\]
+\begin{center}
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=0.9\textwidth]{../images/ik-4-solutions.png}\\
+\caption{The first 4 out of 8 solutions of the IK-problem}
+\end{figure}
+\end{center}
+\end{columns}
 \end{frame}
 
 \begin{frame}
