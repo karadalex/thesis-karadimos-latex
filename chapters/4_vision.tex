@@ -138,7 +138,7 @@ is found the method proceeds with a new radius. The method is terminated when at
 
 \begin{equation}
 \label{grasping-intersections}
-\mathbb{G} = \argmax_{(x,y)} I_1(x,y) \odot I_2(x,y)
+\mathbb{G} = \underset{(x,y)}{\arg\max} I_1(x,y) \odot I_2(x,y)
 \end{equation}
 
 At the equation \ref{grasping-intersections}, the set of intersection points $\mathbb{G}$ is calculated. Given one binary image $I_1(x,y)$ which contains the contour of the detected tool (all white pixels are the contour) 
