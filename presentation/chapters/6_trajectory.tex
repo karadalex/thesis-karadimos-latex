@@ -156,7 +156,38 @@ r = \sqrt{x^{2}_{F} + y^{2}_{F} + z^{2}_{F}} \\
 \caption{Circular arc trajectory of tool tip with respect to Fulcrum reference frame and it's transformation via the Fulcrum Effect. In this trajectory 2 circular arcs are used}
 \end{figure}
 \end{center}
+\end{columns}
+\end{frame}
 
+
+\begin{frame}
+\frametitle{Helical trajectory of tool tip}
+
+\begin{columns}
+\column{0.6\textwidth}
+\begin{center}
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=\textwidth]{../images/rcm_trajectories/rcm_helical_traj.png}\\
+\caption{Helical trajectory of tool tip with respect to Fulcrum reference frame and it's transformation via the Fulcrum Effect}
+\end{figure}
+\end{center}
+
+\column{0.4\textwidth}
+\[
+\begin{cases}
+x^{}_{F} = r_0\cos(2πs) + x^{}_{F0} \\
+y^{}_{F} = r_0\sin(2πs) + y^{}_{F0} \\
+z^{}_{F} = \pm βs
+\end{cases}
+\]
+\begin{center}
+\[
+s \in \left[ 0, τ \right]
+\]
+$τ$: cycles\\
+$β/r_0$: slope (aka pitch)
+\end{center}
 \end{columns}
 \end{frame}
 
@@ -165,19 +196,88 @@ r = \sqrt{x^{2}_{F} + y^{2}_{F} + z^{2}_{F}} \\
 \frametitle{Cubic Spline trajectory of tool tip}
 
 \begin{columns}
-\column{0.6\textwidth}
+\column{0.5\textwidth}
+\begin{align*}
+x_i(s) = & a_i(s-s_i)^3 + b_i(s-s_i)^2 + \\ &+ c_i(s-s_i) + d_i
+\end{align*}
+\[
+s_i \leqslant s \leqslant s_{i+1}
+\]
+boundary conditions $\Rightarrow α_i,b_i,c_i,d_i \in \mathbb{R}$
+\[
+x_i(s_i) = x_i
+\]
+\[
+x_i(s_{i+1}) = x_{i+1}
+\]
+\[
+\dot{x}_i(s_i) = \dot{x}_i
+\]
+\[
+\dot{x}_i(s_{i+1}) = \dot{x}_{i+1}
+\]
 
-\column{0.4\textwidth}
+\column{0.5\textwidth}
+\begin{center}
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=\textwidth]{../images/rcm_trajectories/rcm_cubic_traj.png}\\
+\caption{A Cubic Spline trajectory and it's transformation via the Fulcrum Effect}
+\end{figure}
+\end{center}
 \end{columns}
 \end{frame}
 
 \begin{frame}
 \frametitle{B-Spline trajectory of tool tip}
+\begin{columns}
+\column{0.4\textwidth}
+\begin{center}
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=\textwidth]{../images/bezier-curve.png}\\
+\caption{Cubic B\'ezier curve calculated using cubic interpolation of 4 control points} 
+\end{figure}
+\end{center}
 
+\column{0.6\textwidth}
+\[
+\mathbf{L}_0(s) = (1-s)\mathbf{P}_0 + s\mathbf{P}_1
+\]
+\[
+\mathbf{Q}_0(s) = (1-s)\mathbf{L}_0(s) + s\mathbf{L}_1(s)
+\]
+\[
+\mathbf{C}_0(s) = (1-s)\mathbf{Q}_0(s) + s\mathbf{Q}_1(s)
+\]
+\begin{align*}
+    \mathbf{C}_0(s) = (1-s)^3\mathbf{P}_0 &+ 3(1-s)^2 s\mathbf{P}_1 + \\ &+ 3(1-s)s^2\mathbf{P}_2 + s^3\mathbf{P}_3
+\end{align*}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{B-Spline trajectory of tool tip}
 \begin{columns}
 \column{0.6\textwidth}
+\begin{center}
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=\textwidth]{../images/bezier_path.png}\\
+\caption{A cubic B\'ezier curve calculated and plotted in MATLAB} 
+\end{figure}
+\end{center}
 
 \column{0.4\textwidth}
+\begin{center}
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=\textwidth]{../images/robot_planner3/3d_bezier_spline.png}
+\caption{Experiment 3d: Create the B-spline trajectory inside the surgical site (below the green mounting dock) and transform it via the fulcrum transformation to a trajectory for the robot's TCP.}
+\label{robot-planner3d-bezier-spline}
+\end{figure}
+\end{center}
+
 \end{columns}
 \end{frame}
 
