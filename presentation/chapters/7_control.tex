@@ -95,7 +95,7 @@ is the initial frame and the right image is the frame where the object is at the
 \end{figure}
 
 \[
-\mathbf{e}[kT] = [e_x, e_y, e_θ]^\top
+\mathbf{e}[k] = [e_x, e_y, e_θ]^\top
 \]
 \end{center}
 \end{frame}
@@ -115,7 +115,7 @@ is the initial frame and the right image is the frame where the object is at the
 \mathbf{x}[k+1] = \mathbf{x}[k] + \mathbf{u}[k]
 \]
 \[
-\mathbf{u}[k] = K_p\mathbf{e}[k] + K_i \sum_{i=0}^{k-1} \mathbf{e}[iT] + K_d \left( \mathbf{e}[kT] - \mathbf{e}[(k-1)T] \right)
+\mathbf{u}[k] = K_p\mathbf{e}[k] + K_i \sum_{i=0}^{k-1} \mathbf{e}[i] + K_d \left( \mathbf{e}[k] - \mathbf{e}[k-1] \right)
 \]
 \end{center}
 \end{frame}
