@@ -74,9 +74,35 @@ i_z & j_z & k_z\\
 \end{columns}
 \end{frame}
 
+
 \begin{frame}
 \frametitle{Singularity points}
+\begin{columns}
+\column{0.8\textwidth}
+\begin{itemize}
+\item points where robot has \textbf{reduced kinematic capability}
+	\begin{itemize}
+	\item cannot move in some directions
+	\item cannot move at all
+	\item points where small displacements/velocities in the taskspace require very large displacements/velocities in the joint space
+	\item kinematics equations are not defined or $\Vert J \Vert = 0$
+	\end{itemize}
+\item must be known before path planning in order \textbf{to be avoided}
+\item example singularity points (based on KUKA's Sunrise.OS 1.11 manual)
+	\begin{itemize}
+	\item shoulder fully extended $\Rightarrow θ_1$ and $θ_3$ are not defined (there are infinite combinations for the same result)
+	\item When $\sin\left( θ_6 \right) = 0$ then the angles $θ_5, θ_7$ are not defined. (infinite number of combinations of
+	$θ_5, θ_7$ to get the same orientation on the end-effector.
+	\end{itemize}
+\end{itemize}
+\column{0.2\textwidth}
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{../images/iiwa-frames.png}
+\end{figure}
+\end{columns}
 \end{frame}
+
 
 \begin{frame}
 \frametitle{RCM constraint}
