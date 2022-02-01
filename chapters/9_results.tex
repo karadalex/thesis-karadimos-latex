@@ -12,7 +12,7 @@ inserted and then the tool gets ejected from the mounting dock's hole.\\
 The aim of this experiment is to test the overall behaviour of the robot inside the work space, before implementing more complex path planning algorithms.
 
 \begin{center}
-\begin{figure}[!htb]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{images/robot_planner1.png}
 \caption{Experiment 1}
@@ -163,7 +163,7 @@ This experiment is very useful, because it shows whether all holes of the mounti
 \textbf{dexterous} the robot will be in pivoting around each hole, i.e. how free the robot arm is to execute pivot motions.
 
 \begin{center}
-\begin{figure}[!htb]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{images/robot_planner2a}
 \caption{Experiment 2a:}
@@ -263,7 +263,7 @@ in Gazebo, in which the mounting dock is closer to the robot and in front of it.
 with sufficient dexterity, the robot is free to pivot around.
 
 \begin{center}
-\begin{figure}[!htb]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{images/robot_planner2b}
 \caption{Experiment 2b: Running robot planner 2b with a different table layout so that all target poses have improved reachability. Note that all trajectories shown in the screenshots are collision-free, 
@@ -371,7 +371,7 @@ Experiment                & Trocar3 insertion time & Execution status & Trocar3 
 Due to the probabilistic nature of the motion planner (in these experiments the OMPL library is used with the RRTConnect path planning algorithm), the solutions 
 to the path planning problem are not always the same and thus it is possible that the robot arm reaches a pose which is close to a singularity
 \begin{center}
-\begin{figure}[!htb]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=0.9\textwidth]{images/robot_planner2b/singularity_failure.png}
 \caption{Experiment 2b: Singularity failure}
@@ -385,7 +385,7 @@ a custom ROS node that subscribes to the robot's kinematic state (joints' angle 
 /kinematic\_state topic (see figure \ref{kinematic-state-topic-graph}).
 
 \begin{center}
-\begin{figure}[!htb]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{images/kinematic_state_topic_graph.png}
 \caption{Custom kinematic state node that subscribes to the joint values and publishes forward kinematics solutions and the jacobian matrix values.}
@@ -419,7 +419,7 @@ is by passing as parameters the coordinates of the start point and a vector atta
 of the line segment can be very useful in cases where the direction of the line is needed.
 
 \begin{center}
-\begin{figure}[!htb]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{images/robot_planner3/3b_line_seg.png}
 \caption{Experiment 3b: Create the line segment trajectory inside the surgical site (below the green mounting dock) and transform it via the fulcrum transformation to a trajectory for the robot's TCP.
@@ -431,7 +431,7 @@ which is used to calculated the distance error (RCM deviation)}
 \end{center}
 
 \begin{center}
-\begin{figure}[!htb]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{images/robot_planner3/robot_planner3b_error.png}
 \caption{Experiment 3b: RCM error diagram from home position to line and reverse-line segment trajectories.}
@@ -446,7 +446,7 @@ the reverse line-segment trajectory and then finally it stays constant while the
 a pivot trajectory are studied separately.
 
 \begin{center}
-\begin{figure}[!htb]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{images/robot_planner3/robot_planner3b-error_distributions.png}
 \caption{Experiment 3b: RCM error distributions, measurements from 10 iterations of the same experiment. From left to right: distribution of all measurements, distribution of measurements while the robot was pivoting, 
@@ -455,7 +455,7 @@ distribution of measurements while the robot was inserted but still.}
 \end{figure}
 \end{center}
 
-\begin{table}[!htb]
+\begin{table}[htbp]
 \centering
 \begin{tabular}{ |c|c|c|c| } 
 \hline
@@ -471,7 +471,7 @@ distribution of measurements while the robot was inserted but still.}
 \end{table}
 
 \begin{center}
-\begin{figure}[!htb]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=0.49\textwidth]{images/robot_planner3/robot_planner3b_manip1.png}
 \includegraphics[width=0.49\textwidth]{images/robot_planner3/robot_planner3b_manip2.png}
@@ -578,7 +578,7 @@ to a trajectory that the robotic arm can execute. To define a circular trajector
 circle's center and it's radius $r$.\\ 
 
 \begin{center}
-\begin{figure}[!htb]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{images/robot_planner3/3a_circle.png}
 \caption{Experiment 3a: Create circular trajectory inside the surgical site (below the green mounting dock) and transform it via the fulcrum transformation to a trajectory for the robot's TCP.}
@@ -587,7 +587,7 @@ circle's center and it's radius $r$.\\
 \end{center}
 
 \begin{center}
-\begin{figure}[!htb]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{images/robot_planner3/3a_circle_details.png}
 \caption{Experiment 3a: A more detailed view of the circular trajectories. (a) the original circular trajectory designed inside the surgical taskspace, (b) the transformed trajectory that the base of the surgical tool will
@@ -604,10 +604,11 @@ or $yz$ planes and not in an arbitrary orientation.
 \subsection{Cubic Spline trajectories in task space}
 
 The goal of this experiment is to generate a cubic spline trajectory inside the surgical
-taskspace which will then be transformed via the fulcrum transformation to a trajectory that the robotic arm can execute.
+taskspace which will then be transformed via the fulcrum transformation to a trajectory that the robotic arm can execute. Cubic spline equations are presented in more detail at \ref{section:cubic-spline} and the generated trajectories 
+of this experiment can be seen in figure \ref{robot-planner3c-cubic-spline}.
 
 \begin{center}
-\begin{figure}[!htb]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{images/robot_planner3/3c_cubic_spline.png}
 \caption{Experiment 3c: Create the cubic spline trajectory inside the surgical site (below the green mounting dock) and transform it via the fulcrum transformation to a trajectory for the robot's TCP.}
@@ -641,8 +642,12 @@ to the path variable $s$. The time derivative of the trajectory would be calcula
 
 \subsection{B-Spline trajectories in task space}
 
+The goal of this experiment is to generate a B-Spline trajectory inside the surgical
+taskspace which will then be transformed via the fulcrum transformation to a trajectory that the robotic arm can execute. B-spline equations are presented in more detail at \ref{section:b-spline} and the generated trajectories 
+of this experiment can be seen in figure \ref{robot-planner3d-bezier-spline}.
+
 \begin{center}
-\begin{figure}[!htb]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{images/robot_planner3/3d_bezier_spline.png}
 \caption{Experiment 3d: Create the B-spline trajectory inside the surgical site (below the green mounting dock) and transform it via the fulcrum transformation to a trajectory for the robot's TCP.}
@@ -765,7 +770,7 @@ to a trajectory that the robotic arm can execute. To define a helical trajectory
 helix center, it's radius $r$, as well as the number of cycles $τ$ of the helix and slope parameter $β$.\\ 
 
 \begin{center}
-\begin{figure}[!htb]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{images/robot_planner3/3h_helix.png}
 \caption{Experiment 3h: Create helical trajectory inside the surgical site (below the green mounting dock) and transform it via the fulcrum transformation to a trajectory for the robot's TCP.}
@@ -783,7 +788,7 @@ show some frames from the experiment with the first three to show the pick steps
 in the visualization program.
 
 \begin{center}
-\begin{figure}[!htb]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{images/robot_planner4/robot_planner4}
 \caption{Experiment 4: Simple pick-and-place experiment of a cube}
@@ -943,7 +948,7 @@ controller parameters are $K_p = 0.9, K_d = 0.2$}
 \end{center}
 
 \begin{center}
-\begin{figure}[!htb]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=0.6\textwidth]{images/grasp-points-triangle.png}\\
 \caption{Image based visual servoing and calculation of grasp points. The yellow points are the grasp points and the thin black circumscribed circle is the growing circle that was used to calculate them.}
@@ -968,7 +973,7 @@ x \\ y \\ z \\ ψ \\ θ \\ φ \\
 where $\mathbf{p} = [x,y,z]$ and the Euler angles $ψ, θ, φ$ are later used to calculate the quaternion $\mathbf{q}$. \\
 
 \begin{center}
-\begin{figure}[!htb]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{images/robot_planner6/robot_planner6.png}
 \caption{Robot planner6: Path from home, to point above Fulcrum point and path of insertion/retraction}
@@ -976,7 +981,7 @@ where $\mathbf{p} = [x,y,z]$ and the Euler angles $ψ, θ, φ$ are later used to
 \end{center}
 
 \begin{center}
-\begin{figure}[!htb]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{images/robot_planner6/rcm_fulcrum_alignment_error.png}
 \includegraphics[width=\textwidth]{images/robot_planner6/rcm_fulcrum_alignment_error2.png}\\
@@ -985,7 +990,7 @@ where $\mathbf{p} = [x,y,z]$ and the Euler angles $ψ, θ, φ$ are later used to
 \end{center}
 
 \begin{center}
-\begin{figure}[!htb]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{images/robot_planner6/topics-and-nodes.png}
 \caption{ROS nodes and topics used for the robot-planner6 experiment. In this experiment the trajectories and RCM fulcrum errors are with respect to the 2nd fulcrum reference frame only.}
@@ -993,7 +998,7 @@ where $\mathbf{p} = [x,y,z]$ and the Euler angles $ψ, θ, φ$ are later used to
 \end{center}
 
 \begin{center}
-\begin{figure}[!htb]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=0.49\textwidth]{images/robot_planner6/rcm-error-collision.png}
 \includegraphics[width=0.49\textwidth]{images/robot_planner6/rcm-collision.png}\\
@@ -1012,7 +1017,7 @@ The goal of this experiment is to run all stages of this thesis together to stud
 of the state machine as shown in figure \ref{smack-state-machine}.
 
 \begin{center}
-\begin{figure}[!htb]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{images/state-machine-all-tasks.png}
 \caption{State machine status, shown in smach viewer}

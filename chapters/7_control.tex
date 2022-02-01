@@ -140,7 +140,10 @@ using position-based servoing or in the camera's space (also known as "pixel spa
 \begin{itemize}
 \item \textbf{Photogrammetric technique}
 \item \textbf{Stereoscopic vision}: This methodology uses two separate views of the scene as taken from two viewports (from two cameras) 
-and calculates the depth of various objects and areas using information from both views. For more details about stereoscopic vision see chapter \ref{stereoscopic-vision}
+and calculates the depth of various objects and areas using information from both views. 
+\begin{comment}
+  For more details about stereoscopic vision see chapter \ref{stereoscopic-vision}
+\end{comment}
 \item \textbf{Extracting depth from motion} This methodology is very similar to stereoscopic vision and is also known as \textit{monocular} or \textit{motion stereo}. The difference is that instead of using two views fromtwo distinct cameras this methodology 
 uses two views from the same camera but from different points in time. A very important assumption for this methodology is to assume that two consecutive views from the video frame do not change significantly, so that some feature points can be matched in both views in order to calculate the depth information. This methodology 
 is cheaper in terms of hardware but it fails to extract depth informations in cases where the robot is completely still.
