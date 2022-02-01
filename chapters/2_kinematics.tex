@@ -137,7 +137,7 @@ The workspace of the robot arm is the set of all points in $\mathbb{R}^3$ that t
 
 The surgical tool is attached to the end-effector of the arm; the corresponding frames are in agreement with the drawing shown in Figure~\ref{fig:kuka-surgical tool}. 
 The corresponding transformations can be found as
-\begin{equation}{*}
+\begin{equation*}
 ^{7}T_{TCP} = 
 \begin{bmatrix}
 1 & 0 & 0 & 0 \\
@@ -161,7 +161,7 @@ The corresponding transformations can be found as
 0 & 0 & 1 & 0.455 \\
 0 & 0 & 0 & 1 \\
 \end{bmatrix}
-\end{equation}{*}
+\end{equation*}
 
 \begin{figure}[htbp]
 \centering
@@ -400,7 +400,7 @@ Let the calculated ${}^0T_3$ have the following form
 \end{bmatrix}
 \end{equation}
 
-then the distance that must satisfy the inequality \ref{eq:elbow-up-constraint-distance-inequality} is 
+then the distance that must satisfy the inequality $d_{\min} \leq d \leq d_{\max}$ is 
 \begin{equation}
 d = \Vert {}^0\mathbf{p}_3 \Vert
 \end{equation}
@@ -410,7 +410,7 @@ In a similar way, the angle version of the elbow-up constraint can be used to ch
 {}^0R_3 = [ {}^0\mathbf{\hat{x}}_3 \quad {}^0\mathbf{\hat{y}}_3 \quad {}^0\mathbf{\hat{z}}_3 ]
 \end{equation}
 
-then the angle that must satisfy the inequality \ref{eq:elbow-up-constraint-angle-inequality} is
+then the angle that must satisfy the inequality $-\frac{\pi}{2} \leq θ \leq \frac{\pi}{2}$ is
 \begin{equation}
 θ = acos \left( \frac{ {}^0\mathbf{\hat{z}}_3 \cdot {}^0\mathbf{\hat{z}} }{ \Vert {}^0\mathbf{\hat{z}}_3 \Vert  \Vert {}^0\mathbf{\hat{z}} \Vert } \right)
 \end{equation}
