@@ -1,22 +1,18 @@
 \chapter{Path Planning}
 
-\textbf{Path Planning} is a geometric problem, where it is desired to find a path from a starting point to a goal point and also satisfying a set of constraints, such as: 
-restricting the solutions inside the robot's configuration space, avoiding obstacles in the task space, avoiding singularity points and respecting the robot's 
+\textbf{Path Planning} is a geometric problem, related to finding a path from a starting point to a goal point while satisfying a set of constraints, such as: restricting the solutions inside the robot's configuration space, avoiding obstacles in the task space, avoiding singularity points and respecting the robot's 
 joint limits.
+%
+\section{Pathe planninf sampling methods}
+%
+Sampling planning methods use random functions to choose a sample from the configuration or joint space. Unlike discretizing methods, sampling ones are 
+computationally inexpensive cannot compute optimal solutions.
+%
+\subsection{RRT Algorithm}
+%
+The \textbf{Rapidly-exploring Random Trees} algorithm searches for an obstacle-free motion plan from an initial state $x_{init}$ to a set of goal states $\mathcal{X}_{goal}$ that are within the allowed position and orientation tolerances.
 
-
-\section{Sampling methods}
-
-The path planning algorithms that were mostly used in this thesis belong to the category of sampling methods. These methods use random functions to choose a sample from 
-the configuration space or the state space. Sampling methods differ from the deterministic grid methods which, which discretize the whole space. Sampling methods are less 
-computationally expensive than the grid methods, but they do not deliver optimal solutions like the latter.
-
-
-\subsection{RRT Algorithms}
-
-The \textbf{Rapidly-exploring Random Trees} algorithm is a sampling planning method that searches for an obstacle-free motion plan from an initial state $x_{init}$ to a set of goal states $\mathcal{X}_{goal}$. We refer to a set 
-of goal states, because apart from the one desired goal state there can be other neighbor states that are within the allowed position and orientation tolerances.
-
+\small
 \begin{algorithm}[H]
 \SetAlgoLined
 \ForEach{replanning attempt}{
@@ -39,22 +35,15 @@ of goal states, because apart from the one desired goal state there can be other
 \Return FAILURE and $ T=(V,E) $ \;
 \caption{RRT Algorithm}
 \end{algorithm}
+\nprmalsize
 
 Other variations of the RRT Algorithm, which are also available in the OMPL library, included in the MoveIt library of ROS framework  are:
-\begin{itemize}
-	\item \textbf{TRRT} Transition-based RRT
-	\item \textbf{BiTRRT} Bidirectional Transition-based RRT
-	\item \textbf{RRT*}
-	\item \textbf{RRTConnect} with is the default OMPL path planner in ROS
-	\item \textbf{LBTRRT} Lower Bound Tree RRT
-\end{itemize}
-
-
+a) \textbf{TRRT} Transition-based RRT, b) \textbf{BiTRRT} Bidirectional Transition-based RRT, c) \textbf{RRT*}
+	\item \textbf{RRTConnect} with is the default OMPL path planner in ROS, d) \textbf{LBTRRT} Lower Bound Tree RRT.
+%
 \subsection{PRM Algorithms}
-
-The \textbf{Probabilistic Roadmap} (PRM) algorithm is a sampling planning method that constructs a roadmap representation of $\mathcal{C}_{free}$ \textbf{before searching} for a solution. After the roadmap is successfully built, then the algorithm searches 
-for a solution using a traditional graph-based search algorithm. A very important aspect of this algorithm is how the sampling of the free configuration space will be done. The sampling is usually performed using a 
-uniform distribution except from the regions close to objects where the sampling is more dense.
+%
+The \textbf{Probabilistic Roadmap} (PRM) algorithm constructs a roadmap representation of $\mathcal{C}_{free}$ \textbf{before searching} for a solution. After the roadmap is successfully built, then the algorithm searches for a solution using a traditional graph-based search algorithm. The sampling of the free configuration space is usually performed using a uniform distribution except from the regions close to objects where the sampling is more dense.
 
 \begin{algorithm}[H]
 \SetAlgoLined
@@ -77,16 +66,10 @@ initialize roadmap graph $G \leftarrow (V,E)$\;
 \caption{PRM roadmap construction (preprocessing phase)}
 \end{algorithm}
 
-Other variations of the PRM Algorithm, which are also available in the OMPL library, included in the MoveIt library of ROS framework  are:
-\begin{itemize}
-	\item \textbf{PRM*}
-	\item \textbf{LazyPRM}
-	\item \textbf{LazyPRM*}
-\end{itemize}
-
-
+Other variations of the PRM Algorithm, which are also available in the OMPL library, included in the MoveIt library of ROS framework  are: i) \textbf{PRM*}, ii)  \textbf{LazyPRM}, and iii) \textbf{LazyPRM*},
+%
 \section{Pick and place algorithm}
-
+%
 % Help on using the algorithme package
 % http://ftp.ntua.gr/mirror/ctan/macros/latex/contrib/algorithm2e/doc/algorithm2e.pdf 
 \begin{algorithm}[H]
@@ -108,100 +91,67 @@ Other variations of the PRM Algorithm, which are also available in the OMPL libr
 \caption{Pick and Place algorithm}
 \end{algorithm}
 
-If the pick and place algorithm targets small objects, such as cubes or spheres or other small convex objects then the path planning is straightforward. In the case where, the object to pick and place has at least one 
-dimension that is bigger than the others like a rod or other long objects, such as the surgical tools, used in this thesis, then the path planning becomes more complicated, because of the almost certain collisions 
-of the tool with the links of the rest of the robot (the link of the end-effector will probably not collide with the tool).
-
-
+Picking and placing small objects results in a straightforward path planning. When the object to be picked has at least one dimension significantly larger than the others, like a rod such similar to the surgical tools,  then the path planning becomes more complicated, because of the possible  collisions of the tool with the links of the rest of the robot (the link of the end-effector will probably not collide with the tool).
+%
 \section{Task space analysis}
+%
+%Before designing any paths and trajectories it is very important to better understand the taskspace in which the surgical tool will operate in. 
+When the robot arm is in the pick-and-place phase where it detects the surgical tool and grasps and then move to the mounting dock to insert it, then at this phase, the taskspace is the same as the robot's taskspace. However, when the surgical tool is inserted in the patient's body and starts executing pivoting motions, then there are two taskspaces tto be studied. The first one is the surgical taskspace, which is where the surgical movements are planned (sutures, laparoscopic camera movements etc.) and the second taskspace is the one outside of patient's body in which the planned paths are "mirrored" so that the robot can execute them. The surgical taskspace $\mathbb{S}$ is the one shown in Figure~\ref{surgical-taskspace}. The paths inside the surgical task are transformed via the Fulcrum effect transformation, described in more detail in Section~\ref{section:fulcrum-effect}, to the pivot paths taskspace $\mathbb{P}$ which is a subset of the robot's taskspace $\mathbb{T}$ (we assume that all pivot motions can be executed, i.e. that all motions are reachable and fully inside the robot's taskspace). The paths are then used as input to a trajectory generator whose output 
+is transformed via the IK equations to the joint angles that belong to the joint space $\mathbb{J}$. 
 
-Before designing any paths and trajectories it is very important to better understand the taskspace in which the surgical tool will operate in. When the robot arm is in the pick-and-place phase where it detexts the surgical 
-tool and grasps and then go to the mounting dock to insert it, then at this phase, the taskspace is the same as the robot's taskspace. However, when the surgical tool is inserted in the patient's body and starts executing 
-pivoting motions, then there are 2 taskspaces that are studied. The first one is the surgical taskspace, which is where the surgical movements are planned (sutures, laparoscopic camera movements etc.) and the second 
-taskspace is the one outside of patient's body in which the planned paths are "mirrored" so that the robot can execute them. The surgical taspace $\mathbb{S}$ is the one shown in figure \ref{surgical-taskspace}. The paths inside 
-the surgical task are transformed via the Fulcrum effect transformation, which is described in more detail in \ref{section:fulcrum-effect}, to the pivot paths taskspace $\mathbb{P}$ which is a subset of the robot's taskspace 
-$\mathbb{T}$ (we assume that all pivot motions can be executed, i.e. that all motions are reachable and fully inside the robot's taskspace). The paths are then used as input to a trajectory generator whose output 
-is transformed via the Inverse Kinematics equations to the joint angles that belong to the joint space $\mathbb{J}$. \\
-
-Alternatively in a mathematical notation, the fulcrum effect transformation is notated as
-\begin{equation}
+Alternatively in a mathematical notation, the fulcrum effect transformation is $
 Φ: \mathbb{S} \longrightarrow \mathbb{P}
-\end{equation}
-the inverse kinematics transformation is described as
-\begin{equation}
+$, while the IK transformation is $
 IK: \mathbb{P} \subset \mathbb{T} \longrightarrow \mathbb{J}
-\end{equation}
-and similarly the forward kinematics transformation can be described as
-\begin{equation}
+$
+and similarly the forward kinematics transformation can be described as $
 FK: \mathbb{J} \longrightarrow \mathbb{T}
-\end{equation}\\
-
+$\\
+%
 \begin{center}
 \begin{figure}[!htb]
 \centering
-\includegraphics[width=\textwidth]{images/spaces-and-transformations.png}\\
-\caption{The spaces studied in this thesis and how they are connected with each other via transformations}
+\includegraphics[width=0.7\textwidth]{images/spaces-and-transformations.png}\\
+\caption{Relationships beteeen Surgical and pivot path taskspace.}
 \label{surgical-taskspace}
 \end{figure}
 \end{center}
 
-Having defined all the spaces, the Dexterity metric of the tool's task space (same as the surgical taskspace) can be defined as
-\begin{equation}
-\mathcal{D} = \mathcal{L}_q \mathcal{M}
+The Dexterity metric of the tool's task space is
+\begin{eqnarray}
+\mathcal{D} &=& \mathcal{L}_q \mathcal{M}, \mbox{where}
 \label{dexterity-measure}
-\end{equation}
-where
-\begin{equation}
-\mathcal{M} = \sqrt{det(J J^\top)}
-\end{equation}
-\begin{equation}
+\\
+\mathcal{M} &=& \sqrt{det(J J^\top)}\\
 \label{joint-limit-measure}
-\mathcal{L}_{q}=1-\exp\left\{-\kappa\prod_{i=1}^{n_{k}}\frac{(q_{ {i}}-q_{i,\min})(q_{i,\max}-q_{i})}{(q_{i,\max}-q_{i,\min})^{2}}\right\}
-\end{equation}
+\mathcal{L}_{q}&=&1-\exp\left\{-\kappa\prod_{i=1}^{n_{k}}\frac{(q_{ {i}}-q_{i,\min})(q_{i,\max}-q_{i})}{(q_{i,\max}-q_{i,\min})^{2}}\right\}
+\end{eqnarray}
 
 \begin{center}
-\begin{figure}[!htb]
+\begin{figure}[htbp]
 \centering
-\includegraphics[width=10cm]{images/robot-planner1-manipulability-plot.png}\\
-\caption{Plot of the manipulability of the robot arm at sample points of the executed trajectory}
+\includegraphics[width=0.7\textwidth]{images/robot-planner1-manipulability-plot.png}\\
+\caption{Manipulability index of robot arm during  trajectory}
 \label{robot-planner1-manipulability-plot}
 \end{figure}
 \end{center}
 
-The equation \ref{joint-limit-measure} calculates a joint limit measure which is multiplied with the manipulability measure and gives the dexterity measure.
-From that equation we can conclude the following:
-\begin{itemize}
-\item If $q_i = q_{min}$ or $q_i = q_{max}$ then the exponential is equal to 1 which means that $\mathcal{L}_{q}$ and $\mathcal{D}$ are both 0, which means 
-that the robot has \textbf{no dexterity at the boundary of the task space}.
-\item If the value of $q_i$ is close to it's boundary value then the dexterity approaches 0. The how much close or far it is from the boundary (or in other words 
-how fast the exponential term converges) depends on the parameter $\kappa$
-\item The $q_{min}, q_{max}$ are calculated from the geometry of the task-space
-\end{itemize}
+Equation~(\ref{joint-limit-measure}) calculates a joint limit measure which is multiplied with the manipulability measure and gives the dexterity measure and the following:
+a) If $q_i = q_{min}$ or $q_i = q_{max}$ then the exponential is equal to 1 which means that $\mathcal{L}_{q}$ and $\mathcal{D}$ are both 0, implying that the robot has \textbf{no dexterity at the boundary of the task space}, b) If the value of $q_i$ is close to its boundary value then the dexterity approaches zero. The distance from the boundary (or in other words how fast the exponential term converges) depends on the parameter $\kappa$, and c) The $q_{min}, q_{max}$ are calculated from the geometry of the task-space.
 
-For maximum dexterity at most points of a trajectory in a pivoting motion, the pivot sub-
-taskspace (i.e. the space of all configurations of feasible pivot motions) must be fully within 
-the robot’s whole reachable taskspace, otherwise only a small range of pivot movements will be 
-feasible.\\
-
-Finding $q_{i,min}, q_{i,max}$ at \ref{joint-limit-measure} is very difficult and time-consuming especially at task spaces with more intricate geometries. 
-A similar and more practical equation to \ref{joint-limit-measure} can be written for calculating the dexterity of the robot in task space:
-
+For maximum dexterity throughout the trajectory in a pivoting motion, the pivot sub-taskspace (i.e. the space of all configurations of feasible pivot motions) must be fully within the robot’s whole reachable taskspace, otherwise only a small range of pivot movements will be 
+feasible. 
+Finding $q_{i,min}, q_{i,max}$ at (\ref{joint-limit-measure}) is difficult and time-consuming at task spaces with more intricate geometries. A similar and more practical equation to (\ref{joint-limit-measure}) can be written for calculating the dexterity of the robot in task space:
 \begin{equation}
 \label{rcm-taskspace-limit-measure}
-\mathcal{L}_{p}=1-e^{-\kappa (r_{max} - r)}
+\mathcal{L}_{p}=1-e^{-\kappa (r_{max} - r)},
 \end{equation}
-where $r_{max}$ is the maximum radius of a circle that the tool tip can follow at a given insertion depth $z$. Moreover, at every point of the taskspace, it is $L^2 = r^2 + z^2$. 
-The equation \ref{rcm-taskspace-limit-measure} however only shows dexterity in terms of approaching the boundary of the taskspace and it does not take into consideration internal points of low 
-dexterity and singularities like equation \ref{dexterity-measure}.
+where $r_{max}$ is the maximum radius of a circle that the tool tip can follow at a given insertion depth $z$. Moreover, at every point of the taskspace, $L^2 = r^2 + z^2$. Equation (\ref{rcm-taskspace-limit-measure}) shows dexterity in terms of approaching the boundary of the taskspace and it does not take into consideration internal points of low dexterity and singularities like (\ref{dexterity-measure}).
 
 \begin{listing}[H]
 \begin{minted}[tabsize=2,breaklines,frame=lines,framesep=2mm,baselinestretch=1.2,fontsize=\footnotesize, linenos]{matlab}
-x = []; y = []; z = [];
-r = [];
-s = 0:0.005:0.5;
-L = 0.48;
-k = 4.5;
-
+x = []; y = []; z = []; r = [];
+s = 0:0.005:0.5; L = 0.48; k = 4.5;
 for z0=-L:0.01:0
     if abs(z0)*sqrt(2) <= L
         rmax = abs(z0);
@@ -217,15 +167,15 @@ for z0=-L:0.01:0
     end
 end
 \end{minted}
-\caption{RCM Taskpace calculation using MATLAB}
+\caption{RCM Taskpace calculation in MATLAB}
 \label{code:rcm_taskspace_matlab}
 \end{listing}
 
 \begin{center}
-\begin{figure}[!htb]
+\begin{figure}[htbp]
 \centering
-\includegraphics[width=0.8\textwidth]{images/rcm_taskspace.png}\\
-\caption{Task space inside patients body. Colors with 0 or low value correspond to points with low dexterity. This is the trivial case, where no collision objects are taken into consideration}
+\includegraphics[width=0.7\textwidth]{images/rcm_taskspace.png}\\
+\caption{Task space inside patient's body. Colors with 0 or low value correspond to points with low dexterity.}
 \label{surgical-taskspace}
 \end{figure}
 \end{center}
