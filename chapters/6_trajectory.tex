@@ -1,9 +1,7 @@
 \chapter{Trajectory Planning - Laparoscopic tool manipulation}
 \label{chapter-6}
-
-At this step, given the points of the desired path, a more detailed trajectory is calculated, 
-which will contain all the waypoints that the robot will have to visit. Trajectory planning is executed after a desired path is generated,
-and consists in mapping the geometric points to specific \textbf{time points}, as well as assigning specific \textbf{velocities}, \textbf{accelerations} and \textbf{jerks}, 
+%
+Trajectory planning is executed after a desired path is generated, and consists in mapping the geometric points to specific \textbf{time points}, as well as assigning specific \textbf{velocities}, \textbf{accelerations} and \textbf{jerks}, 
 in order to generate the commands needed for the robot controller to execute a smooth motion.\\
 
 The paths that are calculated are parameterized by the path parameter $s$. As $s$ increases from $0$, the robot moves from the start configuration $q(0)$ to the goal configuration $q(1)$. 
