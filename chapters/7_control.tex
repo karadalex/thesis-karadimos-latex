@@ -55,104 +55,73 @@ To calculate the distance $d(l, O_F)$ there is available a method in the \textbf
 \label{line-point-distance-formula}
 d(l, O_F) = \frac{\Vert \overrightarrow{O_FA} \times \mathbf{\hat{x}} \Vert}{\Vert \mathbf{\hat{x}} \Vert}.
 \end{equation}
-Similar approaches to calculate this error/distance are presented in bibliography \cite{Dong2016RobustTD,Bauzano2009ControlMF}.\\
+Similar approaches to calculate this error/distance are presented in bibliography \cite{Dong2016RobustTD,Bauzano2009ControlMF}.
+
+If $e_{rcm} \leq 3_{\max} = 1$mm then the surgical tool axis passes through the fulcrum point and executes RCM trajectories, otherwise the robot is considered to have slipped from alignment, it does not execute RCM motion and probably generates a force $f \propto e$ which exerts pressure to the incision point and the abdominal wall (or the tissue around the incision point), which can have negative side-effects in the recovery of the incision. In~\cite{Bauzano2009ControlMF} a different distance $e_s$ is calculated as the RCM error as shown in Figure~\ref{rcm-force-interaction-model}, which is along the x-axis of the fulcrum reference frame or the axis of the abdominal wall. Using this deviation distance $e_s$ the force interaction between the surgical tool and the abdominal wall is $\Vert \mathbf{f}_s \Vert = λ e_s$, where $λ$ is the elasticity of the abdominal wall and can be measured experimentally and $e_s = \frac{1}{cosγ} e.$
 
 \begin{center}
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.5\textwidth]{images/rcm-force-interaction-model.png}
+\includegraphics[width=0.4\textwidth]{images/rcm-force-interaction-model.png}
 \caption{Force interaction model of the laparoscopic tool and the abdominal wall around the fulcrum point (RCM point)}
 \label{rcm-force-interaction-model}
 \end{figure}
 \end{center}
 
-
-If $e_{rcm} \leq 3_{max} = 1mm$ then the surgical tool axis passes through the fulcrum point and executes RCM trajectories, otherwise the robot is considered to have slipped from alignment, it does not execute RCM motion and 
-probably generates a force $f \propto e$ which exerts pressure to the incision point and the abdominal wall (or the tissue around the incision point), which can have negative side-effects in the recovery of the incision.
-In paper \cite{Bauzano2009ControlMF} a different distance $e_s$ is calculated as the RCM error as shown in figure \ref{rcm-force-interaction-model}, which is along the x-axis of the fulcrum reference frame or the axis 
-of the abdominal wall (we assume local to the Fulcrum point the abdominal wall is a straight line). Using this deviation distance $e_s$ the force interaction between the surgical tool and the abdominal wall can be modelled 
-with the following force
-
-\begin{equation}
-\Vert \mathbf{f}_s \Vert = λ e_s
-\end{equation}
-where $λ$ is the elasticity of the abdominal wall and can be measured experimentally and
-\begin{equation}
-e_s = \frac{1}{cosγ} e
-\end{equation}
-
 \begin{center}
-\begin{figure}[!htb]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=0.4\textwidth]{images/rcm-error-yz.png}
-\caption{RCM error calculation in yz plane. The RCM error or yz-error is the distance between the line of the $\mathbf{\hat{x}}$ vector (here seen as a point) and the estimated position of the origin of the
-fulcrum reference frame $\tilde{O}_F$}
+\caption{RCM error calculation in yz plane. The RCM error or yz-error is the distance between the line of the $\mathbf{\hat{x}}$ vector (here seen as a point) and the estimated position of the origin of the fulcrum reference frame $\tilde{O}_F$}
 \label{rcm-error-yz-plane}
 \end{figure}
 \end{center}
 
 The error $e_{rcm}$ can provide further information if the distance of the line $l$ (or of the $\mathbf{\hat{x}}$ axis) from the fulcrum point, is seen from a different perspective than that of 
-figure \ref{rcm-error-geometry}. If this distance is seen from a plane that is perpendicular to $\mathbf{\hat{x}}$, then the line is seen as a point and the distance $d(l, O_F)$ is seen as a distance between 2 points, 
-as illustrated in figure \ref{rcm-error-yz-plane}. This perspective of the RCM error (will also be referenced as yz-error $e_{yz}$) is more useful because it decomposes the error distance in 2 components that can be used to 
-correct the goal pose of the robot so that is fixes the RCM misalignment.
+Figure~\ref{rcm-error-geometry}. If this distance is seen from a plane that is perpendicular to $\mathbf{\hat{x}}$, then the line is seen as a point and the distance $d(l, O_F)$ is seen as a distance between 2 points, as illustrated in Figure~\ref{rcm-error-yz-plane}. This perspective of the RCM error (will also be referenced as yz-error $e_{yz}$) is more useful because it decomposes the error distance in 2 components that can be used to correct the goal pose of the robot so that is fixes the RCM misalignment, as in $e_y = e_{yz}sinψ \quad \textrm{and} \quad e_z = e_{yz}cosψ.~$ The angle $ψ$ that is used to split $e_{rcm}$ in the two components, is already known from the robot's pose and it is the yaw (also known as spin) angle of the surgical tool.
 
-\begin{equation}
-e_y = e_{yz}sinψ \quad \textrm{and} \quad e_z = e_{yz}cosψ
-\end{equation}
-
-The angle $ψ$ that is used to split $e_{rcm}$ in the two components, is already known from the robot's pose and it is the yaw (also known as spin) angle of the surgical tool.\\
-
-Using the estimated RCM error $\tilde{e}_{rcm}$ and the estimated position of the origin of the fulcrum reference frame, then an adaptive motion control system can be designed that corrects the trajectory to avoid RCM 
-misalignment. The proposed control system is illustrated in the block diagram \ref{rcm-control-system-block-diagram} and a similar pivoting motion control system is also described in the bibliography 
-in \cite{Muoz2005PivotingMC}.
+Using the estimated RCM error $\tilde{e}_{rcm}$ and the estimated position of the origin of the fulcrum reference frame, an adaptive motion control system can be designed that corrects the trajectory to avoid RCM misalignment. The proposed control system is illustrated in block diagram~\ref{rcm-control-system-block-diagram} following along a similar pivoting motion control system in \cite{Muoz2005PivotingMC}.
 
 \begin{center}
-\begin{figure}[!htb]
+\begin{figure}[htbp]
 \centering
-\includegraphics[width=\textwidth]{images/rcm-system-control.png}
-\caption{RCM tracking proposed control system. The RCM error is used as input in the trajectory generator to correct the trajectory command in order to fix the RCM misalignment}
+\includegraphics[width=0.8\textwidth]{images/rcm-system-control.png}
+\caption{RCM tracking proposed control system.}
 \label{rcm-control-system-block-diagram}
 \end{figure}
 \end{center}
 
-
+%
 \section{Visual Servoing}
-
-At this chapter we briefly investigate how visual servoing can be applied in surgery robotics. \textbf{Visual Servoing} is the use of visual information 
-to guide and control a robot. The main task of visual servoing is to control the end-effector's pose using features extracted from visual information. The 
-features that are usually extracted from cameras are the position and orientation of the detected object, the distance of the object from the camera (using 
-stereoscopic vision, photogrammetry or other techniques), the size and the shape of the object. The visual servoing can be executed either in the robot's space 
-using position-based servoing or in the camera's space (also known as "pixel space") by using the image-based technique.
-
+%
+%At this chapter we briefly investigate how visual servoing can be applied in surgery robotics. \textbf{Visual Servoing} is the use of visual information to guide and control a robot. The main task of visual servoing is to control the end-effector's pose using features extracted from visual information. The features that are usually extracted from cameras are the position and orientation of the detected object, the distance of the object from the camera (using stereoscopic vision, photogrammetry or other techniques), the size and the shape of the object. The visual servoing can be executed either in the robot's space using position-based servoing or in the camera's space (also known as "pixel space") by using the image-based technique.
+%
 \subsection{Position based servoing}
+\clearpage
 
 \begin{center}
-\begin{figure}[H]
+\begin{figure}[htbp]
 \centering
-\includegraphics[width=0.8\textwidth]{images/visual-servoing-position-based.png}\\
+\includegraphics[width=0.7\textwidth]{images/visual-servoing-position-based.png}\\
 \caption{Position based visual servoing closed loop control}
 \end{figure}
 \end{center}
 
 \begin{itemize}
 \item \textbf{Photogrammetric technique}
-\item \textbf{Stereoscopic vision}: This methodology uses two separate views of the scene as taken from two viewports (from two cameras) 
-and calculates the depth of various objects and areas using information from both views. 
+\item \textbf{Stereoscopic vision}: This methodology uses two separate views of the scene as taken from two cameras and calculates the depth of various objects and areas using information from both views. 
 \begin{comment}
   For more details about stereoscopic vision see chapter \ref{stereoscopic-vision}
 \end{comment}
-\item \textbf{Extracting depth from motion} This methodology is very similar to stereoscopic vision and is also known as \textit{monocular} or \textit{motion stereo}. The difference is that instead of using two views fromtwo distinct cameras this methodology 
-uses two views from the same camera but from different points in time. A very important assumption for this methodology is to assume that two consecutive views from the video frame do not change significantly, so that some feature points can be matched in both views in order to calculate the depth information. This methodology 
-is cheaper in terms of hardware but it fails to extract depth informations in cases where the robot is completely still.
+\item \textbf{Extracting depth from motion} This methodology is very similar to stereoscopic vision and is also known as \textit{monocular} or \textit{motion stereo}. It uses two views from the same camera but from different points in time. A very important assumption for this methodology is to assume that two consecutive views from the video frame do not change significantly, so that some feature points can be matched in both views in order to calculate the depth information. This methodology is cheaper in terms of hardware but it fails to extract depth informations in cases where the robot is completely still.
 \item \textbf{Servoing using 3D sensors}
 \end{itemize}
 
 \begin{center}
-\begin{figure}[!htb]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=0.6\textwidth]{images/visual-servoing-position-based2.png}\\
-\caption{Position based visual servoing using depth from motion, stereo vision or 3D sensors, from which the desired position $\mathbf{x}_d$ is calculated and 
-used to drive the robot.}
+\caption{Position based visual servoing using depth from motion, stereo vision or 3D sensors, from which the desired position $\mathbf{x}_d$ is calculated and used to drive the robot.}
 \end{figure}
 \end{center}
 
