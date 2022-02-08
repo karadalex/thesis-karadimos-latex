@@ -1,29 +1,27 @@
-\chapter{System Control}
+\chapter{Robotic MIS System Control}
 
 \section{RCM Tracking}
 \label{section:rcm-tracking}
 
-This section describes how to use a Remote Center of Motion error metric in order to implement a control system that makes sure that the laparoscopic tool is always aligned with the fulcrum point and it satisfies the RCM 
-constraint. To calculate this error, which can then be used as a feedback signal to a control system, the line of the long axis of the surgical tool must be first defined. To define this line, 2 points are needed. Both of these 
-points can be calculated using the transformation of the surgical tool, which is attached to the robot's TCP on the end-effector. Let the following be the pose of the surgical tool with respect to the global reference frame
-\begin{equation}
+This section describes how to use an RCM-error metric in order to implement a control system that makes sure that the laparoscopic tool is always aligned with the fulcrum point and it satisfies the RCM 
+constraint. To calculate this error, which can then be used as a feedback signal to a control system, the line of the long axis of the surgical tool must be first defined. To define this line, two points are  calculated using the transformation of the surgical tool, which is attached to the robot's TCP on the end-effector. Let the following be the pose of the surgical tool with respect to the global reference frame
+$
 {}^UT_{T0} = \begin{bmatrix}
 \mathbf{\hat{x}} & \mathbf{\hat{y}} & \mathbf{\hat{z}} & \mathbf{p} \\
 0                & 0                & 0                & 1 \\
-\end{bmatrix}
-\end{equation}
+\end{bmatrix}.
+$
 Using this pose, let $A,B$ be the points such that 
-\begin{equation}
-\overrightarrow{O_FA} = \mathbf{p}, \quad \textrm{and} \quad \overrightarrow{O_FB} = \mathbf{p} + \mathbf{\hat{x}}
-\end{equation}
+$
+\overrightarrow{O_FA} = \mathbf{p},~ \textrm{and} \quad \overrightarrow{O_FB} = \mathbf{p} + \mathbf{\hat{x}}, 
+$
 where $O_F$ is the origin point of the fulcrum reference frame. The the line of interest is defined as the line $l$ that passes through the points $A$ and $B$. \\
 
-The alignment error is calculated using a known position and orientation for the second fulcrum reference frame. In real-case scenarios the exact position and orientation of the fulcrum points are not precisely known 
-but can be estimated. To model the uncertainty of the pose, the pose message of the fulcrum point includes also a covariance matrix. The ROS message that was used was the \textbf{PoseWithCovarianceStamped} which needs the 
+The alignment error is calculated using a known position and orientation for the second fulcrum reference frame. In real-case scenarios the exact position and orientation of the unv=certain fulcrum points are estimated. To model the uncertainty of the pose, the pose message of the fulcrum point includes also a covariance matrix. The ROS message that was used was the \textbf{PoseWithCovarianceStamped} which needs the 
 following information (with respect to the global frame) to be fully defined:
-\[
-( \mathbf{p}, \mathbf{q}, \mathbf{C} ), \quad \mathbf{p} \in \mathbb{R}^3, \mathbf{q} \in \mathbb{H}, \mathbf{C} \in \mathbb{R}^{6 \times 6}
-\]
+$
+( \mathbf{p}, \mathbf{q}, \mathbf{C} ), \quad \mathbf{p} \in \mathbb{R}^3, \mathbf{q} \in \mathbb{H}, \mathbf{C} \in \mathbb{R}^{6 \times 6},
+$
 where 
 \begin{equation}
 \mathbf{C} = \begin{bmatrix}
@@ -35,33 +33,32 @@ where
 σ_{xφ} & σ_{yφ} & σ_{zφ} & σ_{ψφ} & σ_{θφ} & σ_{φφ} \\
 \end{bmatrix}
 \end{equation}
-The covariance matrix and its coefficients can be calculated using equations \ref{eq:cov-matrix} and \ref{eq:cov-matrix-coeff}, using the mean values of the estimations of $x,y,z,ψ,θ,φ$.
+The covariance matrix and its coefficients can be calculated using %equations \ref{eq:cov-matrix} and \ref{eq:cov-matrix-coeff}, using t
+he mean values of the estimations of $x,y,z,ψ,θ,φ$.
 
 \begin{center}
-\begin{figure}[!htb]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=0.5\textwidth]{images/robot_planner6/rcm-error-geometry.png}
-\caption{Geometric calculation of the RCM alignment error $e$ using the distance between the line $l$ and the RCM (aka Fulcrum) point.}
+\caption{Geometric calculation of the RCM alignment error $e$ using the distance between the line $l$ and the RCM point.}
 \label{rcm-error-geometry}
 \end{figure}
 \end{center}
 
 Since both the origin of the fulcrum reference frame and the line of the long axis of the tool are known then the alignment error can be calculated as the distance of the line $l$ from the point $O_F$
-\begin{equation}
-e_{rcm} = d(l, O_F)
-\end{equation}
+$
+e_{rcm} = d(l, O_F).
+$
 
-To calculate the distance $d(l, O_F)$ there is available a method in the \textbf{Eigen} C++ library that calculates the distance of a line that passes through 2 points, from a third point. Alternatively, this distance 
-can be calculated using \ref{line-point-distance-formula}.
+To calculate the distance $d(l, O_F)$ there is available a method in the \textbf{Eigen} C++ library that calculates the distance of a line that passes through 2 points, from a third point. Alternatively, this distance can be calculated using \ref{line-point-distance-formula}.
 \begin{equation}
 \label{line-point-distance-formula}
-d(l, O_F) = \frac{\Vert \overrightarrow{O_FA} \times \mathbf{\hat{x}} \Vert}{\Vert \mathbf{\hat{x}} \Vert}
+d(l, O_F) = \frac{\Vert \overrightarrow{O_FA} \times \mathbf{\hat{x}} \Vert}{\Vert \mathbf{\hat{x}} \Vert}.
 \end{equation}
-
-Similar approaches to calculate this error/distance are presented in bibliography at \cite{Dong2016RobustTD} and \cite{Bauzano2009ControlMF}.\\
+Similar approaches to calculate this error/distance are presented in bibliography \cite{Dong2016RobustTD,Bauzano2009ControlMF}.\\
 
 \begin{center}
-\begin{figure}[!htb]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=0.5\textwidth]{images/rcm-force-interaction-model.png}
 \caption{Force interaction model of the laparoscopic tool and the abdominal wall around the fulcrum point (RCM point)}

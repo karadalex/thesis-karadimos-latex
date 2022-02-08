@@ -1,11 +1,11 @@
-\chapter{simulation Studies}
+\chapter{Simulation Studies}
 
 \section{Robot Planner 1: Simple MoveIt planning}
 \label{section:robot-planner1}
 
 In this first simulation we are testing some simple trajectories with the surgical tool already attached to the robot arm's end effector. The path is designed using the appropriate coordinates and orientations so that the robot begins from the home position, then visits the table with the surgical 
 tools and then visits the other table on top of which the mounting dock is placed. Upon arrival at the mounting dock, the robot inserts the tool inside a hole (we consider these holes to be a simplistic alternative to the trocars used in real operations), then executes a simple pivot motion, while the tool is still inserted and then the tool gets ejected from the mounting dock's hole.
-The aim of this simulation is to test the overall behaviour of the robot inside the work space, before implementing more complex path planning algorithms.
+The aim of this simulation is to test the overall behaviour of the robot inside the work space, before implementing more complex path planning algorithms. In the sequel all simulations start from the home position, while the used parameters are: tolerances: 0.000005, max planning time: 5 seconds, replanning: true, max planning attempts: 6. Furthermore, the `execution status' is 1 for success and 0 for failure.
 
 \begin{center}
 \begin{figure}[htbp]
@@ -18,7 +18,7 @@ The aim of this simulation is to test the overall behaviour of the robot inside 
 % Robot Planner 1 with RRTConnect
 \begin{longtable}{|p{2cm}|c|p{2cm}|p{2cm}|p{2cm}|}
 \hline
-Robot Planner 1           & \multicolumn{4}{c}{\textbf{RRTConnect}}                                                                                                 \vline \\
+Planner 1           & \multicolumn{4}{c}{\textbf{RRTConnect}}                                                                                                 \vline \\
 \hline
                           & \multicolumn{4}{c}{\textbf{Fake tool picking trajectory}}                     \vline \\
 \hline
@@ -77,8 +77,8 @@ Simulation                & Reverse pivot planning time & Execution status & ret
 \hline
 \textbf{Standard deviation} & 	1.628910 &	- &	1.204682 & - \\
 \hline
-\caption{Time results for robot planner 1 using the RRTConnect path planner algorithm. Planning time is the sum of solution time and path simplification time. Execution status is 
-1 for success and 0 for failure. Parameters: tolerances: 0.000005, max planning time: 5 seconds, replanning: true, max planning attempts: 6. Simulations start from home position.}
+\caption{Time results for Robot Planner (RP) 1 using the RRTConnect path planner algorithm. Planning time is the sum of solution time and path simplification time. %Execution status is 1 for success and 0 for failure.
+}
 \label{robot-planner1-rrtconnect-data}
 \end{longtable}
 
@@ -86,7 +86,7 @@ Simulation                & Reverse pivot planning time & Execution status & ret
 % Robot Planner 1 with RRT*
 \begin{longtable}{|p{2cm}|c|p{2cm}|p{2cm}|p{2cm}|}
 \hline
-Robot Planner 1           & \multicolumn{4}{c}{\textbf{RRT*}}                                                                                                 \vline \\
+Planner 1           & \multicolumn{4}{c}{\textbf{RRT*}}                                                                                                 \vline \\
 \hline
                           & \multicolumn{4}{c}{\textbf{Fake tool picking trajectory}}                     \vline \\
 \hline
@@ -145,7 +145,8 @@ Simulation                & Reverse pivot planning time & Execution status & ret
 \hline
 \textbf{Standard deviation} & 	inconclusive &	- &	inconclusive & - \\
 \hline
-\caption{Time results for robot planner 1 using the RRT* path planner algorithm. Planning time is the sum of solution time and path simplification time. Execution status is 1 for success and 0 for failure. Parameters: tolerances: 0.000005, max planning time: 5 seconds, replanning: true, max planning attempts: 6. Simulations start from home position.}
+\caption{Time results for robot planner 1 using the RRT* path planner algorithm. Planning time is the sum of solution time and path simplification time. %Execution status is 1 for success and 0 for failure. %Parameters: tolerances: 0.000005, max planning time: 5 seconds, replanning: true, max planning attempts: 6.
+}
 \label{robot-planner1-rrtstar-data}
 \end{longtable}
 
@@ -169,7 +170,7 @@ This study is useful, because it shows whether all holes of the mounting dock ar
 % Robot Planner 2a with RRTConnect
 \begin{longtable}{|p{2cm}|c|p{2cm}|p{2cm}|p{2cm}|}
 \hline
-Robot Planner 2a           & \multicolumn{4}{c}{\textbf{RRTConnect}}                                                                                                 \vline \\
+Planner 2a           & \multicolumn{4}{c}{\textbf{RRTConnect}}                                                                                                 \vline \\
 \hline
                           & \multicolumn{4}{c}{\textbf{Insertion \& Pivot trajectories}}                     \vline \\
 \hline
@@ -248,11 +249,12 @@ Simulation                & Trocar3 insertion time & Execution status & Trocar3 
 \textbf{Standard deviation} & 	0.088385 &	- &	0.314852 & - \\
 \hline
 
-\caption{Time results for robot planner 2a using the RRTConnect path planner algorithm. Planning time is the sum of solution time and path simplification time. Execution status is 
-1 for success and 0 for failure. Parameters: tolerances: 0.0005, max planning time: 5 seconds, replanning: true, max planning attempts: 6. Simulations start from home position.}
+\caption{Time results for RP 2a using the RRTConnect path planner algorithm. Planning time is the sum of solution time and path simplification time. %Execution status is 1 for success and 0 for failure. %Parameters: tolerances: 0.0005, max planning time: 5 seconds, replanning: true, max planning attempts: 6.
+}
 \label{robot-planner2a-rrtconnect-data}
 \end{longtable}
 
+\normalsize
 To overcome the reachability issue shown in Figure \ref{Simulation-robot-planner2a}, the algorithm was repeated, but this time using a different simulation layout 
 in Gazebo, in which the mounting dock is closer to the robot and in front of it. This new layout enables the robot to reach all mounting holes with ease and 
 with sufficient dexterity, the robot is free to pivot around.
@@ -267,8 +269,8 @@ because the robotic arm is in an elbow-up configuration, so that it avoids the c
 \end{figure}
 \end{center}
 
-Observing the screenshots at figure \ref{Simulation-robot-planner2b}, it is clear that the robot must always be in an elbow-up configuration in order to avoid collisions with the mounting dock. This constraint can be 
-described either using the relative distance of the third link with the base or the relative angles of the third link's axis with respect to the axis of the base, as described with more detail in 
+\normalsize
+Observing the screenshots at Figure \ref{Simulation-robot-planner2b}, it is clear that the robot must always be in an elbow-up configuration in order to avoid collisions with the mounting dock. This constraint can be described either using the relative distance of the third link with the base or the relative angles of the third link's axis with respect to the axis of the base, as described with more detail in 
 \ref{section-elbow-up-constraints}. The latter description with angles is easier to implement using the ROS MoveIt! framework,  but it would require to solve an extra inverse and forward kinematics problem targeting the third 
 link, instead of the end-effector. To avoid these additional, computationally expensive calculations and simplify the simulations, instead of mathematically describing the constraint, 
 some extra points were added in the trajectory. 
@@ -279,7 +281,7 @@ configuration for most of the path, because otherwise it would make a big jump i
 % Robot Planner 2b with RRTConnect
 \begin{longtable}{|p{2cm}|c|p{2cm}|p{2cm}|p{2cm}|}
 \hline
-Robot Planner 2b           & \multicolumn{4}{c}{\textbf{RRTConnect}}                                                                                                 \vline \\
+Planner 2b           & \multicolumn{4}{c}{\textbf{RRTConnect}}                                                                                                 \vline \\
 \hline
                           & \multicolumn{4}{c}{\textbf{Insertion \& Pivot trajectories}}                     \vline \\
 \hline
@@ -357,8 +359,8 @@ Simulation                & Trocar3 insertion time & Execution status & Trocar3 
 \hline
 \textbf{Standard deviation} & 	0.107534 &	- &	2.202951 & - \\
 \hline
-\caption{Time results for robot planner 2b using the RRTConnect path planner algorithm and a different table layout from robot planner 2a. Planning time is the sum of solution time and path simplification time. Execution status is 
-1 for success and 0 for failure. Parameters: tolerances: 0.0005, max planning time: 5 seconds, replanning: true, max planning attempts: 6. Simulations start from home position.}
+\caption{Time results for RP 2b using the RRTConnect path planner algorithm and a different table layout from RP 2a. Planning time is the sum of solution time and path simplification time. %Execution status is 1 for success and 0 for failure. %Parameters: tolerances: 0.0005, max planning time: 5 seconds, replanning: true, max planning attempts: 6.
+}
 \label{robot-planner2b-rrtconnect-data}
 \end{longtable}
 
@@ -408,10 +410,10 @@ The goal of this third simulation is to design and test only some pivot trajecto
 \label{section:robot-planner3b}
 
 The goal of this simulation is to generate a line segment trajectory inside the surgical
-taskspace which will then be transformed via the fulcrum transformation to a trajectory that the robotic arm can execute. To define a line segment only 
-2 points are needed, the coordinates of the start and those of the end of the line segment. An other, way of defining a line segment trajectory, 
-is by passing as parameters the coordinates of the start point and a vector attached to that point, whose and points to the end point. The second definition 
-of the line segment can be very useful in cases where the direction of the line is needed.
+taskspace which will then be transformed via the fulcrum transformation to a trajectory that the robotic arm can execute. To define a line segment only two points are needed, the coordinates of the start and those of the end of the line segment. An other, way of defining a line segment trajectory, is by passing as parameters the coordinates of the start point and a vector attached to that point, whose and points to the end point. The second definition of the line segment can be very useful in cases where the direction of the line is needed.
+
+In the Figure~\ref{robot-planner3b-line-seg-rcm-errors} one can see the RCM error values with respect to time. The x-axis shows the ROS time in seconds and the y-axis the RCM error in logarithmic scale. The robot starts from the home position where the RCM error is larger, then approaches the fulcrum point, 
+where the error decreases and then it executes the line segment pivot trajectory where the error is bounded in the magnitude of less than a micrometer $10^{-6}m$ then stays constant, then changes again during the execution of the reverse line-segment trajectory and then finally it stays constant while the robot stays still in the initial insertion position. The RCM error while the robot is inserted but still and the error while the robot executes a pivot trajectory are studied separately.
 
 \begin{center}
 \begin{figure}[htbp]
@@ -433,12 +435,6 @@ which is used to calculated the distance error (RCM deviation)}
 \label{robot-planner3b-line-seg-rcm-errors}
 \end{figure}
 \end{center}
-
-In the diagram \ref{robot-planner3b-line-seg-rcm-errors} one can see the RCM error values with respect to time. The x-axis shows the ROS time in seconds and the y-axis the RCM error in logarithmic scale. The robot starts from 
-the home position where the rcm error is bigger, then approaches the fulcrum point, 
-where the error decreases and then it executes the line segment pivot trajectory where the error is bounded in the magnitude of less than a micrometer $10^{-6}m$ then stays constant, then changes again during the execution of 
-the reverse line-segment trajectory and then finally it stays constant while the robot stays still in the initial insertion position. The RCM error while the robot is inserted but still and the error while the robot executes 
-a pivot trajectory are studied separately.
 
 \begin{center}
 \begin{figure}[htbp]
@@ -475,19 +471,15 @@ distribution of measurements while the robot was inserted but still.}
 \end{figure}
 \end{center}
 
-Note that although this type of trajectory is trivial in robot planner, this specific line segment trajectory should not be confused with ROS MoveIt line segment trajectories. The line-segment studied in this simulation 
-is linear when defined in the surgical taskpsace, but it is highly non-linear when transformed via the fulcrum transformation and it has a curved shape. The only exceptions to this transformation is for line segments that 
-lie on the direction defined by the radius unit vector $\mathbf{\hat{r}}$ of the spherical coordinate system of the Fulcrum reference frame, or equivalently the points $A,B$ defining the line-segment and the origin $O$ 
-of the reference frame, must be collinear. These exceptions can also be planned by the MoveIt framework and are also known 
-as and referenced throughout this thesis, as insertion movements. Let $\overrightarrow{AB}$ be the vector representing the line segment, then for the points $A, B$ the following must hold, in order for the line segment to be 
-invariant under the fulcrum transformation in terms of shape (i.e. the line to remain a line).
+Note that although this type of trajectory is trivial in RP, this specific line segment trajectory should not be confused with ROS MoveIt line segment trajectories. The line-segment studied in this simulation is linear when defined in the surgical taskpsace, but it is highly non-linear when transformed via the fulcrum transformation and it has a curved shape. The only exceptions to this transformation is for line segments that lie on the direction defined by the radius unit vector $\mathbf{\hat{r}}$ of the spherical coordinate system of the Fulcrum reference frame, or equivalently the points $A,B$ defining the line-segment and the origin $O$ of the reference frame, must be collinear. These exceptions can also be planned by the MoveIt framework and are also known as and referenced throughout this thesis, as insertion movements. Let $\overrightarrow{AB}$ be the vector representing the line segment, then for the points $A, B$ the following must hold, in order for the line segment to be invariant under the fulcrum transformation in terms of shape (i.e. the line to remain a line).
 \begin{equation}
-\overrightarrow{AB} = \overrightarrow{OB} - \overrightarrow{OA}
-\end{equation} 
-and
-\begin{equation}
+\overrightarrow{AB} = \overrightarrow{OB} - \overrightarrow{OA},\mbox{and }
 \overrightarrow{OB} = r \overrightarrow{OA}, \quad r \in \mathbb{R}
 \end{equation}
+
+\subsection{Circular trajectories in task space}
+
+The goal of this simulation is to generate a circular trajectory inside the surgical taskspace which will then be transformed via the fulcrum transformation to a trajectory that the robotic arm can execute. To define a circular trajectory in the taskspace, two parameters are required: the $(x,y,z)$ coordinates of the circle's center and its radius $r$.\\ 
 
 \begin{center}
 \begin{figure}[H]
@@ -501,7 +493,7 @@ and
 % Robot Planner 3b with RRTConnect
 \begin{longtable}{|p{0.16\textwidth}|p{0.16\textwidth}|p{0.16\textwidth}|p{0.16\textwidth}|p{0.16\textwidth}|}
 \hline
-Robot Planner 3b          & \multicolumn{4}{c}{Approach and \textbf{line segment pivot} trajectories with \textbf{RRTConnect}}                                                                                                 \vline \\
+Planner 3b          & \multicolumn{4}{c}{Approach and \textbf{line segment pivot} trajectories with \textbf{RRTConnect}}                                                                                                 \vline \\
 \hline
                           & \multicolumn{4}{c}{\textbf{elbow-up preparatory path}}                     \vline \\
 \hline
@@ -560,18 +552,12 @@ Simulation                & Line segment path planning time (sec) & Execution st
 \hline
 \textbf{Standard deviation} & 	2.421448 &	- &	0.086818 & - \\
 \hline
-\caption{Time results for robot planner 1 using the RRTConnect path planner algorithm. Planning time is the sum of solution time and path simplification time. Execution status is 
-1 for success and 0 for failure. Parameters: tolerances: 0.000005, max planning time: 5 seconds, replanning: true, max planning attempts: 6. Simulations start from home position.}
+\caption{Time results for RP 1 using the RRTConnect path planner algorithm. Planning time is the sum of solution time and path simplification time. %Execution status is 1 for success and 0 for failure. %Parameters: tolerances: 0.000005, max planning time: 5 seconds, replanning: true, max planning attempts: 6.
+}
 \label{robot-planner3b-rrtconnect-data}
 \end{longtable}
 
-
-\subsection{Circular trajectories in task space}
-
-The goal of this simulation is to generate a circular trajectory inside the surgical taskspace which will then be transformed via the fulcrum transformation 
-to a trajectory that the robotic arm can execute. To define a circular trajectory in the taskspace, two parameters are required: the $(x,y,z)$ coordinates of the 
-circle's center and it's radius $r$.\\ 
-
+%
 \begin{center}
 \begin{figure}[htbp]
 \centering
@@ -625,12 +611,11 @@ and a constant derivative for all points of $\mathbf{x}_d = [0.1, 0.1, 0.1]$. No
 to the path variable $s$. The time derivative of the trajectory would be calculated using the chain rule:
 
 \begin{equation}
-\begin{aligned}
-\mathbf{\dot{x}} ={}& \frac{d\mathbf{x}}{dt}  \\
-	={}& \frac{d\mathbf{x}(s)}{dt} = \frac{d\mathbf{x}(s(t))}{dt}   \\
-    ={}& \frac{d\mathbf{x}}{ds} \cdot \frac{ds}{dt} \\
-    ={}& \mathbf{x}_d \cdot \frac{ds}{dt}
-\end{aligned}
+\mathbf{\dot{x}} =
+%{}& \frac{d\mathbf{x}}{dt}  \\
+%	={}& \frac{d\mathbf{x}(s)}{dt} = \frac{d\mathbf{x}(s(t))}{dt}   \\
+    =\frac{d\mathbf{x}}{ds} \cdot \frac{ds}{dt} 
+    =\mathbf{x}_d \cdot \frac{ds}{dt}
 \end{equation}
 
 
@@ -665,8 +650,7 @@ T_A =
   &            &   & 1.95 \\
 0 &     0      & 0 & 1 \\
 \end{bmatrix}
-\]
-\[
+,~
 T_B = 
 \begin{bmatrix}
   &            &   & 0.4 \\
@@ -674,9 +658,9 @@ T_B =
   &            &   & 1.95 \\
 0 &     0      & 0 & 1 \\
 \end{bmatrix}
-\]
-where 
+\] 
 \[
+\mbox{where} 
 \mathbf{R_{rpy}} = \mathbf{Rot}(\mathbf{\hat{z}}, 2.952052) \cdot \mathbf{Rot}(\mathbf{\hat{y}}, 1.311528) \cdot \mathbf{Rot}(\mathbf{\hat{x}}, -1.750799)
 \]
 
@@ -710,7 +694,8 @@ and the solutions chosen for each point are
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.7\textwidth]{images/robot_planner3/3e_joint_polynomial.png}
-\caption{Simulation 3e: Polynomial trajectories of 5th degree for each of the 7 joints. The trajectory is computed at 60 sampling points.}
+\caption{Simulation 3e: Polynomial trajectories of 5th degree for each of the 7 joints.% The trajectory is computed at 60 sampling points.
+}
 \label{robot-planner3e-joint-polynomial}
 \end{figure}
 \end{center}
@@ -718,63 +703,58 @@ and the solutions chosen for each point are
 
 \subsection{Trajectories in joint space with trapezoidal velocity profile}
 
-The goal of this simulation is to generate a trajectory in joint space using a trapezoidal velocity profile. The start and end points as well as the inverse kinematics solutions for these points are the same as those 
-in \ref{section:9-2-polynomial-traj}.
-
-\begin{center}
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.7\textwidth]{images/robot_planner3/3f_trapezoid1.png}
-\caption{Simulation 3f: Trajectory using a trapezoid velocity profile. The time constant (also known as blend time) is $τ = 15$ seconds and the total trajectory duration is 60 seconds. The trajectory is computed at 60 sampling points.}
-\label{robot-planner3f-joint-trapezoid1}
-\end{figure}
-\end{center}
-
-\begin{center}
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.7\textwidth]{images/robot_planner3/3f_trapezoid2.png}
-\caption{Simulation 3f: Trajectory using a trapezoid velocity profile. The time constant (also known as blend time) is $τ = 30$ seconds and the total trajectory duration is 60 seconds. Note that 
-the blend time is chosen as half of the total duration which has as a result the linear segment (constant velocity) to disappear and create a "bang-bang" trajectory. In control theory, a "bang-bang" controller, 
-is a controller that switches abruptly between two states. The trajectory is computed at 60 sampling points.}
-\label{robot-planner3f-joint-trapezoid2}
-\end{figure}
-\end{center}
-
+The goal of this simulation is to generate a trajectory in joint space using a trapezoidal velocity profile. The start and end points as well as the inverse kinematics solutions for these points are the same as those in \ref{section:9-2-polynomial-traj}.
 
 \subsection{Trajectories in joint space with s-curve velocity profile}
 
-The goal of this simulation is to generate a trajectory in joint space using a smooth s-curve velocity profile. The start and end points as well as the inverse kinematics solutions for these points are the same as those 
-in \ref{section:9-2-polynomial-traj}.
-
-\begin{center}
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.7\textwidth]{images/robot_planner3/3g_s_curve.png}
-\caption{Simulation 3g: Trajectory using a s-curve velocity profile. The time constants are $τ_1 = τ_2 = 6$ seconds and the total trajectory duration is 60 seconds. The trajectory is computed at 60 sampling points.}
-\label{robot-planner3g-joint-s-curve}
-\end{figure}
-\end{center}
-
-
-\subsection{Helical trajectories in task space}
-
-The goal of this simulation is to generate a helical trajectory inside the surgical taskspace which will then be transformed via the fulcrum transformation 
-to a trajectory that the robotic arm can execute. To define a helical trajectory in the taskspace, two parameters are required: the $(x,y,z)$ coordinates of the 
-helix center, it's radius $r$, as well as the number of cycles $τ$ of the helix and slope parameter $β$.\\ 
+The goal of this simulation is to generate a trajectory in joint space using a smooth s-curve velocity profile. The start and end points as well as the inverse kinematics solutions for these points are the same as those in \ref{section:9-2-polynomial-traj}.
 
 \begin{center}
 \begin{figure}[htbp]
 \centering
+\includegraphics[width=0.7\textwidth]{images/robot_planner3/3f_trapezoid1.png}
+\caption{Simulation 3f: Trajectory using a trapezoid velocity profile ($τ = 15$ seconds). %The trajectory is computed at 60 sampling points.
+}
+\label{robot-planner3f-joint-trapezoid1}
+\end{figure}
+\end{center}
+%
+\subsection{Helical trajectories in task space}
+%
+The goal of this simulation is to generate a helical trajectory inside the surgical taskspace which will then be transformed via the fulcrum transformation to a trajectory that the robotic arm can execute. To define a helical trajectory in the taskspace, two parameters are required: the $(x,y,z)$ coordinates of the helix center, its radius $r$, as well as the number of cycles $τ$ of the helix and slope parameter $β$.\\ 
+
+\begin{center}
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.6\textwidth]{images/robot_planner3/3f_trapezoid2.png}
+\caption{Simulation 3f: Trajectory using a trapezoid velocity profile ($τ = 30$ seconds)% and the total trajectory duration is 60 seconds. %Note that the blend time is chosen as half of the total duration which has as a result the linear segment (constant velocity) to disappear and create a "bang-bang" trajectory. In control theory, a "bang-bang" controller, is a controller that switches abruptly between two states. %The trajectory is computed at 60 sampling points.
+}
+\label{robot-planner3f-joint-trapezoid2}
+\end{figure}
+\end{center}
+
+\begin{center}
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.6\textwidth]{images/robot_planner3/3g_s_curve.png}
+\caption{Simulation 3g: Trajectory using a s-curve velocity profile ($τ_1 = τ_2 = 6$) %and the total trajectory duration is 60 seconds. %The trajectory is computed at 60 sampling points.
+}
+\label{robot-planner3g-joint-s-curve}
+\end{figure}
+\end{center}
+
+%
+\begin{center}
+\begin{figure}[htbp]
+\centering
 \includegraphics[width=0.7\textwidth]{images/robot_planner3/3h_helix.png}
-\caption{simulation 3h: Create helical trajectory inside the surgical site (below the green mounting dock) and transform it via the fulcrum transformation to a trajectory for the robot's TCP.}
+\caption{Simulation 3h: Helical trajectory creation inside the surgical site (below the green mounting dock) and subsequent transformation via the fulcrum transformation to a trajectory for the robot's TCP.}
 \label{robot-planner3h-helix}
 \end{figure}
 \end{center}
 
-
 \section{Robot Planner 4: Simple cube pick-and-place simulation}
-
+%
 In this simulation we plan a simple pick-and-place path for a cube. The robotic arm first visits the left table and starts from the pre-grasp posture and then 
 slowly approaches the cube until the grasp posture. When the gripper has reached the grasp posture, it closes the fingers to grasp the object and then retreats 
 to the post-grasp posture. After that the robotic arm visits the right table to execute the place steps which are similar to the pick steps. The images below 
@@ -793,12 +773,12 @@ Observing the results from table \ref{robot-planner4-rrtconnect-data}, the time 
 ranges from approximately 0.01 to 0.02 seconds, whereas in the Place pipeline we observe mainly 2 distinct groups of time ranges. One group has values around 0.02 seconds and the other 
 has bigger values around 0.14 seconds. In the case with the bigger time durations, the solution made the robot go around the obstacle whereas in the other cases the path planning solution avoided the obstacle, 
 which means that an easier path was found, it was solved quicker and the path solution was much simpler (in terms of kinematic constraints) which led to smaller path simplification time durations. 
-It is also possible, that due to the obstacle and the initial conditions, the robot may not find a solution at the first attempt or none at all.
+It is also possible, that due to the obstacle and the initial conditions, the robot may not find a solution.
 
 % Robot Planner 4 with RRTConnect
 \begin{longtable}{|p{2cm}|c|p{3cm}|p{3cm}|p{3cm}|}
 \hline
-Robot Planner 4           & \multicolumn{4}{c}{\textbf{RRTConnect}}                                                                                                 \vline \\
+Planner 4           & \multicolumn{4}{c}{\textbf{RRTConnect}}                                                                                                 \vline \\
 \hline
                           & \multicolumn{4}{c}{\textbf{Pick Pipeline}}                     \vline \\
 \hline
@@ -834,17 +814,16 @@ Simulation                & Status & Solution Time & Path Simplification Time & 
 \hline
 \textbf{Average} & 1	& 0.0781998	& 0.4379681	& 1 \\
 \hline
-\caption{Time results for robot planner 4 using the RRTConnect path planner algorithm}
+\caption{Time results for RP 4 using the RRTConnect path planner algorithm}
 \label{robot-planner4-rrtconnect-data}
 \end{longtable}
 
-The main observation from the results of table \ref{robot-planner4-rrtstar-data} is that RRT* time durations are much bigger than those from RRTConnect, but the RRT* algorithm has the advantage of finding better, more accurate solutions (approximately the same solutions at most attempts) and with less collisions. Although these time durations are not optimal for real-time applications, they could be useful in pick-and-place pipelines 
-if the solutions are pre-computed (memoized) and saved for later use.
+The main observation from the results of table \ref{robot-planner4-rrtstar-data} is that RRT* time durations are larger than those from RRTConnect, but the RRT* algorithm has the advantage of finding better, more accurate solutions (approximately the same solutions at most attempts) and with less collisions. Although these time durations are not optimal for real-time applications, they could be useful in pick-and-place pipelines if the solutions are pre-computed and saved for later use.
 
 % Robot Planner 4 with RRT*
 \begin{longtable}{|p{2cm}|c|p{3cm}|p{3cm}|p{3cm}|}
 \hline
-Robot Planner 4           & \multicolumn{4}{c}{\textbf{RRT*}}                                                                                                 \vline \\
+Planner 4           & \multicolumn{4}{c}{\textbf{RRT*}}                                                                                                 \vline \\
 \hline
                           & \multicolumn{4}{c}{\textbf{Pick Pipeline}}                     \vline \\
 \hline
@@ -876,14 +855,14 @@ Simulation                & Status & Solution Time & Path Simplification Time & 
 \hline
 \textbf{Average} & 1	& 45.0165155	& 0.411763	& 1 \\
 \hline
-\caption{Time results for robot planner 4 using the RRT* path planner algorithm}
+\caption{Time results for RP 4 using the RRT* path planner algorithm}
 \label{robot-planner4-rrtstar-data}
 \end{longtable}
 
 % Robot Planner 4 with PRM*
 \begin{longtable}{|p{2cm}|c|p{3cm}|p{3cm}|p{3cm}|}
 \hline
-Robot Planner 4           & \multicolumn{4}{c}{\textbf{PRM*}}                                                                                                 \vline \\
+Planner 4           & \multicolumn{4}{c}{\textbf{PRM*}}                                                                                                 \vline \\
 \hline
                           & \multicolumn{4}{c}{\textbf{Pick Pipeline}}                     \vline \\
 \hline
@@ -913,31 +892,21 @@ Simulation                & Status & Solution Time & Path Simplification Time & 
 \hline
 \textbf{Average}	& 1	& 45.421346	& 0.0019276	& 1 \\
 \hline
-\caption{Time results for robot planner 4 using the PRM* path planner algorithm}
+\caption{Time results for RP 4 using the PRM* path planner algorithm}
 \label{robot-planner4-prmstar-data}
 \end{longtable}
 
 
 \section{Robot Planner 5: Visual servoing}
 
-The goal of this fifth simulation is to control the KUKA robot using the camera via the visual servoing technique. In the first part of the simulation the 
-robotic arm goes to an initial known position (e.g. the corner of the table) and then moves around until it detects a surgical tool. When that happens, the 
-image-based visual servoing will send commands to the robot so that the detected tool is at the center of the video frame and with the same orientation 
-as the video frame. At the second part of the simulation, the robot follows a similar algorithm. It starts with a known position, like the corner of the second 
-table, then moves around until the mounting dock starts to appear inside the frame. When that happens, the image-based visual servoing will send commands to the 
-robot so that the center of the trocar or the fulcrum reference frame is at the center and with the same orientation as the video frame. Similar results can be 
-achieved by using position-based visual servoing, but that was not chosen at this implementation for simplicity and less operations. Position-based servoing 
-requires more calculations because it is required to get the camera's transformation, express it with respect to the end-effector and then calculate the 
-end-effector pose which is then used as an input to a Cartesian Controller.
+The goal of this fifth simulation is to control the KUKA robot using the camera via the visual servoing technique. In the first part of the simulation the robotic arm moves to an initial known position and then moves around until it detects a surgical tool. When that happens, the image-based visual servoing will send commands to the robot so that the detected tool is at the center of the video frame and with the same orientation as the video frame. At the second part of the simulation, the robot follows a similar algorithm. It starts with a known position, then moves around until the mounting dock starts to appear inside the frame. When that happens, the image-based visual servoing will send commands to the robot so that the center of the trocar or the fulcrum reference frame is at the center and with the same orientation as the video frame. Similar results can be achieved by using position-based visual servoing, but that was not chosen at this implementation for simplicity and less operations. Position-based servoing requires more calculations because it is required to get the camera's transformation, express it with respect to the end-effector and then calculate the end-effector pose which is then used as an input to a Cartesian Controller.
 
 \begin{center}
-\begin{figure}[H]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=0.35\textwidth]{images/robot_planner5/visual_servo_controller3.png}
 \includegraphics[width=0.35\textwidth]{images/robot_planner5/visual_servo_controller4.png}\\
-\caption{Visual servo controller error diagrams. On the left image in the error graphs appear some spikes. These spikes occur from the sudden temporary detection 
-of a nearby surgical tool. On the right image, these spikes are filtered out, and only the error graphs of the visual servoing of one tool are shown. The  
-controller parameters are $K_p = 0.9, K_d = 0.2$}
+\caption{Visual servo controller error diagrams. On the left image in the error graphs appear some spikes. These spikes occur from the sudden temporary detection of a nearby surgical tool. On the right image, these spikes are filtered out, and only the error graphs of the visual servoing of one tool are shown. The  controller parameters are $K_p = 0.9, K_d = 0.2$}
 \end{figure}
 \end{center}
 
@@ -964,13 +933,13 @@ x \\ y \\ z \\ ψ \\ θ \\ φ \\
 0.529996 \\ 0.059271 \\ 1.398114 \\ -0.271542 \\ 0 \\ 0 \\
 \end{bmatrix}, \quad \mathbf{C} = diag(0.001, \cdots, 0.001)
 \end{equation}
-where $\mathbf{p} = [x,y,z]$ and the Euler angles $ψ, θ, φ$ are later used to calculate the quaternion $\mathbf{q}$. \\
+where $\mathbf{p} = [x,y,z]$ and the Euler angles $ψ, θ, φ$ are used to calculate the $\mathbf{q}$-quaternion . \\
 
 \begin{center}
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.7\textwidth]{images/robot_planner6/robot_planner6.png}
-\caption{Robot planner6: Path from home, to point above Fulcrum point and path of insertion/retraction}
+\caption{Robot planner 6: Path from home, to point above Fulcrum point and path of insertion/retraction}
 \end{figure}
 \end{center}
 
@@ -996,7 +965,7 @@ where $\mathbf{p} = [x,y,z]$ and the Euler angles $ψ, θ, φ$ are later used to
 \centering
 \includegraphics[width=0.35\textwidth]{images/robot_planner6/rcm-error-collision.png}
 \includegraphics[width=0.35\textwidth]{images/robot_planner6/rcm-collision.png}\\
-\caption{Surgical tool slides from an aligned, RCM pose to a pose misaligned from the fulcrum point, no RCM motion and surgical tool is is collision, exerting pressure to the abdominal wall. The diagram on the 
+\caption{Surgical tool slides from an aligned, RCM pose to a pose misaligned from the fulcrum point, no RCM motion and surgical tool is exerting pressure to the abdominal wall. The diagram on the 
 left shows the error starting from a correct position to a problematic position. The right image shows the tool in collision with the mounting dock (abdominal wall) and there is an obvious distance from the 
 fulcrum reference frame.}
 \end{figure}
@@ -1007,8 +976,7 @@ fulcrum reference frame.}
 \section{Robot Planner 7: State machine - End-to-end running}
 \label{section:robot-planner7}
 
-The goal of this simulation is to run all stages of this thesis together to study the end-to-end result. Each stage is run by a different node and the sequence in which every task is executed is dictated by the status 
-of the state machine as shown in figure \ref{smack-state-machine}.
+The goal of this simulation is to run all stages of this thesis together to study the end-to-end result. Each stage is run by a different node and the sequence in which every task is executed is dictated by the status of the state machine as shown in Figure~\ref{smack-state-machine}.
 
 \begin{center}
 \begin{figure}[htbp]
