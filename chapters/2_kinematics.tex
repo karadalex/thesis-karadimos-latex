@@ -176,7 +176,7 @@ The Inverse Kinematics (IK) problem seeks to find those joint values that make t
 
 \subsection{Decoupling Technique}
 
-In this section the inverse kinematics problem is solved for 6 out of the 7 DoF, where the third joint is not used in this analysis and its angle is set to zero $θ_3 = 0$ . Using the decupling technique, the IK-problem is split to 2 separate subproblems, one for the position and one for the orientation of the end-effector. This technique can be applied in this case because the axes of the 3 last joints intersect at the same point and they form an Euler wrist. 
+In this section the IK problem is solved for 6 out of the 7 DoF, where the third joint is not used in this analysis and its angle is set to zero $θ_3 = 0$ . Using the decupling technique, the IK-problem is split to 2 separate subproblems, one for the position and one for the orientation of the end-effector. This technique can be applied in this case because the axes of the 3 last joints intersect at the same point and they form an Euler wrist. 
 
 To solve for the joints' angles, the transformation matrix $^0T_7$ of the end-effector with respect to the robot's base is required. Usually the transformation ${}^UT_{tcp}$ is known, which is the pose of Tool's center point (TCP) with respect to the Universal Coordinate Frame $\lbrace U \rbrace$ from which the required $^0T_7$ can be calculated
 
@@ -295,7 +295,7 @@ J_i = \begin{bmatrix}
 %
 \subsubsection{Workspace constraints \& Singularity points}
 %
-When studying the kinematics of a robotic arm it is important to study the singularity points, which must be known before path planning in order to be avoided. From a mathematical point of view, singularity points are defined as these spatial joint coordinates where the kinematics equations are not defined, e.g. when dividing by a quantity that becomes zero or is very close to zero or when the determinant of the robot's Jacobian approaches zero (as shown in Figure~\ref{robot-planner1-manipulability-plot}), or even when the inverse kinematics solutions are infinite. 
+When studying the kinematics of a robotic arm it is important to study the singularity points, which must be known before path planning in order to be avoided. From a mathematical point of view, singularity points are defined as these spatial joint coordinates where the kinematics equations are not defined, e.g. when dividing by a quantity that becomes zero or is very close to zero or when the determinant of the robot's Jacobian approaches zero (as shown in Figure~\ref{robot-planner1-manipulability-plot}), or even when the IK solutions are infinite. 
 
 Singularity points typically reduce the kinematic capability of the robot. An example of that are points where the end-effector cannot move at all or it cannot move in some directions. An other example of singularity points, are those in which small displacements/velocities in the taskspace require very large displacements/velocities in the joint space and sometimes with velocities much higher than the rated values of the actuators
 
@@ -303,7 +303,7 @@ For the Kuka iiwa 7 DoF arm, the singularity points are:
 \begin{itemize}
 	\item When $p_x^2 + p_y^2 = 0$ then the end-effector lies on the z-axis and $θ_1$ is not defined
 	\item When the axes $z_1,z_7$ coincide, then $θ_1,θ_7$ can no longer be defined
-	\item When $\sin\left( θ_6 \right) = 0$ then the angles $θ_5, θ_7$ are not defined. According to the robot's manual and the equations of inverse kinematics above, there are an infinite number of combinations of
+	\item When $\sin\left( θ_6 \right) = 0$ then the angles $θ_5, θ_7$ are not defined. According to the robot's manual and the aforementioned equations of IK there are an infinite number of combinations of
 	$θ_5, θ_7$ to get the same position on the end-effector.
 	\item When the shoulder is fully extended, $θ_1$ and $θ_3$ are not defined (there are infinite combinations for the same result)
 \end{itemize}
@@ -332,10 +332,10 @@ The Remote Center of Motion (RCM) constraint is encountered frequently in MIS. T
 \item \textbf{pitch}, also known as tilt: rotation around the $\mathbf{\hat{y}}$ unit vector by an angle $\theta$
 \item \textbf{yaw}, also known as spin: rotation around the $\mathbf{\hat{x}}$ unit vector by an angle $\psi$
 \end{enumerate}
-The RCM constraint does not have a direct implication in the solutions of the inverse kinematics solution, because it only reduces the taskspace to a very specific subspace and a very specific set of robot positions and orientations.
+The RCM constraint does not have a direct implication in the solutions of the IK solution, because it only reduces the taskspace to a very specific subspace and a very specific set of robot positions and orientations.
 
 To satisfy the RCM constraint many MIS robots have special mechanical structures that make it easier for the laparoscopic tools to pivot around the fulcrum point. The most common examples of these types of mechanisms are parallelograms, spherical linkages and circular tracking arcs, all of which have usually 2 RCM DoF. Other types of RCM mechanisms are isocenters, synchronous belt transmission, parallel manipulators, passive RCMs and compliant mechanisms~\cite{dai2009HIstoricalMISKinematicsRCM}. 
-\begin{comment}In the simulation setup of this thesis there is no special RCM mechanism to satisfy the RCM constraint. A typical industrial robot arm is used and the RCM constraint is satisfied by calculating at each time the correct pose the robot must have which is used as input to the Inverse Kinematics problem. To achieve this, the RCM point must be known beforehand (or be estimated) and then all RCM poses are calculated using a spherical coordinate system, whose origin 
+\begin{comment}In the simulation setup of this thesis there is no special RCM mechanism to satisfy the RCM constraint. A typical industrial robot arm is used and the RCM constraint is satisfied by calculating at each time the correct pose the robot must have which is used as input to the IK problem. To achieve this, the RCM point must be known beforehand (or be estimated) and then all RCM poses are calculated using a spherical coordinate system, whose origin 
 of axes is the RCM point.
 \end{comment}
 \begin{figure}[htbp]
@@ -360,12 +360,12 @@ In the latter use case, in order to satisfy the collision avoidance, all path pl
 \end{figure}
 \end{center}
 
-Observing Figure~\ref{elbow-up-vs-down}, there are two ways to mathematically describe the elbow-up constraint (see Figure~ \ref{elbow-up-constraint-geometry}), either using the distance between the robot base and the 3rd link or by using the relative angle of the base link and the 3rd link. From the iiwa14 specifications, the following calculations are implemented using $d_1 = 360$mm and $d_3 = 420$mm.
+Observing Figure~\ref{elbow-up-vs-down}, there are two ways to mathematically describe the elbow-up constraint (see Figure~ \ref{elbow-up-constraint-geometry}), either using the distance between the robot base and the third link or by using the relative angle of the base link and the third link. From the Kuka iiwa specifications, the following calculations are implemented using $d_1 = 360$mm and $d_3 = 420$mm.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.8\textwidth]{images/elbow-up-constraint-geometry.png}\\
-\caption{Elbow-up constraint description with relative distance or angle between links with lengths $d_1$ and $d_3$}
+\caption{Elbow-up constraint description with relative pose between links with lengths $d_1$ and $d_3$}
 \label{elbow-up-constraint-geometry}
 \end{figure}
 
@@ -374,32 +374,25 @@ The distance constraint is $d_{\min} \leq d \leq d_{\max}$,
 where
 $d_{\min} = \sqrt{d_1^2 + d_3^2} = 553$mm and $d_{\max} = d_1 + d_3 = 780\mbox{mm}.
 $
-The distance-based description of the elbow-up constraint is not very convenient, because it can not be easily forward-transformed to a description that uses the robot's forward kinematic transformations and reference frames, 
-but it can be easily used after the inverse kinematics solution to check which solutions satisfy this distance constraint. 
-The angle-based description can sometimes be more convenient because it directly describes the orientation that the 3rd reference frame must have, with respect to the reference frame of the base. Thus for each orientation 
-angle (pitch, yaw, roll) the following constraint must be satisfied 
+The distance-based description of the elbow-up constraint is not very convenient, because it can not be easily forward-transformed to a description that uses the robot's forward kinematic transformations and reference frames, but it can be easily used after the IK solution to check which solutions satisfy this distance constraint. The angle-based description can sometimes be more convenient because it directly describes the orientation that the third reference frame must have, with respect to the reference frame of the base. Thus for each orientation angle (pitch, yaw, roll) the following constraint must be satisfied 
 $-\frac{\pi}{2} \leq θ \leq \frac{\pi}{2}$.
 %\begin{equation} \label{eq:elbow-up-constraint-angle-inequality} -\frac{\pi}{2} \leq θ \leq \frac{\pi}{2}. \end{equation}
-When the inverse kinematics problem is solved, then some of the solutions may be rejected from the elbow-up constraint after the following calculations. For each solution the forward kinematics up to the 3rd joint must be 
-calculated. Note that although the forward kinematics from the universal frame to the end-effector should be the same for all solutions, the same does not hold for the forward kinematic transformations of the intermediate 
-links.
-
-\begin{equation}
-{}^UT_{tcp} = {}^UT_0  \;\;  {}^0T_3  \;\;   {}^3T_{tcp}
-\end{equation}
-
-\begin{equation}
+When the IK problem is solved, then some of the solutions may be rejected from the elbow-up constraint after the following calculations. For each solution the forward kinematics up to the third joint must be 
+calculated. Note that although the forward kinematics from the universal frame to the end-effector should be the same for all solutions, the same does not hold for the forward kinematic transformations of the intermediate links, since 
+%\begin{equation}
+%{}^UT_{tcp} = {}^UT_0  \;\;  {}^0T_3  \;\;   {}^3T_{tcp}
+%\end{equation}
+$
 {}^0T_3 = {}^UT_0^{-1}  \;\;  {}^UT_{tcp}  \;\;   {}^3T_{tcp}^{-1}
-\end{equation}
+$.
 
-Let the calculated ${}^0T_3$ have the following form
-\begin{equation}
+Let the calculated ${}^0T_3$ be
+$
 {}^0T_3 = \begin{bmatrix}
 {}^0R_3 & {}^0\mathbf{p}_3 \\
 0       & 1 \\
-\end{bmatrix}
-\end{equation}
-
+\end{bmatrix},
+$
 then the distance that must satisfy the inequality $d_{\min} \leq d \leq d_{\max}$ is 
 \begin{equation}
 d = \Vert {}^0\mathbf{p}_3 \Vert

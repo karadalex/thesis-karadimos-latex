@@ -1,9 +1,7 @@
 \chapter{Trajectory Planning - Laparoscopic tool manipulation}
 \label{chapter-6}
-
-At this step, given the points of the desired path, a more detailed trajectory is calculated, 
-which will contain all the waypoints that the robot will have to visit. Trajectory planning is executed after a desired path is generated,
-and consists in mapping the geometric points to specific \textbf{time points}, as well as assigning specific \textbf{velocities}, \textbf{accelerations} and \textbf{jerks}, 
+%
+Trajectory planning is executed after a desired path is generated, and consists in mapping the geometric points to specific \textbf{time points}, as well as assigning specific \textbf{velocities}, \textbf{accelerations} and \textbf{jerks}, 
 in order to generate the commands needed for the robot controller to execute a smooth motion.\\
 
 The paths that are calculated are parameterized by the path parameter $s$. As $s$ increases from $0$, the robot moves from the start configuration $q(0)$ to the goal configuration $q(1)$. 
@@ -22,7 +20,7 @@ procedures add an additional motion constraint that demands at each time one poi
 \begin{center}
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=12cm]{images/fulcrum-space.png}\\
+\includegraphics[width=0.7\textwidth]{images/fulcrum-space.png}\\
 \caption{Tool pose at target point $B$ calculated with respect to Fulcrum's reference frame $\lbrace F \rbrace$}
 \end{figure}
 \end{center}
@@ -151,35 +149,29 @@ even more problematic when the IK problem is not solved with analytical equation
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.5\textwidth]{images/interpolation-accuracy.png}\\
-\caption{Path/trajectory interpolation done at two stages. (a) the initial desired circular trajectory, (b) sample waypoints that will approximate the circle and shape a polygon, (c) the line segments connecting the 
-waypoints and which the robot must theoretically follow exactly, (d) lower-level interpolation of the line segments (made by MoveIt in ROS or by the robot's controller when executing PtP), (e) the actual trajectory that 
+\caption{Path/trajectory interpolation done at two stages. (a) the initial desired circular trajectory, (b) sample waypoints that will approximate the circle and shape a polygon, (c) the line segments connecting the waypoints and which the robot must theoretically follow exactly, (d) lower-level interpolation of the line segments (made by MoveIt in ROS or by the robot's controller when executing PtP), (e) the actual trajectory that 
 the robot will follow}
 \label{interpolation-accuracy}
 \end{figure}
 \end{center}
-
 
 \subsection{Circular trajectory of tool tip}
 
 \begin{center}
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.8\textwidth]{images/circular-trajectory-wrt-fulcrum.png}\\
+\includegraphics[width=0.7\textwidth]{images/circular-trajectory-wrt-fulcrum.png}\\
 \caption{Circular trajectory of tool tip with respect to Fulcrum reference frame}
 \end{figure}
 \end{center}
 
-To generate a circular trajectory for the pivot movement we must specify the center of the circle 
-and a vector whose magnitude is the radius of the circle and it’s direction gives the orientation 
-of the plane that the circle lies at. The simplest case of a circular trajectory is the one, 
-whose circle lies in a plane parallel to the xy plane.
-
+To generate a circular trajectory for the pivot movement we must specify the center of the circle and a vector whose magnitude is the radius of the circle and it’s direction gives the orientation of the plane that the circle lies at. The simplest case of a circular trajectory, where the circle lies in a plane parallel to the xy plane.
 
 We first consider the motion of the laparoscopic tool tip on a circle parallel to a z-plane, with respect to the $\lbrace F \rbrace$ coordinate frame.
 \begin{equation}
 (x^{}_{F} - x^{}_{F0})^2 + (y^{}_{F} - y^{}_{F0})^2 = r_0^2, \;\; z^{}_{F} = z^{}_{F0}
 \end{equation}
-It's often more convenient to express trajectories in a parametric form, which makes it easier to calculate all the waypoints of the trajectory
+It is more convenient to express trajectories in a parametric form,
 \begin{equation}
 \label{circle-z-plane-traj}
 \begin{cases}
@@ -191,8 +183,7 @@ z^{}_{F} = z^{}_{F0}
 s \in [0, 1]
 \end{equation}
 
-After having calculated the cartesian coordinates we can calculate the spherical coordinates as follows
-
+After having calculated the cartesian coordinates we can calculate the spherical coordinates as 
 \begin{equation}
 \label{eqns:cartesian-to-spherical}
 \begin{cases}
@@ -205,7 +196,7 @@ r = \sqrt{x^{2}_{F} + y^{2}_{F} + z^{2}_{F}} \\
 \begin{center}
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=\textwidth]{images/rcm_trajectories/rcm_circle_traj.png}\\
+\includegraphics[width=0.7\textwidth]{images/rcm_trajectories/rcm_circle_traj.png}\\
 \caption{Circular trajectory of tool tip with respect to Fulcrum reference frame and it's transformation via the Fulcrum Effect}
 \end{figure}
 \end{center}
@@ -217,17 +208,15 @@ Fulcrum Effect transformation.
 \begin{center}
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=\textwidth]{images/rcm_trajectories/robot-pose-random-rcm-circle-traj.png}\\
+\includegraphics[width=0.7\textwidth]{images/rcm_trajectories/robot-pose-random-rcm-circle-traj.png}\\
 \caption{Circular trajectory that lies on an a plane of arbitrary orientation with respect to the fulcrum point}
 \end{figure}
 \end{center}
 
-
 \subsection{Circular arc trajectory of tool tip}
 
 To generate a circular arc trajectory for a pivot motion we must specify the same parameters as 
-in the circular trajectory as well as the length of the arc or the total angle $φ$ of the arc 
-section. Another parameter has more significance in circular arc trajectories that plain circles is the phase of the arc. This initial phase can be expressed as either an angle $φ_0$ added to the arguments of 
+in the circular trajectory as well as the length of the arc or the total angle $φ$ of the arc section. Another parameter has more significance in circular arc trajectories that plain circles is the phase of the arc. This initial phase can be expressed as either an angle $φ_0$ added to the arguments of 
 sine and cosine functions or it can be expressed as $s$ values that have as initial value different from $0$. The parametric equations for a circular arc are:
 
 \begin{equation}
@@ -243,7 +232,7 @@ s \in \left[ 0, \frac{φ}{2π} \right]
 \begin{center}
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=\textwidth]{images/rcm_trajectories/rcm_arcs_traj.png}\\
+\includegraphics[width=0.7\textwidth]{images/rcm_trajectories/rcm_arcs_traj.png}\\
 \caption{Circular arc trajectory of tool tip with respect to Fulcrum reference frame and it's transformation via the Fulcrum Effect. In this trajectory 2 circular arcs are used}
 \end{figure}
 \end{center}
@@ -266,7 +255,7 @@ where $s \in \left[ 0, τ \right]$ expresses the range along the trajectory, $τ
 \begin{center}
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=\textwidth]{images/rcm_trajectories/rcm_helical_traj.png}\\
+\includegraphics[width=0.7\textwidth]{images/rcm_trajectories/rcm_helical_traj.png}\\
 \caption{Helical trajectory of tool tip with respect to Fulcrum reference frame and it's transformation via the Fulcrum Effect}
 \end{figure}
 \end{center}
@@ -276,7 +265,7 @@ where $s \in \left[ 0, τ \right]$ expresses the range along the trajectory, $τ
 \begin{center}
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=10cm]{images/line-segment-trajectory-wrt-fulcrum.png}\\
+\includegraphics[width=0.7\textwidth]{images/line-segment-trajectory-wrt-fulcrum.png}\\
 \caption{Line segment trajectory of tool tip with respect to Fulcrum reference frame}
 \end{figure}
 \end{center}
@@ -306,8 +295,8 @@ After having calculated the cartesian coordinates we can calculate the spherical
 \begin{center}
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=\textwidth]{images/rcm_trajectories/rcm_lineseg_traj.png}\\
-\caption{A Line segment trajectory and it's transformation via the Fulcrum Effect}
+\includegraphics[width=0.7\textwidth]{images/rcm_trajectories/rcm_lineseg_traj.png}\\
+\caption{A Line segment trajectory and its transformation via the Fulcrum Effect}
 \end{figure}
 \end{center}
 
@@ -388,7 +377,7 @@ a_i = \frac{1}{σ^3} (\dot{x}_{i+1}σ - 2x_{i+1} + \dot{x}_iσ +2x_i)
 \begin{center}
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=\textwidth]{images/cubic-spline-path1.png}\\
+\includegraphics[width=0.7\textwidth]{images/cubic-spline-path1.png}\\
 \caption{Cubic Spline curve with 10 waypoints} 
 \label{cubic-spline-explanation}
 \end{figure}
@@ -397,7 +386,7 @@ a_i = \frac{1}{σ^3} (\dot{x}_{i+1}σ - 2x_{i+1} + \dot{x}_iσ +2x_i)
 \begin{center}
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=\textwidth]{images/rcm_trajectories/rcm_cubic_traj.png}\\
+\includegraphics[width=0.7\textwidth]{images/rcm_trajectories/rcm_cubic_traj.png}\\
 \caption{A Cubic Spline trajectory and it's transformation via the Fulcrum Effect}
 \end{figure}
 \end{center}
@@ -461,7 +450,7 @@ s^3 \\ s^2 \\ s \\ 1
 \begin{center}
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=\textwidth]{images/bezier_path.png}\\
+\includegraphics[width=0.7\textwidth]{images/bezier_path.png}\\
 \caption{A cubic B\'ezier curve calculated and plotted in MATLAB} 
 \end{figure}
 \end{center}
@@ -472,7 +461,7 @@ and connect together 3 B\'ezier curves.
 \begin{center}
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.6\textwidth]{images/b-spline-explanation.png}\\
+\includegraphics[width=0.7\textwidth]{images/b-spline-explanation.png}\\
 \caption{B-Spline curve constructed from 3 B\'ezier curves. The first B\'ezier curve colored in red is a quadratic one and the following two are both cubic.} 
 \label{b-spline-explanation}
 \end{figure}
@@ -499,7 +488,7 @@ for the operating staff, who control the robot.
 \begin{center}
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=\textwidth]{images/rcm_trajectories/rcm_bezier_traj.png}\\
+\includegraphics[width=0.7\textwidth]{images/rcm_trajectories/rcm_bezier_traj.png}\\
 \caption{A B\'ezier curve trajectory and it's transformation via the Fulcrum Effect}
 \end{figure}
 \end{center}
@@ -838,7 +827,7 @@ q_k = (\tilde{q}_k - q_1) \frac{q_2 - q_1}{\tilde{q}_2 - \tilde{q}_1} + q_1
 \begin{center}
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=\textwidth]{images/vel-profiles.png}\\
+\includegraphics[width=0.7\textwidth]{images/vel-profiles.png}\\
 \caption{Joint trajectory generated using velocity profiles. Calculated and plotted in MATLAB} 
 \end{figure}
 \end{center}
@@ -858,7 +847,7 @@ oscillations are not necessarily avoided in the task space.
 \begin{center}
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=\textwidth]{images/cart-pendulum-passive-wrist-analogy.png}\\
+\includegraphics[width=0.7\textwidth]{images/cart-pendulum-passive-wrist-analogy.png}\\
 \caption{Trapezoid vs s-curve velocity profiles applied to the cart-inverted-pendulum system.} 
 \label{cart-pendulum-passive-wrist-analogy}
 \end{figure}
